@@ -253,7 +253,7 @@ Responsibilities:
     - If tasks remain or new tasks are discovered, repeat the loop.
 5.  **Quality Assurance**:
     - Trigger `Test` sub-agent for comprehensive coverage (Positive/Negative paths).
-    - If failures occur, trigger `Debug` or `Beast` to fix.
+    - If failures occur, trigger `Beast` to fix (Refactor Loop).
 6.  **Finalization**:
     - Trigger `Document` sub-agent to update project docs and READMEs.
     - Move plan folder to `finished`.
@@ -274,7 +274,6 @@ Responsibilities:
 - implement-agent (Beast)
 - test-agent
 - document-agent
-- debug-agent (if needed)
 
 ---
 
@@ -426,31 +425,6 @@ Produces:
 - **Idempotency**: Tests must clean up their own state; order of execution should not matter.
 - **Rationale Required**: For every E2E scenario, explain _why_ it is critical.
 - **No Flakes**: If a test fails intermittently, it is a bug in the test. Fix strictness.
-
-## Subagents: Debug (Optional)
-
-### Purpose
-
-Failure diagnosis and minimal fix proposals.
-
-Produces:
-
-- Root cause analysis
-- Fix suggestions
-- Regression test guidance
-
-Updates:
-
-- 2-PROGRESS.md
-
-### Tools / MCP
-
-**TBD**
-
-### Skills
-
-- testing-standards
-- progress-updates
 
 ---
 
