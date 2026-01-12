@@ -22,7 +22,6 @@ tools:
     "edit/editFiles",
     "search",
     "web",
-    "sanity/semantic_search",
     "agent",
     "todo",
   ]
