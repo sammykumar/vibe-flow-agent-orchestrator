@@ -329,23 +329,26 @@ Updates:
 
 ### Purpose
 
-Execute 5-PLAN.md exactly and verify basic functionality.
+Execute `5-PLAN.md` with maximal initiative and persistence. Beast's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
 
 Produces:
 
-- Code changes
-- 2-PROGRESS.md updates
+- Refined code changes
+- `2-PROGRESS.md` updates (high-signal diffs/logs)
 - **Evidence of Happy Path verification**
 
 ### Responsibilities
 
-- Implement code changes per spec
-- **Perform "Happy Path" testing (Unit & Basic E2E)**
-- Ensure application starts/runs without immediate errors
+- **Autonomous Implementation**: Pursue the plan aggressively. Don’t stall on minor uncertainties—make a best judgment, act, and record rationale.
+- **Micro-Verification**: Run `get_errors` and relevant happy-path tests after every edit.
+- **DAP Preparation**: Create a brief **Destructive Action Plan** for risky refactors or infrastructure changes before acting.
 
 ### Tools / MCP
 
-**TBD**
+- **Core**: `search`, `read/readFile`, `read/problems`, `edit/editFiles`, `edit/replaceStringInFile`
+- **Execution**: `execute/runInTerminal`, `execute/getTerminalOutput`, `execute/runTask`, `execute/runNotebookCell`
+- **Context**: `read/listCodeUsages`, `grep_search`, `semantic_search`
+- **Management**: `todo`
 
 ### Skills
 
@@ -353,37 +356,18 @@ Produces:
 
 ### Rules
 
-- No plan → no implementation
-- Record checkpoints in progress file
-- Stop and escalate on ambiguity
-  Robust quality assurance beyond the happy path.
-
-Produces:
-
-- Comprehensive Test Suite (Unit & E2E)
-- Execution evidence (**Positive & Negative paths**)
-
-Create and run automated tests.
-
-Produces:
-
-- Test files
-- Execution evidence
-
-Updates:
-
-- 2-PROGRESS.md
-
-### Tools / MCP
-
-**TBD**
-
-### Skills
-
-- testing-standards
-- progress-updates
+- **Goal/Plan/Policy**: Before every tool use, emit a one-line preamble (Goal → Plan → Policy).
+- **Stop Conditions**:
+  - ✅ Full satisfaction of acceptance criteria.
+  - ✅ `get_errors` yields no new diagnostics.
+  - ✅ Happy Path tests pass with logs provided.
+- **No Deferral**: Never yield early or defer action when further progress is possible.
+- **High Signal**: Use concise, outcome-focused updates; prefer logs and diffs over narrative.
+- **Resume Mastery**: If interrupted or prompted to resume, immediately read `todo` and continue without asking for instructions.
 
 ---
+
+## Subagents: Test
 
 ## Subagents: Debug (Optional)
 
