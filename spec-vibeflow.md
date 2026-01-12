@@ -215,43 +215,61 @@ Each agent is defined as a `.agent.md` profile.
 
 ### Purpose
 
-**The Orchestrator.** It is the only agent the user directly interacts with. It is responsible for initializing the PDD process AND orchestrating the specialized sub-agents to achieve the user's goal.
+**The Orchestrator.** It is the only agent the user directly interacts with. It is responsible for initializing the PDD process AND orchestrating the specialized sub-agents to achieve the user's goal. It focuses on high-level state management, task delegation, and quality verification rather than direct implementation.
 
 Responsibilities:
 
-- Parse user intent
-- Create/validate PDD structure
-- **Orchestrate specialized sub-agents** (Research, Beast, Test, Document)
-- Enforce workflow gates
-- Merge results
-- Track project state
+- **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
+- **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Beast, Test, Document) sequentially or iteratively.
+- **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
+- **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
 ### Tools / MCP
 
-**TBD**
-
-(No default edit permissions.)
+- **Core**: `agent` (for `runSubagent`), `edit/createFile`, `edit/editFiles`, `edit/createDirectory`, `read/readFile`, `search`
+- **Management**: `todo`
 
 ### Skills
 
-**TBD**
+- **Strategic Planning**: Determining the optimal sequence of sub-agent calls based on task complexity.
+- **Validation & Critique**: Reviewing sub-agent results (logs, file changes, test outputs) against the `4-SPEC.md` and `5-PLAN.md`.
+- **Workflow Control**: Enforcing the PDD lifecycle and gatekeeping transitions.
 
-### Workflow logic
+### Workflow logic (Beast Mode Loop)
 
-1. **Vibe Flow** initializes PDD structure.
-2. **Vibe Flow** orchestrates traversal through specialized agents:
-   - Needs Spec/Plan? → Calls **Research**
-   - Plan ready? → Calls **Beast**
-3. **Beast** loop:
-   - Implement -> **Happy Path Test** -> (If fail: Debug) -> Success
-4. **Test** loop:
-   - Comprehensive Test -> (If fail: Debug -> Beast) -> Success
-5. **Document** updates project docs.
+1.  **Initialization**:
+    - Create PDD structure: `.github/plans/todo/{area}/{task}/`.
+    - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
+2.  **Research & Design**:
+    - Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
+    - Review specification with the user.
+3.  **Planning**:
+    - Generate `5-PLAN.md` based on the approved spec.
+4.  **Implementation Loop**:
+    - Trigger `Beast` (Implementation) sub-agent.
+    - `Beast` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
+    - Orchestrator reviews `2-PROGRESS.md` and the implementation evidence.
+    - If tasks remain or new tasks are discovered, repeat the loop.
+5.  **Quality Assurance**:
+    - Trigger `Test` sub-agent for comprehensive coverage (Positive/Negative paths).
+    - If failures occur, trigger `Debug` or `Beast` to fix.
+6.  **Finalization**:
+    - Trigger `Document` sub-agent to update project docs and READMEs.
+    - Move plan folder to `finished`.
+
+### Rules
+
+- **Access Tooling**: Must have access to `runSubagent`. If missing, fail immediately.
+- **Progress-First**: Always check/update `2-PROGRESS.md` before and after every sub-agent call.
+- **Verification Over Implementation**: Do not write source code. Verify that sub-agents did.
+- **Iterative Completion**: Continue calling sub-agents until all tasks in `2-PROGRESS.md` are marked as `completed`.
+- **User Liaison**: Serve as the single point of contact for the user, summarizing progress and escalating ambiguities.
 
 ### Subagents
 
 - research-agent
-- implement-agent
+- implement-agent (Beast)
 - test-agent
 - document-agent
 - debug-agent (if needed)
