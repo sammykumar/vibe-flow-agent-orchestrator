@@ -227,8 +227,8 @@ Responsibilities:
 
 ### Tools / MCP
 
-- **Core**: `agent` (for `runSubagent`), `edit/createFile`, `edit/editFiles`, `edit/createDirectory`, `read/readFile`, `search`
-- **Management**: `todo`
+- **Core**: `runSubagent`, `create_file`, `replace_string_in_file`, `create_directory`, `read_file`, `file_search`, `semantic_search`
+- **Management**: `manage_todo_list`
 
 ### Skills
 
@@ -294,12 +294,12 @@ Updates:
 
 ### Tools / MCP
 
-- **Core**: `search`, `read/readFile`, `read/problems`, `vscode/getProjectSetupInfo`
-- **Web**: `vscode/openSimpleBrowser`, `web`, `fetch`
-- **Execution**: `execute/runInTerminal`, `execute/getTerminalOutput`, `execute/runTask`, `execute/runNotebookCell`
-- **Context**: `read/terminalSelection`, `read/terminalLastCommand`
-- **File/Management**: `edit/createDirectory`, `edit/createFile`, `edit/editFiles`, `todo`
-- **Infrastructure**: `copilot-container-tools/*`
+- **Core**: `file_search`, `semantic_search`, `read_file`, `get_errors`, `get_project_setup_info`
+- **Web**: `open_simple_browser`, `fetch_webpage`
+- **Execution**: `run_in_terminal`, `get_terminal_output`, `create_and_run_task`, `run_notebook_cell`
+- **Context**: `terminal_selection`, `terminal_last_command`
+- **File/Management**: `create_directory`, `create_file`, `replace_string_in_file`, `manage_todo_list`
+- **Infrastructure**: `mcp_copilot_conta_*`
 
 ### Skills
 
@@ -346,10 +346,10 @@ Produces:
 
 ### Tools / MCP
 
-- **Core**: `search`, `read/readFile`, `read/problems`, `edit/editFiles`, `edit/replaceStringInFile`
-- **Execution**: `execute/runInTerminal`, `execute/getTerminalOutput`, `execute/runTask`, `execute/runNotebookCell`
-- **Context**: `read/listCodeUsages`, `grep_search`, `semantic_search`
-- **Management**: `todo`
+- **Core**: `file_search`, `read_file`, `get_errors`, `replace_string_in_file`, `create_file`
+- **Execution**: `run_in_terminal`, `get_terminal_output`, `create_and_run_task`, `run_notebook_cell`
+- **Context**: `list_code_usages`, `grep_search`, `semantic_search`
+- **Management**: `manage_todo_list`
 
 ### Skills
 
@@ -392,10 +392,10 @@ Produces:
 
 ### Tools / MCP
 
-- **Core**: `read/readFile`, `edit/editFiles`, `edit/createFile`, `search`
-- **Execution**: `execute/runInTerminal` (for running test suites like `jest`, `vitest`, `playwright`), `execute/getTerminalOutput`
-- **Analysis**: `read/problems`, `read/listCodeUsages`
-- **Browsing**: `vscode/openSimpleBrowser`, `playwright/*` (MCP), `chrome-devtools` (MCP)
+- **Core**: `read_file`, `replace_string_in_file`, `create_file`, `file_search`
+- **Execution**: `run_in_terminal` (for running test suites like `jest`, `vitest`, `playwright`), `get_terminal_output`
+- **Analysis**: `get_errors`, `list_code_usages`
+- **Browsing**: `open_simple_browser`, `playwright/*` (MCP), `chrome-devtools` (MCP)
 
 ### Skills
 
@@ -455,9 +455,9 @@ docs/
 
 ### Tools / MCP
 
-- **Core**: `read/readFile`, `edit/editFiles`, `edit/createFile`, `search`
-- **Visualization**: `execute/runInTerminal`, `vscode/openSimpleBrowser`
-- **Analysis**: `read/listDir`, `grep_search`, `read/listCodeUsages`
+- **Core**: `read_file`, `replace_string_in_file`, `create_file`, `file_search`
+- **Visualization**: `run_in_terminal`, `open_simple_browser`
+- **Analysis**: `list_dir`, `grep_search`, `list_code_usages`
 
 ### Skills
 
