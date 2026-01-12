@@ -262,6 +262,8 @@ Responsibilities:
 
 - **Access Tooling**: Must have access to `runSubagent`. If missing, fail immediately.
 - **Progress-First**: Always check/update `2-PROGRESS.md` before and after every sub-agent call.
+- **Tool Preamble**: Before every tool use, emit a one-line preamble: **Goal → Plan → Policy**.
+- **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative in `2-PROGRESS.md`.
 - **Verification Over Implementation**: Do not write source code. Verify that sub-agents did.
 - **Iterative Completion**: Continue calling sub-agents until all tasks in `2-PROGRESS.md` are marked as `completed`.
 - **User Liaison**: Serve as the single point of contact for the user, summarizing progress and escalating ambiguities.
