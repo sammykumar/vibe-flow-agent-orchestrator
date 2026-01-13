@@ -16,7 +16,6 @@ These are the executable agent files. Treat them as production source code.
 **Structure:**
 - **YAML Frontmatter:** Defines `name`, `description`, `tools`, and `infer` settings.
 - **Prompt Body:** Defines the agent's identity, role, and strict execution protocols.
-- **Version Tag:** `<!-- version: X.X.X -->` (CRITICAL for updates).
 
 ### 2. The Installer (`bootstrap-vibeflow.md`)
 This file contains the instructions for an AI to install Vibe Flow into a target repository.
@@ -25,6 +24,7 @@ This file contains the instructions for an AI to install Vibe Flow into a target
 ### 3. The Protocol Spec (`spec-vibeflow.md`)
 Defines the PDD (Plan-Driven Development) standard that the agents enforce `spec-vibeflow.md`.
 - This file is often copied to `docs/vibeflow/PDD Protocol.md` in target repos.
+- **Version Tag:** `<!-- version: X.X.X -->` (Source of Truth for Vibe Flow version).
 
 ## 🛠️ Development Workflow
 
@@ -32,7 +32,7 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce `spec
 1.  **Edit the Prompt:** precise wording matters. Use "YOU MUST" for critical constraints.
 2.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
 3.  **Bump Version:**
-    - You **MUST** update all modified files' version comment: `<!-- version: 1.0.1 -->`.
+    - You **MUST** update the version comment in `spec-vibeflow.md`: `<!-- version: 1.0.1 -->`.
     - Run `./version-bump.sh <major|minor|patch>` to automate this and ensure consistency.
 
 ### Adding New Agents

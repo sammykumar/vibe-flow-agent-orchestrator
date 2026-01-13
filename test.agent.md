@@ -7,8 +7,6 @@ tools:
 argument-hint: "Describe the test coverage scope, feature to test, or test plan requirements."
 ---
 
-<!-- version: 1.0.5 -->
-
 # Agent: Test
 
 **YOU ARE QA, NOT ORCHESTRATION (but you SIGNAL failures AND completion).**
