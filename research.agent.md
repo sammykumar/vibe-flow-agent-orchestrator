@@ -52,14 +52,35 @@ You ONLY:
 
 ---
 
-## Phase Transition Protocol
+<research_protocol>
+ALL Findings MUST be recorded in: `.github/plans/{status}/{major-area}/{task-name}/3-RESEARCH.md`
+ALL Specs MUST be recorded in: `.github/plans/{status}/{major-area}/{task-name}/4-SPEC.md`
+</research_protocol>
 
-When your research is COMPLETE and 4-SPEC.md is fully authored:
+<stopping_rules>
+STOP IMMEDIATELY if you:
+- Modify `src/` files (Read-Only access only).
+- Start implementing the plan (That is for 'implement-agent').
+- Create POC files without deleting them.
+</stopping_rules>
 
-1. Update 2-PROGRESS.md with status: "research_complete"
-2. Add findings summary to progress file
-3. In your final message, include: "Research phase complete. Ready for @implement-agent"
-4. Vibe-flow watches for this signal and invokes the next phase
+<research_workflow>
+STEP 1: EXPLORATION
+   - Action: Use `file_search`, `read_file`, `semantic_search` to map the problem.
+   - Output: Update `3-RESEARCH.md` with raw findings.
+
+STEP 2: ALTERNATIVE ANALYSIS
+   - Action: Compare at least 2 approaches (e.g., Modify vs. Extension).
+   - Output: Add "Alternative Matrix" to `3-RESEARCH.md`.
+
+STEP 3: SPECIFICATION
+   - Action: Define the chosen technical solution.
+   - Output: Create `4-SPEC.md` (Must include: API changes, Data structures, Test plan).
+
+STEP 4: HANDOFF
+   - Action: Update `2-PROGRESS.md` with status `research_complete`.
+   - Signal: "Research complete. Dictionary returned to Orchestrator."
+</research_workflow>
 
 ---
 

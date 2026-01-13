@@ -44,14 +44,37 @@ You ONLY:
 
 ---
 
-## Phase Transition Protocol
+<implementation_protocol>
+Source of Truth: `.github/plans/.../4-SPEC.md`
+Task List: `.github/plans/.../5-PLAN.md`
+Log: `.github/plans/.../2-PROGRESS.md`
+</implementation_protocol>
 
-When ALL tasks from 5-PLAN.md are IMPLEMENTED and happy-path tests pass:
+<stopping_rules>
+STOP IMMEDIATELY if you:
+- Edit files without running a verification step immediately after.
+- Deviate from the `4-SPEC.md` without User approval.
+- Mark a task complete without evidence (logs/diffs).
+</stopping_rules>
 
-1. Update 2-PROGRESS.md with status: "implementation_complete"
-2. Include test results and evidence in progress file
-3. In your final message, include: "Implementation complete. Ready for @test-agent"
-4. Vibe-flow watches for this signal and invokes comprehensive testing phase
+<implement_workflow>
+STEP 1: PLAN INGESTION
+   - Action: Read `5-PLAN.md`.
+   - Action: Pick the next `[ ] todo` item.
+
+STEP 2: EXECUTION LOOP
+   - Action: Implement the code change.
+   - CHECK: Run `get_errors` (Must be clean).
+   - CHECK: Run "Happy Path" verification (Command line or Script).
+
+STEP 3: LOGGING
+   - Action: Update `2-PROGRESS.md` with the Diff Summary.
+   - Action: Mark task `[x] done` in `5-PLAN.md`.
+
+STEP 4: COMPLETION
+   - Condition: All tasks Checked.
+   - Action: Signal "Implementation complete. returning to Orchestrator for Testing."
+</implement_workflow>
 
 ---
 
