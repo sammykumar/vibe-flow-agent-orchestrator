@@ -1,7 +1,7 @@
 ---
 name: research-agent
-description: "Investigation + specification authoring specialist."
-infer: false
+description: "The Research Methodologist. Investigation and specification authoring specialist for deep codebase analysis and technical blueprint creation."
+infer: true
 tools:
   [
     "vscode/openSimpleBrowser",

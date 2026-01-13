@@ -2,7 +2,7 @@
 
 These instructions install or update Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-**Version**: 1.0.1
+<!-- version: 1.0.1 -->
 
 This bootstrap script can be used for both **initial installation** and **version updates**. It checks GitHub for the latest agent versions and updates them as needed.
 
@@ -172,7 +172,7 @@ Download all agents to `.github/agents`. If agents already exist, they will be o
 
 ### 6.3 Verify Installation
 
-After fetching, verify each agent file contains the `version:` field in its frontmatter. If an existing agent version is older than the latest tag, it has been successfully updated.
+After fetching, verify each agent file contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`). If an existing agent version is older than the latest tag, it has been successfully updated.
 
 Ensure you use the raw content URLs and install them to `.github/agents/`.
 

@@ -1,6 +1,5 @@
 ---
 name: vibe-flow
-version: 1.0.1
 description: "The Orchestrator agent for Plan-Driven Development."
 infer: false
 tools:
@@ -27,6 +26,8 @@ tools:
     "todo",
   ]
 ---
+
+<!-- version: 1.0.1 -->
 
 # Vibe Flow Orchestrator
 
