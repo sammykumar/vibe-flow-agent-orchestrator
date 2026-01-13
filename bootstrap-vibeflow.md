@@ -1,6 +1,10 @@
 # Bootstrap Vibe Flow
 
-These instructions install Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
+These instructions install or update Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
+
+**Version**: 1.0.0
+
+This bootstrap script can be used for both **initial installation** and **version updates**. It checks GitHub for the latest agent versions and updates them as needed.
 
 Process overview:
 
@@ -142,18 +146,33 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 6. **Finish**: Move to `finished`.
 ```
 
-## 6. Install Vibe Flow Agents
+## 6. Install or Update Vibe Flow Agents
 
-Use `curl` or `wget` to fetch the master agent profiles from the official repository:
+Use `curl` or `wget` to fetch agent profiles from the official repository:
 https://github.com/sammykumar/vibe-flow-agent-orchestrator
 
-Execute the following commands to download the agents to `.github/agents`:
+### 6.1 Check for Latest Version
+
+Before fetching, check the latest version tag from GitHub:
+
+```bash
+LATEST_TAG=$(curl -s https://api.github.com/repos/sammykumar/vibe-flow-agent-orchestrator/releases/latest | grep 'tag_name' | cut -d'\"' -f4)
+echo "Latest Vibe Flow version: $LATEST_TAG"
+```
+
+### 6.2 Fetch Agent Profiles
+
+Download all agents to `.github/agents`. If agents already exist, they will be overwritten with the latest versions:
 
 - Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
 - Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/research.agent.md) to `.github/agents/research.agent.md`
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/test.agent.md) to `.github/agents/test.agent.md`
 - Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/document.agent.md) to `.github/agents/document.agent.md`
+
+### 6.3 Verify Installation
+
+After fetching, verify each agent file contains the `version:` field in its frontmatter. If an existing agent version is older than the latest tag, it has been successfully updated.
 
 Ensure you use the raw content URLs and install them to `.github/agents/`.
 
@@ -192,7 +211,7 @@ Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md`.
 
 ## 10. Report to the User
 
-Fill in the template:
+Fill in the template for **first-time installation**:
 
 ```markdown
 # Vibe Flow Installed
@@ -202,10 +221,30 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
 
-- `.github/agents/vibe-flow.agent.md` (Orchestrator)
+- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.0.0)
+- `.github/agents/research.agent.md` (Research Agent)
+- `.github/agents/implement.agent.md` (Implement Agent)
+- `.github/agents/test.agent.md` (Test Agent)
+- `.github/agents/document.agent.md` (Document Agent)
 - `.github/plans/` (Project Memory)
 - `docs/vibeflow/` (Protocol)
 
 **To start a task**:
 "@vibe-flow Implement {feature_name}"
+```
+
+Or for **updates**, report which agents were upgraded:
+
+```markdown
+# Vibe Flow Updated
+
+The following agents have been updated to the latest version:
+
+- vibe-flow.agent.md (v{OLD_VERSION} → v{NEW_VERSION})
+- research.agent.md
+- implement.agent.md
+- test.agent.md
+- document.agent.md
+
+All agent profiles are now in sync with the official repository.
 ```

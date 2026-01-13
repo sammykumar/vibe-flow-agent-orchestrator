@@ -1,5 +1,6 @@
 ---
 name: vibe-flow
+version: 1.0.0
 description: "The Orchestrator agent for Plan-Driven Development."
 infer: false
 tools:
