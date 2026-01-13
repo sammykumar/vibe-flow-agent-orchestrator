@@ -169,12 +169,13 @@ Download all agents to `.github/agents`. If agents already exist, they will be o
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/test.agent.md) to `.github/agents/test.agent.md`
 - Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/document.agent.md) to `.github/agents/document.agent.md`
+- Fetch [spec-vibeflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/spec-vibeflow.md) to `docs/vibeflow/PDD Protocol.md`
 
 ### 6.3 Verify Installation
 
-After fetching, verify each agent file contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`). If an existing agent version is older than the latest tag, it has been successfully updated.
+After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`). If the version matches the latest tag, it has been successfully updated.
 
-Ensure you use the raw content URLs and install them to `.github/agents/`.
+Ensure you use the raw content URLs and install them to their respective locations.
 
 ## 7. Create `AGENTS.md`
 
@@ -222,12 +223,12 @@ Vibe Flow (Plan-Driven Development) is now active.
 **New Structure**:
 
 - `.github/agents/vibe-flow.agent.md` (Orchestrator v1.0.0)
+- `docs/vibeflow/PDD Protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
 - `.github/agents/implement.agent.md` (Implement Agent)
 - `.github/agents/test.agent.md` (Test Agent)
 - `.github/agents/document.agent.md` (Document Agent)
 - `.github/plans/` (Project Memory)
-- `docs/vibeflow/` (Protocol)
 
 **To start a task**:
 "@vibe-flow Implement {feature_name}"
@@ -238,13 +239,14 @@ Or for **updates**, report which agents were upgraded:
 ```markdown
 # Vibe Flow Updated
 
-The following agents have been updated to the latest version:
+The following agents have been updated to the latest version (v{NEW_VERSION}):
 
-- vibe-flow.agent.md (v{OLD_VERSION} → v{NEW_VERSION})
+- vibe-flow.agent.md
 - research.agent.md
 - implement.agent.md
 - test.agent.md
 - document.agent.md
+- docs/vibeflow/PDD Protocol.md
 
 All agent profiles are now in sync with the official repository.
 ```
