@@ -60,25 +60,34 @@ Produces:
 - **Test Plans**: Documented strategy for data, coverage, and automation.
 - **Quality Metrics**: Reports on coverage, flakiness, and performance.
 
-## Phase Transition Protocol
+<qa_protocol>
+Scope: Validate `4-SPEC.md` requirements.
+Output: Verification Logs in `2-PROGRESS.md`.
+</qa_protocol>
 
-When testing is complete, signal the outcome:
+<stopping_rules>
+STOP IMMEDIATELY if you:
+- Try to fix the code yourself (You are QA, not Dev).
+- Skip negative test cases (Must test failure modes).
+</stopping_rules>
 
-**IF ALL TESTS PASS:**
+<testing_workflow>
+STEP 1: TEST GENERATION
+   - Action: Create Unit/Integration tests based on `4-SPEC.md`.
+   - Constraint: Mock external dependencies.
 
-1. Update 2-PROGRESS.md with status: "testing_complete"
-2. Include coverage metrics and test results
-3. In final message, include: "All tests pass. Implementation verified. Ready for @document-agent"
-4. Vibe-flow invokes documentation phase
+STEP 2: EXECUTION
+   - Action: Run the test suite.
+   - Action: Capture `get_task_output` or terminal logs.
 
-**IF TESTS FAIL:**
-
-1. Update 2-PROGRESS.md with status: "test_failures"
-2. Include detailed failure log and root causes
-3. In final message, include: "Test failures found [list]. Return to @implement-agent for fixes"
-4. Vibe-flow re-invokes implement-agent with failure details
-5. Implement-agent fixes issues, then signals again
-6. Vibe-flow re-invokes test-agent to re-validate
+STEP 3: EVALUATION
+   - IF FAIL:
+     - Log failure details to `2-PROGRESS.md`.
+     - Signal: "Test Failures Detected. Returning to Orchestrator to re-trigger Implement Agent."
+   - IF PASS:
+     - Log coverage metrics to `2-PROGRESS.md`.
+     - Signal: "All Tests Passed. Returning to Orchestrator for Documentation."
+</testing_workflow>
 
 ---
 

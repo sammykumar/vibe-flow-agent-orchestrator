@@ -45,17 +45,33 @@ You ONLY:
 
 ---
 
-## Phase Transition Protocol
+<doc_protocol>
+Target: `docs/` folder and `README.md`.
+Source: `4-SPEC.md` and Actual Code (`src/`).
+</doc_protocol>
 
-When documentation is COMPLETE:
+<stopping_rules>
+STOP IMMEDIATELY if you:
+- Modify source code logic (Comments/JSDoc updates are OK).
+- Create broken links (Must verify relative paths).
+</stopping_rules>
 
-1. Update 2-PROGRESS.md with status: "documentation_complete"
-2. Include summary of documentation updates
-3. In final message, include: "Documentation complete. Task finished."
-4. Vibe-flow watches for this signal to:
-   - Move plan folder from .github/plans/todo to .github/plans/finished
-   - Archive the completed task
-   - Report completion to user
+<documentation_workflow>
+STEP 1: ARCHITECTURE VIZ
+   - Action: Create Mermaid diagrams (`.mmd`) for new flows.
+   - Output: `docs/architecture/diagrams/`.
+
+STEP 2: API & GUIDES
+   - Action: Update/Create API references.
+   - Action: Update "How to use" guides in `docs/guides/`.
+
+STEP 3: README SYNC
+   - Action: Ensure root `README.md` reflects new features.
+
+STEP 4: FINALIZE
+   - Action: Update `2-PROGRESS.md` with status `finished`.
+   - Signal: "Documentation complete. Returning to Orchestrator to close task."
+</documentation_workflow>
 
 ---
 
