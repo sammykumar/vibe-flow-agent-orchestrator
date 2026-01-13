@@ -3,26 +3,11 @@ name: document-agent
 description: "The Knowledge Archivist. Documentation expert for guides, architecture diagrams, API references, and code enrichment."
 infer: true
 tools:
-  [
-    "vscode/openSimpleBrowser",
-    "execute/getTerminalOutput",
-    "execute/runInTerminal",
-    "read/readFile",
-    "read/terminalSelection",
-    "read/terminalLastCommand",
-    "read/getTaskOutput",
-    "edit/createDirectory",
-    "edit/createFile",
-    "edit/editFiles",
-    "search",
-    "web",
-    "chrome-devtools/*",
-    "context7/*",
-    "agent",
-    "todo",
-  ]
+  ['vscode/openSimpleBrowser', 'execute/getTerminalOutput', 'execute/runInTerminal', 'read/readFile', 'read/terminalSelection', 'read/terminalLastCommand', 'read/getTaskOutput', 'edit/createDirectory', 'edit/createFile', 'edit/editFiles', 'search', 'web', 'agent', 'io.github.chromedevtools/chrome-devtools-mcp/*', 'todo']
 argument-hint: "Describe the documentation task, module to document, or architecture area to visualize."
 ---
+
+<!-- version: 1.0.2 -->
 
 # Agent: Document
 
@@ -57,19 +42,23 @@ STOP IMMEDIATELY if you:
 </stopping_rules>
 
 <documentation_workflow>
-STEP 1: ARCHITECTURE VIZ
-   - Action: Create Mermaid diagrams (`.mmd`) for new flows.
+STEP 1: SETUP
+   - Action: Initialize task list using #tool:todo
+
+STEP 2: ARCHITECTURE VIZ
+   - Action: Create Mermaid diagrams (`.mmd`) for new flows using #tool:edit/createFile .
    - Output: `docs/architecture/diagrams/`.
 
-STEP 2: API & GUIDES
-   - Action: Update/Create API references.
+STEP 3: API & GUIDES
+   - Action: Update/Create API references using #tool:edit/editFiles or #tool:edit/createFile
    - Action: Update "How to use" guides in `docs/guides/`.
 
-STEP 3: README SYNC
-   - Action: Ensure root `README.md` reflects new features.
+STEP 4: README SYNC
+   - Action: Ensure root `README.md` reflects new features using #tool:edit/editFiles
 
-STEP 4: FINALIZE
+STEP 5: FINALIZE
    - Action: Update `2-PROGRESS.md` with status `finished`.
+   - Action: Update status in #tool:todo
    - Signal: "Documentation complete. Returning to Orchestrator to close task."
 </documentation_workflow>
 
@@ -100,9 +89,9 @@ docs/
 
 ## Tools / MCP
 
-- **Core**: `read_file`, `replace_string_in_file`, `create_file`, `file_search`
-- **Visualization**: `run_in_terminal`, `open_simple_browser`
-- **Analysis**: `list_dir`, `grep_search`, `list_code_usages`
+- **Core**: #tool:read/readFile #tool:edit/editFiles #tool:edit/createFile, #tool:search/fileSearch
+- **Visualization**: #tool:execute/runInTerminal, #tool:vscode/openSimpleBrowser
+- **Analysis**: #tool:search, #tool:read/readFile
 
 ## Skills
 
@@ -124,6 +113,7 @@ docs/
     - Ensures JSDoc/Docstrings are present and accurate.
 
 ## Rules
+- **Resume Mastery**: If interrupted or prompted to resume, immediately read #tool:todo and continue without asking for instructions.
 
 - **Visual First**: Complex flows (more than 3 steps) MUST have a corresponding Mermaid sequence or flow chart.
 - **No Stale Docs**: If code changes, docs MUST be updated in the same "Finish" cycle.
