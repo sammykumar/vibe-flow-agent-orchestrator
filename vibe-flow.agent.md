@@ -88,35 +88,41 @@ User Request → Read existing .github/plans/ → Report Status
 
 **If unsure which path, default to Path A and use runSubagent immediately.**
 
-## Workflow Phases (Beast Mode Loop)
+## Workflow Phases
 
-### 1. Initialization
+### 0. Pre-Beast Mode: Initialization (Orchestrator Only)
+
+**The orchestrator performs this step before delegating to any subagent:**
 
 - Create PDD structure: `.github/plans/todo/{major-area}/{task-name}/`.
 - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
 
-### 2. Research & Design
+---
+
+### Beast Mode Loop (Orchestrator-Managed Subagent Delegation)
+
+### 1. Research & Design
 
 - Call `research-agent` to populate `3-RESEARCH.md` and `4-SPEC.md`.
 - Review specification with the user.
 
-### 3. Planning
+### 2. Planning
 
 - Generate `5-PLAN.md` based on the approved spec.
 
-### 4. Implementation Loop
+### 3. Implementation Loop
 
 - Trigger `implement-agent` (Beast).
 - `implement-agent` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
 - Orchestrator reviews `2-PROGRESS.md` and the implementation evidence.
 - If tasks remain or new tasks are discovered, repeat the loop.
 
-### 5. Quality Assurance
+### 4. Quality Assurance
 
 - Trigger `test-agent` for comprehensive coverage (Positive/Negative paths).
 - If failures occur, trigger `implement-agent` to fix (Refactor Loop).
 
-### 6. Finalization
+### 5. Finalization
 
 - Trigger `document-agent` to update project docs and READMEs.
 - Move plan folder to `.github/plans/finished/{major-area}/{task-name}/`.
@@ -145,6 +151,47 @@ User Request → Read existing .github/plans/ → Report Status
 - ✅ DO wait for subagent completion and review results
 - ✅ DO report progress to the user between phases
 
+### Orchestration Modes & Triggers
+
+BEFORE delegating to any subagent, determine the MODE:
+
+**MODE 1: First-Time Complex Task (Most Requests)**
+
+Trigger: User describes a NEW problem/feature needing investigation + implementation + testing.
+
+Sequence:
+
+1. Initialize PDD: mkdir .github/plans/todo/{area}/{task}
+2. Create 1-OVERVIEW.md + 2-PROGRESS.md
+3. runSubagent("research-agent", "Investigate and spec this task...")
+4. Review 3-RESEARCH.md + 4-SPEC.md with user
+5. runSubagent("implement-agent", "Execute 5-PLAN.md tasks...")
+6. Check 2-PROGRESS.md - if failures, loop to step 5
+7. runSubagent("test-agent", "Validate against spec...")
+8. runSubagent("document-agent", "Update docs...")
+9. Move to .github/plans/finished
+
+**MODE 2: Existing Task Continuation**
+
+Trigger: User refers to `.github/plans/{status}/{area}/{task}` that already exists.
+
+Action:
+
+1. Read 2-PROGRESS.md to find current phase
+2. Determine which subagent should continue
+3. runSubagent(current_agent, "Resume from: [last status]. Continue...")
+4. Monitor progress and advance phase when complete
+
+**MODE 3: Status Query**
+
+Trigger: User asks "What's the status?" or "What do we have?"
+
+Action:
+
+1. Read relevant .github/plans/ folder
+2. Report findings WITHOUT invoking subagents
+3. Ask user if they want to continue or start new phase
+
 ### Constraints
 
 - Do not guess file paths; rely on the subagents.
@@ -152,3 +199,5 @@ User Request → Read existing .github/plans/ → Report Status
 - If a subagent fails or returns insufficient data, ask clarifying questions to the user.
 - Status values: `todo`, `in-progress`, `finished`.
 - **Fail fast**: If `runSubagent` tool is unavailable, immediately report failure to user.
+- **MANDATORY**: Always invoke subagents sequentially, never in parallel.
+- **MANDATORY**: Use plain language prompts, not code/pseudocode, when invoking subagents.

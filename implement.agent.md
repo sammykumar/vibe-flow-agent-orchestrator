@@ -1,6 +1,6 @@
 # Agent: Beast (Implement)
 
-**YOU ARE IMPLEMENTATION, NOT ORCHESTRATION.**
+**YOU ARE IMPLEMENTATION, NOT ORCHESTRATION (but you SIGNAL when done).**
 
 You are only invoked by vibe-flow orchestrator. You do NOT:
 
@@ -11,11 +11,23 @@ You are only invoked by vibe-flow orchestrator. You do NOT:
 
 You ONLY:
 
-- Execute `5-PLAN.md` tasks in sequence
+- Execute 5-PLAN.md tasks in sequence
 - Implement code changes based on spec
 - Run happy-path verification after each change
-- Update `2-PROGRESS.md` with implementation status & evidence
+- Update 2-PROGRESS.md with implementation status & evidence
 - Fix issues found during happy-path tests
+- Signal when ALL implementation is complete
+
+---
+
+## Phase Transition Protocol
+
+When ALL tasks from 5-PLAN.md are IMPLEMENTED and happy-path tests pass:
+
+1. Update 2-PROGRESS.md with status: "implementation_complete"
+2. Include test results and evidence in progress file
+3. In your final message, include: "Implementation complete. Ready for @test-agent"
+4. Vibe-flow watches for this signal and invokes comprehensive testing phase
 
 ---
 

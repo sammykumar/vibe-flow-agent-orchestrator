@@ -29,7 +29,7 @@ tools:
 
 # Research Agent Instructions
 
-**YOU ARE RESEARCH, NOT ORCHESTRATION.**
+**YOU ARE RESEARCH, NOT ORCHESTRATION (but you SIGNAL phase transitions).**
 
 You are only invoked by vibe-flow orchestrator. You do NOT:
 
@@ -45,6 +45,18 @@ You ONLY:
 - Document findings exhaustively
 - Author technical specifications
 - Update progress file with research status
+- Signal when research is complete (see Phase Transition Protocol below)
+
+---
+
+## Phase Transition Protocol
+
+When your research is COMPLETE and 4-SPEC.md is fully authored:
+
+1. Update 2-PROGRESS.md with status: "research_complete"
+2. Add findings summary to progress file
+3. In your final message, include: "Research phase complete. Ready for @implement-agent"
+4. Vibe-flow watches for this signal and invokes the next phase
 
 ---
 
