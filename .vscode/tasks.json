@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Version and Push",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "BUMP_TYPE=\"${input:versionBump}\" && AGENT_FILE=\"vibe-flow.agent.md\" && CURRENT_VERSION=$(grep \"^version:\" \"$AGENT_FILE\" | sed \"s/version: //\") && IFS=\".\" read -r MAJOR MINOR PATCH <<< \"$CURRENT_VERSION\" && case $BUMP_TYPE in major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;; minor) MINOR=$((MINOR + 1)); PATCH=0 ;; patch) PATCH=$((PATCH + 1)) ;; esac && NEW_VERSION=\"$MAJOR.$MINOR.$PATCH\" && sed -i \"\" \"s/^version: .*/version: $NEW_VERSION/\" \"$AGENT_FILE\" && echo \"Version bumped from $CURRENT_VERSION to $NEW_VERSION\" && git add \"$AGENT_FILE\" && git commit -m \"chore: bump version to $NEW_VERSION\" && git push origin && echo \"✓ Version $NEW_VERSION committed and pushed\""
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "versionBump",
+      "type": "pickString",
+      "description": "Select version bump type",
+      "options": ["major", "minor", "patch"],
+      "default": "patch"
+    }
+  ]
+}
