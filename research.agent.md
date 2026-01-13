@@ -22,6 +22,8 @@ tools:
     "edit/editFiles",
     "search",
     "web",
+    "chrome-devtools/*",
+    "context7/*",
     "agent",
     "todo",
   ]

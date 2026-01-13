@@ -4,14 +4,25 @@ description: "The QA Specialist. Comprehensive testing expert for unit, integrat
 infer: true
 tools:
   [
-    "read/readFile",
-    "edit/editFiles",
-    "edit/createFile",
-    "search",
-    "execute/runInTerminal",
-    "execute/getTerminalOutput",
-    "read/problems",
     "vscode/openSimpleBrowser",
+    "execute/testFailure",
+    "execute/getTerminalOutput",
+    "execute/runTask",
+    "execute/runInTerminal",
+    "execute/runTests",
+    "read/problems",
+    "read/readFile",
+    "read/terminalSelection",
+    "read/terminalLastCommand",
+    "read/getTaskOutput",
+    "edit/createDirectory",
+    "edit/createFile",
+    "edit/editFiles",
+    "search",
+    "web",
+    "chrome-devtools/*",
+    "context7/*",
+    "agent",
   ]
 argument-hint: "Describe the test coverage scope, feature to test, or test plan requirements."
 ---

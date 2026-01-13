@@ -4,15 +4,19 @@ description: "Beast - Implementation specialist. Executes plans autonomously, wr
 infer: true
 tools:
   [
-    "search",
-    "read/readFile",
+    "execute",
     "read/problems",
-    "edit/editFiles",
+    "read/readFile",
+    "read/terminalSelection",
+    "read/terminalLastCommand",
+    "read/getTaskOutput",
+    "edit/createDirectory",
     "edit/createFile",
-    "execute/runInTerminal",
-    "execute/getTerminalOutput",
-    "execute/createAndRunTask",
-    "execute/runNotebookCell",
+    "edit/editFiles",
+    "search",
+    "web",
+    "chrome-devtools/*",
+    "agent",
     "todo",
   ]
 argument-hint: "Describe the implementation task, feature to build, or bug to fix."

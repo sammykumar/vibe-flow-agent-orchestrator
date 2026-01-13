@@ -4,13 +4,22 @@ description: "The Knowledge Archivist. Documentation expert for guides, architec
 infer: true
 tools:
   [
-    "read/readFile",
-    "edit/editFiles",
-    "edit/createFile",
-    "search",
-    "execute/runInTerminal",
     "vscode/openSimpleBrowser",
+    "execute/getTerminalOutput",
+    "execute/runInTerminal",
+    "read/readFile",
+    "read/terminalSelection",
+    "read/terminalLastCommand",
+    "read/getTaskOutput",
+    "edit/createDirectory",
+    "edit/createFile",
+    "edit/editFiles",
+    "search",
     "web",
+    "chrome-devtools/*",
+    "context7/*",
+    "agent",
+    "todo",
   ]
 argument-hint: "Describe the documentation task, module to document, or architecture area to visualize."
 ---
