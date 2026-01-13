@@ -3,16 +3,17 @@ name: test-agent
 description: "The QA Specialist. Comprehensive testing expert for unit, integration, and E2E testing with quality metrics and coverage analysis."
 infer: true
 tools:
-  - read_file
-  - replace_string_in_file
-  - create_file
-  - file_search
-  - run_in_terminal
-  - get_terminal_output
-  - get_errors
-  - list_code_usages
-  - open_simple_browser
-argumentHint: "Describe the test coverage scope, feature to test, or test plan requirements."
+  [
+    "read/readFile",
+    "edit/editFiles",
+    "edit/createFile",
+    "search",
+    "execute/runInTerminal",
+    "execute/getTerminalOutput",
+    "read/problems",
+    "vscode/openSimpleBrowser",
+  ]
+argument-hint: "Describe the test coverage scope, feature to test, or test plan requirements."
 ---
 
 # Agent: Test

@@ -3,20 +3,19 @@ name: implement-agent
 description: "Beast - Implementation specialist. Executes plans autonomously, writes code, performs verification, and drives projects to completion."
 infer: true
 tools:
-  - file_search
-  - read_file
-  - get_errors
-  - replace_string_in_file
-  - create_file
-  - run_in_terminal
-  - get_terminal_output
-  - create_and_run_task
-  - run_notebook_cell
-  - list_code_usages
-  - grep_search
-  - semantic_search
-  - manage_todo_list
-argumentHint: "Describe the implementation task, feature to build, or bug to fix."
+  [
+    "search",
+    "read/readFile",
+    "read/problems",
+    "edit/editFiles",
+    "edit/createFile",
+    "execute/runInTerminal",
+    "execute/getTerminalOutput",
+    "execute/createAndRunTask",
+    "execute/runNotebookCell",
+    "todo",
+  ]
+argument-hint: "Describe the implementation task, feature to build, or bug to fix."
 ---
 
 # Agent: Beast (Implement)

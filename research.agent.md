@@ -25,6 +25,7 @@ tools:
     "agent",
     "todo",
   ]
+argument-hint: "Describe the research task, feature to analyze, or technical specification to author."
 ---
 
 # Research Agent Instructions

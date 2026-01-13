@@ -3,16 +3,16 @@ name: document-agent
 description: "The Knowledge Archivist. Documentation expert for guides, architecture diagrams, API references, and code enrichment."
 infer: true
 tools:
-  - read_file
-  - replace_string_in_file
-  - create_file
-  - file_search
-  - run_in_terminal
-  - open_simple_browser
-  - list_dir
-  - grep_search
-  - list_code_usages
-argumentHint: "Describe the documentation task, module to document, or architecture area to visualize."
+  [
+    "read/readFile",
+    "edit/editFiles",
+    "edit/createFile",
+    "search",
+    "execute/runInTerminal",
+    "vscode/openSimpleBrowser",
+    "web",
+  ]
+argument-hint: "Describe the documentation task, module to document, or architecture area to visualize."
 ---
 
 # Agent: Document
