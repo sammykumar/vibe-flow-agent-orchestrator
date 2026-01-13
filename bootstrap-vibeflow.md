@@ -188,8 +188,7 @@ Create `AGENTS.md` at git root:
 
 ## 9. Refresh instructions files
 
-Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md` and `CLAUDE.md`.
-Set `CLAUDE.md` to `@AGENTS.md`.
+Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md`.
 
 ## 10. Report to the User
 
