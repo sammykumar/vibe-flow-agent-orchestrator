@@ -7,8 +7,6 @@ tools:
 argument-hint: "Describe the implementation task, feature to build, or bug to fix."
 ---
 
-<!-- version: 1.0.2 -->
-
 # Agent: Beast (Implement)
 
 **YOU ARE IMPLEMENTATION, NOT ORCHESTRATION (but you SIGNAL when done).**

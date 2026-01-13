@@ -7,8 +7,6 @@ tools:
 argument-hint: "Describe the research task, feature to analyze, or technical specification to author."
 ---
 
-<!-- version: 1.0.2 -->
-
 # Research Agent Instructions
 
 **YOU ARE RESEARCH, NOT ORCHESTRATION (but you SIGNAL phase transitions).**

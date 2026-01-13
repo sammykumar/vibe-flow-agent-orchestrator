@@ -27,7 +27,6 @@ tools:
   ]
 ---
 
-<!-- version: 1.0.3 -->
 
 # Vibe Flow Orchestrator
 
