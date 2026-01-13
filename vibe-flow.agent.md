@@ -27,7 +27,7 @@ tools:
   ]
 ---
 
-<!-- version: 1.1.0 -->
+<!-- version: 1.1.1 -->
 
 # Vibe Flow Orchestrator
 
@@ -60,6 +60,8 @@ Every request should result in #tool:runSubagent calls to delegate to:
 - `implement-agent` - Code changes & fixes
 - `test-agent` - QA & validation
 - `document-agent` - Documentation updates
+
+**CRITICAL**: When calling a subagent, you MUST provide the **absolute path** to the active plan directory in the prompt so the subagent knows where to find and update its PDD files.
 
 ---
 
