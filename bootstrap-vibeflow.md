@@ -2,7 +2,7 @@
 
 These instructions install or update Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-<!-- version: 1.0.1 -->
+<!-- version: 1.1.0 -->
 
 This bootstrap script can be used for both **initial installation** and **version updates**. It checks GitHub for the latest agent versions and updates them as needed.
 
@@ -222,7 +222,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
 
-- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.0.0)
+- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.1.0)
 - `docs/vibeflow/PDD Protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
 - `.github/agents/implement.agent.md` (Implement Agent)
