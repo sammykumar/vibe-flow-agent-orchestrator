@@ -30,16 +30,17 @@ docs/
 ├── Unused Instructions.md
 └── Writing Documentation.md
 .github/
+├── agents/
+│   ├── vibe-flow.agent.md
+│   ├── research.agent.md
+│   ├── implement.agent.md
+│   ├── test.agent.md
+│   └── document.agent.md
 ├── plans/
 │   ├── todo/
 │   ├── in-progress/
 │   └── finished/
 └── skills/
-vibe-flow.agent.md
-research.agent.md
-implement.agent.md
-test.agent.md
-document.agent.md
 AGENTS.md
 ```
 
@@ -74,7 +75,7 @@ Search the codebase for candidate files using this glob pattern: `**/{.github/co
 
 **Establish Vibe Flow Structure**:
 
-- Create directories `docs`, `.github/plans`, and `.github/skills` at the repository root if they do not exist.
+- Create directories `docs`, `.github/plans`, `.github/skills`, and `.github/agents` at the repository root if they do not exist.
 - Create subdirectories `docs/vibeflow`, `docs/guides`, `docs/architecture`.
 - Create PDD state folders: `.github/plans/todo`, `.github/plans/in-progress`, `.github/plans/finished`.
 - Create `.github/plans/.gitkeep`.
@@ -146,15 +147,15 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 Use `curl` or `wget` to fetch the master agent profiles from the official repository:
 https://github.com/sammykumar/vibe-flow-agent-orchestrator
 
-Execute the following commands to download the agents to the repository root:
+Execute the following commands to download the agents to `.github/agents`:
 
-- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/vibe-flow.agent.md) to `vibe-flow.agent.md`
-- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/research.agent.md) to `research.agent.md`
-- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/implement.agent.md) to `implement.agent.md`
-- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/test.agent.md) to `test.agent.md`
-- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/document.agent.md) to `document.agent.md`
+- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
+- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/research.agent.md) to `.github/agents/research.agent.md`
+- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/implement.agent.md) to `.github/agents/implement.agent.md`
+- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/test.agent.md) to `.github/agents/test.agent.md`
+- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/main/document.agent.md) to `.github/agents/document.agent.md`
 
-Ensure you use the raw content URLs and install them to the _repository root_.
+Ensure you use the raw content URLs and install them to `.github/agents/`.
 
 ## 7. Create `AGENTS.md`
 
@@ -165,7 +166,7 @@ Create `AGENTS.md` at git root:
 
 ## Core Orchestrator
 
-- **@vibe-flow** (vibe-flow.agent.md): Use this agent for ALL complex tasks. It manages the Plan-Driven Development lifecycle.
+- **@vibe-flow** (.github/agents/vibe-flow.agent.md): Use this agent for ALL complex tasks. It manages the Plan-Driven Development lifecycle.
 
 ## Sub-Agents (Managed by Vibe Flow)
 
@@ -202,7 +203,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
 
-- `vibe-flow.agent.md` (Orchestrator)
+- `.github/agents/vibe-flow.agent.md` (Orchestrator)
 - `.github/plans/` (Project Memory)
 - `docs/vibeflow/` (Protocol)
 
