@@ -7,11 +7,11 @@ This document defines the architecture and best-practice design for a VS Code Co
 - **One orchestrator agent:** `vibe-flow`
 - **Multiple specialist sub-agents**
 - **Plan-Driven Development (PDD)** as the execution model
-- **VS Code Custom Agents + Skills + MCP servers**
+- **VS Code Custom Agents + MCP servers**
 
 Goals:
 
-- Enforce structured engineering research agent (spec & plan) → beast mode agent (implement) → test agent → document agent)
+- Enforce structured engineering (research agent (spec & plan) → implement agent → test agent → document agent)
 - Reduce hallucinated implementation
 - Preserve project memory via filesystem artifacts
 - Enable scalable, auditable AI-assisted development
@@ -39,7 +39,6 @@ Major Area Examples:
 ```
 - core
 - agents
-- skills
 - mcp-servers
 - infrastructure
 - ci-cd
@@ -185,27 +184,50 @@ docs/{major-area}/{doc}.md
 
 ---
 
-## 3. Skills Architecture (Reusable Behavioral Modules)
+## 3. MCP Server Baseline
 
-Skills live in:
+The following MCP servers provide essential capabilities for the Vibe Flow agent workflow:
 
-```
-.github/skills/{skill-name}/SKILL.md
-```
+### Core MCP Servers
 
-### Recommended skills
+#### Context7 (Documentation Lookup)
 
-tbd
+- **Package**: `io.github.upstash/context7/*`
+- **Purpose**: Fetch authoritative documentation for third-party libraries and frameworks
+- **Usage**: Research Agent uses this to validate API usage and discover best practices
+- **Tools**:
+  - `mcp_io_github_ups_resolve-library-id`: Find library documentation
+  - `mcp_io_github_ups_get-library-docs`: Retrieve specific library docs
+
+#### Playwright (Browser Automation & Testing)
+
+- **Package**: `playwright/*`
+- **Purpose**: E2E testing, UI behavior analysis, and browser automation
+- **Usage**:
+  - Test Agent: E2E test execution
+  - Research Agent: Analyze existing UI behavior
+- **Tools**:
+  - `mcp_microsoft_pla_browser_run_code`: Execute browser automation scripts
+  - Browser control, screenshot capture, network monitoring
+
+#### Chrome DevTools (Runtime Inspection)
+
+- **Package**: `io.github.chromedevtools/chrome-devtools-mcp/*`
+- **Purpose**: Runtime debugging, network analysis, performance profiling
+- **Usage**:
+  - Research Agent: Investigate runtime behavior and issues
+  - Test Agent: Validate performance and network activity
+- **Tools**:
+  - `mcp_io_github_chr_get_network_request`: Inspect network requests
+  - Console log access, DOM inspection, performance metrics
+
+### Setup Requirements
+
+For target repositories to use Vibe Flow effectively, these MCP servers should be configured in the VS Code environment. See VS Code MCP configuration documentation for setup instructions.
 
 ---
 
-## 4. MCP Server Baseline
-
-tbd
-
----
-
-## 5. Agent Modes
+## 4. Agent Modes
 
 Each agent is defined as a `.agent.md` profile.
 
@@ -221,7 +243,7 @@ Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
 - **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
-- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Beast, Test, Document) sequentially or iteratively.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement, Test, Document) sequentially or iteratively.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
@@ -230,31 +252,23 @@ Responsibilities:
 - **Core**: `runSubagent`, `create_file`, `replace_string_in_file`, `create_directory`, `read_file`, `file_search`, `semantic_search`
 - **Management**: `manage_todo_list`
 
-### Skills
-
-- **Strategic Planning**: Determining the optimal sequence of sub-agent calls based on task complexity.
-- **Validation & Critique**: Reviewing sub-agent results (logs, file changes, test outputs) against the `4-SPEC.md` and `5-PLAN.md`.
-- **Workflow Control**: Enforcing the PDD lifecycle and gatekeeping transitions.
-
-### Workflow logic (Beast Mode Loop)
+### Workflow logic (Implementation Loop)
 
 1.  **Initialization**:
     - Create PDD structure: `.github/plans/in-progress/{area}/{task}/`.
     - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
 2.  **Research & Design**:
-    - Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
-    - Review specification with the user.
-3.  **Planning**:
-    - Generate `5-PLAN.md` based on the approved spec.
-4.  **Implementation Loop**:
-    - Trigger `Beast` (Implementation) sub-agent.
-    - `Beast` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
+    - Call `Research` sub-agent to populate `3-RESEARCH.md`, `4-SPEC.md`, and `5-PLAN.md`.
+    - Review specification and plan with the user.
+3.  **Implementation Loop**:
+    - Trigger `Implement` (Implementation) sub-agent.
+    - `Implement` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
     - Orchestrator reviews `2-PROGRESS.md` and the implementation evidence.
     - If tasks remain or new tasks are discovered, repeat the loop.
-5.  **Quality Assurance**:
+4.  **Quality Assurance**:
     - Trigger `Test` sub-agent for comprehensive coverage (Positive/Negative paths).
-    - If failures occur, trigger `Beast` to fix (Refactor Loop).
-6.  **Finalization**:
+    - If failures occur, trigger `Implement` to fix (Refactor Loop).
+5.  **Finalization**:
     - Trigger `Document` sub-agent to update project docs and READMEs.
     - **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
 
@@ -270,10 +284,10 @@ Responsibilities:
 
 ### Subagents
 
-- research-agent
-- implement-agent (Beast)
-- test-agent
-- document-agent
+- research.agent
+- implement.agent
+- test.agent
+- document.agent
 
 ---
 
@@ -287,6 +301,7 @@ Produces:
 
 - 3-RESEARCH.md
 - 4-SPEC.md
+- 5-PLAN.md
 
 Updates:
 
@@ -300,14 +315,6 @@ Updates:
 - **Context**: `terminal_selection`, `terminal_last_command`
 - **File/Management**: `create_directory`, `create_file`, `replace_string_in_file`, `manage_todo_list`
 - **Infrastructure**: `mcp_copilot_conta_*`
-
-### Skills
-
-- **Deep Research**: Evidence-driven investigation of codebase and external sources.
-- **Alternative Analysis**: Identification and evaluation of multiple implementation approaches with a formal **Alternative Matrix** (Principles, Pros/Cons, Risks, Alignment).
-- **Technical Specification**: Authoring detailed architectural and functional specs, including **Impact Analysis** (affected components, breaking changes).
-- **Pattern Discovery**: Identifying established project conventions and industry best practices.
-- **Collaborative Refinement**: Guiding the user toward a single recommended approach.
 
 ### Rules
 
@@ -326,11 +333,11 @@ Updates:
 
 ---
 
-## Subagents: Beast (Implement)
+## Subagents: Implement
 
 ### Purpose
 
-Execute `5-PLAN.md` with maximal initiative and persistence. Beast's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
+Execute `5-PLAN.md` with maximal initiative and persistence. Implement Agent's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
 
 Produces:
 
@@ -350,10 +357,6 @@ Produces:
 - **Execution**: `run_in_terminal`, `get_terminal_output`, `create_and_run_task`, `run_notebook_cell`
 - **Context**: `list_code_usages`, `grep_search`, `semantic_search`
 - **Management**: `manage_todo_list`
-
-### Skills
-
-**TBD**
 
 ### Rules
 
@@ -397,14 +400,6 @@ Produces:
 - **Analysis**: `get_errors`, `list_code_usages`
 - **Browsing**: `open_simple_browser`, `playwright/*` (MCP), `chrome-devtools` (MCP)
 
-### Skills
-
-- **Testing Strategy**: Defining the right mix of Unit (fast) vs E2E (confident) tests.
-- **Data Fixtures**: Designing isolated test data factories to prevent state leakage.
-- **Mocking/Stubbing**: Separating concerns effectively.
-- **Performance Profiling**: Recognizing slow tests and optimizing them.
-- **Security Testing**: Basic input validation and boundary checking triggers.
-
 ### Workflow Modes
 
 1.  **Spec-to-Test (Red Phase)**:
@@ -412,8 +407,8 @@ Produces:
     - Generate failing unit tests for defined interfaces.
     - _Output_: `X failures` confirmed.
 2.  **Implementation Verification (Green Phase)**:
-    - Run tests against `Beast` agent's output.
-    - Fix minor implementation bugs directly or reject task back to `Beast`.
+    - Run tests against `Implement` agent's output.
+    - Fix minor implementation bugs directly or reject task back to `Implement`.
 3.  **Critical Path (E2E)**:
     - Generate Playwright/Cypress scripts for the "Happy Path" defined in the Spec.
     - Verify against running local server.
@@ -459,12 +454,6 @@ docs/
 - **Visualization**: `run_in_terminal`, `open_simple_browser`
 - **Analysis**: `list_dir`, `grep_search`, `list_code_usages`
 
-### Skills
-
-- **Visual Architecture**: Expertise in mermaid.js for creating Sequence, Class, State, and C4 Architecture diagrams.
-- **Technical Writing**: Clarity, conciseness, and audience awareness (User vs Developer).
-- **Doc-as-Code**: Managing docs with the same rigor as source code.
-
 ### Workflow Modes
 
 1.  **Readme Guard**:
@@ -496,13 +485,13 @@ Status values map directly to the `{status}` segment in the PDD path:
 
 ### Status definitions
 
-| Status      | Meaning                                                       |
-| ----------- | ------------------------------------------------------------- |
-| todo        | Work identified but not yet started (Manual use only)         |
-| in-progress | Actively being researched, implemented, tested, or documented |
-| finished    | Fully implemented, tested, and documented                     |
+| Status      | Meaning                                                                                           |
+| ----------- | ------------------------------------------------------------------------------------------------- |
+| todo        | Work identified but not yet started (**User creates only - agents never work on todo folders**)   |
+| in-progress | Actively being researched, implemented, tested, or documented (**Agents always initialize here**) |
+| finished    | Fully implemented, tested, and documented (**User manually moves here after verification**)       |
 
-Status transitions are minimal: **Agents always initialize in `in-progress`**. The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
+Status transitions are minimal: **Agents always initialize in `in-progress`**. The `todo` status is for user planning only. The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
 ---
 

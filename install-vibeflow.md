@@ -44,7 +44,6 @@ docs/
 │   ├── todo/
 │   ├── in-progress/
 │   └── finished/
-└── skills/
 AGENTS.md
 ```
 
@@ -79,7 +78,7 @@ Search the codebase for candidate files using this glob pattern: `**/{.github/co
 
 **Establish Vibe Flow Structure**:
 
-- Create directories `docs`, `.github/plans`, `.github/skills`, and `.github/agents` at the repository root if they do not exist.
+- Create directories `docs`, `.github/plans`, and `.github/agents` at the repository root if they do not exist.
 - Create subdirectories `docs/vibeflow`, `docs/guides`, `docs/architecture`.
 - Create PDD state folders: `.github/plans/todo`, `.github/plans/in-progress`, `.github/plans/finished`.
 - Create `.github/plans/.gitkeep`.
@@ -159,7 +158,7 @@ Create `AGENTS.md` at git root:
 ## Sub-Agents (Managed by Vibe Flow)
 
 - **@research-agent**: Investigation & Spec.
-- **@implement-agent**: Code & Refactor (Beast).
+- **@implement-agent**: Code & Refactor.
 - **@test-agent**: QA & E2E.
 - **@document-agent**: Diagrams & Guides.
 

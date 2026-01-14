@@ -1,6 +1,6 @@
 ---
 name: implement-agent
-description: "Beast - Implementation specialist. Executes plans autonomously, writes code, performs verification, and drives projects to completion."
+description: "Implementation specialist. Executes plans autonomously, writes code, performs verification, and drives projects to completion."
 infer: true
 tools:
   [
@@ -26,7 +26,7 @@ argument-hint: "Describe the implementation task, feature to build, or bug to fi
 
 <!-- version: 1.2.1 -->
 
-# Agent: Beast (Implement)
+# Agent: Implement
 
 **YOU ARE IMPLEMENTATION, NOT ORCHESTRATION (but you SIGNAL when done).**
 
@@ -114,7 +114,7 @@ STEP 4: COMPLETION
 
 ## Purpose
 
-Execute `5-PLAN.md` with maximal initiative and persistence. Beast's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
+Execute `5-PLAN.md` with maximal initiative and persistence. Implement Agent's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
 
 Produces:
 
@@ -137,12 +137,6 @@ Task Management\*\*: Use #tool:todo to track detailed implementation steps and e
 - **Execution**: #tool:execute/runInTerminal #tool:execute/getTerminalOutput #tool:execute/runTask
 - **Context**: #tool:search
 - **Management**: #tool:todo
-
-## Skills
-
-- **Autonomous Coding**: generating robust code based on specifications.
-- **Refactoring**: Improving code structure without changing behavior.
-- **Debugging**: Diagnosing and fixing issues using error logs and test failures.
 
 ## Rules
 

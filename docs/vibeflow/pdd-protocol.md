@@ -6,15 +6,14 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 
 ### Statuses
 
-- `todo`: Work identified but not yet started (Manual use only).
-- `in-progress`: Actively being researched, implemented, tested. (Agents initialize here).
-- `finished`: Fully implemented, tested, and documented. (User moves here manually).
+- `todo`: Work identified but not yet started (**User creates only - agents never work on todo folders**).
+- `in-progress`: Actively being researched, implemented, tested. (**Agents always initialize here**).
+- `finished`: Fully implemented, tested, and documented. (**User manually moves here after verification**).
 
 ### Major Area Examples
 
 - `core`
 - `agents`
-- `skills`
 - `mcp-servers`
 - `infrastructure`
 - `ci-cd`

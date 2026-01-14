@@ -132,14 +132,6 @@ STEP 3: EVALUATION
 - **Analysis**: #tool:read/problems
 - **Browsing**: #tool:vscode/openSimpleBrowser , `playwright/*` (MCP), `chrome-devtools` (MCP)
 
-## Skills
-
-- **Testing Strategy**: Defining the right mix of Unit (fast) vs E2E (confident) tests.
-- **Data Fixtures**: Designing isolated test data factories to prevent state leakage.
-- **Mocking/Stubbing**: Separating concerns effectively.
-- **Performance Profiling**: Recognizing slow tests and optimizing them.
-- **Security Testing**: Basic input validation and boundary checking triggers.
-
 ## Workflow Modes
 
 1.  **Spec-to-Test (Red Phase)**:
@@ -147,8 +139,8 @@ STEP 3: EVALUATION
     - Generate failing unit tests for defined interfaces.
     - _Output_: `X failures` confirmed.
 2.  **Implementation Verification (Green Phase)**:
-    - Run tests against `Beast` agent's output.
-    - Fix minor implementation bugs directly or reject task back to `Beast`.
+    - Run tests against `Implement` agent's output.
+    - Fix minor implementation bugs directly or reject task back to `Implement`.
 3.  **Critical Path (E2E)**:
     - Generate Playwright/Cypress scripts for the "Happy Path" defined in the Spec.
     - Verify against running local server.

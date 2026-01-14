@@ -137,12 +137,6 @@ docs/
 - **Visualization**: #tool:execute/runInTerminal, #tool:vscode/openSimpleBrowser
 - **Analysis**: #tool:search, #tool:read/readFile
 
-## Skills
-
-- **Visual Architecture**: Expertise in mermaid.js for creating Sequence, Class, State, and C4 Architecture diagrams.
-- **Technical Writing**: Clarity, conciseness, and audience awareness (User vs Developer).
-- **Doc-as-Code**: Managing docs with the same rigor as source code.
-
 ## Workflow Modes
 
 1.  **Readme Guard**:
