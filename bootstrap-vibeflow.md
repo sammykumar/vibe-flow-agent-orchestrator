@@ -131,11 +131,11 @@ echo "Latest Vibe Flow version: $LATEST_TAG"
 
 Download all agents to `.github/agents`. If agents already exist, they will be overwritten with the latest versions:
 
-- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
-- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/research.agent.md) to `.github/agents/research.agent.md`
-- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/implement.agent.md) to `.github/agents/implement.agent.md`
-- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/test.agent.md) to `.github/agents/test.agent.md`
-- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/document.agent.md) to `.github/agents/document.agent.md`
+- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
+- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/research.agent.md) to `.github/agents/research.agent.md`
+- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/implement.agent.md) to `.github/agents/implement.agent.md`
+- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/test.agent.md) to `.github/agents/test.agent.md`
+- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/document.agent.md) to `.github/agents/document.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
 
