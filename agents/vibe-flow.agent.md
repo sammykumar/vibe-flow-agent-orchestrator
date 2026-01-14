@@ -28,7 +28,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 1.4.1 -->
+<!-- version: 1.4.2 -->
 
 # Vibe Flow Orchestrator
 
