@@ -125,7 +125,6 @@ Produces:
 
 ## Responsibilities
 
-
 - **Autonomous Implementation**: Pursue the plan aggressively. Don’t stall on minor uncertainties—make a best judgment, act, and record rationale.
 - **Micro-Verification**: Run #tool:read/problems and relevant happy-path tests after every edit.
 - **DAP Preparation**: Create a brief **Destructive Action Plan** for risky refactors or infrastructure changes before acting.
