@@ -2,6 +2,7 @@
 name: new-feature
 description: Start a new feature using Plan-Driven Development
 agent: vibe-flow
+argument-hint: "What feature do you want to build?"
 ---
 
 # Start New Feature

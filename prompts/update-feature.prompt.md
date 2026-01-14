@@ -2,6 +2,7 @@
 name: update-feature
 description: Update an existing feature using Plan-Driven Development
 agent: vibe-flow
+argument-hint: "How should we update this feature or what is the next step?"
 ---
 
 # Update Existing Feature
