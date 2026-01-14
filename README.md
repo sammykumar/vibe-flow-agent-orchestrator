@@ -38,25 +38,52 @@ graph TD
         DA[document-agent]
     end
 
+    subgraph "PDD Artifacts"
+        F1[1-OVERVIEW.md]
+        F2[2-PROGRESS.md]
+        F3[3-RESEARCH.md]
+        F4[4-SPEC.md]
+        F5[5-PLAN.md]
+        DOCS[docs/*.md]
+    end
+
     NF & UF -->|Invokes| VF
 
+    %% Orchestrator inits
+    VF -->|Creates| F1
+    VF -->|Creates| F2
+
     VF -->|Delegate: 1. Research| RA
-    RA -.->|Research & Spec| VF
+    RA -->|Creates/Updates| F3
+    RA -->|Creates/Updates| F4
+    RA -->|Creates/Updates| F5
+    RA -->|Updates| F2
+    RA -.->|Signal| VF
 
     VF -->|Delegate: 2. Implement| IA
-    IA -.->|Code Changes| VF
+    IA -->|Updates| F2
+    IA -.->|Signal| VF
 
     VF -->|Delegate: 3. Verify| TA
-    TA -.->|Test Results| VF
+    TA -->|Updates| F2
+    TA -.->|Signal| VF
 
     VF -->|Delegate: 4. Document| DA
-    DA -.->|Docs & Diagrams| VF
+    DA -->|Creates/Updates| DOCS
+    DA -.->|Signal| VF
 
     style VF fill:#8e44ad,stroke:#333,color:#fff
     style RA fill:#27ae60,stroke:#333,color:#fff
     style IA fill:#2980b9,stroke:#333,color:#fff
     style TA fill:#c0392b,stroke:#333,color:#fff
     style DA fill:#f39c12,stroke:#333,color:#fff
+
+    style F1 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+    style F2 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+    style F3 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+    style F4 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+    style F5 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+    style DOCS fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
 ```
 
 ## �🚀 Quick Start
