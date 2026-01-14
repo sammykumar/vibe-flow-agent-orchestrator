@@ -4,6 +4,8 @@ Plan-Driven Development (PDD) agent suite for managing complex software projects
 
 **Tags:** github-copilot, agents, orchestration, pdd, project-management, testing, documentation
 
+_Heavily Inspired by AlignFirst V1 (https://github.com/paleo/alignfirst/blob/v1/README.md)_
+
 ## 🎯 What is Vibe Flow?
 
 Vibe Flow is a complete agent-based development framework that transforms how you build software. Instead of ad-hoc coding, Vibe Flow enforces a structured workflow:
