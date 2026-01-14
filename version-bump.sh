@@ -54,3 +54,9 @@ git commit -m "chore: bump version to $NEW_VERSION"
 git push origin
 
 echo "✓ Version $NEW_VERSION committed and pushed"
+
+# Create and push tag
+git tag "v$NEW_VERSION"
+git push origin "v$NEW_VERSION"
+
+echo "✓ Tag v$NEW_VERSION created and pushed"

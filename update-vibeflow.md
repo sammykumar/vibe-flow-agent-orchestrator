@@ -21,7 +21,7 @@ Process overview:
 Before fetching, check the latest version tag from GitHub:
 
 ```bash
-LATEST_TAG=$(curl -s https://api.github.com/repos/sammykumar/vibe-flow-agent-orchestrator/releases/latest | grep 'tag_name' | cut -d'\"' -f4)
+LATEST_TAG=$(curl -s https://api.github.com/repos/sammykumar/vibe-flow-agent-orchestrator/tags | grep '"name":' | head -n 1 | cut -d '"' -f 4)
 echo "Latest Vibe Flow version: $LATEST_TAG"
 ```
 
@@ -29,13 +29,13 @@ echo "Latest Vibe Flow version: $LATEST_TAG"
 
 Download all agents to `.github/agents`. Existing agents will be overwritten with the latest versions:
 
-- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
-- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/research.agent.md) to `.github/agents/research.agent.md`
-- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/implement.agent.md) to `.github/agents/implement.agent.md`
-- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/test.agent.md) to `.github/agents/test.agent.md`
-- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/document.agent.md) to `.github/agents/document.agent.md`
-- Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
-- Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
+- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
+- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/agents/subagents/research.agent.md) to `.github/agents/research.agent.md`
+- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/agents/subagents/implement.agent.md) to `.github/agents/implement.agent.md`
+- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/agents/subagents/test.agent.md) to `.github/agents/test.agent.md`
+- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/agents/subagents/document.agent.md) to `.github/agents/document.agent.md`
+- Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
+- Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
 
 ### 3.1 Verify Update
 
@@ -48,7 +48,7 @@ Report which agents were upgraded:
 ```markdown
 # Vibe Flow Updated
 
-The following agents have been updated to the latest version (v${LATEST_TAG}):
+The following agents have been updated to the latest version (${LATEST_TAG}):
 
 - vibe-flow.agent.md
 - research.agent.md

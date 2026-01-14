@@ -172,7 +172,7 @@ Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md`.
 
 Fill in the template for **first-time installation**:
 
-```markdown
+````markdown
 # Vibe Flow Installed
 
 The {START_FILE} instructions have been migrated to `docs/unused-instructions.md`.
@@ -203,3 +203,5 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **To start a task**:
 "@vibe-flow Implement {feature_name}"
+```
+````
