@@ -22,7 +22,7 @@ These are the executable agent files. Treat them as production source code.
 
 - **YAML Frontmatter:** Defines `name`, `description`, `tools`, and `infer` settings.
 - **Prompt Body:** Defines the agent's identity, role, and strict execution protocols.
-- **Version Tag:** `<!-- version: X.X.X -->` (CRITICAL for updates).
+- **Version Tag:** `<!-- version: X.X.X -->` in `vibe-flow.agent.md` ONLY (single source of truth for the entire suite).
 
 ### 2. The Installer (`install-vibeflow.md`)
 
@@ -42,9 +42,11 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 
 1.  **Edit the Prompt:** precise wording matters. Use "YOU MUST" for critical constraints.
 2.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
-3.  **Bump Version:**
+3.  **Task Management:** All agents include guidance to use `#tool:todo` for tracking work. Ensure new agents or major updates maintain this pattern.
+4.  **Bump Version:**
     - You **MUST** update the version comment in `vibe-flow.agent.md`: `<!-- version: 1.0.1 -->`.
-    - Run `./version-bump.sh <major|minor|patch>` to automate this and ensure consistency.
+    - This is the **single source of truth** for the entire agent suite. Subagents do NOT have individual version tags.
+    - Run `./version-bump.sh <major|minor|patch>` to automate this.
 
 ### Adding New Agents
 
@@ -68,8 +70,10 @@ There is no `npm test` for prompts. Validation is behavioral.
 - **`test-agent`:** The QA. Writes/Runs tests.
 - **`document-agent`:** The Scribe. Updates docs.
 
-## 🚫 Common Pitfalls
+## 🚫 Common Pitfalls in `vibe-flow.agent.md` only. If you don't bump, updates won't propagate. All agents are versioned as a suite.
 
-- **Forgetting Version Bumps:** The installer checks versions. If you don't bump, updates won't propagate.
+- **Breaking Installer:** If you rename a file, `install-vibeflow.md` will break.
+- **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
+- **Inconsistent Task Management:** All agents should use `#tool:todo` consistently for tracking work
 - **Breaking Installer:** If you rename a file, `install-vibeflow.md` will break.
 - **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
