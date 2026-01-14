@@ -97,7 +97,12 @@ STEP 1: SETUP & EXPLORATION
 - Action: Initialize research plan using #tool:todo.
 - Action: Use #tool:file_search, #tool:read_file, #tool:semantic_search to map the problem.
 - Action: Use #tool:mcp_io_github_ups_resolve-library-id to find library docs.
-- Action: Use #tool:mcp_microsoft_pla_browser_run_code (Playwright) or Chrome DevTools to analyze UI/Behavior.
+- Action: **FOR UI/FRONTEND ISSUES**: You MUST use visual inspection tools:
+  - Use #tool:mcp_io_github_chr_get_network_request (Chrome DevTools) to inspect DOM, styles, and responsive behavior
+  - Use #tool:mcp_microsoft_pla_browser_run_code (Playwright) to test actual rendering at different viewports
+  - Document visual behavior across breakpoints (mobile, tablet, desktop)
+  - Capture screenshots or describe visual issues observed
+  - DO NOT rely solely on code reading for UI/responsive design issues
 - Output: Update `3-RESEARCH.md` in the plan directory with raw findings.
 
 STEP 2: ALTERNATIVE ANALYSIS
