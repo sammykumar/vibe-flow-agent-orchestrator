@@ -56,7 +56,7 @@ git push origin
 echo "✓ Version $NEW_VERSION committed and pushed"
 
 # Create and push tag
-git tag "v$NEW_VERSION"
+git tag -m "Version $NEW_VERSION" "v$NEW_VERSION"
 git push origin "v$NEW_VERSION"
 
 echo "✓ Tag v$NEW_VERSION created and pushed"

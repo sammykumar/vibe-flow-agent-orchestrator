@@ -113,12 +113,18 @@ STEP 2: ALTERNATIVE ANALYSIS
 STEP 3: SPECIFICATION
 
 - Action: Define the chosen technical solution.
-- Output: Create `4-SPEC.md` in the plan directory (Must include: API changes, Data structures, Test plan).
+- Action: **Check if `4-SPEC.md` already exists** in the plan directory using #tool:read_file
+  - IF EXISTS: Update the existing file with revised requirements, constraints, or new learnings from failed tests
+  - IF NOT EXISTS: Create new `4-SPEC.md`
+- Output: `4-SPEC.md` in the plan directory (Must include: API changes, Data structures, Test plan).
 
 STEP 4: PLANNING
 
 - Action: Break down the spec into concrete implementation tasks.
-- Output: Create `5-PLAN.md` in the plan directory using the plan template (`docs/templates/plan-template.md`).
+- Action: **Check if `5-PLAN.md` already exists** in the plan directory using #tool:read_file
+  - IF EXISTS: Update the existing file with revised tasks, adjusted approach, or new steps based on test failures
+  - IF NOT EXISTS: Create new `5-PLAN.md` using the plan template (`docs/templates/plan-template.md`)
+- Output: `5-PLAN.md` in the plan directory.
 
 STEP 5: HANDOFF
 
@@ -148,8 +154,8 @@ You are the **Research Methodologist** (subagent: `research.agent`). Your sole p
 All work happens in: `.github/plans/{status}/{major-area}/{task-name}/`
 
 - **Updates**: `3-RESEARCH.md` (Findings, alternatives, evidence).
-- **Creates**: `4-SPEC.md` (Technical constraints, API changes, test plans).
-- **Creates**: `5-PLAN.md` (Step-by-step implementation tasks).
+- **Creates/Updates**: `4-SPEC.md` (Technical constraints, API changes, test plans). **This is a living document** - update it if the plan already exists and you're refining the spec based on test failures or new insights.
+- **Creates/Updates**: `5-PLAN.md` (Step-by-step implementation tasks). **This is a living document** - update it when iterating to reflect new implementation strategy.
 - **updates**: `2-PROGRESS.md` (Log your activities).
 
 ## Rules & Constraints
