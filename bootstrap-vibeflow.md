@@ -2,7 +2,7 @@
 
 These instructions install or update Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-<!-- version: 1.2.0 -->
+<!-- version: 1.2.1 -->
 
 This bootstrap script can be used for both **initial installation** and **version updates**. It checks GitHub for the latest agent versions and updates them as needed.
 
@@ -122,9 +122,9 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 
 ### Statuses
 
-- `todo`: Work identified but not started.
-- `in-progress`: Actively being researched, implemented, tested.
-- `finished`: Fully implemented, tested, and documented.
+- `todo`: Work identified but not yet started (Manual use only).
+- `in-progress`: Actively being researched, implemented, tested. (Agents initialize here).
+- `finished`: Fully implemented, tested, and documented. (User moves here manually).
 
 ### Required Files
 
@@ -138,8 +138,8 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 
 ### Workflow
 
-1. **Initialize**: Create folder in `todo`.
-2. **Research**: Populate `3-RESEARCH.md` and `4-SPEC.md`. (Orchestrator moves folder to `in-progress` at the start of work).
+1. **Initialize**: Create folder in `in-progress`.
+2. **Research**: Populate `3-RESEARCH.md` and `4-SPEC.md`.
 3. **Plan**: Create `5-PLAN.md`.
 4. **Implement**: Execute plan, logging to `2-PROGRESS.md`.
 5. **Test**: Verify implementation.

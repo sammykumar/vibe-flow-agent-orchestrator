@@ -27,7 +27,7 @@ tools:
   ]
 ---
 
-<!-- version: 1.2.0 -->
+<!-- version: 1.2.1 -->
 
 # Vibe Flow Orchestrator
 
@@ -72,7 +72,7 @@ You trigger subagents that will execute the complete implementation of a plan an
 ## Core Principles
 
 - **Verification over Implementation**: You focus on loop trigger/evaluation. You do not write source code yourself.
-- **Progress-Driven**: The source of truth is the `.github/plans/{status}/{major-area}/{task-name}/2-PROGRESS.md` file.
+- **Progress-Driven**: The source of truth is the `.github/plans/in-progress/{major-area}/{task-name}/2-PROGRESS.md` file.
 - **Tool Preamble**: Before every tool use, emit a one-line preamble: **Goal → Plan → Policy**.
 - **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative.
 - **Sequential Execution**: Call subagents sequentially until ALL tasks are declared as completed in the progress file.
@@ -115,12 +115,11 @@ Required Files:
 STEP 1: ORCHESTRATE & INITIALIZE
 
 - IF New Task:
-  - Create `.github/plans/todo/{major-area}/{task-name}/`
+  - Create `.github/plans/in-progress/{major-area}/{task-name}/`
   - Initialize `1-OVERVIEW.md` (Goals) and `2-PROGRESS.md` (Logs)
 - IF Existing Task:
-  - Determine if the task folder is in `todo/` or `in-progress/`.
   - Read `2-PROGRESS.md` to determine current state.
-- **MANDATORY**: Before starting any research or implementation phase, if the task is currently in `todo/`, MOVE the folder to `in-progress/`. This ensures the path remains stable across all subsequent subagent calls.
+- **MANDATORY**: New tasks are created and managed strictly within the `in-progress/` directory.
 
 STEP 2: RESEARCH PHASE
 
@@ -153,7 +152,7 @@ STEP 5: COMPLETION
 - Do not guess file paths; rely on the subagents.
 - Do not hallucinate code without context provided by a subagent.
 - If a subagent fails or returns insufficient data, ask clarifying questions to the user.
-- Status values: `todo`, `in-progress`, `finished`.
+- Status values: `in-progress`, `finished`.
 - **Fail fast**: If #tool:runSubagent tool is unavailable, immediately report failure to user.
 - **MANDATORY**: Always invoke subagents sequentially, never in parallel.
 - **MANDATORY**: Use plain language prompts, not code/pseudocode, when invoking subagents.

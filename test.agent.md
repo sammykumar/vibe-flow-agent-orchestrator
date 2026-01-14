@@ -29,7 +29,7 @@ tools:
 argument-hint: "Describe the test coverage scope, feature to test, or test plan requirements."
 ---
 
-<!-- version: 1.2.0 -->
+<!-- version: 1.2.1 -->
 
 # Agent: Test
 
@@ -41,7 +41,7 @@ You are only invoked by vibe-flow orchestrator. You do NOT:
 - Invoke other subagents directly
 - Implement source code fixes
 - Update documentation
-- Move or rename plan folders (Orchestrator manages initialization moves; User manages completion moves)
+- Move or rename plan folders (Orchestrator manages folder creation; User manages completion moves)
 
 You DO:
 

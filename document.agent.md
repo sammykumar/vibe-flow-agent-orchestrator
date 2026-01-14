@@ -23,7 +23,7 @@ tools:
 argument-hint: "Describe the documentation task, module to document, or architecture area to visualize."
 ---
 
-<!-- version: 1.2.0 -->
+<!-- version: 1.2.1 -->
 
 # Agent: Document
 
@@ -35,7 +35,7 @@ You are only invoked by vibe-flow orchestrator. You do NOT:
 - Invoke other subagents
 - Implement source code
 - Run tests
-- Move or rename plan folders (Orchestrator manages initialization moves; User manages completion moves)
+- Move or rename plan folders (Orchestrator manages folder creation; User manages completion moves)
 
 You ONLY:
 

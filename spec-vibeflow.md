@@ -239,11 +239,10 @@ Responsibilities:
 ### Workflow logic (Beast Mode Loop)
 
 1.  **Initialization**:
-    - Create PDD structure: `.github/plans/todo/{area}/{task}/`.
+    - Create PDD structure: `.github/plans/in-progress/{area}/{task}/`.
     - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
 2.  **Research & Design**:
     - Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
-    - If the task is in `todo/`, the Orchestrator moves it to `in-progress/` before calling the sub-agent.
     - Review specification with the user.
 3.  **Planning**:
     - Generate `5-PLAN.md` based on the approved spec.
@@ -497,19 +496,13 @@ Status values map directly to the `{status}` segment in the PDD path:
 
 ### Status definitions
 
-```
-todo
-in-progress
-finished
-```
-
 | Status      | Meaning                                                       |
 | ----------- | ------------------------------------------------------------- |
-| todo        | Work identified but not yet started                           |
+| todo        | Work identified but not yet started (Manual use only)         |
 | in-progress | Actively being researched, implemented, tested, or documented |
 | finished    | Fully implemented, tested, and documented                     |
 
-Status transitions from `todo` to `in-progress` are **explicitly controlled by `vibe-flow`**. However, the final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
+Status transitions are minimal: **Agents always initialize in `in-progress`**. The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
 ---
 
