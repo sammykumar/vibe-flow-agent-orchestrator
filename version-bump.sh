@@ -42,18 +42,15 @@ esac
 NEW_VERSION="$MAJOR.$MINOR.$PATCH"
 
 echo "Bumping to version: $NEW_VERSION"
-echo ""
 
-# Update version in all agent files
-for AGENT_FILE in "${AGENT_FILES[@]}"; do
-    if [ -f "$AGENT_FILE" ]; then
-        sed -i "" "s/<!-- version: .* -->/<!-- version: $NEW_VERSION -->/" "$AGENT_FILE"
-        echo "✓ Updated $AGENT_FILE"
-    else
 # Update version in orchestrator file (single source of truth)
 sed -i "" "s/<!-- version: .* -->/<!-- version: $NEW_VERSION -->/" "$AGENT_FILE"
 
 echo "Version bumped from $CURRENT_VERSION to $NEW_VERSION in $AGENT_FILE"
 
 # Git operations
-git add "$AGENT_FILE
+git add "$AGENT_FILE"
+git commit -m "chore: bump version to $NEW_VERSION"
+git push origin
+
+echo "✓ Version $NEW_VERSION committed and pushed"
