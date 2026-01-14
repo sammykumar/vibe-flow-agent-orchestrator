@@ -24,8 +24,6 @@ tools:
 argument-hint: "Describe the implementation task, feature to build, or bug to fix."
 ---
 
-<!-- version: 1.2.1 -->
-
 # Agent: Implement
 
 **YOU ARE IMPLEMENTATION, NOT ORCHESTRATION (but you SIGNAL when done).**

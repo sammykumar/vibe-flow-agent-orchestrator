@@ -23,8 +23,6 @@ tools:
 argument-hint: "Describe the documentation task, module to document, or architecture area to visualize."
 ---
 
-<!-- version: 1.2.1 -->
-
 # Agent: Document
 
 **YOU ARE DOCUMENTATION, NOT ORCHESTRATION (but you SIGNAL task completion).**

@@ -140,7 +140,9 @@ Download all agents to `.github/agents`. If agents already exist, they will be o
 
 ### 6.3 Verify Installation
 
-After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`). If the version matches the latest tag, it has been successfully updated.
+After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`). This is the single source of truth for the Vibe Flow version. All subagents are versioned together as a suite based on the orchestrator version.
+
+If the version matches the latest tag, the installation has been successfully updated.
 
 Ensure you use the raw content URLs and install them to their respective locations.
 
@@ -189,13 +191,15 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
 
-- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.1.0)
+- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.2.1 - single source of truth for version)
 - `docs/vibeflow/pdd-protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
 - `.github/agents/implement.agent.md` (Implement Agent)
 - `.github/agents/test.agent.md` (Test Agent)
 - `.github/agents/document.agent.md` (Document Agent)
 - `.github/plans/` (Project Memory)
+
+**Note**: The vibe-flow orchestrator version is the single source of truth. All subagents are versioned together as a suite.
 
 **To start a task**:
 "@vibe-flow Implement {feature_name}"
