@@ -26,13 +26,13 @@ docs/
 ├── architecture/
 ├── api/
 ├── guides/
-│   ├── Code Style.md
-│   └── Testing Strategy.md
+│   ├── code-style.md
+│   └── testing-strategy.md
 ├── vibeflow/
-│   ├── PDD Protocol.md
-│   └── Orchestator Manual.md
-├── Unused Instructions.md
-└── Writing Documentation.md
+│   ├── pdd-protocol.md
+│   └── orchestrator-manual.md
+├── unused-instructions.md
+└── writing-documentation.md
 .github/
 ├── agents/
 │   ├── vibe-flow.agent.md
@@ -91,10 +91,10 @@ If `.gitignore` exists, ensure it includes:
 # Ignore temp files if any
 ```
 
-## 4. Move START_FILE to `docs/Unused Instructions.md`
+## 4. Move START_FILE to `docs/unused-instructions.md`
 
-1. Check if `docs/Unused Instructions.md` already exists. If it exists, stop.
-2. Move START_FILE content into `docs/Unused Instructions.md` with title `# Unused Instructions`. Remove START_FILE.
+1. Check if `docs/unused-instructions.md` already exists. If it exists, stop.
+2. Move START_FILE content into `docs/unused-instructions.md` with title `# Unused Instructions`. Remove START_FILE.
 3. Call this **UNUSED_FILE**.
 
 ## 5. Extract and Infer Documentation
@@ -103,48 +103,15 @@ Extract documents from UNUSED_FILE and infer project conventions.
 
 ### 5.1. Code Style
 
-Create `docs/guides/Code Style.md` with code style rules. Extract from UNUSED_FILE and infer from codebase.
+Create `docs/guides/code-style.md` with code style rules. Extract from UNUSED_FILE and infer from codebase.
 
 ### 5.2. Testing Strategy
 
-Create `docs/guides/Testing Strategy.md` explaining how tests are written and run. Extract from UNUSED_FILE and infer from codebase.
+Create `docs/guides/testing-strategy.md` explaining how tests are written and run. Extract from UNUSED_FILE and infer from codebase.
 
 ### 5.3. PDD Protocol
 
-Create `docs/vibeflow/PDD Protocol.md` with the following content:
-
-```markdown
-# Plan-Driven Development (PDD)
-
-## File Contract
-
-All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
-
-### Statuses
-
-- `todo`: Work identified but not yet started (Manual use only).
-- `in-progress`: Actively being researched, implemented, tested. (Agents initialize here).
-- `finished`: Fully implemented, tested, and documented. (User moves here manually).
-
-### Required Files
-
-| File            | Purpose                                     |
-| --------------- | ------------------------------------------- |
-| `1-OVERVIEW.md` | Business context + goals                    |
-| `2-PROGRESS.md` | Append-only execution log (Source of Truth) |
-| `3-RESEARCH.md` | Investigation + Alternative Matrix          |
-| `4-SPEC.md`     | Tech Spec + Impact Analysis                 |
-| `5-PLAN.md`     | Step-by-step implementation plan            |
-
-### Workflow
-
-1. **Initialize**: Create folder in `in-progress`.
-2. **Research**: Populate `3-RESEARCH.md` and `4-SPEC.md`.
-3. **Plan**: Create `5-PLAN.md`.
-4. **Implement**: Execute plan, logging to `2-PROGRESS.md`.
-5. **Test**: Verify implementation.
-6. **Finish**: User manually moves the folder to `finished`.
-```
+The PDD Protocol will be fetched from the official repository in step 6 along with the agents.
 
 ## 6. Install or Update Vibe Flow Agents
 
@@ -169,7 +136,8 @@ Download all agents to `.github/agents`. If agents already exist, they will be o
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/test.agent.md) to `.github/agents/test.agent.md`
 - Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/document.agent.md) to `.github/agents/document.agent.md`
-- Fetch [spec-vibeflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/spec-vibeflow.md) to `docs/vibeflow/PDD Protocol.md`
+- Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
+- Fetch [spec-vibeflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/spec-vibeflow.md) to `docs/vibeflow/orchestrator-manual.md`
 
 ### 6.3 Verify Installation
 
@@ -197,7 +165,7 @@ Create `AGENTS.md` at git root:
 
 ## Documentation
 
-- `docs/vibeflow/PDD Protocol.md`: Rules for plans.
+- `docs/vibeflow/pdd-protocol.md`: Rules for plans.
 - `docs/guides/`: Code and usage guides.
 ```
 
@@ -223,7 +191,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 **New Structure**:
 
 - `.github/agents/vibe-flow.agent.md` (Orchestrator v1.1.0)
-- `docs/vibeflow/PDD Protocol.md` (Vibe Flow Protocol)
+- `docs/vibeflow/pdd-protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
 - `.github/agents/implement.agent.md` (Implement Agent)
 - `.github/agents/test.agent.md` (Test Agent)
@@ -246,7 +214,8 @@ The following agents have been updated to the latest version (v{NEW_VERSION}):
 - implement.agent.md
 - test.agent.md
 - document.agent.md
-- docs/vibeflow/PDD Protocol.md
+- docs/vibeflow/pdd-protocol.md
+- docs/vibeflow/orchestrator-manual.md
 
 All agent profiles are now in sync with the official repository.
 ```
