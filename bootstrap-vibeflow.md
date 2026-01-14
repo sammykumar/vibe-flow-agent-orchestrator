@@ -185,7 +185,7 @@ Fill in the template for **first-time installation**:
 ```markdown
 # Vibe Flow Installed
 
-The {START_FILE} instructions have been migrated to `docs/Unused Instructions.md`.
+The {START_FILE} instructions have been migrated to `docs/unused-instructions.md`.
 Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
