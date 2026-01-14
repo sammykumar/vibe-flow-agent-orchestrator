@@ -89,7 +89,7 @@ STEP 2: UI VISUAL DOCUMENTATION (for UI/Frontend changes only)
 
 - Action: **Check if `screenshots/before-*.png` exist** in the plan directory using #tool:read/readFile
 - IF UI CHANGES:
-  - **CAPTURE "AFTER" SCREENSHOTS**: Use #tool:mcp_microsoft_pla_browser_run_code (Playwright) to capture the fixed/improved UI
+  - **CAPTURE "AFTER" SCREENSHOTS**: Use #tool:playwright (Playwright) to capture the fixed/improved UI
     - Save screenshots to plan directory: `{plan-dir}/screenshots/after-*.png`
     - Capture at same viewports as before screenshots: mobile (375px), tablet (768px), desktop (1440px)
   - **CREATE VISUAL COMPARISON**: In your documentation (README, guides, or plan docs), include:
@@ -99,8 +99,12 @@ STEP 2: UI VISUAL DOCUMENTATION (for UI/Frontend changes only)
 
 STEP 3: ARCHITECTURE VIZ
 
-- Action: Create Mermaid diagrams (`.mmd`) for new flows using #tool:edit/createFile .
-- Output: `docs/architecture/diagrams/`.
+- Action: Identify complex flows (logic > 3 steps) or new module interactions.
+- Action: **MANDATORY**: Create/Update Mermaid diagrams (`.md`) for these flows using #tool:edit/createFile
+  - Location: `docs/architecture/diagrams/`.
+  - Types: Use **Sequence Diagrams** for flows, **Class Diagrams** for data models, **C4 Component Diagrams** for system structure.
+  - Naming: `[feature]-[type].mmd` (e.g., `auth-login-sequence.mmd`).
+- Output: `docs/architecture/diagrams/` populated with valid Mermaid files.
 
 STEP 4: API & GUIDES
 
@@ -167,5 +171,6 @@ docs/
 - **Resume Mastery**: If interrupted or prompted to resume, immediately read #tool:todo and continue without asking for instructions.
 
 - **Visual First**: Complex flows (more than 3 steps) MUST have a corresponding Mermaid sequence or flow chart.
+- **Diagrams Required**: You MUST create at least one Mermaid diagram for any feature that introduces new logic or data structures.
 - **No Stale Docs**: If code changes, docs MUST be updated in the same "Finish" cycle.
 - **Link Integrity**: All internal links must be relative and valid.

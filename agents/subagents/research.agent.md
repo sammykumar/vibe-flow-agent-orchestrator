@@ -215,6 +215,7 @@ Structure your specification file as follows:
 ## 1. Architecture Design
 
 _Diagrams, data flow, component changes._
+_Ideally, draft Mermaid diagrams here (Sequence, Flowchart) for the Document Agent to finalize._
 
 ## 2. API / Interface Changes
 

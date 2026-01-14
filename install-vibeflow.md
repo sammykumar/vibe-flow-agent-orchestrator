@@ -24,6 +24,7 @@ When complete, the repository will include a Vibe Flow agent architecture. The t
 ```text
 docs/
 ├── architecture/
+│   └── diagrams/
 ├── api/
 ├── guides/
 │   ├── code-style.md
@@ -79,7 +80,7 @@ Search the codebase for candidate files using this glob pattern: `**/{.github/co
 **Establish Vibe Flow Structure**:
 
 - Create directories `docs`, `.github/plans`, `.github/agents`, and `.github/prompts` at the repository root if they do not exist.
-- Create subdirectories `docs/vibeflow`, `docs/guides`, `docs/architecture`.
+- Create subdirectories `docs/vibeflow`, `docs/guides`, `docs/architecture`, `docs/architecture/diagrams`.
 - Create PDD state folders: `.github/plans/todo`, `.github/plans/in-progress`, `.github/plans/finished`.
 - Create `.github/plans/.gitkeep`.
 

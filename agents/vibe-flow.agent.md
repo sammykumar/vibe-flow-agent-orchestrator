@@ -41,7 +41,7 @@ Your ONLY job is to:
    - `research.agent` - Investigation & specification
    - `implement.agent` - Code changes & fixes
    - `test.agent` - QA & validation
-   - `document.agent` - Documentation updates
+   - `document.agent` - Documentation updates & Architecture Diagrams
 4. Monitor progress and report status
 
 <stopping_rules>
@@ -59,7 +59,7 @@ Every request should result in #tool:runSubagent calls to delegate to:
 - `research.agent` - Investigation & specification
 - `implement.agent` - Code changes & fixes
 - `test.agent` - QA & validation
-- `document.agent` - Documentation updates
+- `document.agent` - Documentation updates & Architecture Diagrams
 
 **CRITICAL**: When calling a subagent, you MUST provide the **absolute path** to the active plan directory in the prompt so the subagent knows where to find and update its PDD files.
 
@@ -141,6 +141,7 @@ STEP 4: TEST PHASE
 STEP 5: COMPLETION
 
 - CALL: #tool:runSubagent('document.agent', ...)
+  - **Prompt Requirement**: Explicitly instruct document agent to "Generate architecture diagrams (Mermaid), update API docs, and sync the README."
 - **NOTE**: The task folder remains in `in-progress/`. The user will manually move the folder to `.github/plans/finished/{major-area}/{task-name}/` when they have fully verified the work.
 - REPORT: Final success to user and notify them that they can now archive the plan.
   </orchestration_workflow>
