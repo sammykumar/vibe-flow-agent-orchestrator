@@ -17,6 +17,7 @@ tools:
     "search",
     "web",
     "agent",
+    "playwright/*",
     "io.github.chromedevtools/chrome-devtools-mcp/*",
     "todo",
   ]
@@ -84,21 +85,33 @@ STEP 1: SETUP
 
 - Action: Initialize task list using #tool:todo
 
-STEP 2: ARCHITECTURE VIZ
+STEP 2: UI VISUAL DOCUMENTATION (for UI/Frontend changes only)
+
+- Action: **Check if `screenshots/before-*.png` exist** in the plan directory using #tool:read/readFile
+- IF UI CHANGES:
+  - **CAPTURE "AFTER" SCREENSHOTS**: Use #tool:mcp_microsoft_pla_browser_run_code (Playwright) to capture the fixed/improved UI
+    - Save screenshots to plan directory: `{plan-dir}/screenshots/after-*.png`
+    - Capture at same viewports as before screenshots: mobile (375px), tablet (768px), desktop (1440px)
+  - **CREATE VISUAL COMPARISON**: In your documentation (README, guides, or plan docs), include:
+    - Before/After image pairs showing the improvement
+    - Viewport-specific comparisons (mobile, tablet, desktop)
+    - Brief description of what changed visually
+
+STEP 3: ARCHITECTURE VIZ
 
 - Action: Create Mermaid diagrams (`.mmd`) for new flows using #tool:edit/createFile .
 - Output: `docs/architecture/diagrams/`.
 
-STEP 3: API & GUIDES
+STEP 4: API & GUIDES
 
 - Action: Update/Create API references using #tool:edit/editFiles or #tool:edit/createFile
 - Action: Update "How to use" guides in `docs/guides/`.
 
-STEP 4: README SYNC
+STEP 5: README SYNC
 
 - Action: Ensure root `README.md` reflects new features using #tool:edit/editFiles
 
-STEP 5: FINALIZE
+STEP 6: FINALIZE
 
 - Action: Update `2-PROGRESS.md` in the plan directory with status `finished`.
 - Action: Update status in #tool:todo

@@ -101,9 +101,12 @@ STEP 1: SETUP & EXPLORATION
   - Use #tool:mcp_io_github_chr_get_network_request (Chrome DevTools) to inspect DOM, styles, and responsive behavior
   - Use #tool:mcp_microsoft_pla_browser_run_code (Playwright) to test actual rendering at different viewports
   - Document visual behavior across breakpoints (mobile, tablet, desktop)
-  - Capture screenshots or describe visual issues observed
+  - **CAPTURE "BEFORE" SCREENSHOTS**: Use Playwright to capture screenshots of the current (broken/pre-change) UI state
+    - Save screenshots to plan directory: `{plan-dir}/screenshots/before-*.png`
+    - Capture at key viewports: mobile (375px), tablet (768px), desktop (1440px)
+    - Document screenshot filenames in `3-RESEARCH.md`
   - DO NOT rely solely on code reading for UI/responsive design issues
-- Output: Update `3-RESEARCH.md` in the plan directory with raw findings.
+- Output: Update `3-RESEARCH.md` in the plan directory with raw findings and before screenshot references.
 
 STEP 2: ALTERNATIVE ANALYSIS
 
