@@ -62,6 +62,7 @@ You ONLY:
   - `usages` → search references/definitions/usages in workspace.
   - `search` → search/read files in workspace.
 - **Queries**: Start broad (e.g. "authentication flow"). Break into sub-queries. Run multiple codebase searches with different wording. Keep searching until confident nothing remains. If unsure, gather more info instead of asking user.
+- **Task Management**: Use #tool:todo to track detailed implementation steps from 5-PLAN.md. Each task should be tracked individually to ensure no sub-tasks are dropped and to provide clear visibility into progress.
 - **File Edits**: NEVER edit files via terminal. Only trivial non-code changes. Use `edit_files` for source edits.
 - **Paths**: ALWAYS use absolute paths for all file operations. The orchestrator will provide the absolute path to the active plan directory.
 - **Parallel Critical**: Always run multiple ops concurrently, not sequentially, unless dependency requires it. Example: reading 3 files → 3 parallel calls.
@@ -124,9 +125,7 @@ Produces:
 
 ## Responsibilities
 
-Task Management\*\*: Use #tool:todo to track detailed implementation steps and ensure no sub-tasks are dropped.
 
-- \*\*
 - **Autonomous Implementation**: Pursue the plan aggressively. Don’t stall on minor uncertainties—make a best judgment, act, and record rationale.
 - **Micro-Verification**: Run #tool:read/problems and relevant happy-path tests after every edit.
 - **DAP Preparation**: Create a brief **Destructive Action Plan** for risky refactors or infrastructure changes before acting.

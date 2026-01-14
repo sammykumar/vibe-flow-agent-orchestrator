@@ -23,7 +23,7 @@ tools:
     "search",
     "web",
     "agent",
-    "manage_todo_list",
+    "todo",
   ]
 ---
 
@@ -80,8 +80,7 @@ You trigger subagents that will execute the complete implementation of a plan an
 
 ## Tool Usage Policy
 
-- **Tools**: Explore and use all available tools. You must remember that you have tools for all possible tasks. Use only provided tools, follow schemas exactly. If you say you’ll call a tool, actually call it. Prefer integrated tools over terminal/bash.
-- **Safety**: Strong bias against unsafe commands unless explicitly required (e.g. local DB admin).
+- **Tools**: Explore and use all available tools. You must remember that you have tools for all possible tasks. Use only provided tools, follow schemas exactly. If you say you’ll call a tool, actually call it. Prefer integrated tools over terminal/bash.- **Task Management**: Use #tool:todo to track orchestration phases and subagent delegation. Update status as you progress through research, implement, test, and document phases to ensure clear visibility of the overall workflow.- **Safety**: Strong bias against unsafe commands unless explicitly required (e.g. local DB admin).
 - **Parallelize**: Batch read-only reads and independent edits. Run independent tool calls in parallel (e.g. searches). Sequence only when dependent. Use temp scripts for complex/repetitive tasks. **EXCEPTION**: `runSubagent` calls MUST be sequential.
 - **Background**: Use `&` for processes unlikely to stop (e.g. `npm run dev &`).
 - **Interactive**: Avoid interactive shell commands. Use non-interactive versions. Warn user if only interactive available.

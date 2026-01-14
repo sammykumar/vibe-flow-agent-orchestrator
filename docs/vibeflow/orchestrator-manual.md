@@ -250,7 +250,7 @@ Responsibilities:
 ### Tools / MCP
 
 - **Core**: `runSubagent`, `create_file`, `replace_string_in_file`, `create_directory`, `read_file`, `file_search`, `semantic_search`
-- **Management**: `manage_todo_list`
+- **Management**: `todo`
 
 ### Workflow logic (Implementation Loop)
 
@@ -313,7 +313,7 @@ Updates:
 - **Web**: `open_simple_browser`, `fetch_webpage`
 - **Execution**: `run_in_terminal`, `get_terminal_output`, `create_and_run_task`, `run_notebook_cell`
 - **Context**: `terminal_selection`, `terminal_last_command`
-- **File/Management**: `create_directory`, `create_file`, `replace_string_in_file`, `manage_todo_list`
+- **File/Management**: `create_directory`, `create_file`, `replace_string_in_file`, `todo`
 - **Infrastructure**: `mcp_copilot_conta_*`
 
 ### Rules
@@ -356,7 +356,7 @@ Produces:
 - **Core**: `file_search`, `read_file`, `get_errors`, `replace_string_in_file`, `create_file`
 - **Execution**: `run_in_terminal`, `get_terminal_output`, `create_and_run_task`, `run_notebook_cell`
 - **Context**: `list_code_usages`, `grep_search`, `semantic_search`
-- **Management**: `manage_todo_list`
+- **Management**: `todo`
 
 ### Rules
 
