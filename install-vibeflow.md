@@ -139,7 +139,11 @@ Ensure you use the raw content URLs and install them to their respective locatio
 
 ## 7. Configure VS Code
 
-Ensure `.vscode/settings.json` exists (create if missing). Add or merge the following settings to suggest the PDD prompts:
+You MUST ensure the `.vscode/settings.json` file exists and contains the prompt file recommendations.
+
+1.  **Check for Existence**: Check if `.vscode/settings.json` exists.
+2.  **Create if Missing**: If it does not exist, create it with `{}`.
+3.  **Merge Settings**: Read the file and merge the following configuration into it. Do NOT overwrite existing unrelated settings.
 
 ```json
 {

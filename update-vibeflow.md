@@ -44,7 +44,24 @@ Download all agents to `.github/agents`. Existing agents will be overwritten wit
 
 After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`).
 
-## 4. Report to the User
+## 4. Configure VS Code
+
+You MUST ensure the `.vscode/settings.json` file is configured to suggest the PDD prompts.
+
+1.  **Check for Existence**: Check if `.vscode/settings.json` exists.
+2.  **Create if Missing**: If it does not exist, create it with `{}`.
+3.  **Merge Settings**: Read the file and merge the following configuration into it. Do NOT overwrite existing unrelated settings.
+
+```json
+{
+  "chat.promptFilesRecommendations": {
+    ".github/prompts/new-feature.prompt.md": true,
+    ".github/prompts/update-feature.prompt.md": true
+  }
+}
+```
+
+## 5. Report to the User
 
 Report which agents were upgraded:
 

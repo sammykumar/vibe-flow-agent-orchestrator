@@ -51,7 +51,7 @@ graph TD
 
     VF -->|Delegate: 4. Document| DA
     DA -.->|Docs & Diagrams| VF
-    
+
     style VF fill:#8e44ad,stroke:#333,color:#fff
     style RA fill:#27ae60,stroke:#333,color:#fff
     style IA fill:#2980b9,stroke:#333,color:#fff
