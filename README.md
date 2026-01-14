@@ -18,7 +18,48 @@ Vibe Flow is a complete agent-based development framework that transforms how yo
 
 All work is tracked in `.github/plans/` directories, creating a permanent memory of your project's evolution.
 
-## 🚀 Quick Start
+## � Workflow Diagram
+
+```mermaid
+graph TD
+    subgraph "Prompts"
+        NF[new-feature]
+        UF[update-feature]
+    end
+
+    subgraph "Orchestrator"
+        VF[vibe-flow]
+    end
+
+    subgraph "Subagents"
+        RA[research-agent]
+        IA[implement-agent]
+        TA[test-agent]
+        DA[document-agent]
+    end
+
+    NF & UF -->|Invokes| VF
+
+    VF -->|Delegate: 1. Research| RA
+    RA -.->|Research & Spec| VF
+
+    VF -->|Delegate: 2. Implement| IA
+    IA -.->|Code Changes| VF
+
+    VF -->|Delegate: 3. Verify| TA
+    TA -.->|Test Results| VF
+
+    VF -->|Delegate: 4. Document| DA
+    DA -.->|Docs & Diagrams| VF
+    
+    style VF fill:#8e44ad,stroke:#333,color:#fff
+    style RA fill:#27ae60,stroke:#333,color:#fff
+    style IA fill:#2980b9,stroke:#333,color:#fff
+    style TA fill:#c0392b,stroke:#333,color:#fff
+    style DA fill:#f39c12,stroke:#333,color:#fff
+```
+
+## �🚀 Quick Start
 
 | Action                  | Description                                                        | Install                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

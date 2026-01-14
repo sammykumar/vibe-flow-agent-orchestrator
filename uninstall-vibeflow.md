@@ -13,6 +13,7 @@ Ask the user to confirm before proceeding:
 
 This will remove:
 - All agents from .github/agents/
+- All prompts from .github/prompts/
 - Vibe Flow documentation from docs/vibeflow/
 - AGENTS.md file
 
@@ -34,6 +35,11 @@ mkdir -p "$BACKUP_DIR"
 # Backup agent files
 if [ -d ".github/agents" ]; then
     cp -r .github/agents "$BACKUP_DIR/"
+fi
+
+# Backup prompt files
+if [ -d ".github/prompts" ]; then
+    cp -r .github/prompts "$BACKUP_DIR/"
 fi
 
 # Backup Vibe Flow docs
@@ -62,7 +68,20 @@ else
 fi
 ```
 
-## 4. Remove Vibe Flow Documentation
+## 4. Remove Prompt Files
+
+Delete the `.github/prompts/` directory:
+
+```bash
+if [ -d ".github/prompts" ]; then
+    rm -rf .github/prompts
+    echo "✓ Removed .github/prompts/"
+else
+    echo "ℹ️ .github/prompts/ not found"
+fi
+```
+
+## 5. Remove Vibe Flow Documentation
 
 Delete Vibe Flow-specific documentation:
 
@@ -75,7 +94,7 @@ else
 fi
 ```
 
-## 5. Remove AGENTS.md
+## 6. Remove AGENTS.md
 
 ```bash
 if [ -f "AGENTS.md" ]; then
@@ -86,7 +105,7 @@ else
 fi
 ```
 
-## 6. Handle Plans Directory
+## 7. Handle Plans Directory
 
 Ask the user what to do with existing plans:
 
@@ -127,7 +146,7 @@ if [ -d ".github/plans" ]; then
 fi
 ```
 
-## 7. Restore Previous Instructions (Optional)
+## 8. Restore Previous Instructions (Optional)
 
 Check if `docs/unused-instructions.md` exists and offer to restore it:
 
@@ -146,7 +165,7 @@ if [ -f "docs/unused-instructions.md" ]; then
 fi
 ```
 
-## 8. Clean Up Empty Directories
+## 9. Clean Up Empty Directories
 
 Remove empty directories created by Vibe Flow:
 
@@ -175,7 +194,7 @@ if [ -d ".github" ] && [ -z "$(ls -A .github)" ]; then
 fi
 ```
 
-## 9. Git Operations (Optional)
+## 10. Git Operations (Optional)
 
 Ask if the user wants to commit the changes:
 
@@ -191,7 +210,7 @@ git commit -m "chore: uninstall Vibe Flow agents"
 echo "✓ Changes committed"
 ```
 
-## 10. Report Completion
+## 11. Report Completion
 
 ```markdown
 # Vibe Flow Uninstalled

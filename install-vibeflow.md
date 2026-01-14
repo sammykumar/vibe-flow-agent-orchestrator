@@ -78,7 +78,7 @@ Search the codebase for candidate files using this glob pattern: `**/{.github/co
 
 **Establish Vibe Flow Structure**:
 
-- Create directories `docs`, `.github/plans`, and `.github/agents` at the repository root if they do not exist.
+- Create directories `docs`, `.github/plans`, `.github/agents`, and `.github/prompts` at the repository root if they do not exist.
 - Create subdirectories `docs/vibeflow`, `docs/guides`, `docs/architecture`.
 - Create PDD state folders: `.github/plans/todo`, `.github/plans/in-progress`, `.github/plans/finished`.
 - Create `.github/plans/.gitkeep`.
@@ -128,6 +128,8 @@ Download all agents to `.github/agents`:
 - Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/agents/subagents/document.agent.md) to `.github/agents/document.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
+- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
+- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
 
 ### 6.2 Verify Installation
 
@@ -135,7 +137,20 @@ After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version
 
 Ensure you use the raw content URLs and install them to their respective locations.
 
-## 7. Create `AGENTS.md`
+## 7. Configure VS Code
+
+Ensure `.vscode/settings.json` exists (create if missing). Add or merge the following settings to suggest the PDD prompts:
+
+```json
+{
+  "chat.promptFilesRecommendations": {
+    ".github/prompts/new-feature.prompt.md": true,
+    ".github/prompts/update-feature.prompt.md": true
+  }
+}
+```
+
+## 8. Create `AGENTS.md`
 
 Create `AGENTS.md` at git root:
 
@@ -159,16 +174,16 @@ Create `AGENTS.md` at git root:
 - `docs/guides/`: Code and usage guides.
 ```
 
-## 8. Handle Links from UNUSED_FILE
+## 9. Handle Links from UNUSED_FILE
 
 - Scan UNUSED_FILE for links to deprecated docs.
 - If relevant content exists, move links to `AGENTS.md` (manually).
 
-## 9. Refresh instructions files
+## 10. Refresh instructions files
 
 Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md`.
 
-## 10. Report to the User
+## 11. Report to the User
 
 Fill in the template for **first-time installation**:
 
@@ -197,6 +212,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 - `.github/agents/implement.agent.md` (Implement Agent)
 - `.github/agents/test.agent.md` (Test Agent)
 - `.github/agents/document.agent.md` (Document Agent)
+- `.github/prompts/` (Interactive Prompts)
 - `.github/plans/` (Project Memory)
 
 **Note**: The vibe-flow orchestrator version is the single source of truth. All subagents are versioned together as a suite.

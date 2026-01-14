@@ -37,6 +37,8 @@ Download all agents to `.github/agents`. Existing agents will be overwritten wit
 - Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/agents/subagents/document.agent.md) to `.github/agents/document.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
+- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
+- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
 
 ### 3.1 Verify Update
 
@@ -58,6 +60,8 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 - document.agent.md
 - docs/vibeflow/pdd-protocol.md
 - docs/vibeflow/orchestrator-manual.md
+- .github/prompts/new-feature.prompt.md
+- .github/prompts/update-feature.prompt.md
 
-All agent profiles are now in sync with the official repository.
+All agent profiles and prompts are now in sync with the official repository.
 ```
