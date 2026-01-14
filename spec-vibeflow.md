@@ -243,6 +243,7 @@ Responsibilities:
     - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
 2.  **Research & Design**:
     - Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
+    - If the task is in `todo/`, the Orchestrator moves it to `in-progress/` before calling the sub-agent.
     - Review specification with the user.
 3.  **Planning**:
     - Generate `5-PLAN.md` based on the approved spec.
@@ -256,7 +257,7 @@ Responsibilities:
     - If failures occur, trigger `Beast` to fix (Refactor Loop).
 6.  **Finalization**:
     - Trigger `Document` sub-agent to update project docs and READMEs.
-    - Move plan folder to `finished`.
+    - **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
 
 ### Rules
 
@@ -508,7 +509,7 @@ finished
 | in-progress | Actively being researched, implemented, tested, or documented |
 | finished    | Fully implemented, tested, and documented                     |
 
-Status transitions are **explicitly controlled by `vibe-flow`** and should be reflected by moving the task folder between status directories.
+Status transitions from `todo` to `in-progress` are **explicitly controlled by `vibe-flow`**. However, the final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
 ---
 

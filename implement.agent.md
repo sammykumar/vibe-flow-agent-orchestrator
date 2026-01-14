@@ -24,6 +24,8 @@ tools:
 argument-hint: "Describe the implementation task, feature to build, or bug to fix."
 ---
 
+<!-- version: 1.2.0 -->
+
 # Agent: Beast (Implement)
 
 **YOU ARE IMPLEMENTATION, NOT ORCHESTRATION (but you SIGNAL when done).**
@@ -34,6 +36,7 @@ You are only invoked by vibe-flow orchestrator. You do NOT:
 - Invoke other subagents
 - Run testing (that's test-agent's job)
 - Update documentation (that's document-agent's job)
+- Move or rename plan folders (Orchestrator manages initialization moves; User manages completion moves)
 
 You ONLY:
 

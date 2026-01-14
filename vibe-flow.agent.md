@@ -27,7 +27,7 @@ tools:
   ]
 ---
 
-<!-- version: 1.1.3 -->
+<!-- version: 1.2.0 -->
 
 # Vibe Flow Orchestrator
 
@@ -118,7 +118,9 @@ STEP 1: ORCHESTRATE & INITIALIZE
   - Create `.github/plans/todo/{major-area}/{task-name}/`
   - Initialize `1-OVERVIEW.md` (Goals) and `2-PROGRESS.md` (Logs)
 - IF Existing Task:
+  - Determine if the task folder is in `todo/` or `in-progress/`.
   - Read `2-PROGRESS.md` to determine current state.
+- **MANDATORY**: Before starting any research or implementation phase, if the task is currently in `todo/`, MOVE the folder to `in-progress/`. This ensures the path remains stable across all subsequent subagent calls.
 
 STEP 2: RESEARCH PHASE
 
@@ -140,8 +142,8 @@ STEP 4: TEST PHASE
 STEP 5: COMPLETION
 
 - CALL: #tool:runSubagent('document-agent', ...)
-- MOVE: Folder to `.github/plans/finished/{major-area}/{task-name}/`
-- REPORT: Final success to user.
+- **NOTE**: The task folder remains in `in-progress/`. The user will manually move the folder to `.github/plans/finished/{major-area}/{task-name}/` when they have fully verified the work.
+- REPORT: Final success to user and notify them that they can now archive the plan.
   </orchestration_workflow>
 
 3. Ask user if they want to continue or start new phase

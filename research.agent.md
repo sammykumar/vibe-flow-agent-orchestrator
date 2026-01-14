@@ -31,6 +31,8 @@ tools:
 argument-hint: "Describe the research task, feature to analyze, or technical specification to author."
 ---
 
+<!-- version: 1.2.0 -->
+
 # Research Agent Instructions
 
 **YOU ARE RESEARCH, NOT ORCHESTRATION (but you SIGNAL phase transitions).**
@@ -41,6 +43,7 @@ You are only invoked by vibe-flow orchestrator. You do NOT:
 - Invoke other subagents
 - Make implementation decisions
 - Create source code
+- Move or rename plan folders (Orchestrator manages initialization moves; User manages completion moves)
 
 You ONLY:
 
