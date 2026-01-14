@@ -60,3 +60,9 @@ git tag -m "Version $NEW_VERSION" "v$NEW_VERSION"
 git push origin "v$NEW_VERSION"
 
 echo "✓ Tag v$NEW_VERSION created and pushed"
+
+# Update 'latest' tag
+git tag -f -m "Latest version" latest
+git push -f origin latest
+
+echo "✓ Tag 'latest' updated and pushed"

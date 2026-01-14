@@ -21,7 +21,8 @@ Process overview:
 Before fetching, check the latest version tag from GitHub:
 
 ```bash
-LATEST_TAG=$(curl -s https://api.github.com/repos/sammykumar/vibe-flow-agent-orchestrator/tags | grep '"name":' | head -n 1 | cut -d '"' -f 4)
+# Fetch tags, filter for those starting with "v" (to ignore "latest"), pick the top one
+LATEST_TAG=$(curl -s https://api.github.com/repos/sammykumar/vibe-flow-agent-orchestrator/tags | grep '"name": "v' | head -n 1 | cut -d '"' -f 4)
 echo "Latest Vibe Flow version: $LATEST_TAG"
 ```
 
