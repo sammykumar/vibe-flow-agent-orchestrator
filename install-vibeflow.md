@@ -41,6 +41,9 @@ docs/
 │   ├── implement.agent.md
 │   ├── test.agent.md
 │   └── document.agent.md
+├── skills/
+│   └── orchestration/
+│       └── SKILL.md
 ├── plans/
 │   ├── todo/
 │   ├── in-progress/
@@ -132,7 +135,13 @@ Download all agents to `.github/agents`:
 - Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
 - Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
 
-### 6.2 Verify Installation
+### 6.2 Fetch Skills
+
+Create `.github/skills/orchestration/` directory and download the orchestration skill:
+
+- Fetch [orchestration/SKILL.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/skills/orchestration/SKILL.md) to `.github/skills/orchestration/SKILL.md`
+
+### 6.3 Verify Installation
 
 After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`).
 
