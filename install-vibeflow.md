@@ -2,7 +2,7 @@
 
 These instructions install Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-<!-- version: 1.5.0 -->
+<!-- version: 2.0.0 -->
 
 This bootstrap script is for **initial installation**. For updates, use `update-vibeflow.md`.
 
@@ -38,10 +38,7 @@ docs/
 .github/
 ├── agents/
 │   ├── vibe-flow.agent.md
-│   ├── research.agent.md
-│   ├── implement.agent.md
-│   ├── test.agent.md
-│   └── document.agent.md
+│   └── research.agent.md
 ├── skills/
 │   └── orchestration/
 │       └── SKILL.md
@@ -134,13 +131,10 @@ https://github.com/sammykumar/vibe-flow-agent-orchestrator
 
 ### 7.1 Fetch Agent Profiles
 
-Download all agents to `.github/agents`:
+Download the incremental agent set to `.github/agents`:
 
 - Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
 - Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
-- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
-- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/test.agent.md) to `.github/agents/test.agent.md`
-- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/document.agent.md) to `.github/agents/document.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
 - Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
@@ -181,11 +175,8 @@ After fetching, verify the following files exist:
 
 **Agents:**
 
-- `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.5.0 -->`)
+- `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 2.0.0 -->`)
 - `.github/agents/research.agent.md`
-- `.github/agents/implement.agent.md`
-- `.github/agents/test.agent.md`
-- `.github/agents/document.agent.md`
 
 **Skills:**
 
@@ -240,9 +231,6 @@ Create `AGENTS.md` at git root:
 ## Sub-Agents (Managed by Vibe Flow)
 
 - **@research-agent**: Investigation & Spec.
-- **@implement-agent**: Code & Refactor.
-- **@test-agent**: QA & E2E.
-- **@document-agent**: Diagrams & Guides.
 
 ## Documentation
 
@@ -285,9 +273,6 @@ Vibe Flow (Plan-Driven Development) is now active.
 - `.github/agents/vibe-flow.agent.md` (Orchestrator v${LATEST_TAG} - single source of truth for version)
 - `docs/vibeflow/pdd-protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
-- `.github/agents/implement.agent.md` (Implement Agent)
-- `.github/agents/test.agent.md` (Test Agent)
-- `.github/agents/document.agent.md` (Document Agent)
 - `.github/skills/orchestration/` (Orchestration skill with PDD templates and workflow patterns)
 - `.github/prompts/` (Interactive Prompts)
 - `.github/plans/` (Project Memory)

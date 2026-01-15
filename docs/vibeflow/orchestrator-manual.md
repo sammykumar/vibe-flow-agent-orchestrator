@@ -1,5 +1,7 @@
 # Vibe Flow – Multi-Agent AI Development Workflow (PDD)
 
+> **Incremental mode notice:** This repository currently ships only the orchestrator and research agent. The full multi-agent workflow described below remains the long-term target. Legacy full-suite agents are backed up in `.github/agents/v1/`.
+
 ## 1. Overview
 
 This document defines the architecture and best-practice design for a VS Code Copilot multi-agent workflow using:

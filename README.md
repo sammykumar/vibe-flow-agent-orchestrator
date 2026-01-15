@@ -1,6 +1,6 @@
 # Vibe Flow Agent Orchestrator
 
-Plan-Driven Development (PDD) agent suite for managing complex software projects through structured research, implementation, testing, and documentation phases.
+Plan-Driven Development (PDD) agent suite for managing complex software projects through a **research-first incremental workflow**.
 
 **Tags:** github-copilot, agents, orchestration, pdd, project-management, testing, documentation
 
@@ -8,13 +8,13 @@ _Heavily Inspired by AlignFirst V1 (https://github.com/paleo/alignfirst/blob/v1/
 
 ## 🎯 What is Vibe Flow?
 
-Vibe Flow is a complete agent-based development framework that transforms how you build software. Instead of ad-hoc coding, Vibe Flow enforces a structured workflow:
+Vibe Flow is a complete agent-based development framework that transforms how you build software. This repo is currently in **incremental mode** to let you validate each phase before adding more subagents.
 
 1. **Research** → Investigate and specify
 2. **Plan** → Break down into tasks
-3. **Implement** → Execute with verification
-4. **Test** → Validate with comprehensive QA
-5. **Document** → Update architecture & guides
+3. **(Next)** Implement → Execute with verification
+4. **(Next)** Test → Validate with comprehensive QA
+5. **(Next)** Document → Update architecture & guides
 
 All work is tracked in `.github/plans/` directories, creating a permanent memory of your project's evolution.
 
@@ -33,9 +33,6 @@ graph TD
 
     subgraph "Subagents"
         RA[research-agent]
-        IA[implement-agent]
-        TA[test-agent]
-        DA[document-agent]
     end
 
     subgraph "PDD Artifacts"
@@ -60,23 +57,10 @@ graph TD
     RA -->|Updates| F2
     RA -.->|Signal| VF
 
-    VF -->|Delegate: 2. Implement| IA
-    IA -->|Updates| F2
-    IA -.->|Signal| VF
-
-    VF -->|Delegate: 3. Verify| TA
-    TA -->|Updates| F2
-    TA -.->|Signal| VF
-
-    VF -->|Delegate: 4. Document| DA
-    DA -->|Creates/Updates| DOCS
-    DA -.->|Signal| VF
+    VF -.->|Stop after Research| DOCS
 
     style VF fill:#8e44ad,stroke:#333,color:#fff
     style RA fill:#27ae60,stroke:#333,color:#fff
-    style IA fill:#2980b9,stroke:#333,color:#fff
-    style TA fill:#c0392b,stroke:#333,color:#fff
-    style DA fill:#f39c12,stroke:#333,color:#fff
 
     style F1 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F2 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
@@ -88,27 +72,26 @@ graph TD
 
 ## �🚀 Quick Start
 
-| Action                  | Description                                                        | Install                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Install Vibe Flow**   | Bootstrap the complete Vibe Flow agent suite into your repository  | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Finstall-vibeflow.md)<br />[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode-insiders:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Finstall-vibeflow.md)     |
-| **Uninstall Vibe Flow** | Safely remove Vibe Flow from your repository (with backup options) | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Funinstall-vibeflow.md)<br />[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode-insiders:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Funinstall-vibeflow.md) |
+| Action                  | Description                                                          | Install                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Install Vibe Flow**   | Bootstrap the incremental Vibe Flow agent suite into your repository | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Finstall-vibeflow.md)<br />[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode-insiders:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Finstall-vibeflow.md)     |
+| **Uninstall Vibe Flow** | Safely remove Vibe Flow from your repository (with backup options)   | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Funinstall-vibeflow.md)<br />[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode-insiders:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Funinstall-vibeflow.md) |
 
 ## 🤖 Agents Included
 
 Once installed, Vibe Flow provides:
 
+> Legacy full-suite agents are backed up in `.github/agents/v1/`.
+
 ### Main Orchestrator
 
-- **@vibe-flow** - The master orchestrator that manages the entire PDD lifecycle, delegates to subagents, and maintains project state
+- **@vibe-flow** - The master orchestrator that manages the PDD lifecycle, delegates to subagents, and maintains project state
 
 ### Specialized Subagents
 
-| Agent               | Role                          | Responsibilities                                                                                  |
-| ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------- |
-| **research-agent**  | Investigation & Specification | Analyzes codebases, authors technical specs, evaluates alternatives, creates implementation plans |
-| **implement-agent** | Code Execution                | Implements plans autonomously, performs micro-verification, maintains high-signal progress logs   |
-| **test-agent**      | Quality Assurance             | Writes unit/integration/E2E tests, validates coverage, reports failures with evidence             |
-| **document-agent**  | Knowledge Archivist           | Creates architecture diagrams, maintains API docs, updates guides and README files                |
+| Agent              | Role                          | Responsibilities                                                                                  |
+| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------- |
+| **research-agent** | Investigation & Specification | Analyzes codebases, authors technical specs, evaluates alternatives, creates implementation plans |
 
 ## 📂 Project Structure Created
 
@@ -118,10 +101,7 @@ After installation, your repository will have:
 .github/
 ├── agents/                    # All Vibe Flow agents
 │   ├── vibe-flow.agent.md    # Main orchestrator
-│   ├── research.agent.md     # Research specialist
-│   ├── implement.agent.md    # Implementation specialist
-│   ├── test.agent.md         # QA specialist
-│   └── document.agent.md     # Documentation specialist
+│   └── research.agent.md     # Research specialist
 └── plans/                     # Project memory (PDD)
     ├── todo/                  # Planned work
     ├── in-progress/           # Active tasks
@@ -149,14 +129,11 @@ The orchestrator will:
 
 1. ✅ Create a plan structure in `.github/plans/in-progress/`
 2. ✅ Delegate to **research-agent** for investigation
-3. ✅ Delegate to **implement-agent** for code changes
-4. ✅ Delegate to **test-agent** for validation
-5. ✅ Delegate to **document-agent** for updates
-6. ✅ Report completion and guide you to archive the plan
+3. ✅ Stop after research and prompt you to add the next subagent
 
 ## 🔄 Version Management
 
-Current Version: **1.3.1** (Single source of truth in `vibe-flow.agent.md`)
+Current Version: **2.0.0** (Single source of truth in `vibe-flow.agent.md`)
 
 All agents are versioned as a suite. When you update Vibe Flow, all agents update together to maintain compatibility.
 
