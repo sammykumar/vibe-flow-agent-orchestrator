@@ -162,6 +162,15 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 - Fetch [orchestration/assets/spec-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/spec-template.md) to `.github/skills/orchestration/assets/spec-template.md`
 - Fetch [orchestration/assets/plan-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/plan-template.md) to `.github/skills/orchestration/assets/plan-template.md`
 
+**Research Skill:**
+
+- Fetch `.github/skills/research/SKILL.md` to `.github/skills/research/SKILL.md`
+- Fetch `.github/skills/research/assets/research-template.md` to `.github/skills/research/assets/research-template.md`
+- Fetch `.github/skills/research/assets/spec-template.md` to `.github/skills/research/assets/spec-template.md`
+- Fetch `.github/skills/research/assets/progress-log-template.md` to `.github/skills/research/assets/progress-log-template.md`
+- Fetch `.github/skills/research/references/REFERENCE.md` to `.github/skills/research/references/REFERENCE.md`
+- Fetch `.github/skills/research/scripts/validate-skill.sh` to `.github/skills/research/scripts/validate-skill.sh` (run it as a post-install verification step)
+
 **Workflow Patterns (references/):**
 
 - Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
