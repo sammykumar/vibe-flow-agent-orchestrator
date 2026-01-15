@@ -39,6 +39,8 @@ Required files:
 - [spec-template.md](assets/spec-template.md)
 - [plan-template.md](assets/plan-template.md)
 
+**Additional Resources**: See [references/workflow.md](references/workflow.md) for detailed workflow patterns, decision points, and subagent invocation examples.
+
 ## Subagent Roster
 
 - `research.agent` - Investigation & specification writing
