@@ -2,7 +2,7 @@
 
 These instructions update the Vibe Flow (Plan-Driven Development) agents and documentation to the latest version.
 
-<!-- version: 1.0.0 -->
+<!-- version: 2.0.0 -->
 
 Process overview:
 
@@ -28,13 +28,10 @@ echo "Latest Vibe Flow version: $LATEST_TAG"
 
 ## 3. Fetch Agent Profiles
 
-Download all agents to `.github/agents`. Existing agents will be overwritten with the latest versions:
+Download the incremental agent set to `.github/agents`. Existing agents will be overwritten with the latest versions:
 
 - Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
 - Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
-- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
-- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/test.agent.md) to `.github/agents/test.agent.md`
-- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/document.agent.md) to `.github/agents/document.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
 - Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
@@ -66,11 +63,8 @@ After fetching, verify the following files exist and were updated:
 
 **Agents:**
 
-- `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.5.0 -->`)
+- `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 2.0.0 -->`)
 - `.github/agents/research.agent.md`
-- `.github/agents/implement.agent.md`
-- `.github/agents/test.agent.md`
-- `.github/agents/document.agent.md`
 
 **Skills:**
 
@@ -120,9 +114,6 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 
 - vibe-flow.agent.md
 - research.agent.md
-- implement.agent.md
-- test.agent.md
-- document.agent.md
 - docs/vibeflow/pdd-protocol.md
 - docs/vibeflow/orchestrator-manual.md
 - .github/prompts/new-feature.prompt.md
