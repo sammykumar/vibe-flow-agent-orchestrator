@@ -31,6 +31,14 @@ Required files:
 - `4-SPEC.md` - Technical specification
 - `5-PLAN.md` - Step-by-step execution tasks
 
+**Templates**: PDD file templates are available in [assets/](assets/) directory:
+
+- [overview-template.md](assets/overview-template.md)
+- [progress-log-template.md](assets/progress-log-template.md)
+- [research-template.md](assets/research-template.md)
+- [spec-template.md](assets/spec-template.md)
+- [plan-template.md](assets/plan-template.md)
+
 ## Subagent Roster
 
 - `research.agent` - Investigation & specification writing

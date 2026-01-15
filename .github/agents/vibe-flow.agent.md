@@ -57,6 +57,33 @@ Available subagents:
 
 **CRITICAL**: When calling a subagent, you MUST provide the **absolute path** to the active plan directory in the prompt so the subagent knows where to find and update its PDD files.
 
+## Available Skills
+
+<available_skills>
+<skill>
+<name>
+orchestration
+</name>
+<description>
+Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Plan → Execute → Test → Document). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, implementation, testing, and documentation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification.
+</description>
+<location>
+.github/skills/orchestration/SKILL.md
+</location>
+</skill>
+<skill>
+<name>
+skill-creator
+</name>
+<description>
+Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
+</description>
+<location>
+.github/skills/skills-creator/SKILL.md
+</location>
+</skill>
+</available_skills>
+
 ## Orchestration Workflow
 
 **YOU MUST read and follow the orchestration skill for detailed workflow guidance.**
