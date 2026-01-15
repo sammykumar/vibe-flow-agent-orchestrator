@@ -23,6 +23,9 @@ tools:
     "search",
     "web",
     "agent",
+    "io.github.upstash/context7/*",
+    "playwright/*",
+    "io.github.chromedevtools/chrome-devtools-mcp/*",
     "todo",
   ]
 argument-hint: "What would you like to build or update today?"
