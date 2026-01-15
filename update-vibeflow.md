@@ -40,7 +40,13 @@ Download all agents to `.github/agents`. Existing agents will be overwritten wit
 - Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
 - Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
 
-### 3.1 Verify Update
+### 3.1 Fetch Skills
+
+Create `.github/skills/orchestration/` directory if it doesn't exist and download the orchestration skill:
+
+- Fetch [orchestration/SKILL.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/SKILL.md) to `.github/skills/orchestration/SKILL.md`
+
+### 3.2 Verify Update
 
 After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`).
 
@@ -79,6 +85,7 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 - docs/vibeflow/orchestrator-manual.md
 - .github/prompts/new-feature.prompt.md
 - .github/prompts/update-feature.prompt.md
+- .github/skills/orchestration/SKILL.md
 
-All agent profiles and prompts are now in sync with the official repository.
+All agent profiles, prompts, and skills are now in sync with the official repository.
 ```

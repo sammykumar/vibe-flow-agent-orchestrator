@@ -75,5 +75,18 @@ There is no `npm test` for prompts. Validation is behavioral.
 - **Breaking Installer:** If you rename a file, `install-vibeflow.md` will break.
 - **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
 - **Inconsistent Task Management:** All agents should use `#tool:todo` consistently for tracking work
-- **Breaking Installer:** If you rename a file, `install-vibeflow.md` will break.
-- **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
+
+## 🧠 Skills
+
+Skills are modular, reusable knowledge packages that extend agent capabilities. Skills live in `.github/skills/` and follow the agentskills.io spec.
+
+### Adding New Skills
+
+1. Create `skill-name/SKILL.md` in `.github/skills/`
+2. Follow the skill-creator guidance for proper structure
+3. Add skill reference to `install-vibeflow.md` if it should be deployed to target repos
+4. Update this file to document the skill's purpose
+
+### Current Skills
+
+- **orchestration** - PDD workflow and subagent delegation patterns used by vibe-flow orchestrator
