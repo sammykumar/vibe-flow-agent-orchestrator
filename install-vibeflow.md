@@ -2,7 +2,7 @@
 
 These instructions install Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-<!-- version: 1.3.0 -->
+<!-- version: 1.5.0 -->
 
 This bootstrap script is for **initial installation**. For updates, use `update-vibeflow.md`.
 
@@ -13,11 +13,12 @@ Process overview:
 3. Create directories
 4. Move START_FILE to `docs/Unused Instructions.md`
 5. Extract and infer documentation
-6. Install Vibe Flow Agents
-7. Create `AGENTS.md`
-8. Handle Links from UNUSED_FILE
-9. Refresh instructions files
-10. Report to the user
+6. Check for Latest Version
+7. Install Vibe Flow Agents
+8. Create `AGENTS.md`
+9. Handle Links from UNUSED_FILE
+10. Refresh instructions files
+11. Report to the user
 
 When complete, the repository will include a Vibe Flow agent architecture. The target structure is:
 
@@ -114,40 +115,92 @@ Create `docs/guides/testing-strategy.md` explaining how tests are written and ru
 
 ### 5.3. PDD Protocol
 
-The PDD Protocol will be fetched from the official repository in step 6 along with the agents.
+The PDD Protocol will be fetched from the official repository in step 7 along with the agents.
 
-## 6. Install Vibe Flow Agents
+## 6. Check for Latest Version
+
+Before fetching, check the latest version tag from GitHub:
+
+```bash
+# Fetch tags, filter for those starting with "v" (to ignore "latest"), pick the top one
+LATEST_TAG=$(curl -s https://api.github.com/repos/sammykumar/vibe-flow-agent-orchestrator/tags | grep '"name": "v' | head -n 1 | cut -d '"' -f 4)
+echo "Latest Vibe Flow version: $LATEST_TAG"
+```
+
+## 7. Install Vibe Flow Agents
 
 Use `curl` or `wget` to fetch agent profiles from the official repository:
 https://github.com/sammykumar/vibe-flow-agent-orchestrator
 
-### 6.1 Fetch Agent Profiles
+### 7.1 Fetch Agent Profiles
 
 Download all agents to `.github/agents`:
 
-- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
-- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
-- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
-- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/agents/test.agent.md) to `.github/agents/test.agent.md`
-- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/agents/document.agent.md) to `.github/agents/document.agent.md`
-- Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
-- Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
-- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
-- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
+- Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
+- Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
+- Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
+- Fetch [test.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/test.agent.md) to `.github/agents/test.agent.md`
+- Fetch [document.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/document.agent.md) to `.github/agents/document.agent.md`
+- Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
+- Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
+- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
+- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
 
-### 6.2 Fetch Skills
+### 7.2 Fetch Skills
 
-Create `.github/skills/orchestration/` directory and download the orchestration skill:
+Create `.github/skills/orchestration/` directory (with subdirectories `assets/` and `references/`) and download the orchestration skill:
 
-- Fetch [orchestration/SKILL.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/master/.github/skills/orchestration/SKILL.md) to `.github/skills/orchestration/SKILL.md`
+**Main Skill File:**
 
-### 6.3 Verify Installation
+- Fetch [orchestration/SKILL.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/SKILL.md) to `.github/skills/orchestration/SKILL.md`
 
-After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`).
+**PDD Templates (assets/):**
+
+- Fetch [orchestration/assets/overview-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/overview-template.md) to `.github/skills/orchestration/assets/overview-template.md`
+- Fetch [orchestration/assets/progress-log-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/progress-log-template.md) to `.github/skills/orchestration/assets/progress-log-template.md`
+- Fetch [orchestration/assets/research-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/research-template.md) to `.github/skills/orchestration/assets/research-template.md`
+- Fetch [orchestration/assets/spec-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/spec-template.md) to `.github/skills/orchestration/assets/spec-template.md`
+- Fetch [orchestration/assets/plan-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/plan-template.md) to `.github/skills/orchestration/assets/plan-template.md`
+
+**Workflow Patterns (references/):**
+
+- Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
+
+### 7.3 Verify Installation
+
+After fetching, verify the following files exist:
+
+**Agents:**
+
+- `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.5.0 -->`)
+- `.github/agents/research.agent.md`
+- `.github/agents/implement.agent.md`
+- `.github/agents/test.agent.md`
+- `.github/agents/document.agent.md`
+
+**Skills:**
+
+- `.github/skills/orchestration/SKILL.md`
+- `.github/skills/orchestration/assets/overview-template.md`
+- `.github/skills/orchestration/assets/progress-log-template.md`
+- `.github/skills/orchestration/assets/research-template.md`
+- `.github/skills/orchestration/assets/spec-template.md`
+- `.github/skills/orchestration/assets/plan-template.md`
+- `.github/skills/orchestration/references/workflow.md`
+
+**Documentation:**
+
+- `docs/vibeflow/pdd-protocol.md`
+- `docs/vibeflow/orchestrator-manual.md`
+
+**Prompts:**
+
+- `.github/prompts/new-feature.prompt.md`
+- `.github/prompts/update-feature.prompt.md`
 
 Ensure you use the raw content URLs and install them to their respective locations.
 
-## 7. Configure VS Code
+## 8. Configure VS Code
 
 You MUST ensure the `.vscode/settings.json` file exists and contains the prompt file recommendations.
 
@@ -164,7 +217,7 @@ You MUST ensure the `.vscode/settings.json` file exists and contains the prompt 
 }
 ```
 
-## 8. Create `AGENTS.md`
+## 9. Create `AGENTS.md`
 
 Create `AGENTS.md` at git root:
 
@@ -188,16 +241,16 @@ Create `AGENTS.md` at git root:
 - `docs/guides/`: Code and usage guides.
 ```
 
-## 9. Handle Links from UNUSED_FILE
+## 10. Handle Links from UNUSED_FILE
 
 - Scan UNUSED_FILE for links to deprecated docs.
 - If relevant content exists, move links to `AGENTS.md` (manually).
 
-## 10. Refresh instructions files
+## 11. Refresh instructions files
 
 Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md`.
 
-## 11. Report to the User
+## 12. Report to the User
 
 Fill in the template for **first-time installation**:
 
@@ -220,12 +273,13 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
 
-- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.2.1 - single source of truth for version)
+- `.github/agents/vibe-flow.agent.md` (Orchestrator v${LATEST_TAG} - single source of truth for version)
 - `docs/vibeflow/pdd-protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
 - `.github/agents/implement.agent.md` (Implement Agent)
 - `.github/agents/test.agent.md` (Test Agent)
 - `.github/agents/document.agent.md` (Document Agent)
+- `.github/skills/orchestration/` (Orchestration skill with PDD templates and workflow patterns)
 - `.github/prompts/` (Interactive Prompts)
 - `.github/plans/` (Project Memory)
 

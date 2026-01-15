@@ -42,13 +42,55 @@ Download all agents to `.github/agents`. Existing agents will be overwritten wit
 
 ### 3.1 Fetch Skills
 
-Create `.github/skills/orchestration/` directory if it doesn't exist and download the orchestration skill:
+Create `.github/skills/orchestration/` directory (with subdirectories `assets/` and `references/`) if it doesn't exist and download the orchestration skill:
+
+**Main Skill File:**
 
 - Fetch [orchestration/SKILL.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/SKILL.md) to `.github/skills/orchestration/SKILL.md`
 
+**PDD Templates (assets/):**
+
+- Fetch [orchestration/assets/overview-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/overview-template.md) to `.github/skills/orchestration/assets/overview-template.md`
+- Fetch [orchestration/assets/progress-log-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/progress-log-template.md) to `.github/skills/orchestration/assets/progress-log-template.md`
+- Fetch [orchestration/assets/research-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/research-template.md) to `.github/skills/orchestration/assets/research-template.md`
+- Fetch [orchestration/assets/spec-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/spec-template.md) to `.github/skills/orchestration/assets/spec-template.md`
+- Fetch [orchestration/assets/plan-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/plan-template.md) to `.github/skills/orchestration/assets/plan-template.md`
+
+**Workflow Patterns (references/):**
+
+- Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
+
 ### 3.2 Verify Update
 
-After fetching, verify `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.0.1 -->`).
+After fetching, verify the following files exist and were updated:
+
+**Agents:**
+
+- `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 1.5.0 -->`)
+- `.github/agents/research.agent.md`
+- `.github/agents/implement.agent.md`
+- `.github/agents/test.agent.md`
+- `.github/agents/document.agent.md`
+
+**Skills:**
+
+- `.github/skills/orchestration/SKILL.md`
+- `.github/skills/orchestration/assets/overview-template.md`
+- `.github/skills/orchestration/assets/progress-log-template.md`
+- `.github/skills/orchestration/assets/research-template.md`
+- `.github/skills/orchestration/assets/spec-template.md`
+- `.github/skills/orchestration/assets/plan-template.md`
+- `.github/skills/orchestration/references/workflow.md`
+
+**Documentation:**
+
+- `docs/vibeflow/pdd-protocol.md`
+- `docs/vibeflow/orchestrator-manual.md`
+
+**Prompts:**
+
+- `.github/prompts/new-feature.prompt.md`
+- `.github/prompts/update-feature.prompt.md`
 
 ## 4. Configure VS Code
 
@@ -86,6 +128,8 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 - .github/prompts/new-feature.prompt.md
 - .github/prompts/update-feature.prompt.md
 - .github/skills/orchestration/SKILL.md
+- .github/skills/orchestration/assets/ (5 PDD templates)
+- .github/skills/orchestration/references/workflow.md
 
 All agent profiles, prompts, and skills are now in sync with the official repository.
 ```

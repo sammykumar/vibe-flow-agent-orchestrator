@@ -89,4 +89,5 @@ Skills are modular, reusable knowledge packages that extend agent capabilities. 
 
 ### Current Skills
 
-- **orchestration** - PDD workflow and subagent delegation patterns used by vibe-flow orchestrator
+- **orchestration** - PDD workflow and subagent delegation patterns used by vibe-flow orchestrator. Includes PDD file templates in `assets/` (overview, progress, research, spec, plan) and detailed workflow patterns in `references/workflow.md`.
+- **skill-creator** - Guide for creating and updating skills following agentskills.io specification
