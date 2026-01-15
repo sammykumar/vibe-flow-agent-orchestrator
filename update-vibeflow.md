@@ -9,7 +9,8 @@ Process overview:
 1. Check for existing installation
 2. Check for Latest Version
 3. Fetch Agent Profiles
-4. Report to the user
+4. Refresh Repo-Specific Skills (Registry + Local)
+5. Report to the user
 
 ## 1. Check for existing installation
 
@@ -86,7 +87,23 @@ After fetching, verify the following files exist and were updated:
 - `.github/prompts/new-feature.prompt.md`
 - `.github/prompts/update-feature.prompt.md`
 
-## 4. Configure VS Code
+## 4. Refresh Repo-Specific Skills (Registry + Local)
+
+Re-run the install-time discovery to keep repo-specific skills in sync as the project evolves.
+
+1. Scan for new or removed technology signals (same rules as installation).
+2. Compare with `.github/skills/skills-manifest.json`.
+3. For new skills, install from registries (Skills Directory, internal repo, or other curated source).
+4. For removed signals, mark the skill as inactive in the manifest or remove it if it’s no longer needed.
+5. Refresh the `<available_skills>` list in `vibe-flow.agent.md` so metadata stays current.
+
+Registry options:
+
+- Skills Directory: https://www.skillsdirectory.com/skills
+- Agent Skills examples: https://github.com/anthropics/skills
+- Internal/private repos
+
+## 5. Configure VS Code
 
 You MUST ensure the `.vscode/settings.json` file is configured to suggest the PDD prompts.
 
@@ -103,7 +120,7 @@ You MUST ensure the `.vscode/settings.json` file is configured to suggest the PD
 }
 ```
 
-## 5. Report to the User
+## 6. Report to the User
 
 Report which agents were upgraded:
 

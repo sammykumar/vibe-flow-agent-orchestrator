@@ -15,10 +15,12 @@ Process overview:
 5. Extract and infer documentation
 6. Check for Latest Version
 7. Install Vibe Flow Agents
-8. Create `AGENTS.md`
-9. Handle Links from UNUSED_FILE
-10. Refresh instructions files
-11. Report to the user
+8. Install Repo-Specific Skills (Registry + Local)
+9. Configure VS Code
+10. Create repo-wide Copilot instructions
+11. Handle Links from UNUSED_FILE
+12. Refresh instructions files
+13. Report to the user
 
 When complete, the repository will include a Vibe Flow agent architecture. The target structure is:
 
@@ -46,7 +48,7 @@ docs/
 │   ├── todo/
 │   ├── in-progress/
 │   └── finished/
-AGENTS.md
+.github/copilot-instructions.md
 ```
 
 ## 1. Initial Checks
@@ -200,7 +202,53 @@ After fetching, verify the following files exist:
 
 Ensure you use the raw content URLs and install them to their respective locations.
 
-## 8. Configure VS Code
+## 8. Install Repo-Specific Skills (Registry + Local)
+
+This step implements **Option A**: discover skills at install/update time (no runtime scanning).
+
+### 8.1 Discovery (signals)
+
+Scan the repo for common technology signals and create a short list of candidate skills. Examples:
+
+- **Node/TypeScript**: `package.json`, `tsconfig.json`, dependencies like `typescript`, `ts-node`, `eslint`
+- **Python**: `pyproject.toml`, `requirements.txt`, `Pipfile`, `poetry.lock`
+- **Infrastructure**: `terraform/`, `*.tf`, `docker-compose.yml`, `kubernetes/`
+- **Cloud**: `azure-pipelines.yml`, `bicep/`, `arm-templates/`, `aws/`, `gcp/`
+- **Cosmos DB**: dependencies like `@azure/cosmos` or `azure-cosmos`, config entries containing `cosmos` or `CosmosClient`
+
+### 8.2 Map signals → skills
+
+Maintain a small mapping table (inline or in `docs/vibeflow/skills-map.md`) that connects signals to skills. Keep it human-editable.
+
+### 8.3 Registry options
+
+Install skills from one or more registries/sources:
+
+- **Skills Directory**: https://www.skillsdirectory.com/skills
+  - Each skill page provides a copy-paste install command (often a Git clone).
+- **Agent Skills example repo**: https://github.com/anthropics/skills
+- **Internal/private repos**: team skills or org-specific workflows
+
+### 8.4 Install location
+
+Install skills into `.github/skills/<skill-name>/` within the target repo.
+
+### 8.5 Record a manifest
+
+Create or update `.github/skills/skills-manifest.json` with entries like:
+
+- `name`
+- `source` (Skills Directory URL, Git repo URL, or internal reference)
+- `installCommand` (if available)
+- `detectedBy` (signals that triggered installation)
+- `version` (tag/commit if known)
+- `installedAt`
+
+### 8.6 Update available skills metadata
+
+If your agent surface supports an `<available_skills>` section (as in `vibe-flow.agent.md`), append the installed skills’ **name**, **description**, and **location** to that list so discovery is fast and activation remains on-demand.
+
+## 9. Configure VS Code
 
 You MUST ensure the `.vscode/settings.json` file exists and contains the prompt file recommendations.
 
@@ -217,37 +265,69 @@ You MUST ensure the `.vscode/settings.json` file exists and contains the prompt 
 }
 ```
 
-## 9. Create `AGENTS.md`
+## 10. Create repo-wide Copilot instructions
 
-Create `AGENTS.md` at git root:
+Follow the GitHub Copilot standard for repository-wide instructions:
+https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions#creating-repository-wide-custom-instructions-1
 
-```markdown
-# {PROJECT_NAME} Development Agents
+Create `.github/copilot-instructions.md` and populate it with repo-specific guidance.
 
-## Core Orchestrator
+**If `AGENTS.md` exists**, migrate any relevant content into `.github/copilot-instructions.md` and then delete `AGENTS.md`.
 
-- **@vibe-flow** (.github/agents/vibe-flow.agent.md): Use this agent for ALL complex tasks. It manages the Plan-Driven Development lifecycle.
+### Content guidelines (best practices)
 
-## Sub-Agents (Managed by Vibe Flow)
+Your repo-wide instructions should be concise, actionable, and grounded in facts from the repo. Include:
 
-- **@research-agent**: Investigation & Spec.
+1. **Project context & goals**
 
-## Documentation
+- One paragraph summary of the repo’s purpose.
 
-- `docs/vibeflow/pdd-protocol.md`: Rules for plans.
-- `docs/guides/`: Code and usage guides.
-```
+2. **Preferred workflows**
 
-## 10. Handle Links from UNUSED_FILE
+- Reference Vibe Flow: use `@vibe-flow` for complex tasks.
+- Mention the Plan-Driven Development flow and where plan files live.
+
+3. **Code style & conventions**
+
+- Link to [docs/guides/code-style.md](docs/guides/code-style.md) and summarize key points.
+
+4. **Testing strategy**
+
+- Link to [docs/guides/testing-strategy.md](docs/guides/testing-strategy.md) and specify how to run tests.
+
+5. **Repository structure & key docs**
+
+- Mention `docs/vibeflow/pdd-protocol.md` and `docs/vibeflow/orchestrator-manual.md`.
+
+6. **Constraints & non-goals**
+
+- Call out anything the install inferred (e.g., no tests yet, or required tools).
+
+7. **Instruction scope**
+
+- Clarify that instructions should be followed and that unspecified changes should preserve existing patterns.
+
+### Content sources (what install-vibeflow learned)
+
+Use these as authoritative inputs when writing instructions:
+
+- **UNUSED_FILE** content (former START_FILE)
+- `docs/guides/code-style.md`
+- `docs/guides/testing-strategy.md`
+- `docs/vibeflow/pdd-protocol.md`
+- `docs/vibeflow/orchestrator-manual.md`
+- Any detected tech signals from Step 8 (e.g., `package.json`, build tools)
+
+## 11. Handle Links from UNUSED_FILE
 
 - Scan UNUSED_FILE for links to deprecated docs.
-- If relevant content exists, move links to `AGENTS.md` (manually).
+- If relevant content exists, move links to `.github/copilot-instructions.md` (manually).
 
-## 11. Refresh instructions files
+## 12. Refresh instructions files
 
-Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `AGENTS.md`.
+Delete every file in `INSTRUCTIONS_FILES` (from Step 2) except `.github/copilot-instructions.md`.
 
-## 12. Report to the User
+## 13. Report to the User
 
 Fill in the template for **first-time installation**:
 
@@ -260,6 +340,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 **New Structure**:
 
 - `.github/agents/vibe-flow.agent.md` (Orchestrator v1.2.1 - single source of truth for version)
+- `.github/copilot-instructions.md` (Repo-wide Copilot instructions)
 - `docs/vibeflow/pdd:
 
 ```markdown
@@ -271,6 +352,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 **New Structure**:
 
 - `.github/agents/vibe-flow.agent.md` (Orchestrator v${LATEST_TAG} - single source of truth for version)
+- `.github/copilot-instructions.md` (Repo-wide Copilot instructions)
 - `docs/vibeflow/pdd-protocol.md` (Vibe Flow Protocol)
 - `.github/agents/research.agent.md` (Research Agent)
 - `.github/skills/orchestration/` (Orchestration skill with PDD templates and workflow patterns)
