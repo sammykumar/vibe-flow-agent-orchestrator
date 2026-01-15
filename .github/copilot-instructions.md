@@ -10,7 +10,7 @@ This is the **source code** for the Vibe Flow AI Agents.
 - The "Compiler" is the LLM that reads them.
 - The "Installer" is `install-vibeflow.md`.
 
-**Note on Repository Structure**: This source repository maintains agents in `agents/` and `agents/subagents/` for easier visual organization during development. However, the installer (`install-vibeflow.md`) deploys agents to `.github/agents/` (flat structure) in target repositories, as VS Code only reads agents from that location. This is intentional - we haven't installed Vibe Flow into this repository itself.
+**Note on Repository Structure**: This repository now uses `.github/agents/` (flat structure) to dogfood Vibe Flow in the same way it's deployed to target repositories. VS Code only reads agents from `.github/agents/`, so this allows us to test the agents in this source repository before publishing.
 
 ## 📂 Core Artifacts
 
@@ -50,9 +50,9 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 
 ### Adding New Agents
 
-1.  Create `new-agent-name.agent.md`.
+1.  Create `new-agent-name.agent.md` in `.github/agents/`.
 2.  Add it to `vibe-flow.agent.md`'s orchestration logic (it needs to know the subagent exists).
-3.  Add it to `install-vibeflow.md` so it gets installed.
+3.  Add it to `install-vibeflow.md` so it gets installed in target repositories.
 
 ## 🧪 Testing & Validation
 
