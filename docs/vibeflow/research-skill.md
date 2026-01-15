@@ -21,4 +21,3 @@ Run the integration dry-run locally:
 ```bash
 bash .github/skills/research/tests/integration/dry-run/run.sh
 ```
-
