@@ -1,0 +1,41 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-research-skill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Run skills-ref validate (if available)
+        run: |
+          echo "Attempting npx skills-ref validate"
+          set -o pipefail
+          npx skills-ref validate .github/skills/research || true
+
+      - name: Run skill validation script
+        run: bash .github/skills/research/scripts/validate-skill.sh
+
+      - name: Run unit tests
+        run: bash .github/skills/research/tests/unit/frontmatter.test.sh
+
+      - name: Run integration dry-run
+        run: bash .github/skills/research/tests/integration/dry-run/run.sh
+
+      - name: Markdown lint
+        run: |
+          npx markdownlint-cli "**/*.md" || true

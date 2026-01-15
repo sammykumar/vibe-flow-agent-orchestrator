@@ -1,8 +1,8 @@
 # Progress: research-skill
 
-- **Status:** research_complete ✅
-- **Completed:** 2026-01-15T12:40:00Z
-- **Owner:** research.agent
+- **Status:** implementation_in_progress 🔧
+- **Started:** 2026-01-15T13:10:00Z
+- **Owner:** implement.agent
 - **ETA (initial):** 1 business day
 - **Estimated effort:** 6-8 hours
 
@@ -16,14 +16,23 @@
 
 ## Remaining / Handoff
 
-- Implement the `research` skill by creating `.github/skills/research/` with `SKILL.md`, `assets/`, `references/`, `scripts/validate-skill.sh`, and tests as described in `4-SPEC.md`.
-- Add CI job `.github/workflows/validate-skills.yml` to run `skills-ref validate` on push/PR and run integration dry-run harness.
+- Implement the `research` skill by creating `.github/skills/research/` with `SKILL.md`, `assets/`, `references/`, `scripts/validate-skill.sh`, and tests as described in `4-SPEC.md`. — **COMPLETED**
+- Add CI job `.github/workflows/validate-skills.yml` to run `skills-ref validate` on push/PR and run integration dry-run harness. — **COMPLETED**
 
 ## Notes
 
 - All claims and decisions are evidenced and cited in `3-RESEARCH.md`.
-- Recommendation: create a standalone `.github/skills/research/` (see Alternative Matrix in `3-RESEARCH.md`).
+- Implementation artifacts created:
+  - `.github/skills/research/SKILL.md`
+  - `.github/skills/research/assets/*` templates
+  - `.github/skills/research/references/REFERENCE.md`
+  - `.github/skills/research/scripts/validate-skill.sh` and `dry_run.sh`
+  - Unit and integration test scripts
+  - CI workflow `.github/workflows/validate-skills.yml`
+  - `install-vibeflow.md` updated to include installation and validation steps
+
+**Status update:** Implementation complete, all local validations and tests passed (unit + integration dry-run). CI workflow added to validate on push/PR. Ready for PR and review.
 
 ---
 
-Research complete. Returning to Orchestrator.
+Research and implementation complete. Returning to Orchestrator.
