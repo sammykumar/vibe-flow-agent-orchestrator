@@ -4,6 +4,14 @@
 - **Owner:** research.agent
 - **ETA:** TBD
 
+## Subagent Ledger (Parallel Runs Only)
+
+| subagent-id | purpose | scope | lock-scope | status | start | end   | outputs   |
+| ----------- | ------- | ----- | ---------- | ------ | ----- | ----- | --------- |
+| research-a1 | Specs   | write | 4-SPEC.md  | ✅     | 09:10 | 09:45 | 4-SPEC.md |
+
+> **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit this file concurrently.
+
 ## Completed tasks
 
 1. Initialized plan

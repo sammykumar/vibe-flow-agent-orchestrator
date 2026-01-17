@@ -76,8 +76,8 @@ Parallel execution is optional and **OFF by default**. Enable it only when you c
 
 ## Subagent Ledger (Parallel Runs Only)
 
-| subagent-id | purpose | scope | lock-scope | status | start | end | outputs |
-| ----------- | ------- | ----- | ---------- | ------ | ----- | --- | ------- |
+| subagent-id | purpose | scope | lock-scope | status | start | end   | outputs   |
+| ----------- | ------- | ----- | ---------- | ------ | ----- | ----- | --------- |
 | research-a1 | Specs   | write | 4-SPEC.md  | ✅     | 09:10 | 09:45 | 4-SPEC.md |
 | research-a2 | Plan    | write | 5-PLAN.md  | ✅     | 09:10 | 09:40 | 5-PLAN.md |
 
