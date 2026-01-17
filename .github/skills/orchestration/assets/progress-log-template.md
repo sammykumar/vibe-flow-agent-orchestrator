@@ -44,7 +44,7 @@
 | ------------- | ----------- |
 | 3-RESEARCH.md | ✅ Complete |
 | 4-SPEC.md     | ✅ Complete |
-| 5-PLAN.md     | ✅ Complete |
+| 5-TASKS.md    | ✅ Complete |
 
 ### Risks
 

@@ -10,7 +10,9 @@ Process overview:
 2. Check for Latest Version
 3. Fetch Agent Profiles
 4. Refresh Repo-Specific Skills (Registry + Local)
-5. Report to the user
+5. Configure VS Code
+6. Migrate 5-PLAN.md → 5-TASKS.md
+7. Report to the user
 
 ## 1. Check for existing installation
 
@@ -33,6 +35,7 @@ Download the incremental agent set to `.github/agents`. Existing agents will be 
 
 - Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
 - Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
+- Fetch [plan-writer.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/plan-writer.agent.md) to `.github/agents/plan-writer.agent.md`
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
@@ -78,6 +81,7 @@ After fetching, verify the following files exist and were updated:
 
 - `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 2.0.0 -->`)
 - `.github/agents/research.agent.md`
+- `.github/agents/plan-writer.agent.md`
 - `.github/agents/implement.agent.md`
 
 **Skills:**
@@ -142,7 +146,15 @@ You MUST ensure the `.vscode/settings.json` file is configured to suggest the PD
 }
 ```
 
-## 6. Report to the User
+## 6. Migration: 5-PLAN.md → 5-TASKS.md
+
+Existing plan directories may still use `5-PLAN.md`. Migrate them to the new task file name:
+
+1. For each plan folder in `.github/plans/**/` that contains `5-PLAN.md`, rename it to `5-TASKS.md`.
+2. Update any internal references within the plan folder (e.g., `2-PROGRESS.md`, `4-SPEC.md`, `1-OVERVIEW.md`) to point to `5-TASKS.md`.
+3. Ensure future planning uses `5-TASKS.md` only; do not recreate `5-PLAN.md`.
+
+## 7. Report to the User
 
 Report which agents were upgraded:
 
@@ -153,6 +165,8 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 
 - vibe-flow.agent.md
 - research.agent.md
+- plan-writer.agent.md
+- implement.agent.md
 - docs/vibeflow/pdd-protocol.md
 - docs/vibeflow/orchestrator-manual.md
 - .github/prompts/new-feature.prompt.md

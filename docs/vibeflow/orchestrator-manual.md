@@ -1,6 +1,6 @@
 # Vibe Flow – Multi-Agent AI Development Workflow (PDD)
 
-> **Incremental mode notice:** This repository currently ships only the orchestrator, research agent, and implement agent. The full multi-agent workflow described below remains the long-term target. Legacy full-suite agents are backed up in `.github/agents/v1/`.
+> **Incremental mode notice:** This repository currently ships only the orchestrator, research agent, plan-writer agent, and implement agent. The full multi-agent workflow described below remains the long-term target. Legacy full-suite agents are backed up in `.github/agents/v1/`.
 
 ## 1. Overview
 
@@ -13,7 +13,7 @@ This document defines the architecture and best-practice design for a VS Code Co
 
 Goals:
 
-- Enforce structured engineering (research agent (spec & plan) → implement agent)
+- Enforce structured engineering (research agent → plan-writer agent → implement agent)
 - Reduce hallucinated implementation
 - Preserve project memory via filesystem artifacts
 - Enable scalable, auditable AI-assisted development
@@ -61,7 +61,7 @@ Required files:
 2-PROGRESS.md
 3-RESEARCH.md
 4-SPEC.md
-5-PLAN.md
+5-TASKS.md
 ```
 
 Documentation output:
@@ -78,7 +78,7 @@ docs/{major-area}/{doc}.md
 | 2-PROGRESS.md | Append-only execution log              |
 | 3-RESEARCH.md | Investigation + **Alternative Matrix** |
 | 4-SPEC.md     | Tech Spec + **Impact Analysis**        |
-| 5-PLAN.md     | Step-by-step implementation plan       |
+| 5-TASKS.md    | Step-by-step implementation tasks      |
 
 ### Progress file format (recommended)
 
@@ -247,7 +247,7 @@ Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
 - **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
-- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Plan Writer, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
@@ -262,14 +262,21 @@ Responsibilities:
     - Create PDD structure: `.github/plans/in-progress/{area}/{task}/`.
     - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
 2.  **Research & Design**:
-    - Call `Research` sub-agent to populate `3-RESEARCH.md`, `4-SPEC.md`, and `5-PLAN.md`.
-    - Review specification and plan with the user.
-3.  **Implementation Loop**:
+
+- Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
+- Review specification with the user.
+
+3.  **Planning Phase**:
+
+- Call `Plan Writer` sub-agent to produce `5-TASKS.md`.
+- Review task plan with the user.
+
+4.  **Implementation Loop**:
     - Trigger `Implement` (Implementation) sub-agent.
     - `Implement` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
     - Orchestrator reviews `2-PROGRESS.md` and the implementation evidence.
     - If tasks remain or new tasks are discovered, repeat the loop.
-4.  **Stop after Implement**:
+5.  **Stop after Implement**:
 
 - Summarize results and ask whether to add the next subagent (Test/Document are future phases).
 - **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
@@ -279,10 +286,10 @@ Responsibilities:
 Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
-- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
+- Write-capable subagents (including the primary `research-agent`, `plan-writer-agent`, and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
-- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-PLAN.md`).
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-TASKS.md`).
 - Summarize each subagent’s outputs separately before synthesis.
 - Tool confirmations must be serialized: only one subagent may request interactive confirmation at a time.
 - Update the Subagent Ledger section in `2-PROGRESS.md` for each parallel run.
@@ -314,7 +321,6 @@ Produces:
 
 - 3-RESEARCH.md
 - 4-SPEC.md
-- 5-PLAN.md
 
 Updates:
 
@@ -346,11 +352,27 @@ Updates:
 
 ---
 
+## Subagents: Plan Writer
+
+### Purpose
+
+Task plan authoring.
+
+Produces:
+
+- 5-TASKS.md
+
+Updates:
+
+- 2-PROGRESS.md
+
+---
+
 ## Subagents: Implement
 
 ### Purpose
 
-Execute `5-PLAN.md` with maximal initiative and persistence. Implement Agent's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
+Execute `5-TASKS.md` with maximal initiative and persistence. Implement Agent's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
 
 Produces:
 

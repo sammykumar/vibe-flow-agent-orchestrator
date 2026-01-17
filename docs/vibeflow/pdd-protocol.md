@@ -34,7 +34,7 @@ Use the **plan-only prompt** to create a `todo/` plan without starting research 
 | `2-PROGRESS.md` | Append-only execution log (Source of Truth) |
 | `3-RESEARCH.md` | Investigation + Alternative Matrix          |
 | `4-SPEC.md`     | Tech Spec + Impact Analysis                 |
-| `5-PLAN.md`     | Step-by-step implementation plan            |
+| `5-TASKS.md`    | Step-by-step implementation tasks           |
 
 ### Documentation Output
 
@@ -44,8 +44,8 @@ Agents produce documentation in: `docs/{major-area}/{doc}.md`
 
 1. **Initialize**: Create folder in `in-progress`.
 2. **Research**: Populate `3-RESEARCH.md` and `4-SPEC.md`.
-3. **Plan**: Create `5-PLAN.md`.
-4. **Implement**: Execute plan, logging to `2-PROGRESS.md`.
+3. **Plan**: Create `5-TASKS.md` via the plan-writer phase.
+4. **Implement**: Execute tasks, logging to `2-PROGRESS.md`.
 5. **Stop after Implement**: Review results and decide whether to add future subagents (Test/Document).
 6. **Finish**: User manually moves the folder to `finished`.
 
@@ -54,10 +54,10 @@ Agents produce documentation in: `docs/{major-area}/{doc}.md`
 Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
-- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
+- Write-capable subagents (including the primary `research-agent`, `plan-writer-agent`, and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
-- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-PLAN.md`).
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-TASKS.md`).
 - Summarize each subagent’s outputs separately before synthesis.
 - Update the Subagent Ledger section in `2-PROGRESS.md` for each parallel run.
 

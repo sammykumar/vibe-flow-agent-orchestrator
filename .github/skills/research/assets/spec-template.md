@@ -20,7 +20,7 @@
 
 ## Deliverables
 
-- Files to produce (4-SPEC.md, 5-PLAN.md tasks, tests)
+- Files to produce (4-SPEC.md, 5-TASKS.md tasks, tests)
 
 ---
 

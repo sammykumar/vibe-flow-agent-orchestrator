@@ -11,7 +11,7 @@ _Heavily Inspired by AlignFirst V1 (https://github.com/paleo/alignfirst/blob/v1/
 Vibe Flow is a complete agent-based development framework that transforms how you build software. This repo is currently in **incremental mode** to let you validate each phase before adding more subagents.
 
 1. **Research** → Investigate and specify
-2. **Plan** → Break down into tasks
+2. **Plan Writer** → Break down into tasks
 3. **Implement** → Execute with verification
 4. **(Next)** Test → Validate with comprehensive QA
 5. **(Next)** Document → Update architecture & guides
@@ -33,6 +33,7 @@ graph TD
 
     subgraph "Subagents"
         RA[research-agent]
+        PW[plan-writer-agent]
         IA[implement-agent]
     end
 
@@ -41,7 +42,7 @@ graph TD
         F2[2-PROGRESS.md]
         F3[3-RESEARCH.md]
         F4[4-SPEC.md]
-        F5[5-PLAN.md]
+        F5[5-TASKS.md]
         CODE[repo changes]
     end
 
@@ -54,11 +55,15 @@ graph TD
     VF -->|Delegate: 1. Research| RA
     RA -->|Creates/Updates| F3
     RA -->|Creates/Updates| F4
-    RA -->|Creates/Updates| F5
     RA -->|Updates| F2
     RA -.->|Signal| VF
 
-    VF -->|Delegate: 2. Implement| IA
+    VF -->|Delegate: 2. Plan Writer| PW
+    PW -->|Creates/Updates| F5
+    PW -->|Updates| F2
+    PW -.->|Signal| VF
+
+    VF -->|Delegate: 3. Implement| IA
     IA -->|Reads| F5
     IA -->|Updates| F2
     IA -->|Changes| CODE
@@ -119,10 +124,11 @@ Once installed, Vibe Flow provides:
 
 ### Specialized Subagents
 
-| Agent               | Role                          | Responsibilities                                                                                  |
-| ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------- |
-| **research-agent**  | Investigation & Specification | Analyzes codebases, authors technical specs, evaluates alternatives, creates implementation plans |
-| **implement-agent** | Implementation & Verification | Executes plans, applies code changes, runs happy-path checks, logs results                        |
+| Agent                 | Role                          | Responsibilities                                                           |
+| --------------------- | ----------------------------- | -------------------------------------------------------------------------- |
+| **research-agent**    | Investigation & Specification | Analyzes codebases, authors technical specs, evaluates alternatives        |
+| **plan-writer-agent** | Task Planning                 | Converts research and spec into an executable task plan (`5-TASKS.md`)     |
+| **implement-agent**   | Implementation & Verification | Executes tasks, applies code changes, runs happy-path checks, logs results |
 
 ## 📂 Project Structure Created
 
@@ -133,6 +139,7 @@ After installation, your repository will have:
 ├── agents/                    # All Vibe Flow agents
 │   ├── vibe-flow.agent.md    # Main orchestrator
 │   ├── research.agent.md     # Research specialist
+│   ├── plan-writer.agent.md  # Task plan author
 │   └── implement.agent.md    # Implementation specialist
 └── plans/                     # Project memory (PDD)
     ├── todo/                  # Planned work
@@ -159,12 +166,13 @@ The orchestrator will:
 
 1. ✅ Create a plan structure in `.github/plans/in-progress/`
 2. ✅ Delegate to **research-agent** for investigation
-3. ✅ Delegate to **implement-agent** after approval
-4. ✅ Stop after implementation and prompt you to add the next subagent
+3. ✅ Delegate to **plan-writer-agent** to create `5-TASKS.md`
+4. ✅ Delegate to **implement-agent** after approval
+5. ✅ Stop after implementation and prompt you to add the next subagent
 
 ## 🔄 Version Management
 
-Current Version: **2.0.0** (Single source of truth in `vibe-flow.agent.md`)
+Current Version: **2.2.0** (Single source of truth in `vibe-flow.agent.md`)
 
 All agents are versioned as a suite. When you update Vibe Flow, all agents update together to maintain compatibility.
 

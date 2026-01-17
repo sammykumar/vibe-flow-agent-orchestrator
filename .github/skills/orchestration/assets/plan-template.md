@@ -1,7 +1,7 @@
-# Implementation Plan: {Feature Name}
+# Task Plan: {Feature Name}
 
 **Date**: YYYY-MM-DD  
-**Agent**: research.agent  
+**Agent**: plan-writer.agent  
 **Status**: Draft / Approved / In Progress / Complete  
 **Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`  
 **Based on Spec**: `4-SPEC.md`

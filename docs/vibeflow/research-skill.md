@@ -5,7 +5,6 @@ for a plan:
 
 - `3-RESEARCH.md` — findings, alternatives, and evidence
 - `4-SPEC.md` — technical specification and acceptance criteria
-- `5-PLAN.md` — implementation plan and task checklist
 - `2-PROGRESS.md` — progress updates
 
 Quickstart

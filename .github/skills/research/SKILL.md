@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md, 2-PROGRESS.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required."
+description: "Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md, 2-PROGRESS.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required."
 license: Proprietary
 metadata:
   author: sammykumar
@@ -45,8 +45,7 @@ into the active plan directory.
    `assets/research-template.md`.
 5. Draft `4-SPEC.md` (technical specification) using
    `assets/spec-template.md`.
-6. Draft `5-PLAN.md` (implementation plan and task checklist).
-7. Update `2-PROGRESS.md` and set status to `research_complete` when finished.
+6. Update `2-PROGRESS.md` and set status to `research_complete` when finished.
 
 ## Inference
 

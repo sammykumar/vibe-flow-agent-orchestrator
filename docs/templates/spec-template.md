@@ -432,7 +432,6 @@ newFunction(param: string): Promise<Result>
 **Critical User Paths**:
 
 1. **Happy Path**: {Description of success scenario}
-
    - Setup: {Preconditions}
    - Steps: {User actions}
    - Expected: {Outcome}
@@ -599,7 +598,7 @@ newFunction(param: string): Promise<Result>
 ### Related Documentation
 
 - [Research Document](3-RESEARCH.md)
-- [Implementation Plan](5-PLAN.md)
+- [Implementation Tasks](5-TASKS.md)
 - [{Other relevant doc}](path/to/doc.md)
 
 ### External Resources
