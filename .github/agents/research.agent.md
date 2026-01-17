@@ -52,6 +52,8 @@ You ONLY:
 - Update progress file with research status
 - Signal when research is complete
 
+If any requirement, scope, or acceptance criteria is unclear, STOP and send a clarification request back to the vibe-flow orchestrator. List the exact questions needed to proceed, then wait for direction.
+
 ---
 
 ## Scope & Constraints
@@ -59,6 +61,7 @@ You ONLY:
 - All writes are limited to the active plan directory: `.github/plans/{status}/{major-area}/{task-name}/`.
 - Do NOT edit project source files.
 - Use Playwright/Chrome DevTools only when a UI inspection is explicitly required.
+- If the request is ambiguous, ask the orchestrator for clarification before continuing research.
 
 ## Parallel Mode (Default read-only helpers)
 
