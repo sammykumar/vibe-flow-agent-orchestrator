@@ -24,24 +24,24 @@
 - [x] Confirm `docs/vibeflow/orchestrator-manual.md` and `docs/vibeflow/pdd-protocol.md` remain consistent after above edits.
   - Files: docs/vibeflow/orchestrator-manual.md, docs/vibeflow/pdd-protocol.md
 
-## Task 3 — Align skill inventory documentation
+## Task 3 — Align skill inventory documentation ✅
 
-- Update README skills list to include all shipped skills (or explicitly call out which are packaged vs internal-only).
+- [x] Update README skills list to include all shipped skills (or explicitly call out which are packaged vs internal-only).
   - File: README.md
-- Update copilot instructions “Current Skills” list to match actual skills present.
+- [x] Update copilot instructions “Current Skills” list to match actual skills present.
   - File: .github/copilot-instructions.md
-- Decide on `skills-creator` packaging:
-  - If shipped, add to install/update instructions and README/copilot instructions.
-  - If internal-only, remove from README/copilot instructions (or label as internal-only).
+- [x] Decide on `skills-creator` packaging:
+  - [x] If shipped, add to install/update instructions and README/copilot instructions.
+  - [x] If internal-only, remove from README/copilot instructions (or label as internal-only).
   - Files: install-vibeflow.md, update-vibeflow.md, README.md, .github/copilot-instructions.md
 
-## Task 4 — Update research skill docs to include `5-PLAN.md`
+## Task 4 — Update research skill docs to include `5-PLAN.md` ✅
 
-- Add `5-PLAN.md` to research skill docs and metadata.
+- [x] Add `5-PLAN.md` to research skill docs and metadata.
   - Files: docs/vibeflow/research-skill.md, .github/skills/research/SKILL.md
 
-## Task 5 — Fix README structure and contributor guidance
+## Task 5 — Fix README structure and contributor guidance ✅
 
-- Remove or replace `AGENTS.md` reference if the file is not present.
-- Update agent file path references to `.github/agents/`.
+- [x] Remove or replace `AGENTS.md` reference if the file is not present.
+- [x] Update agent file path references to `.github/agents/`.
   - File: README.md

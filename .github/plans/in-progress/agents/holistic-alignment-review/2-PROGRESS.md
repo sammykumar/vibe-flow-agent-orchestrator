@@ -4,11 +4,11 @@
 
 ## Task Tracking
 
-| Phase        | Status      | Notes                                                                                                                                  |
-| ------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Research     | complete    | Findings recorded in 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md                                                                               |
-| Implement    | in progress | Tasks 1-4 completed (installer/update alignment, status semantics + plan-only prompt, skills inventory alignment, research skill docs) |
-| Final Review | pending     | Awaiting implementation phase                                                                                                          |
+| Phase        | Status   | Notes                                                                                                                                                                   |
+| ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Research     | complete | Findings recorded in 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md                                                                                                                |
+| Implement    | complete | Tasks 1-5 completed (installer/update alignment, status semantics + plan-only prompt, skills inventory alignment, research skill docs, README structure/guidance fixes) |
+| Final Review | complete | Final review complete; plan ready for user verification and archival                                                                                                    |
 
 ## Subagent Ledger
 
