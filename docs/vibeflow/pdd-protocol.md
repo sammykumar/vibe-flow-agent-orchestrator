@@ -47,6 +47,17 @@ Agents produce documentation in: `docs/{major-area}/{doc}.md`
 5. **Test**: Verify implementation.
 6. **Finish**: User manually moves the folder to `finished`.
 
+### Parallelism Policy (Opt-in)
+
+Parallel execution is optional and **OFF by default**. Enable it only when you can guarantee auditability and lock safety.
+
+- Only run subagents in parallel if they are **read-only** or **partitioned** with explicit, non-overlapping `lock-scope`.
+- Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
+- **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-PLAN.md`).
+- Summarize each subagent’s outputs separately before synthesis.
+- Update the Subagent Ledger section in `2-PROGRESS.md` for each parallel run.
+
 ## Progress Log Format (Recommended)
 
 ```markdown
@@ -62,6 +73,15 @@ Agents produce documentation in: `docs/{major-area}/{doc}.md`
 | 2026-01-12 | Test Agent      | ✅ PASS | unit/api, 0 failures             |
 
 ---
+
+## Subagent Ledger (Parallel Runs Only)
+
+| subagent-id | purpose | scope | lock-scope | status | start | end | outputs |
+| ----------- | ------- | ----- | ---------- | ------ | ----- | --- | ------- |
+| research-a1 | Specs   | write | 4-SPEC.md  | ✅     | 09:10 | 09:45 | 4-SPEC.md |
+| research-a2 | Plan    | write | 5-PLAN.md  | ✅     | 09:10 | 09:40 | 5-PLAN.md |
+
+> **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `2-PROGRESS.md` concurrently.
 
 ## 2026-01-12 — Implement Agent
 
