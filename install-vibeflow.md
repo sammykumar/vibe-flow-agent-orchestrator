@@ -179,6 +179,16 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 - Fetch `.github/skills/mermaidjs-v11/references/integration.md` to `.github/skills/mermaidjs-v11/references/integration.md`
 - Fetch `.github/skills/mermaidjs-v11/references/examples.md` to `.github/skills/mermaidjs-v11/references/examples.md`
 
+**Skills Creator Skill:**
+
+- Fetch `.github/skills/skills-creator/SKILL.md` to `.github/skills/skills-creator/SKILL.md`
+- Fetch `.github/skills/skills-creator/LICENSE.txt` to `.github/skills/skills-creator/LICENSE.txt`
+- Fetch `.github/skills/skills-creator/references/output-patterns.md` to `.github/skills/skills-creator/references/output-patterns.md`
+- Fetch `.github/skills/skills-creator/references/workflows.md` to `.github/skills/skills-creator/references/workflows.md`
+- Fetch `.github/skills/skills-creator/scripts/init_skill.py` to `.github/skills/skills-creator/scripts/init_skill.py`
+- Fetch `.github/skills/skills-creator/scripts/package_skill.py` to `.github/skills/skills-creator/scripts/package_skill.py`
+- Fetch `.github/skills/skills-creator/scripts/quick_validate.py` to `.github/skills/skills-creator/scripts/quick_validate.py`
+
 **Workflow Patterns (references/):**
 
 - Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
@@ -207,6 +217,13 @@ After fetching, verify the following files exist:
 - `.github/skills/mermaidjs-v11/references/cli-usage.md`
 - `.github/skills/mermaidjs-v11/references/integration.md`
 - `.github/skills/mermaidjs-v11/references/examples.md`
+- `.github/skills/skills-creator/SKILL.md`
+- `.github/skills/skills-creator/LICENSE.txt`
+- `.github/skills/skills-creator/references/output-patterns.md`
+- `.github/skills/skills-creator/references/workflows.md`
+- `.github/skills/skills-creator/scripts/init_skill.py`
+- `.github/skills/skills-creator/scripts/package_skill.py`
+- `.github/skills/skills-creator/scripts/quick_validate.py`
 
 **Documentation:**
 

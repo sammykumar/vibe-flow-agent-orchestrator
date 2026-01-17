@@ -90,4 +90,6 @@ Skills are modular, reusable knowledge packages that extend agent capabilities. 
 ### Current Skills
 
 - **orchestration** - PDD workflow and subagent delegation patterns used by vibe-flow orchestrator. Includes PDD file templates in `assets/` (overview, progress, research, spec, plan) and detailed workflow patterns in `references/workflow.md`.
-- **skill-creator** - Guide for creating and updating skills following agentskills.io specification
+- **research** - Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md) inside the active plan directory.
+- **mermaidjs-v11** - Mermaid.js v11 diagrams, configuration, CLI usage, and integration guidance for documentation.
+- **skill-creator** - Guide for creating, packaging, and validating skills following agentskills.io specification.

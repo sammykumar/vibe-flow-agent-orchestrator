@@ -182,7 +182,10 @@ Simply run the install prompt again - it will check GitHub for the latest versio
 
 ## 🧩 Skills Included
 
+- **Orchestration** - PDD workflow and subagent delegation patterns with templates and workflow references. See [.github/skills/orchestration/SKILL.md](.github/skills/orchestration/SKILL.md).
+- **Research** - Evidence-driven analysis and PDD deliverables for repository investigation. See [docs/vibeflow/research-skill.md](docs/vibeflow/research-skill.md).
 - **Mermaid.js v11** - Diagram syntax, configuration, CLI workflows, and integration patterns. See [docs/vibeflow/mermaidjs-v11-skill.md](docs/vibeflow/mermaidjs-v11-skill.md).
+- **Skills Creator** - Creating, packaging, and validating skills using agentskills.io spec. See [.github/skills/skills-creator/SKILL.md](.github/skills/skills-creator/SKILL.md).
 
 ## 🛠️ Development
 

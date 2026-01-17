@@ -60,6 +60,16 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 
 - Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
 
+**Skills Creator Skill:**
+
+- Fetch `.github/skills/skills-creator/SKILL.md` to `.github/skills/skills-creator/SKILL.md`
+- Fetch `.github/skills/skills-creator/LICENSE.txt` to `.github/skills/skills-creator/LICENSE.txt`
+- Fetch `.github/skills/skills-creator/references/output-patterns.md` to `.github/skills/skills-creator/references/output-patterns.md`
+- Fetch `.github/skills/skills-creator/references/workflows.md` to `.github/skills/skills-creator/references/workflows.md`
+- Fetch `.github/skills/skills-creator/scripts/init_skill.py` to `.github/skills/skills-creator/scripts/init_skill.py`
+- Fetch `.github/skills/skills-creator/scripts/package_skill.py` to `.github/skills/skills-creator/scripts/package_skill.py`
+- Fetch `.github/skills/skills-creator/scripts/quick_validate.py` to `.github/skills/skills-creator/scripts/quick_validate.py`
+
 ### 3.2 Verify Update
 
 After fetching, verify the following files exist and were updated:
@@ -79,6 +89,13 @@ After fetching, verify the following files exist and were updated:
 - `.github/skills/orchestration/assets/spec-template.md`
 - `.github/skills/orchestration/assets/plan-template.md`
 - `.github/skills/orchestration/references/workflow.md`
+- `.github/skills/skills-creator/SKILL.md`
+- `.github/skills/skills-creator/LICENSE.txt`
+- `.github/skills/skills-creator/references/output-patterns.md`
+- `.github/skills/skills-creator/references/workflows.md`
+- `.github/skills/skills-creator/scripts/init_skill.py`
+- `.github/skills/skills-creator/scripts/package_skill.py`
+- `.github/skills/skills-creator/scripts/quick_validate.py`
 
 **Documentation:**
 
