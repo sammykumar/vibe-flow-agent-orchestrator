@@ -42,24 +42,43 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 ```markdown
 1. Invoke research.agent:
    - Provide absolute path to plan directory
-   - Request: "Investigate {topic}. Create research findings, technical spec, and execution plan."
+   - Request: "Investigate {topic}. Create research findings and technical spec."
 
 2. Wait for completion signal: "Research phase complete"
 
 3. Verify outputs exist:
    - `3-RESEARCH.md` (investigation findings)
    - `4-SPEC.md` (technical specification)
-   - `5-PLAN.md` (implementation tasks)
 
 4. Review with user (if changes are critical):
    - Present `4-SPEC.md` for approval
-   - Present `5-PLAN.md` for review
 
 5. Update task tracking:
    - Mark "Research" phase as completed
 ```
 
-### STEP 3: Implementation Phase
+### STEP 3: Planning Phase
+
+**Sequential Process (write-capable) - Do NOT parallelize write-capable subagent calls**
+
+```markdown
+1. Invoke plan-writer.agent:
+   - Provide absolute path to plan directory
+   - Request: "Create the implementation task plan from 3-RESEARCH.md and 4-SPEC.md."
+
+2. Wait for completion signal: "Plan complete"
+
+3. Verify outputs exist:
+   - `5-TASKS.md` (implementation tasks)
+
+4. Review with user (if changes are critical):
+   - Present `5-TASKS.md` for review
+
+5. Update task tracking:
+   - Mark "Planning" phase as completed
+```
+
+### STEP 4: Implementation Phase
 
 **Iterative Process - Call implement.agent until all tasks complete**
 
@@ -80,7 +99,7 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
    - Mark individual tasks as completed during implementation
 ```
 
-### STEP 4: Stop after Implement (v2)
+### STEP 5: Stop after Implement (v2)
 
 **Review & Handoff**
 
@@ -100,7 +119,7 @@ Progress Status:
 
 Code Quality:
 
-- [ ] All implementation tasks complete per `5-PLAN.md`
+- [ ] All implementation tasks complete per `5-TASKS.md`
 - [ ] Happy-path verification recorded by implement agent
 - [ ] No compilation/lint errors (if applicable)
 
@@ -203,13 +222,19 @@ Task Completion:
 **Research Agent**:
 
 ```
-"Investigate the authentication system in the codebase. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Analyze the current implementation, evaluate OAuth 2.0 integration options, and create research findings, technical spec, and implementation plan."
+"Investigate the authentication system in the codebase. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Analyze the current implementation, evaluate OAuth 2.0 integration options, and create research findings and a technical spec."
+```
+
+**Plan Writer Agent**:
+
+```
+"Create the implementation task plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Use 3-RESEARCH.md and 4-SPEC.md to produce 5-TASKS.md and update 2-PROGRESS.md."
 ```
 
 **Implement Agent**:
 
 ```
-"Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Follow the tasks in 5-PLAN.md sequentially and update 2-PROGRESS.md after each task."
+"Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Follow the tasks in 5-TASKS.md sequentially and update 2-PROGRESS.md after each task."
 ```
 
 **Future Subagents (not installed in v2)**: Test/Document prompts are added when those agents are installed.

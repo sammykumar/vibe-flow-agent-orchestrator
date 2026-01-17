@@ -124,10 +124,10 @@ STEP 3: SPECIFICATION
 STEP 4: PLANNING
 
 - Action: Break down the spec into concrete implementation tasks.
-- Action: **Check if `5-PLAN.md` already exists** in the plan directory using #tool:read_file
+- Action: **Check if `5-TASKS.md` already exists** in the plan directory using #tool:read_file
   - IF EXISTS: Update the existing file with revised tasks, adjusted approach, or new steps based on test failures
-  - IF NOT EXISTS: Create new `5-PLAN.md` using the plan template (`docs/templates/plan-template.md`)
-- Output: `5-PLAN.md` in the plan directory.
+  - IF NOT EXISTS: Create new `5-TASKS.md` using the plan template (`docs/templates/plan-template.md`)
+- Output: `5-TASKS.md` in the plan directory.
 
 STEP 5: HANDOFF
 
@@ -158,7 +158,7 @@ All work happens in: `.github/plans/{status}/{major-area}/{task-name}/`
 
 - **Updates**: `3-RESEARCH.md` (Findings, alternatives, evidence).
 - **Creates/Updates**: `4-SPEC.md` (Technical constraints, API changes, test plans). **This is a living document** - update it if the plan already exists and you're refining the spec based on test failures or new insights.
-- **Creates/Updates**: `5-PLAN.md` (Step-by-step implementation tasks). **This is a living document** - update it when iterating to reflect new implementation strategy.
+- **Creates/Updates**: `5-TASKS.md` (Step-by-step implementation tasks). **This is a living document** - update it when iterating to reflect new implementation strategy.
 - **updates**: `2-PROGRESS.md` (Log your activities).
 
 ## Rules & Constraints

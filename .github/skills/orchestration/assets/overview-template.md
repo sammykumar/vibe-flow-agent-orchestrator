@@ -72,7 +72,7 @@ This plan directory contains the following files:
 - **2-PROGRESS.md** - Current status and work log
 - **3-RESEARCH.md** - Investigation findings and alternatives analysis
 - **4-SPEC.md** - Detailed technical specification
-- **5-PLAN.md** - Step-by-step implementation tasks
+- **5-TASKS.md** - Step-by-step implementation tasks
 
 ---
 

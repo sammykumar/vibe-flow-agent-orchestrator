@@ -66,6 +66,7 @@ There is no `npm test` for prompts. Validation is behavioral.
 
 - **`vibe-flow` (Orchestrator):** The entry point. Manages state in `.github/plans/`. Delegates work.
 - **`research-agent`:** Read-only analysis. Writes specs.
+- **`plan-writer-agent`:** Task planner. Writes 5-TASKS.md.
 - **`implement-agent`:** The "Do-er". Writes code.
 - **`test-agent`:** The QA. Writes/Runs tests.
 - **`document-agent`:** The Scribe. Updates docs.
@@ -90,6 +91,6 @@ Skills are modular, reusable knowledge packages that extend agent capabilities. 
 ### Current Skills
 
 - **orchestration** - PDD workflow and subagent delegation patterns used by vibe-flow orchestrator. Includes PDD file templates in `assets/` (overview, progress, research, spec, plan) and detailed workflow patterns in `references/workflow.md`.
-- **research** - Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md) inside the active plan directory.
+- **research** - Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md) inside the active plan directory.
 - **mermaidjs-v11** - Mermaid.js v11 diagrams, configuration, CLI usage, and integration guidance for documentation.
 - **skill-creator** - Guide for creating, packaging, and validating skills following agentskills.io specification.

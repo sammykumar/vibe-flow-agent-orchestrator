@@ -73,7 +73,6 @@ Parallel read-only helpers are ON by default in v2. Only operate in parallel whe
 
 - `3-RESEARCH.md`: Evidence-backed findings and alternatives
 - `4-SPEC.md`: Technical specification (APIs, data structures, verification plan)
-- `5-PLAN.md`: Implementation task breakdown
 - `2-PROGRESS.md`: Research status updates (set to `research_complete` at handoff)
 
 ## Research Workflow
@@ -83,8 +82,7 @@ Parallel read-only helpers are ON by default in v2. Only operate in parallel whe
 3. **External docs (if needed)**: Use Context7 to validate third-party APIs.
 4. **Alternatives**: Compare at least two approaches in `3-RESEARCH.md`.
 5. **Spec**: Produce `4-SPEC.md` with clear requirements and constraints.
-6. **Plan**: Produce `5-PLAN.md` aligned to the spec.
-7. **Handoff**: Update `2-PROGRESS.md` and signal completion.
+6. **Handoff**: Update `2-PROGRESS.md` and signal completion for plan-writer.
 
 ## Handoff Signal
 

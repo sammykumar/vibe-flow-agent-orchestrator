@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Plan → Implement). Use when managing complex feature development, bug fixes, or any work requiring coordination across research and implementation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
+description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Plan Writer → Implement). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, and implementation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
 ---
 
 # Orchestration & Delegation
@@ -24,6 +24,7 @@ This skill defines the orchestration workflow for managing complex development t
 ## Subagent Roster (v2)
 
 - `research.agent` - Investigation & specification writing
+- `plan-writer.agent` - Task plan authoring
 - `implement.agent` - Code changes & bug fixes
 
 ## PDD File Structure
@@ -36,7 +37,7 @@ Required files:
 - `2-PROGRESS.md` - **Single source of truth** for current state
 - `3-RESEARCH.md` - Investigation findings
 - `4-SPEC.md` - Technical specification
-- `5-PLAN.md` - Step-by-step execution tasks
+- `5-TASKS.md` - Step-by-step execution tasks
 
 **Templates**: PDD file templates are available in [assets/](assets/) directory:
 
@@ -54,7 +55,7 @@ Required files:
 
 1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
 2. Initialize `1-OVERVIEW.md` (goals) and `2-PROGRESS.md` (logs)
-3. Initialize task tracking with phases: Research, Implement, Final Review
+3. Initialize task tracking with phases: Research, Planning, Implement, Final Review
 
 **Existing Task:**
 
@@ -67,18 +68,26 @@ Required files:
 
 1. **Invoke**: Call research agent with absolute path to plan directory
 2. **Wait**: For signal "Research phase complete"
-3. **Verify**: Confirm `3-RESEARCH.md`, `4-SPEC.md`, AND `5-PLAN.md` exist
-4. **Review**: Ask user to review `4-SPEC.md` and `5-PLAN.md` if changes are critical
+3. **Verify**: Confirm `3-RESEARCH.md` and `4-SPEC.md` exist
+4. **Review**: Ask user to review `4-SPEC.md` if changes are critical
 5. **Update**: Mark Research phase complete in task tracking
 
-### STEP 3: Implementation Phase
+### STEP 3: Planning Phase
+
+1. **Invoke**: Call plan-writer agent with absolute path to plan directory
+2. **Wait**: For signal "Plan complete"
+3. **Verify**: Confirm `5-TASKS.md` exists
+4. **Review**: Ask user to review `5-TASKS.md` if changes are critical
+5. **Update**: Mark Planning phase complete in task tracking
+
+### STEP 4: Implementation Phase
 
 1. **Invoke**: Call implement agent with absolute path to plan directory
 2. **Loop**: Continue calling until `2-PROGRESS.md` shows all tasks complete
 3. **Monitor**: Check progress file after each invocation
 4. **Update**: Mark tasks complete in task tracking as progress is made
 
-### STEP 4: Stop after Implement (v2)
+### STEP 5: Stop after Implement (v2)
 
 1. **Summarize**: Review `2-PROGRESS.md` for completion signals and evidence.
 2. **Confirm**: Ask the user whether to add the next subagent (Test/Document are future phases).
@@ -135,6 +144,7 @@ Use task tracking tool to maintain visibility:
 Phases to track:
 
 - Research
+- Planning
 - Implement (may have multiple tasks based on plan)
 - Final Review
 
@@ -156,7 +166,7 @@ Phases to track:
 Before marking task complete, verify:
 
 - [ ] All PDD files exist and are complete
-- [ ] Implementation complete per `5-PLAN.md`
+- [ ] Implementation complete per `5-TASKS.md`
 - [ ] Happy-path verification recorded by implement agent
 - [ ] README reflects changes
 - [ ] Cleanup performed (no temp files)
