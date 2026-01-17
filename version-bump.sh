@@ -4,7 +4,14 @@
 # Usage: ./version-bump.sh [major|minor|patch]
 
 BUMP_TYPE="${1:-patch}"
-AGENT_FILE="agents/vibe-flow.agent.md"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AGENT_FILE="$SCRIPT_DIR/.github/agents/vibe-flow.agent.md"
+
+if [ ! -f "$AGENT_FILE" ]; then
+    echo "Error: Agent file not found at $AGENT_FILE"
+    echo "Expected path: .github/agents/vibe-flow.agent.md (anchored to script directory)"
+    exit 1
+fi
 
 # Extract current version from main orchestrator (single source of truth)
 CURRENT_VERSION=$(sed -n 's/.*<!-- version: \([0-9.]*\) -->.*/\1/p' "$AGENT_FILE")
