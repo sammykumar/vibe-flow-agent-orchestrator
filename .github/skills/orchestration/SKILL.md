@@ -61,7 +61,7 @@ Required files:
 1. Read `2-PROGRESS.md` to determine current state
 2. Resume task tracking state
 
-**Critical**: All new tasks must be created in `in-progress/` directory.
+**Critical**: All agent-created tasks must be created in `in-progress/` directory. Use `todo/` only for user plan-only/manual planning requests (no execution).
 
 ### STEP 2: Research Phase
 
@@ -164,5 +164,8 @@ Before marking task complete, verify:
 
 ## Status Values
 
-- `in-progress` - Active work
+- `todo` - Plan-only/manual requests (user-created; no execution)
+- `in-progress` - Active work (agents always initialize here)
 - `finished` - Complete and verified (but still in in-progress folder until user manually archives)
+
+Plan-only requests should use the **plan-only prompt** to create a `todo/` plan and stop without invoking subagents.
