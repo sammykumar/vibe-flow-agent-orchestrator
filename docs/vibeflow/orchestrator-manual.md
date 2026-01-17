@@ -245,7 +245,7 @@ Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
 - **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
-- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement, Test, Document) sequentially or iteratively.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement, Test, Document) sequentially by default, iterating as needed.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
@@ -273,6 +273,18 @@ Responsibilities:
 5.  **Finalization**:
     - Trigger `Document` sub-agent to update project docs and READMEs.
     - **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
+
+### Parallel Subagent Policy (Opt-in)
+
+Parallel execution is optional and **OFF by default**. Enable it only when you can guarantee auditability and lock safety.
+
+- Only run subagents in parallel if they are **read-only** or **partitioned** with explicit, non-overlapping `lock-scope`.
+- Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
+- **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-PLAN.md`).
+- Summarize each subagent’s outputs separately before synthesis.
+- Tool confirmations must be serialized: only one subagent may request interactive confirmation at a time.
+- Update the Subagent Ledger section in `2-PROGRESS.md` for each parallel run.
 
 ### Rules
 
