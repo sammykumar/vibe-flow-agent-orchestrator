@@ -8,6 +8,8 @@
 | ---------- | --------------- | ------- | ------------------------------------------------------------------- |
 | 2026-01-16 | Research Agent  | ✅ PASS | 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md for README parallel flow update |
 | 2026-01-16 | Implement Agent | ✅ PASS | README.md updated with v2 parallel subsection + Mermaid diagram     |
+| 2026-01-16 | Implement Agent | ✅ PASS | README Mermaid label updated for parse-safe node text               |
+| 2026-01-16 | Implement Agent | ✅ PASS | Docs/prompts aligned to default read-only parallel helpers (v2)     |
 
 ---
 
@@ -87,4 +89,63 @@
 ### Verification
 
 - get_errors: No issues in README.md
+- Tests: Not run (per request)
+
+---
+
+## 2026-01-16 — Implement Agent (Mermaid label fix)
+
+### Summary
+
+| Field   | Value                                                                                                                                      |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Goal    | Fix Mermaid parse error in README parallel subagents diagram                                                                               |
+| Scope   | Update the node label from parentheses to a Mermaid-safe label                                                                             |
+| Status  | ✅ PASS                                                                                                                                    |
+| Owner   | implement.agent                                                                                                                            |
+| Related | Plan: [.github/plans/in-progress/docs/parallel-subagents-visualization/](.github/plans/in-progress/docs/parallel-subagents-visualization/) |
+
+### Changes
+
+| File      | Description                                                                  |
+| --------- | ---------------------------------------------------------------------------- |
+| README.md | Updated `PR` node label to "parallel read-only subagents" for Mermaid safety |
+
+### Verification
+
+- get_errors: No issues in README.md
+- grep: `parallel read-only subagents` found in README.md
+- Tests: Not run (per request)
+
+---
+
+## 2026-01-16 — Implement Agent (v2 parallel defaults + scope alignment)
+
+### Summary
+
+| Field   | Value                                                                                                                                      |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Goal    | Make parallel read-only subagents default in v2 docs/prompts and clarify v2 agent scope                                                    |
+| Scope   | README, orchestrator manual, PDD protocol, agent prompts, workflow references, and templates                                               |
+| Status  | ✅ PASS                                                                                                                                    |
+| Owner   | implement.agent                                                                                                                            |
+| Related | Plan: [.github/plans/in-progress/docs/parallel-subagents-visualization/](.github/plans/in-progress/docs/parallel-subagents-visualization/) |
+
+### Changes
+
+| File                                                    | Description                                                                          |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| README.md                                               | Set parallel read-only helpers as default; updated v2 scope and agent list           |
+| .github/agents/vibe-flow.agent.md                       | Default read-only parallel safety; write-capable subagents sequential                |
+| .github/agents/research.agent.md                        | Default read-only parallel helper mode clarified                                     |
+| docs/vibeflow/orchestrator-manual.md                    | v2 scope + default read-only parallel policy; future test/document noted             |
+| docs/vibeflow/pdd-protocol.md                           | v2 workflow + default read-only parallel helpers; examples updated                   |
+| docs/templates/progress-log-template.md                 | Parallel ledger aligned to read-only helpers                                         |
+| .github/skills/research/assets/progress-log-template.md | Parallel ledger aligned to read-only helpers                                         |
+| .github/skills/orchestration/SKILL.md                   | v2 workflow + default read-only parallel helpers; sequential write-capable subagents |
+| .github/skills/orchestration/references/workflow.md     | v2 workflow + default read-only parallel helpers; removed test/document references   |
+
+### Verification
+
+- get_errors: No issues reported in modified Markdown files
 - Tests: Not run (per request)

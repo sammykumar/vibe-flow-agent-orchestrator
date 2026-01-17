@@ -2,15 +2,13 @@
 
 ## The Orchestration Pipeline
 
-Plan-Driven Development follows a structured 6-step pipeline. Each step must complete before proceeding to the next:
+Plan-Driven Development follows a structured v2 pipeline. Each step must complete before proceeding to the next:
 
 ```markdown
 1. Initialize (Create PDD structure)
 2. Research Phase (investigation & specification)
 3. Implementation Phase (code changes)
-4. Test Phase (validation & QA)
-5. Documentation Phase (docs & diagrams)
-6. Final Audit (quality verification)
+4. Stop after Implement (v2 review; Test/Document are future phases)
 ```
 
 ## Step-by-Step Orchestration
@@ -22,13 +20,11 @@ Plan-Driven Development follows a structured 6-step pipeline. Each step must com
 
 ```markdown
 1. Determine if task is new or resuming:
-
    - Search for existing plan in `.github/plans/in-progress/`
    - If not found → Create new plan directory
    - If found → Resume from current state
 
 2. For new tasks:
-
    - Create `.github/plans/in-progress/{major-area}/{task-name}/`
    - Initialize `1-OVERVIEW.md` (use template from assets/)
    - Initialize `2-PROGRESS.md` (use template from assets/)
@@ -41,24 +37,21 @@ Plan-Driven Development follows a structured 6-step pipeline. Each step must com
 
 ### STEP 2: Research Phase
 
-**Sequential Process - Do NOT parallelize subagent calls**
+**Sequential Process (write-capable) - Do NOT parallelize write-capable subagent calls**
 
 ```markdown
 1. Invoke research.agent:
-
    - Provide absolute path to plan directory
    - Request: "Investigate {topic}. Create research findings, technical spec, and execution plan."
 
 2. Wait for completion signal: "Research phase complete"
 
 3. Verify outputs exist:
-
    - `3-RESEARCH.md` (investigation findings)
    - `4-SPEC.md` (technical specification)
    - `5-PLAN.md` (implementation tasks)
 
 4. Review with user (if changes are critical):
-
    - Present `4-SPEC.md` for approval
    - Present `5-PLAN.md` for review
 
@@ -72,103 +65,56 @@ Plan-Driven Development follows a structured 6-step pipeline. Each step must com
 
 ```markdown
 1. Invoke implement.agent:
-
    - Provide absolute path to plan directory
    - Request: "Execute the implementation plan at {path}."
 
 2. Monitor progress after each invocation:
-
    - Read `2-PROGRESS.md` for status updates
    - Check for completion signals
 
 3. Loop until complete:
-
    - If `2-PROGRESS.md` shows incomplete tasks → Re-invoke implement.agent
-   - If all tasks marked complete → Proceed to Test Phase
+   - If all tasks marked complete → Proceed to Stop after Implement (v2)
 
 4. Update task tracking:
    - Mark individual tasks as completed during implementation
 ```
 
-### STEP 4: Test Phase
+### STEP 4: Stop after Implement (v2)
 
-**Conditional Workflow - May loop back to Implementation**
-
-```markdown
-1. Invoke test.agent:
-
-   - Provide absolute path to plan directory
-   - Request: "Validate the implementation with comprehensive tests."
-
-2. Evaluate test results:
-   **Tests PASS?** → Proceed to STEP 5 (Documentation)
-   **Tests FAIL?** → Return to STEP 3 (Implementation)
-
-3. For test failures:
-
-   - Review failure details from test.agent
-   - Re-invoke implement.agent with fix instructions
-   - Return to test phase after fixes
-
-4. Update task tracking:
-   - Mark "Test" phase as completed (only when tests pass)
-```
-
-### STEP 5: Documentation Phase
-
-**Multi-Output Process**
+**Review & Handoff**
 
 ```markdown
-1. Invoke document.agent:
-
-   - Provide absolute path to plan directory
-   - Explicit instruction: "Generate architecture diagrams (Mermaid), update API docs, and sync the README."
-
-2. Verify documentation outputs:
-
-   - Architecture diagrams in `docs/architecture/diagrams/`
-   - API documentation updated
-   - README.md reflects changes
-   - All code properly documented
-
-3. Update task tracking:
-   - Mark "Document" phase as completed
+1. Review `2-PROGRESS.md` for completion signals and evidence.
+2. Summarize results for the user.
+3. Ask whether to add the next subagent (Test/Document are future phases).
+4. Mark the Final Review phase as completed.
 ```
-
-### STEP 6: Final Audit
-
-**Quality Verification Checklist**
 
 ```markdown
 Before declaring task complete, verify:
 
 Progress Status:
 
-- [ ] `2-PROGRESS.md` shows status `finished`
-- [ ] All subagent completion signals present
+- [ ] `2-PROGRESS.md` shows completion signals
 
 Code Quality:
 
 - [ ] All implementation tasks complete per `5-PLAN.md`
-- [ ] Tests pass (test agent confirmed)
-- [ ] No compilation/lint errors
+- [ ] Happy-path verification recorded by implement agent
+- [ ] No compilation/lint errors (if applicable)
 
 Documentation:
 
-- [ ] Architecture diagrams created/updated
-- [ ] API documentation current
-- [ ] README.md reflects changes
-- [ ] Code comments/JSDoc complete
+- [ ] README.md reflects changes (if required)
 
 Cleanup:
 
 - [ ] Temporary POC files removed
-- [ ] Debug code removed
-- [ ] No commented-out code blocks
 
 Task Completion:
 
-- [ ] Update task tracking: Mark "Final Audit" complete
+- [ ] Update task tracking: Mark "Final Review" complete
 - [ ] Report completion to user
 - [ ] Note: User manually archives plan to `.github/plans/finished/`
 ```
@@ -186,28 +132,23 @@ Task Completion:
 
 2. Resume workflow:
    - Read `2-PROGRESS.md` to identify current phase
-   - Jump to appropriate step (Research, Implement, Test, Document)
+   - Jump to appropriate step (Research, Implement, Final Review)
    - Continue from where previous work stopped
 ```
 
-### Handling Test Failures
+### Handling Implementation Issues
 
-**Scenario**: Tests fail during STEP 4
+**Scenario**: Implement agent reports failures or incomplete work
 
 ```markdown
-1. Test agent reports failures
+1. Implement agent reports issues
 2. Determine severity:
-   **Critical failures?** → Return to STEP 3 (Implementation)
+   **Critical issues?** → Return to STEP 3 (Implementation)
    **Minor issues?** → Return to STEP 3 (Implementation)
 
 3. Implementation phase with fixes:
-
    - Invoke implement.agent with specific failure details
-   - Request: "Fix the following test failures: {details}"
-
-4. After fixes:
-   - Return to STEP 4 (Test Phase)
-   - Re-run tests to validate fixes
+   - Request: "Fix the following implementation issues: {details}"
 ```
 
 ### Destructive Changes
@@ -216,7 +157,6 @@ Task Completion:
 
 ```markdown
 1. Research agent identifies high-risk changes:
-
    - Database schema modifications
    - Deleting significant code
    - Refactoring core modules
@@ -234,25 +174,22 @@ Task Completion:
 
 ## Subagent Invocation Pattern
 
-**CRITICAL**: Always invoke subagents sequentially, never in parallel
+**CRITICAL**: Always invoke write-capable subagents sequentially; read-only helpers may run in parallel by default
 
 ```markdown
 1. Prepare invocation:
-
    - Gather absolute path to plan directory
    - Compose clear, plain-language prompt
    - Specify expected outputs
 
 2. Invoke subagent:
-
    - Use #tool:agent
    - Provide context: "The plan directory is at {absolute-path}"
    - State objective clearly
 
 3. Wait for completion:
-
    - Do NOT invoke next subagent until current completes
-   - Do NOT parallelize subagent calls
+   - Do NOT parallelize write-capable subagent calls (read-only helpers may run in parallel)
    - Review outputs before proceeding
 
 4. Verify outputs:
@@ -275,17 +212,7 @@ Task Completion:
 "Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Follow the tasks in 5-PLAN.md sequentially and update 2-PROGRESS.md after each task."
 ```
 
-**Test Agent**:
-
-```
-"Validate the OAuth integration implementation with comprehensive tests. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Run all tests, check coverage, and report results."
-```
-
-**Document Agent**:
-
-```
-"Update all documentation for the OAuth integration feature. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Generate architecture diagrams, update API docs, and sync the README."
-```
+**Future Subagents (not installed in v2)**: Test/Document prompts are added when those agents are installed.
 
 ## Failure Recovery Patterns
 
@@ -294,7 +221,6 @@ Task Completion:
 ```markdown
 1. Subagent returns error or incomplete output
 2. Review the failure:
-
    - What went wrong?
    - What information is missing?
    - What context was unclear?
@@ -338,17 +264,9 @@ Phase: Implement
 
 - Mark "Implement" as in-progress → Loop with implement.agent → Mark completed
 
-Phase: Test
+Phase: Final Review
 
-- Mark "Test" as in-progress → Invoke test.agent → If pass, mark completed → If fail, return to Implement
-
-Phase: Document
-
-- Mark "Document" as in-progress → Invoke document.agent → Mark completed
-
-Phase: Final Audit
-
-- Mark "Final Audit" as in-progress → Run verification checklist → Mark completed
+- Mark "Final Review" as in-progress → Run verification checklist → Mark completed
 ```
 
 ## Workflow Visualization
@@ -361,17 +279,13 @@ graph TD
     D --> E{Current Phase?}
 
     C --> F[STEP 2: Research Phase]
-    E -->|Research| F
-    E -->|Implement| G
-    E -->|Test| H
-    E -->|Document| I
+   E -->|Research| F
+   E -->|Implement| G
+   E -->|Final Review| H
 
-    F --> G[STEP 3: Implementation Phase]
-    G --> H[STEP 4: Test Phase]
-    H -->|Tests Fail| G
-    H -->|Tests Pass| I[STEP 5: Documentation Phase]
-    I --> J[STEP 6: Final Audit]
-    J --> K[Complete - Report to User]
+   F --> G[STEP 3: Implementation Phase]
+   G --> H[STEP 4: Stop after Implement (v2)]
+   H --> K[Complete - Report to User]
 ```
 
 ## Best Practices
@@ -379,7 +293,7 @@ graph TD
 ### Do's ✅
 
 - Read orchestration skill at start of each task
-- Invoke subagents sequentially, one at a time
+- Invoke write-capable subagents sequentially; read-only helpers may run in parallel
 - Wait for completion before proceeding
 - Verify outputs after each phase
 - Update task tracking consistently
@@ -389,7 +303,7 @@ graph TD
 ### Don'ts ❌
 
 - Never edit source code yourself
-- Never parallelize subagent calls
+- Never parallelize write-capable subagent calls (read-only helpers may run in parallel)
 - Never skip PDD structure creation
 - Never proceed without verification
 - Never guess file paths

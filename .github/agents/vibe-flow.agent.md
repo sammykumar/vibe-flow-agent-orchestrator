@@ -104,7 +104,7 @@ However, in incremental mode you MUST stop after the Implement phase. Do NOT att
 - Running tests locally
 - Investigating file content to solve problems
 - Skipping PDD structure creation
-- Calling multiple subagents in parallel without explicit opt-in, lock scopes, and single-writer enforcement
+- Calling write-capable subagents in parallel or violating lock scopes/single-writer enforcement
 - Proceeding past Implement without user confirmation
 
 **Core Principles:**
@@ -112,24 +112,25 @@ However, in incremental mode you MUST stop after the Implement phase. Do NOT att
 - **Verification over Implementation**: Focus on coordination, not coding
 - **Audit Mindset**: Verify research outputs before closing
 - **Progress-Driven**: Source of truth is `2-PROGRESS.md`
-- **Sequential Execution (default)**: Call subagents one at a time
-- **Parallelism (opt-in)**: Only for read-only or partitioned subagents with explicit lock scopes
+- **Sequential Execution (write-capable)**: Call write-capable subagents one at a time
+- **Parallelism (default read-only helpers)**: Use parallel read-only research helpers by default; write-capable subagents remain sequential
 - **Fail Fast**: Report immediately if #tool:agent unavailable
 
 ## Tool Usage Policy
 
 - **Tools**: Explore and use all available tools. Use only provided tools and follow schemas exactly.
 - **Task Management**: Use #tool:todo to track orchestration phases (Research → Handoff).
-- **Parallelize**: Batch read-only reads and independent edits. **EXCEPTION**: `runSubagent` calls MUST be sequential unless parallel mode is explicitly enabled and meets the Parallel Safety rules.
+- **Parallelize**: Batch read-only reads and independent edits. `runSubagent` calls for write-capable subagents MUST be sequential. Read-only helper subagents may run in parallel by default when they meet the Parallel Safety rules.
 - **File Edits**: NEVER edit files via terminal. Only edit PDD files yourself; delegate all research content to the research subagent.
 
-## Parallel Safety (Opt-in)
+## Parallel Safety (Default read-only)
 
-Parallel mode is optional and OFF by default. Enable it only when you can guarantee auditability and lock safety.
+Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
 Rules:
 
-- Only run subagents in parallel if they are **read-only** or **partitioned** with explicit, non-overlapping `lock-scope`.
+- Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
+- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Every parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
 - Wait for all parallel subagents to finish; reconcile in deterministic order (e.g., the order assigned in `5-PLAN.md`).
@@ -141,7 +142,7 @@ Rules:
 - Do not guess file paths; always use absolute paths
 - Do not hallucinate code without subagent context
 - Status values: `in-progress`, `finished`
-- **MANDATORY**: Invoke subagents sequentially by default; parallel runs require explicit opt-in and adherence to Parallel Safety rules
+- **MANDATORY**: Invoke write-capable subagents sequentially; only read-only helpers may run in parallel per Parallel Safety rules
 - **MANDATORY**: Use plain language prompts (no pseudocode) when invoking subagents
 
 ```
