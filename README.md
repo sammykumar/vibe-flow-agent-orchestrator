@@ -145,8 +145,6 @@ docs/
 │   └── orchestrator-manual.md # Usage guide
 ├── guides/                    # Development guides
 └── architecture/              # Diagrams & ADRs
-
-AGENTS.md                      # Quick reference
 ```
 
 ## 💡 Usage
@@ -200,7 +198,7 @@ This repository is the **source code** for Vibe Flow agents.
 
 To modify agents or add features:
 
-1. Edit agent files in `agents/` or `agents/subagents/`
+1. Edit agent files in `.github/agents/`
 2. Update `install-vibeflow.md` if structure changes
 3. Run `./version-bump.sh [major|minor|patch]`
 4. Test in a target repository
