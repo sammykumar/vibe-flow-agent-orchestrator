@@ -4,9 +4,9 @@
 
 ## Quick Index
 
-| Date       | Work Item      | Status      | Key outputs                    |
-| ---------- | -------------- | ----------- | ------------------------------ |
-| 2026-01-16 | Research Agent | ✅ complete | Research, spec, and plan ready |
+| Date       | Work Item       | Status      | Key outputs                                |
+| ---------- | --------------- | ----------- | ------------------------------------------ |
+| 2026-01-16 | Research Agent  | ✅ complete | Research, spec, and plan ready             |
 | 2026-01-16 | Implement Agent | ✅ complete | Parallel policy updates + ledger templates |
 
 ---
@@ -37,20 +37,20 @@
 
 ### Summary
 
-| Field   | Value                                                                 |
-| ------- | --------------------------------------------------------------------- |
-| Goal    | Implement Option B: parallel safety policy + subagent ledger updates  |
-| Scope   | Agent prompts, orchestrator docs, PDD protocol, progress templates    |
-| Status  | implement_complete                                                     |
-| Owner   | implement.agent                                                        |
-| Related | Plan: .github/plans/in-progress/agents/parallel-subagents             |
+| Field   | Value                                                                |
+| ------- | -------------------------------------------------------------------- |
+| Goal    | Implement Option B: parallel safety policy + subagent ledger updates |
+| Scope   | Agent prompts, orchestrator docs, PDD protocol, progress templates   |
+| Status  | implement_complete                                                   |
+| Owner   | implement.agent                                                      |
+| Related | Plan: .github/plans/in-progress/agents/parallel-subagents            |
 
 ### Changes
 
-| Area         | Details                                                                 |
-| ------------ | ----------------------------------------------------------------------- |
+| Area         | Details                                                                                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | What changed | - Added opt-in parallel safety policy and single-writer guidance<br>- Added subagent ledger template sections<br>- Updated research agent parallel mode constraints |
-| Notes        | - Kept default sequential mode; parallelism requires explicit opt-in    |
+| Notes        | - Kept default sequential mode; parallelism requires explicit opt-in                                                                                                |
 
 **Files changed**
 
@@ -63,8 +63,8 @@
 
 ### Tests
 
-| Type | Command | Result | Notes |
-| ---- | ------- | ------ | ----- |
+| Type | Command | Result | Notes                                       |
+| ---- | ------- | ------ | ------------------------------------------- |
 | N/A  | N/A     | ✅     | No tests required (prompt/doc updates only) |
 
 ### Verification
