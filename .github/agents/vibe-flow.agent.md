@@ -31,7 +31,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 2.1.0 -->
+<!-- version: 2.1.1 -->
 
 # Vibe Flow Orchestrator (Incremental Mode)
 
