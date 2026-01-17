@@ -141,7 +141,9 @@ Rules:
 
 - Do not guess file paths; always use absolute paths
 - Do not hallucinate code without subagent context
-- Status values: `in-progress`, `finished`
+- Status values: `todo`, `in-progress`, `finished`
+- `todo` is user-only for plan-only/manual planning; agents always initialize in `in-progress`
+- Plan-only prompt: create a `todo/` plan and stop without invoking subagents
 - **MANDATORY**: Invoke write-capable subagents sequentially; only read-only helpers may run in parallel per Parallel Safety rules
 - **MANDATORY**: Use plain language prompts (no pseudocode) when invoking subagents
 

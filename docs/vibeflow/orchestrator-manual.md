@@ -36,6 +36,8 @@ Status Options
 - finished 
 ```
 
+**Semantics:** `todo` is for plan-only/manual planning (no execution). Active agent work always starts in `in-progress`.
+
 Major Area Examples:
 
 ```
@@ -498,11 +500,11 @@ Status values map directly to the `{status}` segment in the PDD path:
 
 | Status      | Meaning                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------- |
-| todo        | Work identified but not yet started (**User creates only - agents never work on todo folders**)                   |
+| todo        | Plan-only/manual requests (**User creates only - agents never work on todo folders**)                             |
 | in-progress | Actively being researched or implemented (**Agents always initialize here; future phases may add test/document**) |
 | finished    | Fully implemented (**Future: tested/documented once those subagents are installed**)                              |
 
-Status transitions are minimal: **Agents always initialize in `in-progress`**. The `todo` status is for user planning only. The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
+Status transitions are minimal: **Agents always initialize in `in-progress`**. The `todo` status is for plan-only/manual requests (use the plan-only prompt). The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
 ---
 

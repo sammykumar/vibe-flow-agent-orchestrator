@@ -10,6 +10,8 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 - `in-progress`: Actively being researched or implemented. (**Agents always initialize here**; Test/Document are future phases).
 - `finished`: Fully implemented. (**User manually moves here after verification; future phases may add test/document**).
 
+Use the **plan-only prompt** to create a `todo/` plan without starting research or implementation. Active agent work always starts in `in-progress`.
+
 ### Major Area Examples
 
 - `core`
