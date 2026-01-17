@@ -12,6 +12,15 @@ This is the **source code** for the Vibe Flow AI Agents.
 
 **Note on Repository Structure**: This repository now uses `.github/agents/` (flat structure) to dogfood Vibe Flow in the same way it's deployed to target repositories. VS Code only reads agents from `.github/agents/`, so this allows us to test the agents in this source repository before publishing.
 
+## ✅ Source of Truth
+
+Use these locations as the authoritative sources for behavior and workflow details:
+
+- .github/agents/
+- docs/vibeflow/
+- install-vibeflow.md
+- update-vibeflow.md
+
 ## 📂 Core Artifacts
 
 ### 1. Agent Definitions (`*.agent.md`)
@@ -54,6 +63,16 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 2.  Add it to `vibe-flow.agent.md`'s orchestration logic (it needs to know the subagent exists).
 3.  Add it to `install-vibeflow.md` so it gets installed in target repositories.
 
+### Change Checklist (Agents)
+
+When changing agents or workflow:
+
+1. Update .github/agents/ (agent definition changes)
+2. Update install-vibeflow.md and update-vibeflow.md
+3. Update docs/vibeflow/pdd-protocol.md and docs/vibeflow/orchestrator-manual.md
+4. Update .github/prompts/ if prompts reference the new flow
+5. Bump the version in .github/agents/vibe-flow.agent.md (or run ./version-bump.sh)
+
 ## 🧪 Testing & Validation
 
 There is no `npm test` for prompts. Validation is behavioral.
@@ -64,12 +83,11 @@ There is no `npm test` for prompts. Validation is behavioral.
 
 ## 🧩 Architecture Summary
 
-- **`vibe-flow` (Orchestrator):** The entry point. Manages state in `.github/plans/`. Delegates work.
-- **`research-agent`:** Read-only analysis. Writes specs.
-- **`plan-writer-agent`:** Task planner. Writes 5-TASKS.md.
-- **`implement-agent`:** The "Do-er". Writes code.
-- **`test-agent`:** The QA. Writes/Runs tests.
-- **`document-agent`:** The Scribe. Updates docs.
+This repository is the **source of truth** for the Vibe Flow agent suite. For behavior details, defer to the agent definitions and documentation:
+
+- Agent definitions in .github/agents/
+- PDD protocol in docs/vibeflow/pdd-protocol.md
+- Orchestrator manual in docs/vibeflow/orchestrator-manual.md
 
 ## 🚫 Common Pitfalls in `vibe-flow.agent.md` only. If you don't bump, updates won't propagate. All agents are versioned as a suite.
 
@@ -79,18 +97,4 @@ There is no `npm test` for prompts. Validation is behavioral.
 
 ## 🧠 Skills
 
-Skills are modular, reusable knowledge packages that extend agent capabilities. Skills live in `.github/skills/` and follow the agentskills.io spec.
-
-### Adding New Skills
-
-1. Create `skill-name/SKILL.md` in `.github/skills/`
-2. Follow the skill-creator guidance for proper structure
-3. Add skill reference to `install-vibeflow.md` if it should be deployed to target repos
-4. Update this file to document the skill's purpose
-
-### Current Skills
-
-- **orchestration** - PDD workflow and subagent delegation patterns used by vibe-flow orchestrator. Includes PDD file templates in `assets/` (overview, progress, research, spec, plan) and detailed workflow patterns in `references/workflow.md`.
-- **research** - Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md) inside the active plan directory.
-- **mermaidjs-v11** - Mermaid.js v11 diagrams, configuration, CLI usage, and integration guidance for documentation.
-- **skill-creator** - Guide for creating, packaging, and validating skills following agentskills.io specification.
+Skills live in .github/skills/. For behavior and usage details, defer to the skill definitions and docs under docs/vibeflow/.
