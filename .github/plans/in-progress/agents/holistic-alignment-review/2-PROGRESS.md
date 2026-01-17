@@ -4,11 +4,11 @@
 
 ## Task Tracking
 
-| Phase        | Status      | Notes                                                                                                             |
-| ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------- |
-| Research     | complete    | Findings recorded in 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md                                                          |
-| Implement    | in progress | Tasks 1-3 completed (installer/update alignment, status semantics + plan-only prompt, skills inventory alignment) |
-| Final Review | pending     | Awaiting implementation phase                                                                                     |
+| Phase        | Status      | Notes                                                                                                                                  |
+| ------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Research     | complete    | Findings recorded in 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md                                                                               |
+| Implement    | in progress | Tasks 1-4 completed (installer/update alignment, status semantics + plan-only prompt, skills inventory alignment, research skill docs) |
+| Final Review | pending     | Awaiting implementation phase                                                                                                          |
 
 ## Subagent Ledger
 
@@ -81,3 +81,33 @@
 
 - Updated README and copilot instructions to list all shipped skills, including skills-creator.
 - Added skills-creator fetch and verification steps to install/update prompts.
+
+## 2026-01-17 — Implement Agent
+
+### Summary
+
+| Field         | Value                                                                            |
+| ------------- | -------------------------------------------------------------------------------- |
+| Goal          | Task 4: update research skill docs to include `5-PLAN.md`                        |
+| Status        | ✅ complete                                                                      |
+| Files Updated | docs/vibeflow/research-skill.md, .github/skills/research/SKILL.md, 2-PROGRESS.md |
+| Verification  | `git status -sb`                                                                 |
+
+### Notes
+
+- Added `5-PLAN.md` to research skill deliverables list and metadata.
+
+## 2026-01-17 — Implement Agent
+
+### Summary
+
+| Field         | Value                                                 |
+| ------------- | ----------------------------------------------------- |
+| Goal          | Task 5: fix README structure and contributor guidance |
+| Status        | ✅ complete                                           |
+| Files Updated | README.md, 2-PROGRESS.md                              |
+| Verification  | `git status -sb`                                      |
+
+### Notes
+
+- Removed the missing AGENTS.md reference and pointed contributor guidance to `.github/agents/`.
