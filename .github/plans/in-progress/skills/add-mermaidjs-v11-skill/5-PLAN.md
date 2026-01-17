@@ -2,23 +2,23 @@
 
 ## Implementation Tasks
 
-1. Add skill files
+1. [x] Add skill files
    - Create .github/skills/mermaidjs-v11/ and references/.
    - Copy upstream SKILL.md and reference files verbatim.
    - Verify frontmatter is intact and references paths match.
 
-2. Update installer
+2. [x] Update installer
    - In [install-vibeflow.md](install-vibeflow.md), add fetch steps for mermaidjs-v11 files under Step 7.2.
    - Add mermaidjs-v11 to the Step 7.3 verification list.
 
-3. Update skill discovery metadata
+3. [x] Update skill discovery metadata
    - Add mermaidjs-v11 entry to <available_skills> in [vibe-flow.agent.md](.github/agents/vibe-flow.agent.md).
    - If adopting a manifest, add entry in .github/skills/skills-manifest.json (decide with maintainers).
 
-4. Documentation update
+4. [x] Documentation update
    - Update README to list mermaidjs-v11 under a “Skills Included” section OR add a docs/vibeflow/mermaidjs-v11-skill.md entry and link it from README.
 
-5. Validation
+5. [x] Validation
    - Confirm file paths exist and align with installer steps.
    - Spot-check links and references in the new skill for correctness.
 

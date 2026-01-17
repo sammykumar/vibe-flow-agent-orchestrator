@@ -167,6 +167,15 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 - Fetch `.github/skills/research/references/REFERENCE.md` to `.github/skills/research/references/REFERENCE.md`
 - Fetch `.github/skills/research/scripts/validate-skill.sh` to `.github/skills/research/scripts/validate-skill.sh` (run it as a post-install verification step)
 
+**Mermaid.js v11 Skill:**
+
+- Fetch `.github/skills/mermaidjs-v11/SKILL.md` to `.github/skills/mermaidjs-v11/SKILL.md`
+- Fetch `.github/skills/mermaidjs-v11/references/diagram-types.md` to `.github/skills/mermaidjs-v11/references/diagram-types.md`
+- Fetch `.github/skills/mermaidjs-v11/references/configuration.md` to `.github/skills/mermaidjs-v11/references/configuration.md`
+- Fetch `.github/skills/mermaidjs-v11/references/cli-usage.md` to `.github/skills/mermaidjs-v11/references/cli-usage.md`
+- Fetch `.github/skills/mermaidjs-v11/references/integration.md` to `.github/skills/mermaidjs-v11/references/integration.md`
+- Fetch `.github/skills/mermaidjs-v11/references/examples.md` to `.github/skills/mermaidjs-v11/references/examples.md`
+
 **Workflow Patterns (references/):**
 
 - Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
@@ -189,6 +198,12 @@ After fetching, verify the following files exist:
 - `.github/skills/orchestration/assets/spec-template.md`
 - `.github/skills/orchestration/assets/plan-template.md`
 - `.github/skills/orchestration/references/workflow.md`
+- `.github/skills/mermaidjs-v11/SKILL.md`
+- `.github/skills/mermaidjs-v11/references/diagram-types.md`
+- `.github/skills/mermaidjs-v11/references/configuration.md`
+- `.github/skills/mermaidjs-v11/references/cli-usage.md`
+- `.github/skills/mermaidjs-v11/references/integration.md`
+- `.github/skills/mermaidjs-v11/references/examples.md`
 
 **Documentation:**
 
