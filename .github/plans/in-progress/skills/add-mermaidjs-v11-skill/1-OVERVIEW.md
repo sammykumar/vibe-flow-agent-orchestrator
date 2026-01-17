@@ -97,11 +97,11 @@ This plan directory contains the following files:
 
 ## Risks & Concerns
 
-| Risk                     | Impact | Likelihood | Mitigation                     | Owner |
-| ------------------------ | ------ | ---------- | ------------------------------ | ----- |
-| Skill format mismatch    | Medium | Medium     | Validate against local skills  | Team  |
-| Installer omissions      | Medium | Low        | Cross-check install-vibeflow.md| Team  |
-| Documentation drift      | Low    | Low        | Update skill inventory         | Team  |
+| Risk                  | Impact | Likelihood | Mitigation                      | Owner |
+| --------------------- | ------ | ---------- | ------------------------------- | ----- |
+| Skill format mismatch | Medium | Medium     | Validate against local skills   | Team  |
+| Installer omissions   | Medium | Low        | Cross-check install-vibeflow.md | Team  |
+| Documentation drift   | Low    | Low        | Update skill inventory          | Team  |
 
 ---
 
