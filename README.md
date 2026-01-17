@@ -147,6 +147,10 @@ Simply run the install prompt again - it will check GitHub for the latest versio
 - **[Orchestrator Manual](docs/vibeflow/orchestrator-manual.md)** - Detailed usage guide
 - **[Development Guide](.github/copilot-instructions.md)** - For contributors to this repository
 
+## 🧩 Skills Included
+
+- **Mermaid.js v11** - Diagram syntax, configuration, CLI workflows, and integration patterns. See [docs/vibeflow/mermaidjs-v11-skill.md](docs/vibeflow/mermaidjs-v11-skill.md).
+
 ## 🛠️ Development
 
 This repository is the **source code** for Vibe Flow agents.

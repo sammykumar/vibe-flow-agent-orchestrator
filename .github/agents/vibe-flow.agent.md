@@ -71,6 +71,17 @@ Plan-Driven Development (PDD) orchestration workflow for managing multi-step dev
 .github/skills/orchestration/SKILL.md
 </location>
 </skill>
+<skill>
+<name>
+mermaidjs-v11
+</name>
+<description>
+Create diagrams and visualizations using Mermaid.js v11 syntax. Use when generating flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, user journeys, timelines, architecture diagrams, or any of 24+ diagram types. Supports JavaScript API integration, CLI rendering to SVG/PNG/PDF, theming, configuration, and accessibility features. Essential for documentation, technical diagrams, project planning, system architecture, and visual communication.
+</description>
+<location>
+.github/skills/mermaidjs-v11/SKILL.md
+</location>
+</skill>
 </available_skills>
 
 ## Orchestration Workflow (Incremental)
