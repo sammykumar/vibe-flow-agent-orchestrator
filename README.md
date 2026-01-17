@@ -12,7 +12,7 @@ Vibe Flow is a complete agent-based development framework that transforms how yo
 
 1. **Research** → Investigate and specify
 2. **Plan** → Break down into tasks
-3. **(Next)** Implement → Execute with verification
+3. **Implement** → Execute with verification
 4. **(Next)** Test → Validate with comprehensive QA
 5. **(Next)** Document → Update architecture & guides
 
@@ -33,6 +33,7 @@ graph TD
 
     subgraph "Subagents"
         RA[research-agent]
+        IA[implement-agent]
     end
 
     subgraph "PDD Artifacts"
@@ -41,7 +42,7 @@ graph TD
         F3[3-RESEARCH.md]
         F4[4-SPEC.md]
         F5[5-PLAN.md]
-        DOCS[docs/*.md]
+        CODE[repo changes]
     end
 
     NF & UF -->|Invokes| VF
@@ -57,17 +58,46 @@ graph TD
     RA -->|Updates| F2
     RA -.->|Signal| VF
 
-    VF -.->|Stop after Research| DOCS
+    VF -->|Delegate: 2. Implement| IA
+    IA -->|Reads| F5
+    IA -->|Updates| F2
+    IA -->|Changes| CODE
+    IA -.->|Signal| VF
+
+    VF -.->|Stop after Implement| CODE
 
     style VF fill:#8e44ad,stroke:#333,color:#fff
     style RA fill:#27ae60,stroke:#333,color:#fff
+    style IA fill:#2980b9,stroke:#333,color:#fff
 
     style F1 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F2 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F3 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F4 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F5 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
-    style DOCS fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+    style CODE fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
+```
+
+### Parallel subagents (v2, default read-only)
+
+In v2, the core workflow remains sequential: `vibe-flow` → `research-agent` → `implement-agent`. By default, `vibe-flow` can also spawn parallel **read-only research helpers** to scan code or gather context. These helpers never edit files or plan artifacts; they return notes to `vibe-flow`, which remains the single writer.
+
+```mermaid
+flowchart TD
+    subgraph "Core (Sequential)"
+        VF[vibe-flow] --> RA[research-agent]
+        RA --> IA[implement-agent]
+    end
+
+    subgraph "Default (Read-only parallel research helpers)"
+        VF -.->|spawn read-only helpers| PR[parallel read-only research helpers]
+        PR -.->|returns findings| VF
+    end
+
+    style VF fill:#8e44ad,stroke:#333,color:#fff
+    style RA fill:#27ae60,stroke:#333,color:#fff
+    style IA fill:#2980b9,stroke:#333,color:#fff
+    style PR fill:#f39c12,stroke:#333,color:#fff,stroke-dasharray: 4 2
 ```
 
 ## �🚀 Quick Start
@@ -89,9 +119,10 @@ Once installed, Vibe Flow provides:
 
 ### Specialized Subagents
 
-| Agent              | Role                          | Responsibilities                                                                                  |
-| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------- |
-| **research-agent** | Investigation & Specification | Analyzes codebases, authors technical specs, evaluates alternatives, creates implementation plans |
+| Agent               | Role                          | Responsibilities                                                                                  |
+| ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------- |
+| **research-agent**  | Investigation & Specification | Analyzes codebases, authors technical specs, evaluates alternatives, creates implementation plans |
+| **implement-agent** | Implementation & Verification | Executes plans, applies code changes, runs happy-path checks, logs results                        |
 
 ## 📂 Project Structure Created
 
@@ -101,7 +132,8 @@ After installation, your repository will have:
 .github/
 ├── agents/                    # All Vibe Flow agents
 │   ├── vibe-flow.agent.md    # Main orchestrator
-│   └── research.agent.md     # Research specialist
+│   ├── research.agent.md     # Research specialist
+│   └── implement.agent.md    # Implementation specialist
 └── plans/                     # Project memory (PDD)
     ├── todo/                  # Planned work
     ├── in-progress/           # Active tasks
@@ -129,7 +161,8 @@ The orchestrator will:
 
 1. ✅ Create a plan structure in `.github/plans/in-progress/`
 2. ✅ Delegate to **research-agent** for investigation
-3. ✅ Stop after research and prompt you to add the next subagent
+3. ✅ Delegate to **implement-agent** after approval
+4. ✅ Stop after implementation and prompt you to add the next subagent
 
 ## 🔄 Version Management
 

@@ -1,6 +1,6 @@
 # Vibe Flow – Multi-Agent AI Development Workflow (PDD)
 
-> **Incremental mode notice:** This repository currently ships only the orchestrator and research agent. The full multi-agent workflow described below remains the long-term target. Legacy full-suite agents are backed up in `.github/agents/v1/`.
+> **Incremental mode notice:** This repository currently ships only the orchestrator, research agent, and implement agent. The full multi-agent workflow described below remains the long-term target. Legacy full-suite agents are backed up in `.github/agents/v1/`.
 
 ## 1. Overview
 
@@ -13,7 +13,7 @@ This document defines the architecture and best-practice design for a VS Code Co
 
 Goals:
 
-- Enforce structured engineering (research agent (spec & plan) → implement agent → test agent → document agent)
+- Enforce structured engineering (research agent (spec & plan) → implement agent)
 - Reduce hallucinated implementation
 - Preserve project memory via filesystem artifacts
 - Enable scalable, auditable AI-assisted development
@@ -206,7 +206,7 @@ The following MCP servers provide essential capabilities for the Vibe Flow agent
 - **Package**: `playwright/*`
 - **Purpose**: E2E testing, UI behavior analysis, and browser automation
 - **Usage**:
-  - Test Agent: E2E test execution
+  - Future Test Agent (not installed in v2): E2E test execution
   - Research Agent: Analyze existing UI behavior
 - **Tools**:
   - `mcp_microsoft_pla_browser_run_code`: Execute browser automation scripts
@@ -218,7 +218,7 @@ The following MCP servers provide essential capabilities for the Vibe Flow agent
 - **Purpose**: Runtime debugging, network analysis, performance profiling
 - **Usage**:
   - Research Agent: Investigate runtime behavior and issues
-  - Test Agent: Validate performance and network activity
+  - Future Test Agent (not installed in v2): Validate performance and network activity
 - **Tools**:
   - `mcp_io_github_chr_get_network_request`: Inspect network requests
   - Console log access, DOM inspection, performance metrics
@@ -245,7 +245,7 @@ Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
 - **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
-- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement, Test, Document) sequentially by default, iterating as needed.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
@@ -267,18 +267,17 @@ Responsibilities:
     - `Implement` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
     - Orchestrator reviews `2-PROGRESS.md` and the implementation evidence.
     - If tasks remain or new tasks are discovered, repeat the loop.
-4.  **Quality Assurance**:
-    - Trigger `Test` sub-agent for comprehensive coverage (Positive/Negative paths).
-    - If failures occur, trigger `Implement` to fix (Refactor Loop).
-5.  **Finalization**:
-    - Trigger `Document` sub-agent to update project docs and READMEs.
-    - **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
+4.  **Stop after Implement**:
 
-### Parallel Subagent Policy (Opt-in)
+- Summarize results and ask whether to add the next subagent (Test/Document are future phases).
+- **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
 
-Parallel execution is optional and **OFF by default**. Enable it only when you can guarantee auditability and lock safety.
+### Parallel Subagent Policy (Default read-only helpers)
 
-- Only run subagents in parallel if they are **read-only** or **partitioned** with explicit, non-overlapping `lock-scope`.
+Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
+
+- Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
+- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
 - Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-PLAN.md`).
@@ -300,8 +299,6 @@ Parallel execution is optional and **OFF by default**. Enable it only when you c
 
 - research.agent
 - implement.agent
-- test.agent
-- document.agent
 
 ---
 
@@ -385,7 +382,7 @@ Produces:
 
 ---
 
-## Subagents: Test
+## Subagents: Test (Future, not installed in v2)
 
 ### Purpose
 
@@ -437,7 +434,7 @@ Produces:
 
 ---
 
-## Subagents: Document
+## Subagents: Document (Future, not installed in v2)
 
 ### Purpose
 
@@ -499,11 +496,11 @@ Status values map directly to the `{status}` segment in the PDD path:
 
 ### Status definitions
 
-| Status      | Meaning                                                                                           |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| todo        | Work identified but not yet started (**User creates only - agents never work on todo folders**)   |
-| in-progress | Actively being researched, implemented, tested, or documented (**Agents always initialize here**) |
-| finished    | Fully implemented, tested, and documented (**User manually moves here after verification**)       |
+| Status      | Meaning                                                                                                           |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| todo        | Work identified but not yet started (**User creates only - agents never work on todo folders**)                   |
+| in-progress | Actively being researched or implemented (**Agents always initialize here; future phases may add test/document**) |
+| finished    | Fully implemented (**Future: tested/documented once those subagents are installed**)                              |
 
 Status transitions are minimal: **Agents always initialize in `in-progress`**. The `todo` status is for user planning only. The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
@@ -516,8 +513,8 @@ Status transitions are minimal: **Agents always initialize in `in-progress`**. T
 - No code without plan
 - No plan without spec
 - No spec without research
-- No merge without tests
-- No release without docs
+- No merge without tests (future phase)
+- No release without docs (future phase)
 
 ---
 

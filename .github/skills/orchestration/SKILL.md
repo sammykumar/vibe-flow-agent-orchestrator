@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Plan → Execute → Test → Document). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, implementation, testing, and documentation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
+description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Plan → Implement). Use when managing complex feature development, bug fixes, or any work requiring coordination across research and implementation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
 ---
 
 # Orchestration & Delegation
@@ -15,9 +15,16 @@ This skill defines the orchestration workflow for managing complex development t
 
 **Progress-Driven**: The single source of truth is `.github/plans/in-progress/{major-area}/{task-name}/2-PROGRESS.md`.
 
-**Sequential Execution**: Call subagents sequentially until ALL tasks are declared complete in the progress file. Never call subagents in parallel.
+**Sequential Execution (write-capable)**: Call write-capable subagents sequentially until ALL tasks are declared complete in the progress file.
+
+**Parallel Read-only Helpers (default)**: Read-only research helpers may run in parallel by default; write-capable subagents remain sequential.
 
 **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative.
+
+## Subagent Roster (v2)
+
+- `research.agent` - Investigation & specification writing
+- `implement.agent` - Code changes & bug fixes
 
 ## PDD File Structure
 
@@ -39,15 +46,6 @@ Required files:
 - [spec-template.md](assets/spec-template.md)
 - [plan-template.md](assets/plan-template.md)
 
-**Additional Resources**: See [references/workflow.md](references/workflow.md) for detailed workflow patterns, decision points, and subagent invocation examples.
-
-## Subagent Roster
-
-- `research.agent` - Investigation & specification writing
-- `implement.agent` - Code changes & bug fixes
-- `test.agent` - QA & validation
-- `document.agent` - Documentation updates & architecture diagrams
-
 ## Orchestration Workflow
 
 ### STEP 1: Initialize
@@ -56,7 +54,7 @@ Required files:
 
 1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
 2. Initialize `1-OVERVIEW.md` (goals) and `2-PROGRESS.md` (logs)
-3. Initialize task tracking with phases: Research, Implement, Test, Document, Final Audit
+3. Initialize task tracking with phases: Research, Implement, Final Review
 
 **Existing Task:**
 
@@ -80,36 +78,23 @@ Required files:
 3. **Monitor**: Check progress file after each invocation
 4. **Update**: Mark tasks complete in task tracking as progress is made
 
-### STEP 4: Test Phase
+### STEP 4: Stop after Implement (v2)
 
-1. **Invoke**: Call test agent with absolute path to plan directory
-2. **On Failure**: Return to STEP 3 (Implementation) to fix issues
-3. **On Success**: Proceed to STEP 5
-4. **Update**: Mark Test phase complete in task tracking
+1. **Summarize**: Review `2-PROGRESS.md` for completion signals and evidence.
+2. **Confirm**: Ask the user whether to add the next subagent (Test/Document are future phases).
+3. **Update**: Mark Final Review complete in task tracking.
 
-### STEP 5: Documentation Phase
+**Final Review Checklist (v2):**
 
-1. **Invoke**: Call document agent with:
-   - Absolute path to plan directory
-   - Explicit instruction: "Generate architecture diagrams (Mermaid), update API docs, and sync the README"
-2. **Verify**: Document agent completed all documentation requirements
-3. **Update**: Mark Document phase complete in task tracking
-
-### STEP 6: Final Audit & Verification
-
-**Conduct final review:**
-
-1. **Progress Status**: `2-PROGRESS.md` shows `finished` and all subagent completion signals
-2. **Architecture Diagrams**: `docs/architecture/diagrams/` contains new/updated Mermaid diagrams if logic changed
-3. **README**: Updated to reflect new state
-4. **Cleanup**: All temporary POC or test files removed
-5. **Quality Gates**: All subagent-specific requirements met (test coverage, JSDoc, etc.)
+1. **Progress Status**: `2-PROGRESS.md` shows completion signals
+2. **README**: Updated to reflect new state (if required)
+3. **Cleanup**: All temporary POC or test files removed
 
 **Note**: Task folder remains in `in-progress/`. User manually moves to `.github/plans/finished/{major-area}/{task-name}/` after verification.
 
 **Report**: Notify user of completion and that they can archive the plan.
 
-**Update**: Mark Final Audit complete in task tracking.
+**Update**: Mark Final Review complete in task tracking.
 
 ## Subagent Invocation Pattern
 
@@ -118,7 +103,7 @@ When invoking a subagent:
 1. **Provide Context**: Include absolute path to active plan directory
 2. **Be Explicit**: Use plain language prompts, not code/pseudocode
 3. **Be Specific**: Clearly state what the subagent must accomplish
-4. **Sequential Only**: Wait for completion before invoking next subagent
+4. **Sequential for write-capable**: Wait for completion before invoking next write-capable subagent; read-only helpers may run in parallel
 
 Example invocation:
 
@@ -133,10 +118,10 @@ Create research findings, technical spec, and execution plan."
 **Stop immediately** if you consider:
 
 - Editing source code or fixing bugs yourself (ONLY subagents do this)
-- Running tests locally (ONLY test agent does this)
+- Running tests locally yourself (no test agent in v2)
 - Investigating file content to solve problems (ONLY research agent does this)
 - Skipping PDD structure creation
-- Calling multiple subagents in parallel (MUST be sequential)
+- Calling write-capable subagents in parallel or violating the single-writer rule
 
 ## Task Tracking Requirements
 
@@ -151,9 +136,7 @@ Phases to track:
 
 - Research
 - Implement (may have multiple tasks based on plan)
-- Test
-- Document
-- Final Audit
+- Final Review
 
 ## Failure Handling
 
@@ -174,9 +157,7 @@ Before marking task complete, verify:
 
 - [ ] All PDD files exist and are complete
 - [ ] Implementation complete per `5-PLAN.md`
-- [ ] Tests pass (test agent confirmed)
-- [ ] Architecture diagrams created/updated
-- [ ] API docs updated
+- [ ] Happy-path verification recorded by implement agent
 - [ ] README reflects changes
 - [ ] Cleanup performed (no temp files)
 - [ ] Progress file shows `finished` status

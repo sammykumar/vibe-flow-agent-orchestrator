@@ -60,12 +60,12 @@ You ONLY:
 - Do NOT edit project source files.
 - Use Playwright/Chrome DevTools only when a UI inspection is explicitly required.
 
-## Parallel Mode (Opt-in)
+## Parallel Mode (Default read-only helpers)
 
-Parallel mode is optional and OFF by default. Only operate in parallel when the orchestrator explicitly enables it and provides `subagent-id`, `scope`, `lock-scope`, and `expected-outputs`.
+Parallel read-only helpers are ON by default in v2. Only operate in parallel when invoked as a **read-only** research helper and the orchestrator provides `subagent-id`, `scope`, `lock-scope`, and `expected-outputs`.
 
 - If `scope` is **read-only**: do not edit any files (including `2-PROGRESS.md`); return findings to the orchestrator.
-- If `scope` is **write**: only edit files in `lock-scope`.
+- If `scope` is **write**: only edit files in `lock-scope` and run sequentially (no parallel write-capable runs in v2).
 - For any shared file, append under a dedicated heading: `### Subagent: {subagent-id}`.
 - Never edit `2-PROGRESS.md` during parallel runs; the orchestrator is the single writer.
 
@@ -79,7 +79,7 @@ Parallel mode is optional and OFF by default. Only operate in parallel when the 
 ## Research Workflow
 
 1. **Initialize**: Use #tool:todo for the research steps.
-2. **Map the codebase**: Use #tool:file_search, #tool:semantic_search, and #tool:read_file.
+2. **Map the codebase**: Use #tool:search and #tool:read/readFile for file access.
 3. **External docs (if needed)**: Use Context7 to validate third-party APIs.
 4. **Alternatives**: Compare at least two approaches in `3-RESEARCH.md`.
 5. **Spec**: Produce `4-SPEC.md` with clear requirements and constraints.

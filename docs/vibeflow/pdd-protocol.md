@@ -7,8 +7,8 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 ### Statuses
 
 - `todo`: Work identified but not yet started (**User creates only - agents never work on todo folders**).
-- `in-progress`: Actively being researched, implemented, tested. (**Agents always initialize here**).
-- `finished`: Fully implemented, tested, and documented. (**User manually moves here after verification**).
+- `in-progress`: Actively being researched or implemented. (**Agents always initialize here**; Test/Document are future phases).
+- `finished`: Fully implemented. (**User manually moves here after verification; future phases may add test/document**).
 
 ### Major Area Examples
 
@@ -38,20 +38,21 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 
 Agents produce documentation in: `docs/{major-area}/{doc}.md`
 
-### Workflow
+### Workflow (v2)
 
 1. **Initialize**: Create folder in `in-progress`.
 2. **Research**: Populate `3-RESEARCH.md` and `4-SPEC.md`.
 3. **Plan**: Create `5-PLAN.md`.
 4. **Implement**: Execute plan, logging to `2-PROGRESS.md`.
-5. **Test**: Verify implementation.
+5. **Stop after Implement**: Review results and decide whether to add future subagents (Test/Document).
 6. **Finish**: User manually moves the folder to `finished`.
 
-### Parallelism Policy (Opt-in)
+### Parallelism Policy (Default read-only helpers)
 
-Parallel execution is optional and **OFF by default**. Enable it only when you can guarantee auditability and lock safety.
+Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
-- Only run subagents in parallel if they are **read-only** or **partitioned** with explicit, non-overlapping `lock-scope`.
+- Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
+- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
 - Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-PLAN.md`).
@@ -67,19 +68,19 @@ Parallel execution is optional and **OFF by default**. Enable it only when you c
 
 ## Quick Index
 
-| Date       | Work Item       |  Status | Key outputs                      |
-| ---------- | --------------- | ------: | -------------------------------- |
-| 2026-01-12 | Implement Agent | ✅ PASS | API endpoint X, 3 files, 6 tests |
-| 2026-01-12 | Test Agent      | ✅ PASS | unit/api, 0 failures             |
+| Date       | Work Item           |  Status | Key outputs                      |
+| ---------- | ------------------- | ------: | -------------------------------- |
+| 2026-01-12 | Implement Agent     | ✅ PASS | API endpoint X, 3 files, 6 tests |
+| 2026-01-12 | Test Agent (future) | ✅ PASS | unit/api, 0 failures             |
 
 ---
 
-## Subagent Ledger (Parallel Runs Only)
+## Subagent Ledger (Parallel Runs)
 
-| subagent-id | purpose | scope | lock-scope | status | start | end   | outputs   |
-| ----------- | ------- | ----- | ---------- | ------ | ----- | ----- | --------- |
-| research-a1 | Specs   | write | 4-SPEC.md  | ✅     | 09:10 | 09:45 | 4-SPEC.md |
-| research-a2 | Plan    | write | 5-PLAN.md  | ✅     | 09:10 | 09:40 | 5-PLAN.md |
+| subagent-id | purpose           | scope     | lock-scope | status | start | end   | outputs        |
+| ----------- | ----------------- | --------- | ---------- | ------ | ----- | ----- | -------------- |
+| research-a1 | code scan         | read-only | n/a        | ✅     | 09:10 | 09:20 | findings to VF |
+| research-a2 | dependency review | read-only | n/a        | ✅     | 09:10 | 09:25 | findings to VF |
 
 > **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `2-PROGRESS.md` concurrently.
 
@@ -110,8 +111,8 @@ None
 
 ### Next Steps
 
-- Test agent to run E2E tests
-- Document agent to update API reference
+- Future test agent to run E2E tests
+- Future document agent to update API reference
 
 ---
 ```

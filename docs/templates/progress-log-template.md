@@ -12,12 +12,12 @@
 
 ---
 
-## Subagent Ledger (Parallel Runs Only)
+## Subagent Ledger (Parallel Runs)
 
-| subagent-id | purpose | scope | lock-scope | status | start | end   | outputs   |
-| ----------- | ------- | ----- | ---------- | ------ | ----- | ----- | --------- |
-| research-a1 | Specs   | write | 4-SPEC.md  | ✅     | 09:10 | 09:45 | 4-SPEC.md |
-| research-a2 | Plan    | write | 5-PLAN.md  | ✅     | 09:10 | 09:40 | 5-PLAN.md |
+| subagent-id | purpose           | scope     | lock-scope | status | start | end   | outputs        |
+| ----------- | ----------------- | --------- | ---------- | ------ | ----- | ----- | -------------- |
+| research-a1 | code scan         | read-only | n/a        | ✅     | 09:10 | 09:20 | findings to VF |
+| research-a2 | dependency review | read-only | n/a        | ✅     | 09:10 | 09:25 | findings to VF |
 
 > **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `2-PROGRESS.md` concurrently.
 
