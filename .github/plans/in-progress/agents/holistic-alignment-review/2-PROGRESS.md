@@ -4,11 +4,11 @@
 
 ## Task Tracking
 
-| Phase        | Status      | Notes                                                                                 |
-| ------------ | ----------- | ------------------------------------------------------------------------------------- |
-| Research     | complete    | Findings recorded in 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md                              |
-| Implement    | in progress | Tasks 1-2 completed (installer/update alignment, status semantics + plan-only prompt) |
-| Final Review | pending     | Awaiting implementation phase                                                         |
+| Phase        | Status      | Notes                                                                                                             |
+| ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| Research     | complete    | Findings recorded in 3-RESEARCH.md, 4-SPEC.md, 5-PLAN.md                                                          |
+| Implement    | in progress | Tasks 1-3 completed (installer/update alignment, status semantics + plan-only prompt, skills inventory alignment) |
+| Final Review | pending     | Awaiting implementation phase                                                                                     |
 
 ## Subagent Ledger
 
@@ -17,6 +17,7 @@
 | 2026-01-17 | research-agent  | write | complete | Findings and recommendations documented               |
 | 2026-01-17 | implement-agent | docs  | complete | Task 1 installer/update alignment for implement agent |
 | 2026-01-17 | implement-agent | docs  | complete | Task 2 status semantics + plan-only prompt alignment  |
+| 2026-01-17 | implement-agent | docs  | complete | Task 3 skills inventory alignment + packaging updates |
 
 ## 2026-01-17 — Research Agent
 
@@ -64,3 +65,19 @@
 
 - Clarified `todo` as plan-only/manual status; reinforced `in-progress` for active agent work across docs and orchestration guidance.
 - Added plan-only prompt and included it in install/update prompt recommendations (including settings snippet).
+
+## 2026-01-17 — Implement Agent
+
+### Summary
+
+| Field         | Value                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| Goal          | Task 3: align skills inventory docs and package skills-creator                                     |
+| Status        | ✅ complete                                                                                        |
+| Files Updated | README.md, .github/copilot-instructions.md, install-vibeflow.md, update-vibeflow.md, 2-PROGRESS.md |
+| Verification  | `git status -sb`                                                                                   |
+
+### Notes
+
+- Updated README and copilot instructions to list all shipped skills, including skills-creator.
+- Added skills-creator fetch and verification steps to install/update prompts.
