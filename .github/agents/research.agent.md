@@ -60,6 +60,15 @@ You ONLY:
 - Do NOT edit project source files.
 - Use Playwright/Chrome DevTools only when a UI inspection is explicitly required.
 
+## Parallel Mode (Opt-in)
+
+Parallel mode is optional and OFF by default. Only operate in parallel when the orchestrator explicitly enables it and provides `subagent-id`, `scope`, `lock-scope`, and `expected-outputs`.
+
+- If `scope` is **read-only**: do not edit any files (including `2-PROGRESS.md`); return findings to the orchestrator.
+- If `scope` is **write**: only edit files in `lock-scope`.
+- For any shared file, append under a dedicated heading: `### Subagent: {subagent-id}`.
+- Never edit `2-PROGRESS.md` during parallel runs; the orchestrator is the single writer.
+
 ## Required Outputs
 
 - `3-RESEARCH.md`: Evidence-backed findings and alternatives
