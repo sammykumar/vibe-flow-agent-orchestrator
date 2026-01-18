@@ -2,7 +2,7 @@
 
 These instructions install Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-<!-- version: 2.0.0 -->
+<!-- version: 2.2.1 -->
 
 This bootstrap script is for **initial installation**. For updates, use `update-vibeflow.md`.
 
@@ -143,9 +143,9 @@ Download the incremental agent set to `.github/agents`:
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
-- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
-- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
-- Fetch [plan-only.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/plan-only.prompt.md) to `.github/prompts/plan-only.prompt.md`
+- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
+- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
+- Fetch [plan-only.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/plan-only.prompt.md) to `.github/prompts/plan-only.prompt.md`
 
 ### 7.2 Fetch Skills
 
@@ -380,7 +380,7 @@ Vibe Flow (Plan-Driven Development) is now active.
 
 **New Structure**:
 
-- `.github/agents/vibe-flow.agent.md` (Orchestrator v1.2.1 - single source of truth for version)
+- `.github/agents/vibe-flow.agent.md` (Orchestrator v${LATEST_TAG} - single source of truth for version)
 - `.github/copilot-instructions.md` (Repo-wide Copilot instructions)
 - `docs/vibeflow/pdd:
 

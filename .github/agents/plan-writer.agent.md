@@ -76,7 +76,7 @@ Parallel read-only helpers are ON by default in v2. Only operate in parallel whe
 
 1. **Initialize**: Use #tool:todo for the planning steps.
 2. **Read**: Review `3-RESEARCH.md` and `4-SPEC.md` for scope, constraints, and acceptance criteria.
-3. **Draft**: Create `5-TASKS.md` using the plan template (`docs/templates/plan-template.md`).
+3. **Draft**: Create `5-TASKS.md` using the plan template (`.github/skills/orchestration/assets/plan-template.md`).
 4. **Verify**: Ensure tasks include file lists, verification steps, and dependencies.
 5. **Handoff**: Update `2-PROGRESS.md` and signal completion.
 

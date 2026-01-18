@@ -2,7 +2,7 @@
 
 These instructions update the Vibe Flow (Plan-Driven Development) agents and documentation to the latest version.
 
-<!-- version: 2.0.0 -->
+<!-- version: 2.2.1 -->
 
 Process overview:
 
@@ -39,9 +39,9 @@ Download the incremental agent set to `.github/agents`. Existing agents will be 
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
-- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
-- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
-- Fetch [plan-only.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/prompts/plan-only.prompt.md) to `.github/prompts/plan-only.prompt.md`
+- Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
+- Fetch [update-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/update-feature.prompt.md) to `.github/prompts/update-feature.prompt.md`
+- Fetch [plan-only.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/plan-only.prompt.md) to `.github/prompts/plan-only.prompt.md`
 
 ### 3.1 Fetch Skills
 
@@ -62,6 +62,23 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 **Workflow Patterns (references/):**
 
 - Fetch [orchestration/references/workflow.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/references/workflow.md) to `.github/skills/orchestration/references/workflow.md`
+
+**Research Skill:**
+
+- Fetch `.github/skills/research/SKILL.md` to `.github/skills/research/SKILL.md`
+- Fetch `.github/skills/research/assets/research-template.md` to `.github/skills/research/assets/research-template.md`
+- Fetch `.github/skills/research/assets/spec-template.md` to `.github/skills/research/assets/spec-template.md`
+- Fetch `.github/skills/research/assets/progress-log-template.md` to `.github/skills/research/assets/progress-log-template.md`
+- Fetch `.github/skills/research/references/REFERENCE.md` to `.github/skills/research/references/REFERENCE.md`
+
+**Mermaid.js v11 Skill:**
+
+- Fetch `.github/skills/mermaidjs-v11/SKILL.md` to `.github/skills/mermaidjs-v11/SKILL.md`
+- Fetch `.github/skills/mermaidjs-v11/references/diagram-types.md` to `.github/skills/mermaidjs-v11/references/diagram-types.md`
+- Fetch `.github/skills/mermaidjs-v11/references/configuration.md` to `.github/skills/mermaidjs-v11/references/configuration.md`
+- Fetch `.github/skills/mermaidjs-v11/references/cli-usage.md` to `.github/skills/mermaidjs-v11/references/cli-usage.md`
+- Fetch `.github/skills/mermaidjs-v11/references/integration.md` to `.github/skills/mermaidjs-v11/references/integration.md`
+- Fetch `.github/skills/mermaidjs-v11/references/examples.md` to `.github/skills/mermaidjs-v11/references/examples.md`
 
 **Skills Creator Skill:**
 
@@ -93,6 +110,17 @@ After fetching, verify the following files exist and were updated:
 - `.github/skills/orchestration/assets/spec-template.md`
 - `.github/skills/orchestration/assets/plan-template.md`
 - `.github/skills/orchestration/references/workflow.md`
+- `.github/skills/research/SKILL.md`
+- `.github/skills/research/assets/research-template.md`
+- `.github/skills/research/assets/spec-template.md`
+- `.github/skills/research/assets/progress-log-template.md`
+- `.github/skills/research/references/REFERENCE.md`
+- `.github/skills/mermaidjs-v11/SKILL.md`
+- `.github/skills/mermaidjs-v11/references/diagram-types.md`
+- `.github/skills/mermaidjs-v11/references/configuration.md`
+- `.github/skills/mermaidjs-v11/references/cli-usage.md`
+- `.github/skills/mermaidjs-v11/references/integration.md`
+- `.github/skills/mermaidjs-v11/references/examples.md`
 - `.github/skills/skills-creator/SKILL.md`
 - `.github/skills/skills-creator/LICENSE.txt`
 - `.github/skills/skills-creator/references/output-patterns.md`
@@ -174,6 +202,8 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 - .github/skills/orchestration/SKILL.md
 - .github/skills/orchestration/assets/ (5 PDD templates)
 - .github/skills/orchestration/references/workflow.md
+- .github/skills/research/SKILL.md
+- .github/skills/mermaidjs-v11/SKILL.md
 
 All agent profiles, prompts, and skills are now in sync with the official repository.
 ```

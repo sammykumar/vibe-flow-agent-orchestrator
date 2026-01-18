@@ -14,6 +14,7 @@ Ask the user to confirm before proceeding:
 This will remove:
 - All agents from .github/agents/
 - All prompts from .github/prompts/
+- All skills from .github/skills/
 - Vibe Flow documentation from docs/vibeflow/
 - AGENTS.md file
 
@@ -40,6 +41,11 @@ fi
 # Backup prompt files
 if [ -d ".github/prompts" ]; then
     cp -r .github/prompts "$BACKUP_DIR/"
+fi
+
+# Backup skills
+if [ -d ".github/skills" ]; then
+    cp -r .github/skills "$BACKUP_DIR/"
 fi
 
 # Backup Vibe Flow docs
@@ -94,7 +100,20 @@ else
 fi
 ```
 
-## 6. Remove AGENTS.md
+## 6. Remove Skills
+
+Delete the `.github/skills/` directory:
+
+```bash
+if [ -d ".github/skills" ]; then
+    rm -rf .github/skills
+    echo "✓ Removed .github/skills/"
+else
+    echo "ℹ️ .github/skills/ not found"
+fi
+```
+
+## 7. Remove AGENTS.md
 
 ```bash
 if [ -f "AGENTS.md" ]; then
@@ -105,7 +124,7 @@ else
 fi
 ```
 
-## 7. Handle Plans Directory
+## 8. Handle Plans Directory
 
 Ask the user what to do with existing plans:
 
@@ -146,7 +165,7 @@ if [ -d ".github/plans" ]; then
 fi
 ```
 
-## 8. Restore Previous Instructions (Optional)
+## 9. Restore Previous Instructions (Optional)
 
 Check if `docs/unused-instructions.md` exists and offer to restore it:
 
@@ -165,7 +184,7 @@ if [ -f "docs/unused-instructions.md" ]; then
 fi
 ```
 
-## 9. Clean Up Empty Directories
+## 10. Clean Up Empty Directories
 
 Remove empty directories created by Vibe Flow:
 
@@ -194,7 +213,7 @@ if [ -d ".github" ] && [ -z "$(ls -A .github)" ]; then
 fi
 ```
 
-## 10. Git Operations (Optional)
+## 11. Git Operations (Optional)
 
 Ask if the user wants to commit the changes:
 
@@ -210,7 +229,7 @@ git commit -m "chore: uninstall Vibe Flow agents"
 echo "✓ Changes committed"
 ```
 
-## 11. Report Completion
+## 12. Report Completion
 
 ```markdown
 # Vibe Flow Uninstalled
@@ -220,6 +239,8 @@ Vibe Flow has been successfully removed from this repository.
 **Removed:**
 
 - ✓ .github/agents/ (all agent files)
+- ✓ .github/prompts/ (all prompt files)
+- ✓ .github/skills/ (all skill files)
 - ✓ docs/vibeflow/ (Vibe Flow documentation)
 - ✓ AGENTS.md
 
