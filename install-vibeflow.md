@@ -2,7 +2,7 @@
 
 These instructions install Vibe Flow (Plan-Driven Development) in a codebase. They produce a structured documentation set, agent profiles, and PDD workflow scaffolding.
 
-<!-- version: 2.2.1 -->
+<!-- version: 2.2.2 -->
 
 This bootstrap script is for **initial installation**. For updates, use `update-vibeflow.md`.
 

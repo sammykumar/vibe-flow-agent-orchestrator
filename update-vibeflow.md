@@ -2,7 +2,7 @@
 
 These instructions update the Vibe Flow (Plan-Driven Development) agents and documentation to the latest version.
 
-<!-- version: 2.2.1 -->
+<!-- version: 2.2.2 -->
 
 Process overview:
 
