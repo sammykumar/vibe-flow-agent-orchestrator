@@ -31,7 +31,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 2.2.0 -->
+<!-- version: 2.2.1 -->
 
 # Vibe Flow Orchestrator (Incremental Mode)
 
@@ -74,6 +74,17 @@ Plan-Driven Development (PDD) orchestration workflow for managing multi-step dev
 </skill>
 <skill>
 <name>
+research
+</name>
+<description>
+Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md, 2-PROGRESS.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required.
+</description>
+<location>
+.github/skills/research/SKILL.md
+</location>
+</skill>
+<skill>
+<name>
 mermaidjs-v11
 </name>
 <description>
@@ -81,6 +92,17 @@ Create diagrams and visualizations using Mermaid.js v11 syntax. Use when generat
 </description>
 <location>
 .github/skills/mermaidjs-v11/SKILL.md
+</location>
+</skill>
+<skill>
+<name>
+skills-creator
+</name>
+<description>
+Create, package, and validate new Vibe Flow skills. Use when you need to extend the agent's capabilities with new domain-specific knowledge or tools.
+</description>
+<location>
+.github/skills/skills-creator/SKILL.md
 </location>
 </skill>
 </available_skills>
