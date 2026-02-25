@@ -41,7 +41,8 @@ docs/
 ├── agents/
 │   ├── vibe-flow.agent.md
 │   ├── research.agent.md
-│   └── implement.agent.md
+│   ├── implement.agent.md
+│   └── test-agent.agent.md
 ├── skills/
 │   └── orchestration/
 │       └── SKILL.md
@@ -139,6 +140,7 @@ Download the incremental agent set to `.github/agents`:
 - Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
 - Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
+- Fetch [test-agent.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/test-agent.agent.md) to `.github/agents/test-agent.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
 - Fetch [new-feature.prompt.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/prompts/new-feature.prompt.md) to `.github/prompts/new-feature.prompt.md`
@@ -200,6 +202,7 @@ After fetching, verify the following files exist:
 - `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 2.0.0 -->`)
 - `.github/agents/research.agent.md`
 - `.github/agents/implement.agent.md`
+- `.github/agents/test-agent.agent.md`
 
 **Skills:**
 
