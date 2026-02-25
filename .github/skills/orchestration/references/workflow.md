@@ -50,8 +50,9 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
    - `3-RESEARCH.md` (investigation findings)
    - `4-SPEC.md` (technical specification)
 
-4. Review with user (if changes are critical):
-   - Present `4-SPEC.md` for approval
+4. Review with user via #tool:vscode/askQuestions:
+   - Summarize findings and ask whether to proceed with planning
+   - This keeps the PDD cycle in a single chat turn
 
 5. Update task tracking:
    - Mark "Research" phase as completed
@@ -71,8 +72,9 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 3. Verify outputs exist:
    - `5-TASKS.md` (implementation tasks)
 
-4. Review with user (if changes are critical):
-   - Present `5-TASKS.md` for review
+4. Review with user via #tool:vscode/askQuestions:
+   - Summarize task plan and ask whether to proceed with implementation
+   - This keeps the PDD cycle in a single chat turn
 
 5. Update task tracking:
    - Mark "Planning" phase as completed

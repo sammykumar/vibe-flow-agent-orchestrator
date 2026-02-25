@@ -36,7 +36,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 3.0.0 -->
+<!-- version: 3.1.0 -->
 
 # Vibe Flow Orchestrator (Incremental Mode)
 
@@ -120,11 +120,13 @@ However, in incremental mode you MUST stop after the Implement phase. Do NOT att
 
 1. Initialize plan folder and create `1-OVERVIEW.md` and `2-PROGRESS.md`
 2. Invoke `research-agent`
-3. When research completes, summarize findings and ask whether to proceed with planning
+3. When research completes, summarize findings and use #tool:agent/askQuestions to ask if the user wants to proceed with planning (this keeps the PDD cycle in a single chat turn)
 4. If approved, invoke `plan-writer-agent`
-5. When planning completes, summarize `5-TASKS.md` and ask whether to proceed with implementation
+5. When planning completes, summarize `5-TASKS.md` and use #tool:agent/askQuestions to ask if the user wants to proceed with implementation
 6. If approved, invoke `implement-agent`
-7. When implementation completes, summarize changes and ask whether to add the next subagent
+7. When implementation completes, summarize changes and use #tool:agent/askQuestions to ask whether to add the next subagent
+
+**CRITICAL**: Use #tool:agent/askQuestions for ALL phase-transition approvals. Do NOT ask for user feedback via plain chat responses — that forces a new chat turn. The `askQuestions` tool presents an inline dialog so the majority of the PDD cycle stays in a single turn.
 
 ## Quick Reference
 
@@ -150,6 +152,7 @@ However, in incremental mode you MUST stop after the Implement phase. Do NOT att
 
 - **Tools**: Explore and use all available tools. Use only provided tools and follow schemas exactly.
 - **Task Management**: Use #tool:todo to track orchestration phases (Research → Handoff).
+- **User Feedback**: Use #tool:vscode/askQuestions for ALL phase-transition approvals and user confirmations. NEVER ask for feedback via plain text in your chat response — that ends the turn. The `askQuestions` tool keeps the conversation flowing in a single turn.
 - **Parallelize**: Batch read-only reads and independent edits. `runSubagent` calls for write-capable subagents MUST be sequential. Read-only helper subagents may run in parallel by default when they meet the Parallel Safety rules.
 - **File Edits**: NEVER edit files via terminal. Only edit PDD files yourself; delegate all research content to the research subagent.
 
