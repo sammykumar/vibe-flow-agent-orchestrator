@@ -1,6 +1,6 @@
 # Vibe Flow – Multi-Agent AI Development Workflow (PDD)
 
-> **Incremental mode notice:** This repository currently ships only the orchestrator, research agent, plan-writer agent, and implement agent. The full multi-agent workflow described below remains the long-term target. Legacy full-suite agents are backed up in `.github/agents/v1/`.
+> **Incremental mode notice:** This repository currently ships the orchestrator, research agent, and implement agent. The full multi-agent workflow described below remains the long-term target.
 
 ## 1. Overview
 
@@ -13,7 +13,7 @@ This document defines the architecture and best-practice design for a VS Code Co
 
 Goals:
 
-- Enforce structured engineering (research agent → plan-writer agent → implement agent)
+- Enforce structured engineering (research agent → implement agent)
 - Reduce hallucinated implementation
 - Preserve project memory via filesystem artifacts
 - Enable scalable, auditable AI-assisted development
