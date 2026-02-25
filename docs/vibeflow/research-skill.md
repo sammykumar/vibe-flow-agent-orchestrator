@@ -3,9 +3,9 @@
 The `research` skill performs repository research and scaffolds the PDD artifacts
 for a plan:
 
-- `3-RESEARCH.md` — findings, alternatives, and evidence
-- `4-SPEC.md` — technical specification and acceptance criteria
-- `2-PROGRESS.md` — progress updates
+- `1-RESEARCH.md` — findings, alternatives, and evidence
+- `2-SPEC.md` — specification and acceptance criteria
+- `3-PROGRESS.md` — progress updates
 
 Quickstart
 

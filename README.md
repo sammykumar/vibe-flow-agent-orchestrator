@@ -37,32 +37,28 @@ graph TD
     end
 
     subgraph "PDD Artifacts"
-        F1[1-OVERVIEW.md]
-        F2[2-PROGRESS.md]
-        F3[3-RESEARCH.md]
-        F4[4-SPEC.md]
-        F5[5-TASKS.md]
+        F1[1-RESEARCH.md]
+        F2[2-SPEC.md]
+        F3[3-PROGRESS.md]
         CODE[repo changes]
     end
 
     NF & UF -->|Invokes| VF
 
     %% Orchestrator inits
-    VF -->|Creates| F1
-    VF -->|Creates| F2
+    VF -->|Creates| F3
 
     VF -->|Delegate: 1. Research| RA
-    RA -->|Creates/Updates| F3
-    RA -->|Creates/Updates| F4
-    RA -->|Updates| F2
+    RA -->|Creates/Updates| F1
+    RA -->|Creates/Updates| F2
+    RA -->|Updates| F3
     RA -.->|Signal| VF
 
-    VF -->|Creates/Updates: 2. Planning| F5
-    VF -->|Updates| F2
+    VF -->|Updates: 2. Planning| F3
 
     VF -->|Delegate: 3. Implement| IA
-    IA -->|Reads| F5
-    IA -->|Updates| F2
+    IA -->|Reads| F3
+    IA -->|Updates| F3
     IA -->|Changes| CODE
     IA -.->|Signal| VF
 
@@ -75,8 +71,6 @@ graph TD
     style F1 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F2 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F3 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
-    style F4 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
-    style F5 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style CODE fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
 ```
 
@@ -161,7 +155,7 @@ The orchestrator will:
 
 1. ✅ Create a plan structure in `.github/plans/in-progress/`
 2. ✅ Delegate to **research-agent** for investigation
-3. ✅ Author `5-TASKS.md` in **vibe-flow** from research/spec outputs
+3. ✅ Author task breakdown in `3-PROGRESS.md` in **vibe-flow** from research/spec outputs
 4. ✅ Delegate to **implement-agent** after approval
 5. ✅ Stop after implementation and prompt you to add the next subagent
 

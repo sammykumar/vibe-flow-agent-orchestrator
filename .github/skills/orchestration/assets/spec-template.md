@@ -1,10 +1,40 @@
-# Technical Specification: {Feature Name}
+# Specification: {Feature Name}
 
 **Date**: YYYY-MM-DD  
 **Agent**: research.agent  
 **Status**: Draft / Under Review / Approved / Implemented  
 **Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`  
-**Based on Research**: `3-RESEARCH.md`
+**Based on Research**: `1-RESEARCH.md`
+
+---
+
+## 0. Business Context
+
+### Problem Statement
+
+{What problem are we solving? What pain points exist?}
+
+### User Impact
+
+{Who benefits from this work? How will their experience improve?}
+
+### Success Criteria
+
+- [ ] {Measurable criterion 1}
+- [ ] {Measurable criterion 2}
+- [ ] {Measurable criterion 3}
+
+### Scope
+
+**In Scope:**
+
+- {Item 1}
+- {Item 2}
+
+**Out of Scope:**
+
+- {Item 1}
+- {Item 2}
 
 ---
 
@@ -597,8 +627,8 @@ newFunction(param: string): Promise<Result>
 
 ### Related Documentation
 
-- [Research Document](3-RESEARCH.md)
-- [Implementation Tasks](5-TASKS.md)
+- [Research Document](1-RESEARCH.md)
+- [Progress & Tasks](3-PROGRESS.md)
 - [{Other relevant doc}](path/to/doc.md)
 
 ### External Resources

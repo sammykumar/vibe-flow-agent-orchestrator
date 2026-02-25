@@ -13,7 +13,7 @@ This skill defines the orchestration workflow for managing complex development t
 
 **Audit Mindset**: Before closing any task, verify every subagent fulfilled its duties (test coverage, diagrams, documentation).
 
-**Progress-Driven**: The single source of truth is `.github/plans/in-progress/{major-area}/{task-name}/2-PROGRESS.md`.
+**Progress-Driven**: The single source of truth is `.github/plans/in-progress/{major-area}/{task-name}/3-PROGRESS.md`.
 
 **Sequential Execution (write-capable)**: Call write-capable subagents sequentially until ALL tasks are declared complete in the progress file.
 
@@ -32,19 +32,15 @@ All work tracked in: `.github/plans/{status}/{major-area}/{task-name}/`
 
 Required files:
 
-- `1-OVERVIEW.md` - Business goal and context
-- `2-PROGRESS.md` - **Single source of truth** for current state
-- `3-RESEARCH.md` - Investigation findings
-- `4-SPEC.md` - Technical specification
-- `5-TASKS.md` - Step-by-step execution tasks
+- `1-RESEARCH.md` - Investigation findings
+- `2-SPEC.md` - Business context + technical specification
+- `3-PROGRESS.md` - **Single source of truth** for tasks and current state
 
 **Templates**: PDD file templates are available in [assets/](assets/) directory:
 
-- [overview-template.md](assets/overview-template.md)
-- [progress-log-template.md](assets/progress-log-template.md)
 - [research-template.md](assets/research-template.md)
 - [spec-template.md](assets/spec-template.md)
-- [plan-template.md](assets/plan-template.md)
+- [progress-log-template.md](assets/progress-log-template.md)
 
 ## Orchestration Workflow
 
@@ -53,12 +49,12 @@ Required files:
 **New Task:**
 
 1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
-2. Initialize `1-OVERVIEW.md` (goals) and `2-PROGRESS.md` (logs)
+2. Initialize `3-PROGRESS.md` (tasks and progress log)
 3. Initialize task tracking with phases: Research, Orchestrator Planning, Implement, Final Review
 
 **Existing Task:**
 
-1. Read `2-PROGRESS.md` to determine current state
+1. Read `3-PROGRESS.md` to determine current state
 2. Resume task tracking state
 
 **Critical**: All agent-created tasks must be created in `in-progress/` directory. Use `todo/` only for user plan-only/manual planning requests (no execution).
@@ -67,33 +63,33 @@ Required files:
 
 1. **Invoke**: Call research agent with absolute path to plan directory
 2. **Wait**: For signal "Research phase complete"
-3. **Verify**: Confirm `3-RESEARCH.md` and `4-SPEC.md` exist
+3. **Verify**: Confirm `1-RESEARCH.md` and `2-SPEC.md` exist
 4. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with orchestrator-authored planning (keeps the PDD cycle in a single chat turn)
 5. **Update**: Mark Research phase complete in task tracking
 
 ### STEP 3: Orchestrator Planning Phase
 
-1. **Author**: Orchestrator writes `5-TASKS.md` directly from `3-RESEARCH.md` and `4-SPEC.md`
-2. **Verify**: Confirm `5-TASKS.md` includes file lists, verification steps, and dependencies
+1. **Author**: Orchestrator writes task breakdown into `3-PROGRESS.md` directly from `1-RESEARCH.md` and `2-SPEC.md`
+2. **Verify**: Confirm `3-PROGRESS.md` includes task list with file targets, verification steps, and dependencies
 3. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with implementation (keeps the PDD cycle in a single chat turn)
 4. **Update**: Mark Orchestrator Planning phase complete in task tracking
 
 ### STEP 4: Implementation Phase
 
 1. **Invoke**: Call implement agent with absolute path to plan directory
-2. **Loop**: Continue calling until `2-PROGRESS.md` shows all tasks complete
+2. **Loop**: Continue calling until `3-PROGRESS.md` shows all tasks complete
 3. **Monitor**: Check progress file after each invocation
 4. **Update**: Mark tasks complete in task tracking as progress is made
 
 ### STEP 5: Stop after Implement (v2)
 
-1. **Summarize**: Review `2-PROGRESS.md` for completion signals and evidence.
+1. **Summarize**: Review `3-PROGRESS.md` for completion signals and evidence.
 2. **Confirm**: Use `#tool:agent/askQuestions` to ask the user whether to add the next subagent (Test/Document are future phases).
 3. **Update**: Mark Final Review complete in task tracking.
 
 **Final Review Checklist (v2):**
 
-1. **Progress Status**: `2-PROGRESS.md` shows completion signals
+1. **Progress Status**: `3-PROGRESS.md` shows completion signals
 2. **README**: Updated to reflect new state (if required)
 3. **Cleanup**: All temporary POC or test files removed
 
@@ -164,7 +160,7 @@ Phases to track:
 Before marking task complete, verify:
 
 - [ ] All PDD files exist and are complete
-- [ ] Implementation complete per `5-TASKS.md`
+- [ ] Implementation complete per task list in `3-PROGRESS.md`
 - [ ] Happy-path verification recorded by implement agent
 - [ ] README reflects changes
 - [ ] Cleanup performed (no temp files)

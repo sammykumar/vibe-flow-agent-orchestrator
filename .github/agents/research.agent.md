@@ -81,25 +81,25 @@ If any requirement, scope, or acceptance criteria is unclear, STOP and send a cl
 
 Parallel read-only helpers are ON by default in v2. Only operate in parallel when invoked as a **read-only** research helper and the orchestrator provides `subagent-id`, `scope`, `lock-scope`, and `expected-outputs`.
 
-- If `scope` is **read-only**: do not edit any files (including `2-PROGRESS.md`); return findings to the orchestrator.
+- If `scope` is **read-only**: do not edit any files (including `3-PROGRESS.md`); return findings to the orchestrator.
 - If `scope` is **write**: only edit files in `lock-scope` and run sequentially (no parallel write-capable runs in v2).
 - For any shared file, append under a dedicated heading: `### Subagent: {subagent-id}`.
-- Never edit `2-PROGRESS.md` during parallel runs; the orchestrator is the single writer.
+- Never edit `3-PROGRESS.md` during parallel runs; the orchestrator is the single writer.
 
 ## Required Outputs
 
-- `3-RESEARCH.md`: Evidence-backed findings and alternatives
-- `4-SPEC.md`: Technical specification (APIs, data structures, verification plan)
-- `2-PROGRESS.md`: Research status updates (set to `research_complete` at handoff)
+- `1-RESEARCH.md`: Evidence-backed findings and alternatives
+- `2-SPEC.md`: Technical specification (APIs, data structures, verification plan)
+- `3-PROGRESS.md`: Research status updates (set to `research_complete` at handoff)
 
 ## Research Workflow
 
 1. **Initialize**: Use #tool:todo for the research steps.
 2. **Map the codebase**: Use #tool:search and #tool:read/readFile for file access.
 3. **External docs (if needed)**: Use Context7 to validate third-party APIs.
-4. **Alternatives**: Compare at least two approaches in `3-RESEARCH.md`.
-5. **Spec**: Produce `4-SPEC.md` with clear requirements and constraints.
-6. **Handoff**: Update `2-PROGRESS.md` and signal completion for plan-writer.
+4. **Alternatives**: Compare at least two approaches in `1-RESEARCH.md`.
+5. **Spec**: Produce `2-SPEC.md` with clear requirements and constraints.
+6. **Handoff**: Update `3-PROGRESS.md` and signal completion for plan-writer.
 
 ## Handoff Signal
 

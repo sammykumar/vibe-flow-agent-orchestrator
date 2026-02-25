@@ -28,13 +28,11 @@ Use the **plan-only prompt** to create a `todo/` plan without starting research 
 
 ### Required Files
 
-| File            | Purpose                                     |
-| --------------- | ------------------------------------------- |
-| `1-OVERVIEW.md` | Business context + goals                    |
-| `2-PROGRESS.md` | Append-only execution log (Source of Truth) |
-| `3-RESEARCH.md` | Investigation + Alternative Matrix          |
-| `4-SPEC.md`     | Tech Spec + Impact Analysis                 |
-| `5-TASKS.md`    | Step-by-step implementation tasks           |
+| File            | Purpose                                                 |
+| --------------- | ------------------------------------------------------- |
+| `1-RESEARCH.md` | Investigation + Alternative Matrix                      |
+| `2-SPEC.md`     | Business context + Tech Spec + Impact Analysis          |
+| `3-PROGRESS.md` | Task plan + append-only execution log (Source of Truth) |
 
 ### Documentation Output
 
@@ -43,9 +41,9 @@ Agents produce documentation in: `docs/{major-area}/{doc}.md`
 ### Workflow (v2)
 
 1. **Initialize**: Create folder in `in-progress`.
-2. **Research**: Populate `3-RESEARCH.md` and `4-SPEC.md`.
-3. **Orchestrator Planning**: `vibe-flow` creates `5-TASKS.md` from `3-RESEARCH.md` and `4-SPEC.md`.
-4. **Implement**: Execute tasks, logging to `2-PROGRESS.md`.
+2. **Research**: Populate `1-RESEARCH.md` and `2-SPEC.md`.
+3. **Orchestrator Planning**: `vibe-flow` writes task breakdown into `3-PROGRESS.md` from `1-RESEARCH.md` and `2-SPEC.md`.
+4. **Implement**: Execute tasks, logging to `3-PROGRESS.md`.
 5. **Stop after Implement**: Review results and decide whether to add future subagents (Test/Document).
 6. **Finish**: User manually moves the folder to `finished`.
 
@@ -56,10 +54,10 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
 - Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
-- **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
-- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-TASKS.md`).
+- **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `3-PROGRESS.md`).
 - Summarize each subagent’s outputs separately before synthesis.
-- Update the Subagent Ledger section in `2-PROGRESS.md` for each parallel run.
+- Update the Subagent Ledger section in `3-PROGRESS.md` for each parallel run.
 
 ## Progress Log Format (Recommended)
 
@@ -84,7 +82,7 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 | research-a1 | code scan         | read-only | n/a        | ✅     | 09:10 | 09:20 | findings to VF |
 | research-a2 | dependency review | read-only | n/a        | ✅     | 09:10 | 09:25 | findings to VF |
 
-> **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `2-PROGRESS.md` concurrently.
+> **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `3-PROGRESS.md` concurrently.
 
 ## 2026-01-12 — Implement Agent
 
@@ -121,7 +119,7 @@ None
 
 ## Alternative Matrix (Research Phase)
 
-When researching solutions, document alternatives in `3-RESEARCH.md`:
+When researching solutions, document alternatives in `1-RESEARCH.md`:
 
 ```markdown
 ## Alternative Matrix
@@ -135,7 +133,7 @@ When researching solutions, document alternatives in `3-RESEARCH.md`:
 
 ## Impact Analysis (Spec Phase)
 
-Include in `4-SPEC.md` to identify ripple effects:
+Include in `2-SPEC.md` to identify ripple effects:
 
 ```markdown
 ## Impact Analysis

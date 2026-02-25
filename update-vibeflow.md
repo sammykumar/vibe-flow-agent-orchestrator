@@ -11,7 +11,7 @@ Process overview:
 3. Fetch Agent Profiles
 4. Refresh Repo-Specific Skills (Registry + Local)
 5. Configure VS Code
-6. Migrate 5-PLAN.md → 5-TASKS.md
+6. Migrate 5-file PDD → 3-file PDD
 7. Report to the user
 
 ## 1. Check for existing installation
@@ -52,11 +52,9 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 
 **PDD Templates (assets/):**
 
-- Fetch [orchestration/assets/overview-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/overview-template.md) to `.github/skills/orchestration/assets/overview-template.md`
 - Fetch [orchestration/assets/progress-log-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/progress-log-template.md) to `.github/skills/orchestration/assets/progress-log-template.md`
 - Fetch [orchestration/assets/research-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/research-template.md) to `.github/skills/orchestration/assets/research-template.md`
 - Fetch [orchestration/assets/spec-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/spec-template.md) to `.github/skills/orchestration/assets/spec-template.md`
-- Fetch [orchestration/assets/plan-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/plan-template.md) to `.github/skills/orchestration/assets/plan-template.md`
 
 **Workflow Patterns (references/):**
 
@@ -102,11 +100,9 @@ After fetching, verify the following files exist and were updated:
 **Skills:**
 
 - `.github/skills/orchestration/SKILL.md`
-- `.github/skills/orchestration/assets/overview-template.md`
 - `.github/skills/orchestration/assets/progress-log-template.md`
 - `.github/skills/orchestration/assets/research-template.md`
 - `.github/skills/orchestration/assets/spec-template.md`
-- `.github/skills/orchestration/assets/plan-template.md`
 - `.github/skills/orchestration/references/workflow.md`
 - `.github/skills/research/SKILL.md`
 - `.github/skills/research/assets/research-template.md`
@@ -172,13 +168,17 @@ You MUST ensure the `.vscode/settings.json` file is configured to suggest the PD
 }
 ```
 
-## 6. Migration: 5-PLAN.md → 5-TASKS.md
+## 6. Migration: 5-file PDD → 3-file PDD
 
-Existing plan directories may still use `5-PLAN.md`. Migrate them to the new task file name:
+Existing plan directories may still use the old 5-file structure (`1-OVERVIEW.md`, `2-PROGRESS.md`, `3-RESEARCH.md`, `4-SPEC.md`, `5-TASKS.md`). Migrate them to the new 3-file structure:
 
-1. For each plan folder in `.github/plans/**/` that contains `5-PLAN.md`, rename it to `5-TASKS.md`.
-2. Update any internal references within the plan folder (e.g., `2-PROGRESS.md`, `4-SPEC.md`, `1-OVERVIEW.md`) to point to `5-TASKS.md`.
-3. Ensure future planning uses `5-TASKS.md` only; do not recreate `5-PLAN.md`.
+1. For each plan folder in `.github/plans/**/`:
+   - If `3-RESEARCH.md` exists, rename it to `1-RESEARCH.md`.
+   - If `4-SPEC.md` exists, rename it to `2-SPEC.md`. If `1-OVERVIEW.md` also exists, prepend its business context into the top of `2-SPEC.md`, then delete `1-OVERVIEW.md`.
+   - If `5-TASKS.md` exists, merge its task list into `2-PROGRESS.md` (add a `## Task Plan` section at the top), then rename `2-PROGRESS.md` to `3-PROGRESS.md` and delete `5-TASKS.md`.
+   - If only `2-PROGRESS.md` exists (no `5-TASKS.md`), rename it to `3-PROGRESS.md`.
+2. Update any internal cross-references within each plan folder to use the new file names.
+3. Handle `5-PLAN.md` → same as `5-TASKS.md` above (legacy name).
 
 ## 7. Report to the User
 
@@ -197,7 +197,7 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 - .github/prompts/new-feature.prompt.md
 - .github/prompts/update-feature.prompt.md
 - .github/skills/orchestration/SKILL.md
-- .github/skills/orchestration/assets/ (5 PDD templates)
+- .github/skills/orchestration/assets/ (3 PDD templates)
 - .github/skills/orchestration/references/workflow.md
 - .github/skills/research/SKILL.md
 - .github/skills/mermaidjs-v11/SKILL.md

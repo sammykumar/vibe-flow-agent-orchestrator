@@ -301,7 +301,7 @@ graph LR
 
 ### Next Steps
 
-1. ✅ Research complete → Create `4-SPEC.md`
+1. ✅ Research complete → Create `2-SPEC.md`
 2. ⏭️ Get stakeholder approval on recommendation
 3. ⏭️ Proceed to specification phase
 
