@@ -1,6 +1,6 @@
 # Vibe Flow – Multi-Agent AI Development Workflow (PDD)
 
-> **Incremental mode notice:** This repository currently ships the orchestrator, research agent, and implement agent. The full multi-agent workflow described below remains the long-term target.
+> This repository ships the orchestrator, research agent, implement agent, and test agent. The document agent described below remains a future target.
 
 ## 1. Overview
 
@@ -13,7 +13,7 @@ This document defines the architecture and best-practice design for a VS Code Co
 
 Goals:
 
-- Enforce structured engineering (research agent → implement agent)
+- Enforce structured engineering (research agent → implement agent → test agent)
 - Reduce hallucinated implementation
 - Preserve project memory via filesystem artifacts
 - Enable scalable, auditable AI-assisted development
@@ -204,7 +204,7 @@ The following MCP servers provide essential capabilities for the Vibe Flow agent
 - **Package**: `playwright/*`
 - **Purpose**: E2E testing, UI behavior analysis, and browser automation
 - **Usage**:
-  - Future Test Agent (not installed in v2): E2E test execution
+  - Test Agent: E2E test execution
   - Research Agent: Analyze existing UI behavior
 - **Tools**:
   - `mcp_microsoft_pla_browser_run_code`: Execute browser automation scripts
@@ -216,7 +216,7 @@ The following MCP servers provide essential capabilities for the Vibe Flow agent
 - **Purpose**: Runtime debugging, network analysis, performance profiling
 - **Usage**:
   - Research Agent: Investigate runtime behavior and issues
-  - Future Test Agent (not installed in v2): Validate performance and network activity
+  - Test Agent: Validate performance and network activity
 - **Tools**:
   - `mcp_io_github_chr_get_network_request`: Inspect network requests
   - Console log access, DOM inspection, performance metrics
@@ -243,7 +243,7 @@ Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
 - **Progress Tracking**: Initialize and maintain the `3-PROGRESS.md` file as the source of truth for the task lifecycle.
-- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement, Test) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
@@ -272,9 +272,16 @@ Responsibilities:
     - `Implement` picks the most important task from `3-PROGRESS.md`, implements it, and performs a "Happy Path" test.
     - Orchestrator reviews `3-PROGRESS.md` and the implementation evidence.
     - If tasks remain or new tasks are discovered, repeat the loop.
-5.  **Stop after Implement**:
+5.  **Test Phase**:
 
-- Summarize results and ask whether to add the next subagent (Test/Document are future phases).
+- Invoke `Test` sub-agent to write and run tests proving the implementation works.
+- If test-agent reports implementation bugs, re-invoke `Implement` to fix, then re-invoke `Test`.
+- Loop implement→test until all tests pass.
+- A plan is NOT considered complete until the test agent confirms all tests pass.
+
+6.  **Final Review**:
+
+- Summarize results and proceed to Final Review.
 - **NOTE**: The Orchestrator DOES NOT automatically move the folder to `finished`. The user performs this move manually after final verification.
 
 ### Parallel Subagent Policy (Default read-only helpers)
@@ -282,7 +289,7 @@ Responsibilities:
 Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
-- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
+- Write-capable subagents (including `research-agent`, `implement-agent`, and `test-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
 - Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `3-PROGRESS.md`).
@@ -304,6 +311,7 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 
 - research.agent
 - implement.agent
+- test.agent
 
 ---
 
@@ -403,55 +411,59 @@ Produces:
 
 ---
 
-## Subagents: Test (Future, not installed in v2)
+## Subagents: Test
 
 ### Purpose
 
-**The QA Specialist.** Operates as a relentless quality assurance expert focused on comprehensive coverage, automation, and reliability. This agent moves beyond simple TDD to orchestrate a full testing pyramid (Unit > Integration > E2E).
+**The QA Specialist.** Discovers the repo's test tooling and conventions, then writes targeted tests (unit, integration, E2E) to prove the implemented functionality works. Adapts to whatever test framework the repo uses — Vitest, Jest, Playwright, Cypress, pytest, cargo test, etc.
 
 Produces:
 
-- **Unit Tests**: High-coverage isolated tests for all new logic.
-- **Integration Tests**: Verification of component interactions.
-- **E2E Scenarios**: User-flow validation (Playwright/Cypress).
-- **Test Plans**: Documented strategy for data, coverage, and automation.
-- **Quality Metrics**: Reports on coverage, flakiness, and performance.
+- **Test files**: Unit, integration, and/or E2E tests appropriate to the repo
+- **Test results**: Pass/fail evidence logged in `3-PROGRESS.md`
+- **Rejection signals**: If tests reveal implementation bugs, rejects back to orchestrator with specifics
 
 ### Responsibilities
 
-1.  **Unit Testing**: Write granular tests for every function/class introduced in `4-SPEC.md`. Mock all external dependencies.
-2.  **Integration Testing**: Verify contract adherence between modules (especially API endpoints and Database layers).
-3.  **E2E Testing**: Implement browser-based or full-system flows for critical user journeys.
-4.  **Automation & CI**: Ensure tests run deterministically in CI environments.
-5.  **Data Management**: Precise control of test data fixtures/factories to ensure reproducibility.
+1.  **Discovery**: Identify test framework, runner, config, conventions, and existing patterns before writing any tests.
+2.  **Unit Testing**: Write granular tests for every function/class introduced per `2-SPEC.md`. Mock external dependencies.
+3.  **Integration Testing**: Verify contract adherence between modules (API endpoints, service layers, data flows).
+4.  **E2E Testing**: Write browser-based or full-system flows ONLY when the repo has an E2E framework configured.
+5.  **Convention Compliance**: Match existing test patterns, file structure, and naming conventions.
 
 ### Tools / MCP
 
 - **Core**: `read_file`, `replace_string_in_file`, `create_file`, `file_search`
-- **Execution**: `run_in_terminal` (for running test suites like `jest`, `vitest`, `playwright`), `get_terminal_output`
+- **Execution**: `run_in_terminal` (for running test suites like `vitest`, `jest`, `playwright`, `pytest`), `get_terminal_output`
 - **Analysis**: `get_errors`, `list_code_usages`
-- **Browsing**: `open_simple_browser`, `playwright/*` (MCP), `chrome-devtools` (MCP)
+- **Context**: `io.github.upstash/context7/*`, `io.github.chromedevtools/chrome-devtools-mcp/*`
 
 ### Workflow Modes
 
-1.  **Spec-to-Test (Red Phase)**:
-    - Analyze `4-SPEC.md`.
-    - Generate failing unit tests for defined interfaces.
-    - _Output_: `X failures` confirmed.
-2.  **Implementation Verification (Green Phase)**:
-    - Run tests against `Implement` agent's output.
-    - Fix minor implementation bugs directly or reject task back to `Implement`.
-3.  **Critical Path (E2E)**:
-    - Generate Playwright/Cypress scripts for the "Happy Path" defined in the Spec.
+1.  **Discovery (always first)**:
+    - Scan for test config, dependencies, existing test files, and conventions.
+    - Record findings in `3-PROGRESS.md`.
+    - If no test framework detected, report to orchestrator.
+2.  **Spec-to-Test**:
+    - Analyze `2-SPEC.md` acceptance criteria.
+    - Write tests covering every acceptance criterion.
+3.  **Implementation Verification**:
+    - Run tests against implement agent's output.
+    - Fix test code if tests fail due to test bugs.
+    - Reject back to orchestrator if tests reveal implementation bugs.
+4.  **Critical Path (E2E)**:
+    - Generate Playwright/Cypress scripts for critical user journeys (only if E2E framework exists).
     - Verify against running local server.
 
 ### Rules
 
-- **Coverage Targets**: Aim for >80% branch coverage on new logic.
+- **Discovery First**: NEVER write tests before discovering the repo's test tooling.
+- **No Implementation Fixes**: If a test reveals an implementation bug, reject back to orchestrator. Do NOT fix source code.
+- **No Framework Installation**: If no test framework exists, report to orchestrator. Do not install dependencies.
 - **Isolation**: Unit tests MUST NOT make network/db calls.
 - **Idempotency**: Tests must clean up their own state; order of execution should not matter.
-- **Rationale Required**: For every E2E scenario, explain _why_ it is critical.
 - **No Flakes**: If a test fails intermittently, it is a bug in the test. Fix strictness.
+- **Convention Compliance**: Follow the repo's existing test patterns and file structure.
 
 ---
 
@@ -520,8 +532,8 @@ Status values map directly to the `{status}` segment in the PDD path:
 | Status      | Meaning                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------- |
 | todo        | Plan-only/manual requests (**User creates only - agents never work on todo folders**)                             |
-| in-progress | Actively being researched or implemented (**Agents always initialize here; future phases may add test/document**) |
-| finished    | Fully implemented (**Future: tested/documented once those subagents are installed**)                              |
+| in-progress | Actively being researched, implemented, or tested (**Agents always initialize here**) |
+| finished    | Fully implemented and tested (**Future: documented once that subagent is installed**)    |
 
 Status transitions are minimal: **Agents always initialize in `in-progress`**. The `todo` status is for plan-only/manual requests (use the plan-only prompt). The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
@@ -534,7 +546,7 @@ Status transitions are minimal: **Agents always initialize in `in-progress`**. T
 - No code without plan
 - No plan without spec
 - No spec without research
-- No merge without tests (future phase)
+- No merge without tests
 - No release without docs (future phase)
 
 ---

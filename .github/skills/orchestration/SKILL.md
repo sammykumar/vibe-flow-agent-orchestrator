@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Orchestrator Planning → Implement). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, and implementation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
+description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Orchestrator Planning → Implement → Test). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, implementation, and testing phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
 ---
 
 # Orchestration & Delegation
@@ -21,10 +21,11 @@ This skill defines the orchestration workflow for managing complex development t
 
 **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative.
 
-## Subagent Roster (v2)
+## Subagent Roster
 
 - `research.agent` - Investigation & specification writing
 - `implement.agent` - Code changes & bug fixes
+- `test.agent` - QA: writes and runs tests to prove functionality
 
 ## PDD File Structure
 
@@ -50,7 +51,7 @@ Required files:
 
 1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
 2. Initialize `3-PROGRESS.md` (tasks and progress log)
-3. Initialize task tracking with phases: Research, Orchestrator Planning, Implement, Final Review
+3. Initialize task tracking with phases: Research, Orchestrator Planning, Implement, Test, Final Review
 
 **Existing Task:**
 
@@ -81,17 +82,27 @@ Required files:
 3. **Monitor**: Check progress file after each invocation
 4. **Update**: Mark tasks complete in task tracking as progress is made
 
-### STEP 5: Stop after Implement (v2)
+### STEP 5: Test Phase
 
-1. **Summarize**: Review `3-PROGRESS.md` for completion signals and evidence.
-2. **Confirm**: Use `#tool:agent/askQuestions` to ask the user whether to add the next subagent (Test/Document are future phases).
+1. **Invoke**: Call test agent with absolute path to plan directory and summary of what was implemented
+2. **Wait**: For signal "Testing complete" or "Testing blocked"
+3. **If blocked**: Re-invoke implement agent to fix reported bugs, then re-invoke test agent
+4. **Loop**: Continue implement→test cycle until all tests pass
+5. **Verify**: Confirm `3-PROGRESS.md` contains test results with pass/fail evidence
+6. **Update**: Mark Test phase complete in task tracking
+
+### STEP 6: Final Review
+
+1. **Summarize**: Review `3-PROGRESS.md` for completion signals, implementation evidence, AND passing test evidence.
+2. **Gate**: A plan is NOT complete unless the test agent confirms all tests pass.
 3. **Update**: Mark Final Review complete in task tracking.
 
-**Final Review Checklist (v2):**
+**Final Review Checklist:**
 
 1. **Progress Status**: `3-PROGRESS.md` shows completion signals
-2. **README**: Updated to reflect new state (if required)
-3. **Cleanup**: All temporary POC or test files removed
+2. **Tests Passing**: Test agent confirmed all tests pass with evidence logged
+3. **README**: Updated to reflect new state (if required)
+4. **Cleanup**: All temporary POC or test files removed
 
 **Note**: Task folder remains in `in-progress/`. User manually moves to `.github/plans/finished/{major-area}/{task-name}/` after verification.
 
@@ -121,10 +132,11 @@ Create research findings, technical spec, and execution plan."
 **Stop immediately** if you consider:
 
 - Editing source code or fixing bugs yourself (ONLY subagents do this)
-- Running tests locally yourself (no test agent in v2)
+- Running tests locally yourself (delegate to test-agent)
 - Investigating file content to solve problems (ONLY research agent does this)
 - Skipping PDD structure creation
 - Calling write-capable subagents in parallel or violating the single-writer rule
+- Skipping the Test phase after implementation
 
 ## Task Tracking Requirements
 
@@ -140,6 +152,7 @@ Phases to track:
 - Research
 - Orchestrator Planning
 - Implement (may have multiple tasks based on plan)
+- Test
 - Final Review
 
 ## Failure Handling
@@ -162,6 +175,8 @@ Before marking task complete, verify:
 - [ ] All PDD files exist and are complete
 - [ ] Implementation complete per task list in `3-PROGRESS.md`
 - [ ] Happy-path verification recorded by implement agent
+- [ ] Test agent wrote and ran tests with all passing
+- [ ] Test evidence (pass/fail counts, coverage) logged in `3-PROGRESS.md`
 - [ ] README reflects changes
 - [ ] Cleanup performed (no temp files)
 - [ ] Progress file shows `finished` status

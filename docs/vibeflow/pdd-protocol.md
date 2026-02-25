@@ -7,8 +7,8 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 ### Statuses
 
 - `todo`: Work identified but not yet started (**User creates only - agents never work on todo folders**).
-- `in-progress`: Actively being researched or implemented. (**Agents always initialize here**; Test/Document are future phases).
-- `finished`: Fully implemented. (**User manually moves here after verification; future phases may add test/document**).
+- `in-progress`: Actively being researched, implemented, or tested. (**Agents always initialize here**).
+- `finished`: Fully implemented and tested. (**User manually moves here after verification**).
 
 Use the **plan-only prompt** to create a `todo/` plan without starting research or implementation. Active agent work always starts in `in-progress`.
 
@@ -38,21 +38,23 @@ Use the **plan-only prompt** to create a `todo/` plan without starting research 
 
 Agents produce documentation in: `docs/{major-area}/{doc}.md`
 
-### Workflow (v2)
+### Workflow
 
 1. **Initialize**: Create folder in `in-progress`.
 2. **Research**: Populate `1-RESEARCH.md` and `2-SPEC.md`.
 3. **Orchestrator Planning**: `vibe-flow` writes task breakdown into `3-PROGRESS.md` from `1-RESEARCH.md` and `2-SPEC.md`.
 4. **Implement**: Execute tasks, logging to `3-PROGRESS.md`.
-5. **Stop after Implement**: Review results and decide whether to add future subagents (Test/Document).
-6. **Finish**: User manually moves the folder to `finished`.
+5. **Test**: `test-agent` writes and runs tests proving functionality works. Logs results to `3-PROGRESS.md`.
+6. **If tests fail due to implementation bugs**: Return to Implement, fix, then re-run Test.
+7. **Final Review**: Plan is complete only when all tests pass.
+8. **Finish**: User manually moves the folder to `finished`.
 
 ### Parallelism Policy (Default read-only helpers)
 
 Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
-- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
+- Write-capable subagents (including `research-agent`, `implement-agent`, and `test-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
 - Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `3-PROGRESS.md`).
