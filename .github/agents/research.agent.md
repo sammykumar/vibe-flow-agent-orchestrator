@@ -99,7 +99,7 @@ Parallel read-only helpers are ON by default in v2. Only operate in parallel whe
 3. **External docs (if needed)**: Use Context7 to validate third-party APIs.
 4. **Alternatives**: Compare at least two approaches in `1-RESEARCH.md`.
 5. **Spec**: Produce `2-SPEC.md` with clear requirements and constraints.
-6. **Handoff**: Update `3-PROGRESS.md` and signal completion for plan-writer.
+6. **Handoff**: Update `3-PROGRESS.md` and signal completion.
 
 ## Handoff Signal
 

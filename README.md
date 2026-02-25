@@ -107,8 +107,6 @@ flowchart TD
 
 Once installed, Vibe Flow provides:
 
-> Legacy full-suite agents are backed up in `.github/agents/v1/`.
-
 ### Main Orchestrator
 
 - **@vibe-flow** - The master orchestrator that manages the PDD lifecycle, delegates to subagents, and maintains project state
