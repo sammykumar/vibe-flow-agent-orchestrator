@@ -247,7 +247,7 @@ Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
 - **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
-- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Plan Writer, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
+- **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
 
@@ -266,9 +266,9 @@ Responsibilities:
 - Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
 - Review specification with the user.
 
-3.  **Planning Phase**:
+3.  **Planning Phase (Orchestrator-owned)**:
 
-- Call `Plan Writer` sub-agent to produce `5-TASKS.md`.
+- Author `5-TASKS.md` directly from `3-RESEARCH.md` and `4-SPEC.md`.
 - Review task plan with the user.
 
 4.  **Implementation Loop**:
@@ -286,7 +286,7 @@ Responsibilities:
 Parallel read-only helpers are ON by default in v2. Use parallelism only for read-only research helpers; write-capable subagents must remain sequential.
 
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
-- Write-capable subagents (including the primary `research-agent`, `plan-writer-agent`, and `implement-agent`) MUST run sequentially.
+- Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
 - **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
 - Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-TASKS.md`).
@@ -352,11 +352,11 @@ Updates:
 
 ---
 
-## Subagents: Plan Writer
+## Orchestrator-Owned Planning
 
 ### Purpose
 
-Task plan authoring.
+`vibe-flow` is the single source of truth for task planning and PDD lifecycle management.
 
 Produces:
 
@@ -364,6 +364,7 @@ Produces:
 
 Updates:
 
+- 1-OVERVIEW.md
 - 2-PROGRESS.md
 
 ---

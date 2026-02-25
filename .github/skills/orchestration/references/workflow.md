@@ -50,7 +50,7 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
    - `3-RESEARCH.md` (investigation findings)
    - `4-SPEC.md` (technical specification)
 
-4. Review with user via #tool:vscode/askQuestions:
+4. Review with user via #tool:agent/askQuestions:
    - Summarize findings and ask whether to proceed with planning
    - This keeps the PDD cycle in a single chat turn
 
@@ -60,24 +60,22 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 
 ### STEP 3: Planning Phase
 
-**Sequential Process (write-capable) - Do NOT parallelize write-capable subagent calls**
+**Orchestrator-Owned Process**
 
 ```markdown
-1. Invoke plan-writer.agent:
-   - Provide absolute path to plan directory
-   - Request: "Create the implementation task plan from 3-RESEARCH.md and 4-SPEC.md."
+1. Author `5-TASKS.md` directly in `vibe-flow`:
+   - Use `3-RESEARCH.md` and `4-SPEC.md` as the source of truth
+   - Include ordered tasks, file targets, verification steps, and dependencies
 
-2. Wait for completion signal: "Plan complete"
-
-3. Verify outputs exist:
+2. Verify outputs exist:
    - `5-TASKS.md` (implementation tasks)
 
-4. Review with user via #tool:vscode/askQuestions:
+3. Review with user via #tool:agent/askQuestions:
    - Summarize task plan and ask whether to proceed with implementation
    - This keeps the PDD cycle in a single chat turn
 
-5. Update task tracking:
-   - Mark "Planning" phase as completed
+4. Update task tracking:
+   - Mark "Orchestrator Planning" phase as completed
 ```
 
 ### STEP 4: Implementation Phase
@@ -108,7 +106,7 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 ```markdown
 1. Review `2-PROGRESS.md` for completion signals and evidence.
 2. Summarize results for the user.
-3. Ask whether to add the next subagent (Test/Document are future phases).
+3. Ask via #tool:agent/askQuestions whether to add the next subagent (Test/Document are future phases).
 4. Mark the Final Review phase as completed.
 ```
 
@@ -227,10 +225,10 @@ Task Completion:
 "Investigate the authentication system in the codebase. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Analyze the current implementation, evaluate OAuth 2.0 integration options, and create research findings and a technical spec."
 ```
 
-**Plan Writer Agent**:
+**Orchestrator Planning Step**:
 
 ```
-"Create the implementation task plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Use 3-RESEARCH.md and 4-SPEC.md to produce 5-TASKS.md and update 2-PROGRESS.md."
+"Read 3-RESEARCH.md and 4-SPEC.md in the plan directory and author 5-TASKS.md with ordered, verifiable implementation tasks. Then use #tool:agent/askQuestions to request approval before implementation."
 ```
 
 **Implement Agent**:
@@ -286,6 +284,10 @@ Phase: Initialize
 Phase: Research
 
 - Mark "Research" as in-progress → Invoke research.agent → Mark completed
+
+Phase: Orchestrator Planning
+
+- Mark "Orchestrator Planning" as in-progress → Author 5-TASKS.md in vibe-flow → Mark completed
 
 Phase: Implement
 

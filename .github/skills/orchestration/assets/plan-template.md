@@ -1,7 +1,7 @@
 # Task Plan: {Feature Name}
 
 **Date**: YYYY-MM-DD  
-**Agent**: plan-writer.agent  
+**Agent**: vibe-flow  
 **Status**: Draft / Approved / In Progress / Complete  
 **Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`  
 **Based on Spec**: `4-SPEC.md`
