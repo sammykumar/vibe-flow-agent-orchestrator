@@ -1,7 +1,9 @@
 ---
 name: implement-agent
 description: "Implementation specialist. Executes plans autonomously, writes code, performs verification, and drives projects to completion."
-infer: true
+user-invocable: false
+disable-model-invocation: false
+
 tools:
   [
     "execute",
@@ -17,7 +19,6 @@ tools:
     "web",
     "agent",
     "io.github.upstash/context7/*",
-    "playwright/*",
     "io.github.chromedevtools/chrome-devtools-mcp/*",
     "todo",
   ]

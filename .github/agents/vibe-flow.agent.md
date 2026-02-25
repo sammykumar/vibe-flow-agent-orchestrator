@@ -1,37 +1,42 @@
 ---
 name: vibe-flow
 description: "The Orchestrator agent for incremental Plan-Driven Development (research + implement baseline)."
-infer: false
+user-invocable: true
+disable-model-invocation: true
+agents: []
 tools:
   [
-    "vscode/openSimpleBrowser",
-    "vscode/runCommand",
-    "execute/testFailure",
-    "execute/getTerminalOutput",
-    "execute/runTask",
-    "execute/createAndRunTask",
-    "execute/runInTerminal",
-    "execute/runTests",
-    "read/problems",
-    "read/readFile",
-    "read/terminalSelection",
-    "read/terminalLastCommand",
-    "read/getTaskOutput",
-    "edit/createDirectory",
-    "edit/createFile",
-    "edit/editFiles",
-    "search",
-    "web",
-    "agent",
-    "io.github.upstash/context7/*",
-    "playwright/*",
+    vscode/memory,
+    vscode/runCommand,
+    execute/testFailure,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    execute/runTask,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    read/problems,
+    read/readFile,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    read/getTaskOutput,
+    agent,
+    edit/createDirectory,
+    edit/createFile,
+    edit/editFiles,
+    edit/rename,
+    search,
+    web,
+    browser,
     "io.github.chromedevtools/chrome-devtools-mcp/*",
-    "todo",
+    "io.github.upstash/context7/*",
+    vscode.mermaid-chat-features/renderMermaidDiagram,
+    todo,
   ]
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 2.2.3 -->
+<!-- version: 3.0.0 -->
 
 # Vibe Flow Orchestrator (Incremental Mode)
 

@@ -1,32 +1,17 @@
 ---
 name: plan-writer-agent
 description: "Task plan author. Produces 5-TASKS.md from research and spec artifacts."
-infer: true
+user-invocable: false
+disable-model-invocation: false
 tools:
   [
-    "vscode/openSimpleBrowser",
-    "vscode/runCommand",
-    "execute/testFailure",
-    "execute/getTerminalOutput",
-    "execute/runTask",
-    "execute/createAndRunTask",
-    "execute/runInTerminal",
-    "execute/runTests",
-    "read/problems",
-    "read/readFile",
-    "read/terminalSelection",
-    "read/terminalLastCommand",
-    "read/getTaskOutput",
-    "edit/createDirectory",
-    "edit/createFile",
-    "edit/editFiles",
-    "search",
-    "web",
-    "agent",
-    "io.github.upstash/context7/*",
-    "playwright/*",
-    "io.github.chromedevtools/chrome-devtools-mcp/*",
-    "todo",
+    vscode/memory,
+    read,
+    agent,
+    edit,
+    search,
+    vscode.mermaid-chat-features/renderMermaidDiagram,
+    todo,
   ]
 argument-hint: "Describe the planning task or feature to break down into executable tasks."
 ---
