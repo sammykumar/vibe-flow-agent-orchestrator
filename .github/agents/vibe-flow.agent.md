@@ -152,7 +152,7 @@ However, in incremental mode you MUST stop after the Implement phase. Do NOT att
 
 - **Tools**: Explore and use all available tools. Use only provided tools and follow schemas exactly.
 - **Task Management**: Use #tool:todo to track orchestration phases (Research → Handoff).
-- **User Feedback**: Use #tool:vscode/askQuestions for ALL phase-transition approvals and user confirmations. NEVER ask for feedback via plain text in your chat response — that ends the turn. The `askQuestions` tool keeps the conversation flowing in a single turn.
+- **User Feedback**: Use #tool:agent/askQuestions for ALL phase-transition approvals and user confirmations. NEVER ask for feedback via plain text in your chat response — that ends the turn. The `askQuestions` tool keeps the conversation flowing in a single turn.
 - **Parallelize**: Batch read-only reads and independent edits. `runSubagent` calls for write-capable subagents MUST be sequential. Read-only helper subagents may run in parallel by default when they meet the Parallel Safety rules.
 - **File Edits**: NEVER edit files via terminal. Only edit PDD files yourself; delegate all research content to the research subagent.
 
