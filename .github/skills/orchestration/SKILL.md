@@ -69,7 +69,7 @@ Required files:
 1. **Invoke**: Call research agent with absolute path to plan directory
 2. **Wait**: For signal "Research phase complete"
 3. **Verify**: Confirm `3-RESEARCH.md` and `4-SPEC.md` exist
-4. **Review**: Ask user to review `4-SPEC.md` if changes are critical
+4. **Review**: Use `#tool:vscode/askQuestions` to ask the user whether to proceed with planning (keeps the PDD cycle in a single chat turn)
 5. **Update**: Mark Research phase complete in task tracking
 
 ### STEP 3: Planning Phase
@@ -77,7 +77,7 @@ Required files:
 1. **Invoke**: Call plan-writer agent with absolute path to plan directory
 2. **Wait**: For signal "Plan complete"
 3. **Verify**: Confirm `5-TASKS.md` exists
-4. **Review**: Ask user to review `5-TASKS.md` if changes are critical
+4. **Review**: Use `#tool:vscode/askQuestions` to ask the user whether to proceed with implementation (keeps the PDD cycle in a single chat turn)
 5. **Update**: Mark Planning phase complete in task tracking
 
 ### STEP 4: Implementation Phase
@@ -90,7 +90,7 @@ Required files:
 ### STEP 5: Stop after Implement (v2)
 
 1. **Summarize**: Review `2-PROGRESS.md` for completion signals and evidence.
-2. **Confirm**: Ask the user whether to add the next subagent (Test/Document are future phases).
+2. **Confirm**: Use `#tool:vscode/askQuestions` to ask the user whether to add the next subagent (Test/Document are future phases).
 3. **Update**: Mark Final Review complete in task tracking.
 
 **Final Review Checklist (v2):**
