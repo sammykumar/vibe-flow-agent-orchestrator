@@ -35,7 +35,6 @@ Download the incremental agent set to `.github/agents`. Existing agents will be 
 
 - Fetch [vibe-flow.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/vibe-flow.agent.md) to `.github/agents/vibe-flow.agent.md`
 - Fetch [research.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/research.agent.md) to `.github/agents/research.agent.md`
-- Fetch [plan-writer.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/plan-writer.agent.md) to `.github/agents/plan-writer.agent.md`
 - Fetch [implement.agent.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/agents/implement.agent.md) to `.github/agents/implement.agent.md`
 - Fetch [pdd-protocol.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/pdd-protocol.md) to `docs/vibeflow/pdd-protocol.md`
 - Fetch [orchestrator-manual.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/docs/vibeflow/orchestrator-manual.md) to `docs/vibeflow/orchestrator-manual.md`
@@ -98,7 +97,6 @@ After fetching, verify the following files exist and were updated:
 
 - `.github/agents/vibe-flow.agent.md` contains the `version:` comment (e.g., `<!-- version: 2.0.0 -->`)
 - `.github/agents/research.agent.md`
-- `.github/agents/plan-writer.agent.md`
 - `.github/agents/implement.agent.md`
 
 **Skills:**
@@ -193,7 +191,6 @@ The following agents have been updated to the latest version (${LATEST_TAG}):
 
 - vibe-flow.agent.md
 - research.agent.md
-- plan-writer.agent.md
 - implement.agent.md
 - docs/vibeflow/pdd-protocol.md
 - docs/vibeflow/orchestrator-manual.md

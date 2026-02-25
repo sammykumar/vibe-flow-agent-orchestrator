@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Plan Writer → Implement). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, and implementation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
+description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Orchestrator Planning → Implement). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, and implementation phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
 ---
 
 # Orchestration & Delegation
@@ -24,7 +24,6 @@ This skill defines the orchestration workflow for managing complex development t
 ## Subagent Roster (v2)
 
 - `research.agent` - Investigation & specification writing
-- `plan-writer.agent` - Task plan authoring
 - `implement.agent` - Code changes & bug fixes
 
 ## PDD File Structure
@@ -55,7 +54,7 @@ Required files:
 
 1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
 2. Initialize `1-OVERVIEW.md` (goals) and `2-PROGRESS.md` (logs)
-3. Initialize task tracking with phases: Research, Planning, Implement, Final Review
+3. Initialize task tracking with phases: Research, Orchestrator Planning, Implement, Final Review
 
 **Existing Task:**
 
@@ -69,16 +68,15 @@ Required files:
 1. **Invoke**: Call research agent with absolute path to plan directory
 2. **Wait**: For signal "Research phase complete"
 3. **Verify**: Confirm `3-RESEARCH.md` and `4-SPEC.md` exist
-4. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with planning (keeps the PDD cycle in a single chat turn)
+4. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with orchestrator-authored planning (keeps the PDD cycle in a single chat turn)
 5. **Update**: Mark Research phase complete in task tracking
 
-### STEP 3: Planning Phase
+### STEP 3: Orchestrator Planning Phase
 
-1. **Invoke**: Call plan-writer agent with absolute path to plan directory
-2. **Wait**: For signal "Plan complete"
-3. **Verify**: Confirm `5-TASKS.md` exists
-4. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with implementation (keeps the PDD cycle in a single chat turn)
-5. **Update**: Mark Planning phase complete in task tracking
+1. **Author**: Orchestrator writes `5-TASKS.md` directly from `3-RESEARCH.md` and `4-SPEC.md`
+2. **Verify**: Confirm `5-TASKS.md` includes file lists, verification steps, and dependencies
+3. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with implementation (keeps the PDD cycle in a single chat turn)
+4. **Update**: Mark Orchestrator Planning phase complete in task tracking
 
 ### STEP 4: Implementation Phase
 
@@ -144,7 +142,7 @@ Use task tracking tool to maintain visibility:
 Phases to track:
 
 - Research
-- Planning
+- Orchestrator Planning
 - Implement (may have multiple tasks based on plan)
 - Final Review
 
