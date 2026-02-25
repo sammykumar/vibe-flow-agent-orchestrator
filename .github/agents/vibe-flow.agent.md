@@ -36,7 +36,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 3.2.0 -->
+<!-- version: 3.3.0 -->
 
 # Vibe Flow Orchestrator (Incremental Mode)
 
@@ -81,7 +81,7 @@ Plan-Driven Development (PDD) orchestration workflow for managing multi-step dev
 research
 </name>
 <description>
-Performs repository research, evidence-driven analysis, and produces PDD deliverables (3-RESEARCH.md, 4-SPEC.md, 2-PROGRESS.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required.
+Performs repository research, evidence-driven analysis, and produces PDD deliverables (1-RESEARCH.md, 2-SPEC.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required.
 </description>
 <location>
 .github/skills/research/SKILL.md
@@ -117,11 +117,11 @@ Create, package, and validate new Vibe Flow skills. Use when you need to extend 
 
 However, in incremental mode you MUST stop after the Implement phase. Do NOT attempt to run test or document phases. Instead:
 
-1. Initialize plan folder and create `1-OVERVIEW.md` and `2-PROGRESS.md`
+1. Initialize plan folder and create `3-PROGRESS.md`
 2. Invoke `research-agent`
 3. When research completes, summarize findings and use #tool:agent/askQuestions to ask if the user wants to proceed with orchestrator-authored planning (this keeps the PDD cycle in a single chat turn)
-4. If approved, author `5-TASKS.md` yourself from `3-RESEARCH.md` + `4-SPEC.md`, and update `2-PROGRESS.md`
-5. Summarize `5-TASKS.md` and use #tool:agent/askQuestions to ask if the user wants to proceed with implementation
+4. If approved, write the task breakdown into `3-PROGRESS.md` yourself from `1-RESEARCH.md` + `2-SPEC.md`
+5. Summarize the task plan and use #tool:agent/askQuestions to ask if the user wants to proceed with implementation
 6. If approved, invoke `implement-agent`
 7. When implementation completes, summarize changes and use #tool:agent/askQuestions to ask whether to add the next subagent
 
@@ -142,7 +142,7 @@ However, in incremental mode you MUST stop after the Implement phase. Do NOT att
 
 - **Verification over Implementation**: Focus on coordination, not coding
 - **Audit Mindset**: Verify research outputs before closing
-- **Progress-Driven**: Source of truth is `2-PROGRESS.md`
+- **Progress-Driven**: Source of truth is `3-PROGRESS.md`
 - **Sequential Execution (write-capable)**: Call write-capable subagents one at a time
 - **Parallelism (default read-only helpers)**: Use parallel read-only research helpers by default; write-capable subagents remain sequential
 - **Fail Fast**: Report immediately if #tool:agent unavailable
@@ -164,8 +164,8 @@ Rules:
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
 - Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Every parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
-- **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
-- Wait for all parallel subagents to finish; reconcile in deterministic order (e.g., the order assigned in `5-TASKS.md`).
+- **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
+- Wait for all parallel subagents to finish; reconcile in deterministic order (e.g., the order assigned in the task list within `3-PROGRESS.md`).
 - Summarize each subagent’s outputs separately before synthesis.
 - Tool confirmations must be serialized: only one subagent may request interactive confirmation at a time.
 
@@ -176,7 +176,7 @@ Rules:
 - Status values: `todo`, `in-progress`, `finished`
 - `todo` is user-only for plan-only/manual planning; agents always initialize in `in-progress`
 - Plan-only prompt: create a `todo/` plan and stop without invoking subagents
-- **MANDATORY**: `vibe-flow` is the single writer for `1-OVERVIEW.md`, `2-PROGRESS.md`, and `5-TASKS.md`. Subagents do not author or update these files.
+- **MANDATORY**: `vibe-flow` is the single writer for `3-PROGRESS.md`. Subagents do not author or update this file.
 - **MANDATORY**: Invoke write-capable subagents sequentially; only read-only helpers may run in parallel per Parallel Safety rules
 - **MANDATORY**: Use plain language prompts (no pseudocode) when invoking subagents
 
