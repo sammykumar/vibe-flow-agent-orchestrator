@@ -7,7 +7,7 @@ This directory contains the `research` skill for Vibe Flow.
 - `scripts/validate-skill.sh` — run validation checks for the skill
   (frontmatter and required assets)
 - `scripts/dry_run.sh` — perform an integration dry-run that generates
-  `3-RESEARCH.md` and `4-SPEC.md` into a temporary plan directory
+  `1-RESEARCH.md` and `2-SPEC.md` into a temporary plan directory
 - Unit tests: `tests/unit/frontmatter.test.sh`
 - Integration tests: `tests/integration/dry-run/run.sh`
 

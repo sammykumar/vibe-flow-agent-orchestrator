@@ -155,11 +155,9 @@ Create `.github/skills/orchestration/` directory (with subdirectories `assets/` 
 
 **PDD Templates (assets/):**
 
-- Fetch [orchestration/assets/overview-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/overview-template.md) to `.github/skills/orchestration/assets/overview-template.md`
 - Fetch [orchestration/assets/progress-log-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/progress-log-template.md) to `.github/skills/orchestration/assets/progress-log-template.md`
 - Fetch [orchestration/assets/research-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/research-template.md) to `.github/skills/orchestration/assets/research-template.md`
 - Fetch [orchestration/assets/spec-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/spec-template.md) to `.github/skills/orchestration/assets/spec-template.md`
-- Fetch [orchestration/assets/plan-template.md](https://raw.githubusercontent.com/sammykumar/vibe-flow-agent-orchestrator/${LATEST_TAG:-master}/.github/skills/orchestration/assets/plan-template.md) to `.github/skills/orchestration/assets/plan-template.md`
 
 **Research Skill:**
 
@@ -206,11 +204,9 @@ After fetching, verify the following files exist:
 **Skills:**
 
 - `.github/skills/orchestration/SKILL.md`
-- `.github/skills/orchestration/assets/overview-template.md`
 - `.github/skills/orchestration/assets/progress-log-template.md`
 - `.github/skills/orchestration/assets/research-template.md`
 - `.github/skills/orchestration/assets/spec-template.md`
-- `.github/skills/orchestration/assets/plan-template.md`
 - `.github/skills/orchestration/references/workflow.md`
 - `.github/skills/mermaidjs-v11/SKILL.md`
 - `.github/skills/mermaidjs-v11/references/diagram-types.md`

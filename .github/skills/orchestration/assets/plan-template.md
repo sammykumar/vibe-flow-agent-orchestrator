@@ -4,7 +4,7 @@
 **Agent**: vibe-flow  
 **Status**: Draft / Approved / In Progress / Complete  
 **Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`  
-**Based on Spec**: `4-SPEC.md`
+**Based on Spec**: `2-SPEC.md`
 
 ---
 
@@ -27,8 +27,8 @@
 
 ## Pre-Implementation Checklist
 
-- [ ] Spec reviewed and approved (`4-SPEC.md`)
-- [ ] Research findings validated (`3-RESEARCH.md`)
+- [ ] Spec reviewed and approved (`2-SPEC.md`)
+- [ ] Research findings validated (`1-RESEARCH.md`)
 - [ ] Dependencies identified and available
 - [ ] Test strategy defined
 - [ ] Rollback plan in place (if high-risk)
@@ -158,7 +158,7 @@
 
 **Status**: ⬜ Not Started / 🔄 In Progress / ✅ Complete
 
-**Notes**: See test strategy in `4-SPEC.md` Section 7
+**Notes**: See test strategy in `2-SPEC.md` Section 7
 
 ---
 
@@ -292,12 +292,12 @@ gantt
 
 When implement.agent picks up this plan:
 
-1. **Read**: This plan + `4-SPEC.md` + `3-RESEARCH.md`
+1. **Read**: This plan + `2-SPEC.md` + `1-RESEARCH.md`
 2. **Start**: With Task 1 (sequential execution)
 3. **After Each Task**:
    - Run `get_errors`
    - Execute happy path verification
-   - Update `2-PROGRESS.md`
+   - Update `3-PROGRESS.md`
    - Mark task as ✅ Complete in this file
 4. **Continue**: Until all tasks complete
 5. **Signal**: "Implementation complete" back to orchestrator

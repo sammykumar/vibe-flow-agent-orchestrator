@@ -16,7 +16,7 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 ### STEP 1: Initialize
 
 **New Task?** → Create plan directory structure
-**Existing Task?** → Read current state from `2-PROGRESS.md`
+**Existing Task?** → Read current state from `3-PROGRESS.md`
 
 ```markdown
 1. Determine if task is new or resuming:
@@ -26,12 +26,11 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 
 2. For new tasks:
    - Create `.github/plans/in-progress/{major-area}/{task-name}/`
-   - Initialize `1-OVERVIEW.md` (use template from assets/)
-   - Initialize `2-PROGRESS.md` (use template from assets/)
+   - Initialize `3-PROGRESS.md` (use template from assets/)
    - Initialize task tracking with phases
 
 3. For existing tasks:
-   - Read `2-PROGRESS.md` to determine current phase
+   - Read `3-PROGRESS.md` to determine current phase
    - Resume task tracking state
 ```
 
@@ -47,8 +46,8 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 2. Wait for completion signal: "Research phase complete"
 
 3. Verify outputs exist:
-   - `3-RESEARCH.md` (investigation findings)
-   - `4-SPEC.md` (technical specification)
+   - `1-RESEARCH.md` (investigation findings)
+   - `2-SPEC.md` (technical specification)
 
 4. Review with user via #tool:agent/askQuestions:
    - Summarize findings and ask whether to proceed with planning
@@ -63,12 +62,12 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 **Orchestrator-Owned Process**
 
 ```markdown
-1. Author `5-TASKS.md` directly in `vibe-flow`:
-   - Use `3-RESEARCH.md` and `4-SPEC.md` as the source of truth
+1. Author task breakdown in `3-PROGRESS.md` directly in `vibe-flow`:
+   - Use `1-RESEARCH.md` and `2-SPEC.md` as the source of truth
    - Include ordered tasks, file targets, verification steps, and dependencies
 
 2. Verify outputs exist:
-   - `5-TASKS.md` (implementation tasks)
+   - `3-PROGRESS.md` (task list and progress tracking)
 
 3. Review with user via #tool:agent/askQuestions:
    - Summarize task plan and ask whether to proceed with implementation
@@ -88,11 +87,11 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
    - Request: "Execute the implementation plan at {path}."
 
 2. Monitor progress after each invocation:
-   - Read `2-PROGRESS.md` for status updates
+   - Read `3-PROGRESS.md` for status updates
    - Check for completion signals
 
 3. Loop until complete:
-   - If `2-PROGRESS.md` shows incomplete tasks → Re-invoke implement.agent
+   - If `3-PROGRESS.md` shows incomplete tasks → Re-invoke implement.agent
    - If all tasks marked complete → Proceed to Stop after Implement (v2)
 
 4. Update task tracking:
@@ -104,7 +103,7 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 **Review & Handoff**
 
 ```markdown
-1. Review `2-PROGRESS.md` for completion signals and evidence.
+1. Review `3-PROGRESS.md` for completion signals and evidence.
 2. Summarize results for the user.
 3. Ask via #tool:agent/askQuestions whether to add the next subagent (Test/Document are future phases).
 4. Mark the Final Review phase as completed.
@@ -115,11 +114,11 @@ Before declaring task complete, verify:
 
 Progress Status:
 
-- [ ] `2-PROGRESS.md` shows completion signals
+- [ ] `3-PROGRESS.md` shows completion signals
 
 Code Quality:
 
-- [ ] All implementation tasks complete per `5-TASKS.md`
+- [ ] All implementation tasks complete per task list in `3-PROGRESS.md`
 - [ ] Happy-path verification recorded by implement agent
 - [ ] No compilation/lint errors (if applicable)
 
@@ -150,7 +149,7 @@ Task Completion:
    **No plan?** → Start fresh with STEP 1
 
 2. Resume workflow:
-   - Read `2-PROGRESS.md` to identify current phase
+   - Read `3-PROGRESS.md` to identify current phase
    - Jump to appropriate step (Research, Implement, Final Review)
    - Continue from where previous work stopped
 ```
@@ -228,13 +227,13 @@ Task Completion:
 **Orchestrator Planning Step**:
 
 ```
-"Read 3-RESEARCH.md and 4-SPEC.md in the plan directory and author 5-TASKS.md with ordered, verifiable implementation tasks. Then use #tool:agent/askQuestions to request approval before implementation."
+"Read 1-RESEARCH.md and 2-SPEC.md in the plan directory and author the task breakdown in 3-PROGRESS.md with ordered, verifiable implementation tasks. Then use #tool:agent/askQuestions to request approval before implementation."
 ```
 
 **Implement Agent**:
 
 ```
-"Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Follow the tasks in 5-TASKS.md sequentially and update 2-PROGRESS.md after each task."
+"Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Follow the task list in 3-PROGRESS.md sequentially and update 3-PROGRESS.md after each task."
 ```
 
 **Future Subagents (not installed in v2)**: Test/Document prompts are added when those agents are installed.
@@ -287,7 +286,7 @@ Phase: Research
 
 Phase: Orchestrator Planning
 
-- Mark "Orchestrator Planning" as in-progress → Author 5-TASKS.md in vibe-flow → Mark completed
+- Mark "Orchestrator Planning" as in-progress → Write task breakdown into 3-PROGRESS.md in vibe-flow → Mark completed
 
 Phase: Implement
 
@@ -304,7 +303,7 @@ Phase: Final Review
 graph TD
     A[User Request] --> B{Existing Plan?}
     B -->|No| C[STEP 1: Initialize]
-    B -->|Yes| D[Read 2-PROGRESS.md]
+    B -->|Yes| D[Read 3-PROGRESS.md]
     D --> E{Current Phase?}
 
     C --> F[STEP 2: Research Phase]

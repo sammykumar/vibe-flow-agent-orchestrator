@@ -68,11 +68,9 @@
 
 This plan directory contains the following files:
 
-- **1-OVERVIEW.md** (this file) - Business context and high-level summary
-- **2-PROGRESS.md** - Current status and work log
-- **3-RESEARCH.md** - Investigation findings and alternatives analysis
-- **4-SPEC.md** - Detailed technical specification
-- **5-TASKS.md** - Step-by-step implementation tasks
+- **1-RESEARCH.md** - Investigation findings and alternatives analysis
+- **2-SPEC.md** (this file) - Business context and technical specification
+- **3-PROGRESS.md** - Task plan, execution log, and current status
 
 ---
 

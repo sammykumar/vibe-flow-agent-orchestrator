@@ -57,11 +57,9 @@ Major Area Examples:
 Required files:
 
 ```
-1-OVERVIEW.md
-2-PROGRESS.md
-3-RESEARCH.md
-4-SPEC.md
-5-TASKS.md
+1-RESEARCH.md
+2-SPEC.md
+3-PROGRESS.md
 ```
 
 Documentation output:
@@ -72,13 +70,11 @@ docs/{major-area}/{doc}.md
 
 ### File semantics
 
-| File          | Purpose                                |
-| ------------- | -------------------------------------- |
-| 1-OVERVIEW.md | Business context + goals               |
-| 2-PROGRESS.md | Append-only execution log              |
-| 3-RESEARCH.md | Investigation + **Alternative Matrix** |
-| 4-SPEC.md     | Tech Spec + **Impact Analysis**        |
-| 5-TASKS.md    | Step-by-step implementation tasks      |
+| File          | Purpose                                                 |
+| ------------- | ------------------------------------------------------- |
+| 1-RESEARCH.md | Investigation + **Alternative Matrix**                  |
+| 2-SPEC.md     | Business context + Tech Spec + **Impact Analysis**      |
+| 3-PROGRESS.md | Task plan + append-only execution log (Source of Truth) |
 
 ### Progress file format (recommended)
 
@@ -246,7 +242,7 @@ Each agent is defined as a `.agent.md` profile.
 Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
-- **Progress Tracking**: Initialize and maintain the `2-PROGRESS.md` file as the source of truth for the task lifecycle.
+- **Progress Tracking**: Initialize and maintain the `3-PROGRESS.md` file as the source of truth for the task lifecycle.
 - **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
@@ -260,21 +256,21 @@ Responsibilities:
 
 1.  **Initialization**:
     - Create PDD structure: `.github/plans/in-progress/{area}/{task}/`.
-    - Initialize `1-OVERVIEW.md` and `2-PROGRESS.md`.
+    - Initialize `3-PROGRESS.md`.
 2.  **Research & Design**:
 
-- Call `Research` sub-agent to populate `3-RESEARCH.md` and `4-SPEC.md`.
+- Call `Research` sub-agent to populate `1-RESEARCH.md` and `2-SPEC.md`.
 - Review specification with the user.
 
 3.  **Planning Phase (Orchestrator-owned)**:
 
-- Author `5-TASKS.md` directly from `3-RESEARCH.md` and `4-SPEC.md`.
+- Write task breakdown into `3-PROGRESS.md` directly from `1-RESEARCH.md` and `2-SPEC.md`.
 - Review task plan with the user.
 
 4.  **Implementation Loop**:
     - Trigger `Implement` (Implementation) sub-agent.
-    - `Implement` picks the most important task from `2-PROGRESS.md`, implements it, and performs a "Happy Path" test.
-    - Orchestrator reviews `2-PROGRESS.md` and the implementation evidence.
+    - `Implement` picks the most important task from `3-PROGRESS.md`, implements it, and performs a "Happy Path" test.
+    - Orchestrator reviews `3-PROGRESS.md` and the implementation evidence.
     - If tasks remain or new tasks are discovered, repeat the loop.
 5.  **Stop after Implement**:
 
@@ -288,16 +284,16 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
 - Write-capable subagents (including the primary `research-agent` and `implement-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
-- **Single-writer rule**: Only the orchestrator writes to `2-PROGRESS.md` during parallel runs.
-- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in `5-TASKS.md`).
-- Summarize each subagent’s outputs separately before synthesis.
+- **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `3-PROGRESS.md`).
+- Summarize each subagent's outputs separately before synthesis.
 - Tool confirmations must be serialized: only one subagent may request interactive confirmation at a time.
-- Update the Subagent Ledger section in `2-PROGRESS.md` for each parallel run.
+- Update the Subagent Ledger section in `3-PROGRESS.md` for each parallel run.
 
 ### Rules
 
 - **Access Tooling**: Must have access to `runSubagent`. If missing, fail immediately.
-- **Progress-First**: Always check/update `2-PROGRESS.md` before and after every sub-agent call.
+- **Progress-First**: Always check/update `3-PROGRESS.md` before and after every sub-agent call.
 - **Tool Preamble**: Before every tool use, emit a one-line preamble: **Goal → Plan → Policy**.
 - **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative in `2-PROGRESS.md`.
 - **Verification Over Implementation**: Do not write source code. Verify that sub-agents did.

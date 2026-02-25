@@ -1,6 +1,94 @@
-# Progress Log
+# Progress & Tasks
 
-> Purpose: chronological, factual record of what changed, why, and what the result was.
+> Purpose: Combined task plan and chronological execution log. Tracks what needs to be done, what changed, and why.
+
+---
+
+## Task Plan
+
+**Date**: YYYY-MM-DD  
+**Agent**: vibe-flow  
+**Status**: Draft / Approved / In Progress / Complete  
+**Based on Spec**: `2-SPEC.md`
+
+### Goal
+
+{One-line summary of what we're building}
+
+### Approach
+
+{Brief description of the chosen technical approach from research}
+
+### Pre-Implementation Checklist
+
+- [ ] Spec reviewed and approved (`2-SPEC.md`)
+- [ ] Research findings validated (`1-RESEARCH.md`)
+- [ ] Dependencies identified and available
+
+### Implementation Tasks
+
+#### Task 1: {Task Name}
+
+**Goal**: {What this task accomplishes}
+
+**Files**:
+
+- `path/to/file1.ts` (create)
+- `path/to/file2.ts` (modify)
+
+**Steps**:
+
+1. {Step 1}
+2. {Step 2}
+3. {Step 3}
+
+**Verification**:
+
+- [ ] Run `get_errors` - must be clean
+- [ ] Happy path test: {describe test}
+
+**Status**: ⬜ Not Started / 🔄 In Progress / ✅ Complete
+
+---
+
+#### Task 2: {Task Name}
+
+**Goal**: {What this task accomplishes}
+
+**Files**:
+
+- `path/to/file3.ts` (create)
+- `path/to/file4.ts` (modify)
+
+**Steps**:
+
+1. {Step 1}
+2. {Step 2}
+3. {Step 3}
+
+**Verification**:
+
+- [ ] Run `get_errors` - must be clean
+- [ ] Happy path test: {describe test}
+
+**Dependencies**: Requires Task 1 complete
+
+**Status**: ⬜ Not Started / 🔄 In Progress / ✅ Complete
+
+---
+
+### Task Summary
+
+| Status         | Count | Tasks     |
+| -------------- | ----- | --------- |
+| ✅ Complete    | 0     | -         |
+| 🔄 In Progress | 0     | -         |
+| ⬜ Not Started | 2     | Tasks 1-2 |
+| **Total**      | **2** | -         |
+
+---
+
+## Execution Log
 
 ## Quick Index
 
@@ -29,7 +117,7 @@
 | Area              | Details                                                       |
 | ----------------- | ------------------------------------------------------------- |
 | Key discoveries   | - Finding 1<br>- Finding 2<br>- Finding 3                     |
-| Alternatives      | Evaluated 3 approaches, selected Option B (see 3-RESEARCH.md) |
+| Alternatives      | Evaluated 3 approaches, selected Option B (see 1-RESEARCH.md) |
 | External sources  | - [Source 1](url)<br>- [Source 2](url)                        |
 | Notes / decisions | - Decision rationale<br>- Known constraints                   |
 
@@ -42,9 +130,8 @@
 
 | File          | Status      |
 | ------------- | ----------- |
-| 3-RESEARCH.md | ✅ Complete |
-| 4-SPEC.md     | ✅ Complete |
-| 5-TASKS.md    | ✅ Complete |
+| 1-RESEARCH.md | ✅ Complete |
+| 2-SPEC.md     | ✅ Complete |
 
 ### Risks
 
