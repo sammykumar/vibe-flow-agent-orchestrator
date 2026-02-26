@@ -84,31 +84,36 @@ STEP 0: DISCOVER TEST TOOLING
 5. Record discoveries in `3-PROGRESS.md` under a `## Test Discovery` heading
 
 If NO test tooling exists:
+
 - Report to orchestrator: "No test framework detected. Recommend installing [framework] before proceeding."
 - Do NOT install test frameworks yourself — that's an implementation concern.
-</discovery_protocol>
+  </discovery_protocol>
 
 ## Test Strategy
 
 Adapt your testing approach to what was implemented and what the repo supports:
 
 ### Unit Tests
+
 - Write for every new function, class, or module introduced
 - Mock external dependencies (DB, network, filesystem)
 - Follow existing test patterns found during discovery
 - Co-locate or place in test directories per repo convention
 
 ### Integration Tests
+
 - Write for component interactions (API endpoints, service layers, data flows)
 - Use the repo's existing test infrastructure (test DB, fixtures, factories)
 - Verify contracts between modules
 
 ### E2E Tests
+
 - Write ONLY when the repo has an E2E framework configured (Playwright, Cypress, etc.)
 - Focus on critical user journeys defined in `2-SPEC.md`
 - Verify against a running local server when applicable
 
 ### Choosing What to Test
+
 1. Read `2-SPEC.md` acceptance criteria — every criterion needs at least one test
 2. Read `3-PROGRESS.md` implementation log — test every file/function that was changed or created
 3. Prioritize: acceptance criteria > new public APIs > edge cases > error paths
@@ -151,7 +156,7 @@ STEP 5: COMPLETION
 - Condition: All acceptance criteria covered by passing tests.
 - If ALL PASS: Signal "Testing complete. All tests passing. Returning to Orchestrator."
 - If IMPLEMENTATION BUGS found: Signal "Testing blocked. Implementation bugs found: [list]. Returning to Orchestrator for re-implementation."
-</test_workflow>
+  </test_workflow>
 
 ---
 
