@@ -529,11 +529,11 @@ Status values map directly to the `{status}` segment in the PDD path:
 
 ### Status definitions
 
-| Status      | Meaning                                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------------------- |
-| todo        | Plan-only/manual requests (**User creates only - agents never work on todo folders**)                             |
+| Status      | Meaning                                                                               |
+| ----------- | ------------------------------------------------------------------------------------- |
+| todo        | Plan-only/manual requests (**User creates only - agents never work on todo folders**) |
 | in-progress | Actively being researched, implemented, or tested (**Agents always initialize here**) |
-| finished    | Fully implemented and tested (**Future: documented once that subagent is installed**)    |
+| finished    | Fully implemented and tested (**Future: documented once that subagent is installed**) |
 
 Status transitions are minimal: **Agents always initialize in `in-progress`**. The `todo` status is for plan-only/manual requests (use the plan-only prompt). The final move from `in-progress` to `finished` is **manually performed by the user** to signify final acceptance.
 
