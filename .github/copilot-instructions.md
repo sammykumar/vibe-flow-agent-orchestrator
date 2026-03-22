@@ -4,22 +4,28 @@ This repository defines the **Vibe Flow** agent suite. Your goal here is to main
 
 ## 🎯 Repository Purpose
 
-This is the **source code** for the Vibe Flow AI Agents.
+This is the **source code** for the Vibe Flow AI Agents, distributed as an [APM](https://github.com/microsoft/apm) package.
 
 - The "Code" is **Markdown** (`*.agent.md`).
 - The "Compiler" is the LLM that reads them.
-- The "Installer" is `install-vibeflow.md`.
+- The "Package Manager" is [APM](https://github.com/microsoft/apm).
 
-**Note on Repository Structure**: This repository now uses `.github/agents/` (flat structure) to dogfood Vibe Flow in the same way it's deployed to target repositories. VS Code only reads agents from `.github/agents/`, so this allows us to test the agents in this source repository before publishing.
+**Note on Repository Structure**: This repository uses a dual-directory layout:
+
+- `.apm/` — the **distribution source** that APM reads when consumers run `apm install sammykumar/vibe-flow-agent-orchestrator`
+- `.github/agents/` (and `.github/skills/`, `.github/prompts/`) — **committed deployed copies** for dogfooding in this source repo. VS Code only reads agents from `.github/agents/`, so these files are kept in sync with `.apm/` to allow testing before publishing.
+
+When you modify an agent, skill, or prompt, update it in **both** `.apm/` and `.github/` to keep them in sync.
 
 ## ✅ Source of Truth
 
 Use these locations as the authoritative sources for behavior and workflow details:
 
-- .github/agents/
-- docs/vibeflow/
-- install-vibeflow.md
-- update-vibeflow.md
+- `.apm/agents/` and `.github/agents/` (keep in sync)
+- `.apm/skills/` and `.github/skills/` (keep in sync)
+- `.apm/prompts/` and `.github/prompts/` (keep in sync)
+- `apm.yml` (package manifest — version must match `vibe-flow.agent.md`)
+- `docs/vibeflow/`
 
 ## 📂 Core Artifacts
 
@@ -33,13 +39,7 @@ These are the executable agent files. Treat them as production source code.
 - **Prompt Body:** Defines the agent's identity, role, and strict execution protocols.
 - **Version Tag:** `<!-- version: X.X.X -->` in `vibe-flow.agent.md` ONLY (single source of truth for the entire suite).
 
-### 2. The Installer (`install-vibeflow.md`)
-
-This file contains the instructions for an AI to install Vibe Flow into a target repository.
-
-- **Rule:** If you add a new agent or change the architecture, you **MUST** update `install-vibeflow.md` to reflect these changes (e.g., creating new files, ensuring new agents are copied).
-
-### 3. The Protocol Spec (`orchestrator-manual.md`)
+### 2. The Protocol Spec (`orchestrator-manual.md`)
 
 Defines the PDD (Plan-Driven Development) standard that the agents enforce in `docs/vibeflow/orchestrator-manual.md`.
 
@@ -60,18 +60,18 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 ### Adding New Agents
 
 1.  Create `new-agent-name.agent.md` in `.github/agents/`.
-2.  Add it to `vibe-flow.agent.md`'s orchestration logic (it needs to know the subagent exists).
-3.  Add it to `install-vibeflow.md` so it gets installed in target repositories.
+2.  Copy it to `.apm/agents/` as well.
+3.  Add it to `vibe-flow.agent.md`'s orchestration logic (it needs to know the subagent exists).
 
 ### Change Checklist (Agents)
 
 When changing agents or workflow:
 
-1. Update .github/agents/ (agent definition changes)
-2. Update install-vibeflow.md and update-vibeflow.md
+1. Update .apm/agents/ (distribution source — this is what APM deploys to consumers)
+2. Update .github/agents/ (dogfood copy — keep in sync)
 3. Update docs/vibeflow/pdd-protocol.md and docs/vibeflow/orchestrator-manual.md
-4. Update .github/prompts/ if prompts reference the new flow
-5. Bump the version in .github/agents/vibe-flow.agent.md (or run ./version-bump.sh)
+4. Update .github/prompts/ and .apm/prompts/ if prompts reference the new flow
+5. Bump the version in .github/agents/vibe-flow.agent.md and apm.yml (or run ./version-bump.sh)
 
 ## 🧪 Testing & Validation
 
@@ -85,13 +85,13 @@ There is no `npm test` for prompts. Validation is behavioral.
 
 This repository is the **source of truth** for the Vibe Flow agent suite. For behavior details, defer to the agent definitions and documentation:
 
-- Agent definitions in .github/agents/
+- Agent definitions in .apm/agents/ (distribution) and .github/agents/ (dogfood)
 - PDD protocol in docs/vibeflow/pdd-protocol.md
 - Orchestrator manual in docs/vibeflow/orchestrator-manual.md
 
 ## 🚫 Common Pitfalls in `vibe-flow.agent.md` only. If you don't bump, updates won't propagate. All agents are versioned as a suite.
 
-- **Breaking Installer:** If you rename a file, `install-vibeflow.md` will break.
+- **Forgetting `.apm/` sync:** If you edit agent/skill/prompt files in `.github/`, you MUST also update the corresponding file in `.apm/`. Both are canonical sources for different consumers.
 - **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
 - **Inconsistent Task Management:** All agents should use `#tool:todo` consistently for tracking work
 
