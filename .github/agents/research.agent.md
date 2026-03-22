@@ -37,7 +37,6 @@ tools:
     github/search_issues,
     github/search_pull_requests,
     github/search_repositories,
-    "io.github.chromedevtools/chrome-devtools-mcp/*",
     "io.github.upstash/context7/*",
     vscode.mermaid-chat-features/renderMermaidDiagram,
     todo,
@@ -74,7 +73,7 @@ If any requirement, scope, or acceptance criteria is unclear, STOP and send a cl
 
 - All writes are limited to the active plan directory: `.github/plans/{status}/{major-area}/{task-name}/`.
 - Do NOT edit project source files.
-- Use Playwright/Chrome DevTools only when a UI inspection is explicitly required.
+- Use Playwright/browser only when a UI inspection is explicitly required.
 - If the request is ambiguous, ask the orchestrator for clarification before continuing research.
 
 ## Parallel Mode (Default read-only helpers)

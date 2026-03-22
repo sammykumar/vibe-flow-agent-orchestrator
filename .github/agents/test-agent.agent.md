@@ -18,8 +18,8 @@ tools:
     "search",
     "web",
     "agent",
+    "browser",
     "io.github.upstash/context7/*",
-    "io.github.chromedevtools/chrome-devtools-mcp/*",
     "todo",
   ]
 argument-hint: "Describe what was implemented and needs test coverage."

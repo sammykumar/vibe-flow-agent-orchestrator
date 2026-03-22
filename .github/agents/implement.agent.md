@@ -18,8 +18,8 @@ tools:
     "search",
     "web",
     "agent",
+    "browser",
     "io.github.upstash/context7/*",
-    "io.github.chromedevtools/chrome-devtools-mcp/*",
     "todo",
   ]
 argument-hint: "Describe the implementation task, feature to build, or bug to fix."
