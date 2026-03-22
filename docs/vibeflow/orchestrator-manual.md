@@ -231,6 +231,15 @@ For target repositories to use Vibe Flow effectively, these MCP servers should b
 
 Each agent is defined as a `.agent.md` profile.
 
+### 4.1 Execution Lanes
+
+Vibe Flow supports two PDD lanes:
+
+- **Fast Track** for small to medium, bounded, low-risk changes that can go straight from plan initialization to implementation and testing.
+- **Full PDD** for large, ambiguous, cross-cutting, or higher-risk changes that need research and approval gates before implementation.
+
+Both lanes still use the same PDD folder structure and `3-PROGRESS.md` as the source of truth.
+
 ---
 
 ## Agent: vibe-flow (Orchestrator)
@@ -238,6 +247,13 @@ Each agent is defined as a `.agent.md` profile.
 ### Purpose
 
 **The Orchestrator.** It is the only agent the user directly interacts with. It is responsible for initializing the PDD process AND orchestrating the specialized sub-agents to achieve the user's goal. It focuses on high-level state management, task delegation, and quality verification rather than direct implementation.
+
+### Mode Selection
+
+Before starting work, classify the request into one of two lanes:
+
+1. **Fast Track** when the change is bounded, low-risk, and the implementation path is already clear.
+2. **Full PDD** when the change is large, ambiguous, cross-cutting, high-risk, or the user explicitly wants research or approval checkpoints.
 
 Responsibilities:
 
@@ -253,6 +269,16 @@ Responsibilities:
 - **Management**: `todo`
 
 ### Workflow logic (Implementation Loop)
+
+#### Fast Track PDD
+
+1. **Initialize** the plan folder and `3-PROGRESS.md`.
+2. **Compact Plan**: write a minimal task breakdown directly from the request.
+3. **Implement**: trigger the implement sub-agent.
+4. **Test**: trigger the test sub-agent.
+5. **Review**: summarize results and finalize.
+
+#### Full PDD
 
 1.  **Initialization**:
     - Create PDD structure: `.github/plans/in-progress/{area}/{task}/`.

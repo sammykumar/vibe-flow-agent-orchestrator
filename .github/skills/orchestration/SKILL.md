@@ -1,11 +1,18 @@
 ---
 name: orchestration
-description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Research → Orchestrator Planning → Implement → Test). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, implementation, and testing phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
+description: "Plan-Driven Development (PDD) orchestration workflow for managing multi-step development tasks through a structured pipeline (Fast Track or Research → Orchestrator Planning → Implement → Test). Use when managing complex feature development, bug fixes, or any work requiring coordination across research, planning, implementation, and testing phases. This skill defines how to delegate to specialized subagents, maintain progress tracking, and ensure quality through systematic verification."
 ---
 
 # Orchestration & Delegation
 
 This skill defines the orchestration workflow for managing complex development tasks through specialized subagents in a Plan-Driven Development (PDD) pipeline.
+
+The workflow has two lanes:
+
+- **Fast Track** for small to medium, bounded, low-risk changes that can move straight from plan initialization to implementation and testing.
+- **Full PDD** for larger, ambiguous, cross-cutting, or risky changes that need research and approval gates before implementation.
+
+Both lanes still create and maintain the PDD files under `.github/plans/{status}/{major-area}/{task-name}/`.
 
 ## Core Principles
 
@@ -44,6 +51,23 @@ Required files:
 - [progress-log-template.md](assets/progress-log-template.md)
 
 ## Orchestration Workflow
+
+### Lane Selection
+
+Before starting, classify the request:
+
+1. Use **Fast Track** when the requested change is bounded, low-risk, and the implementation path is already clear.
+2. Use **Full PDD** when the change is large, ambiguous, cross-cutting, high-risk, or the user explicitly asks for research or approval checkpoints.
+
+### Fast Track PDD
+
+1. Initialize `.github/plans/in-progress/{major-area}/{task-name}/`
+2. Initialize `3-PROGRESS.md` with a compact task plan
+3. Invoke the implement agent
+4. Invoke the test agent
+5. Review results and complete the task
+
+### Full PDD
 
 ### STEP 1: Initialize
 

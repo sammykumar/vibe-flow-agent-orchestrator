@@ -6,6 +6,8 @@ These instructions install Vibe Flow (Plan-Driven Development) in a codebase. Th
 
 This bootstrap script is for **initial installation**. For updates, use `update-vibeflow.md`.
 
+Vibe Flow supports two PDD lanes: a fast-track path for small, bounded work and a full approval-based path for larger or riskier changes. Both lanes still use the same PDD files and `3-PROGRESS.md` source of truth.
+
 Process overview:
 
 1. Initial checks
