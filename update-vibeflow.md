@@ -4,6 +4,8 @@ These instructions update the Vibe Flow (Plan-Driven Development) agents and doc
 
 Vibe Flow supports two PDD lanes: a fast-track path for small, bounded work and a full approval-based path for larger or riskier changes. Both lanes still use the same PDD files and `3-PROGRESS.md` source of truth.
 
+Implementation is optimized around isolated tasks: prefer sequential `implement-agent` runs for work items that own distinct files, and reserve parallel execution for read-only discovery or clearly disjoint tasks.
+
 <!-- version: 2.2.2 -->
 
 Process overview:

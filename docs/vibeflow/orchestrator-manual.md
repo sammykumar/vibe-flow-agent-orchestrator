@@ -240,6 +240,8 @@ Vibe Flow supports two PDD lanes:
 
 Both lanes still use the same PDD folder structure and `3-PROGRESS.md` as the source of truth.
 
+When possible, break work into isolated implementation tasks with non-overlapping file ownership. Run `implement-agent` sequentially per isolated task so each subagent owns a narrow file surface. Reserve parallelism for read-only discovery or clearly disjoint tasks.
+
 ---
 
 ## Agent: vibe-flow (Orchestrator)
@@ -274,9 +276,11 @@ Responsibilities:
 
 1. **Initialize** the plan folder and `3-PROGRESS.md`.
 2. **Compact Plan**: write a minimal task breakdown directly from the request.
-3. **Implement**: trigger the implement sub-agent.
-4. **Test**: trigger the test sub-agent.
-5. **Review**: summarize results and finalize.
+3. **Split** the work into isolated tasks when the file ownership is clear.
+4. **Implement**: trigger the implement sub-agent sequentially for each isolated task.
+5. **Parallelize safely**: use parallel subagents only for read-only discovery or clearly disjoint work.
+6. **Test**: trigger the test sub-agent.
+7. **Review**: summarize results and finalize.
 
 #### Full PDD
 
@@ -294,10 +298,14 @@ Responsibilities:
 - Review task plan with the user.
 
 4.  **Implementation Loop**:
-    - Trigger `Implement` (Implementation) sub-agent.
-    - `Implement` picks the most important task from `3-PROGRESS.md`, implements it, and performs a "Happy Path" test.
-    - Orchestrator reviews `3-PROGRESS.md` and the implementation evidence.
-    - If tasks remain or new tasks are discovered, repeat the loop.
+
+- Trigger `Implement` (Implementation) sub-agent.
+- `Implement` picks the most important isolated task from `3-PROGRESS.md`, implements it, and performs a "Happy Path" test.
+- If the current task shares files with another task, keep implementation sequential and do not parallelize the overlapping work.
+- If a task is isolated and its file surface does not overlap with other tasks, continue with the next sequential implement-agent invocation.
+- Orchestrator reviews `3-PROGRESS.md` and the implementation evidence.
+- If tasks remain or new tasks are discovered, repeat the loop.
+
 5.  **Test Phase**:
 
 - Invoke `Test` sub-agent to write and run tests proving the implementation works.

@@ -14,6 +14,8 @@ The workflow has two lanes:
 
 Both lanes still create and maintain the PDD files under `.github/plans/{status}/{major-area}/{task-name}/`.
 
+For implementation, prefer sequential `implement.agent` runs on isolated tasks with non-overlapping file ownership. Only parallelize work when the tasks are read-only or clearly disjoint.
+
 ## Core Principles
 
 **Verification over Implementation**: Focus on coordinating subagents, not performing implementation yourself.
@@ -63,9 +65,11 @@ Before starting, classify the request:
 
 1. Initialize `.github/plans/in-progress/{major-area}/{task-name}/`
 2. Initialize `3-PROGRESS.md` with a compact task plan
-3. Invoke the implement agent
-4. Invoke the test agent
-5. Review results and complete the task
+3. Split work into isolated implementation tasks where possible
+4. Invoke the implement agent sequentially for each isolated task
+5. Use parallel helpers only for read-only discovery or clearly disjoint work
+6. Invoke the test agent
+7. Review results and complete the task
 
 ### Full PDD
 
@@ -102,9 +106,10 @@ Before starting, classify the request:
 ### STEP 4: Implementation Phase
 
 1. **Invoke**: Call implement agent with absolute path to plan directory
-2. **Loop**: Continue calling until `3-PROGRESS.md` shows all tasks complete
-3. **Monitor**: Check progress file after each invocation
-4. **Update**: Mark tasks complete in task tracking as progress is made
+2. **Scope**: Prefer one isolated task per invocation when file ownership is narrow and non-overlapping
+3. **Loop**: Continue calling until `3-PROGRESS.md` shows all tasks complete
+4. **Monitor**: Check progress file after each invocation
+5. **Update**: Mark tasks complete in task tracking as progress is made
 
 ### STEP 5: Test Phase
 

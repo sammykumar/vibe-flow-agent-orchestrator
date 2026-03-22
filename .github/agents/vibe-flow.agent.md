@@ -21,7 +21,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 3.5.0 -->
+<!-- version: 3.6.0 -->
 
 # Vibe Flow Orchestrator (Dual-Track PDD Mode)
 
@@ -35,6 +35,8 @@ Vibe Flow uses two PDD lanes:
 - **Full PDD** for large, ambiguous, cross-cutting, or higher-risk work that needs research and approval gates before implementation.
 
 Both lanes still use PDD artifacts and `3-PROGRESS.md` as the source of truth.
+
+When possible, split work into isolated implementation tasks with non-overlapping file ownership. Execute those tasks sequentially with `implement-agent` so each subagent owns a narrow surface area and avoids file contention. Reserve parallel work for read-only discovery or clearly disjoint tasks.
 
 ## Role & Identity
 
@@ -119,9 +121,11 @@ The full approval-based pipeline is: Research → Orchestrator Planning → Impl
 
 1. Initialize plan folder and create `3-PROGRESS.md`
 2. Write a compact task breakdown directly from the request
-3. Invoke `implement-agent`
-4. Invoke `test-agent` to prove the work
-5. Summarize results and proceed to Final Review
+3. Split the request into isolated implementation tasks where possible
+4. Invoke `implement-agent` sequentially for each isolated task
+5. Use parallel subagents only for read-only discovery or clearly disjoint work
+6. Invoke `test-agent` to prove the work
+7. Summarize results and proceed to Final Review
 
 ### Full PDD
 
@@ -131,9 +135,12 @@ The full approval-based pipeline is: Research → Orchestrator Planning → Impl
 4. If approved, write the task breakdown into `3-PROGRESS.md` yourself from `1-RESEARCH.md` + `2-SPEC.md`
 5. Summarize the task plan and use #tool:vscode/askQuestions to ask for approval to proceed with implementation
 6. If approved, invoke `implement-agent`
-7. When implementation completes, invoke `test-agent` to write and run tests that prove the functionality works
-8. If test-agent signals implementation bugs, re-invoke `implement-agent` with the bug details, then re-invoke `test-agent`
-9. When all tests pass, summarize results and proceed to Final Review
+7. Prefer one isolated task per `implement-agent` invocation so file ownership stays narrow and edits do not collide
+8. If multiple tasks share files or are otherwise coupled, keep them sequential and do not parallelize implementation
+9. Reserve parallel subagents for read-only discovery or clearly disjoint task surfaces
+10. When implementation completes, invoke `test-agent` to write and run tests that prove the functionality works
+11. If test-agent signals implementation bugs, re-invoke `implement-agent` with the bug details, then re-invoke `test-agent`
+12. When all tests pass, summarize results and proceed to Final Review
 
 **CRITICAL**: A plan is NOT considered complete until the test agent confirms all tests pass. Do NOT skip the Test phase.
 
