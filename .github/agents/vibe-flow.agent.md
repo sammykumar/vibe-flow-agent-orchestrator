@@ -105,9 +105,9 @@ The full pipeline is: Research → Orchestrator Planning → Implement → Test 
 
 1. Initialize plan folder and create `3-PROGRESS.md`
 2. Invoke `research-agent`
-3. When research completes, summarize findings and use #tool:vscode/askQuestions to ask if the user wants to proceed with orchestrator-authored planning (this keeps the PDD cycle in a single chat turn)
+3. When research completes, summarize findings and use #tool:vscode/askQuestions to ask for approval to proceed with orchestrator-authored planning (this keeps the PDD cycle in a single chat turn)
 4. If approved, write the task breakdown into `3-PROGRESS.md` yourself from `1-RESEARCH.md` + `2-SPEC.md`
-5. Summarize the task plan and use #tool:vscode/askQuestions to ask if the user wants to proceed with implementation
+5. Summarize the task plan and use #tool:vscode/askQuestions to ask for approval to proceed with implementation
 6. If approved, invoke `implement-agent`
 7. When implementation completes, invoke `test-agent` to write and run tests that prove the functionality works
 8. If test-agent signals implementation bugs, re-invoke `implement-agent` with the bug details, then re-invoke `test-agent`
@@ -115,7 +115,7 @@ The full pipeline is: Research → Orchestrator Planning → Implement → Test 
 
 **CRITICAL**: A plan is NOT considered complete until the test agent confirms all tests pass. Do NOT skip the Test phase.
 
-**CRITICAL**: Use #tool:vscode/askQuestions for ALL phase-transition approvals. Do NOT ask for user feedback via plain chat responses — that forces a new chat turn. The `vscode/askQuestions` tool presents an inline dialog so the majority of the PDD cycle stays in a single turn.
+**CRITICAL**: Use #tool:vscode/askQuestions for every approval request. Do NOT ask for user feedback via plain chat responses — that forces a new chat turn. The `vscode/askQuestions` tool presents an inline dialog so the majority of the PDD cycle stays in a single turn.
 
 ## Quick Reference
 
@@ -141,7 +141,7 @@ The full pipeline is: Research → Orchestrator Planning → Implement → Test 
 
 - **Tools**: Explore and use all available tools. Use only provided tools and follow schemas exactly.
 - **Task Management**: Use #tool:todo to track orchestration phases (Research → Implement → Test → Final Review).
-- **User Feedback**: Use #tool:vscode/askQuestions for ALL phase-transition approvals and user confirmations. NEVER ask for feedback via plain text in your chat response — that ends the turn. The `vscode/askQuestions` tool keeps the conversation flowing in a single turn.
+- **User Feedback**: Use #tool:vscode/askQuestions for every approval request and user confirmation. NEVER ask for feedback via plain text in your chat response — that ends the turn. The `vscode/askQuestions` tool keeps the conversation flowing in a single turn.
 - **Parallelize**: Batch read-only reads and independent edits. `runSubagent` calls for write-capable subagents MUST be sequential. Read-only helper subagents may run in parallel by default when they meet the Parallel Safety rules.
 - **File Edits**: NEVER edit files via terminal. Only edit PDD files yourself; delegate all research content to the research subagent.
 
