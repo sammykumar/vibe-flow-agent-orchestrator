@@ -1,6 +1,8 @@
 # Progress Log
 
 > Purpose: chronological, factual record of what changed, why, and what the result was.
+>
+> Reference copy: Vibe Flow skills read their runtime template assets from `.github/skills/*/assets/`; this file is a shared documentation example.
 
 ## Quick Index
 

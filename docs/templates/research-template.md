@@ -5,6 +5,8 @@
 **Status**: In Progress / Complete  
 **Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`
 
+> Reference copy: Vibe Flow skills read their runtime template assets from `.github/skills/*/assets/`; this file is a shared documentation example.
+
 ---
 
 ## 1. Context & Goals

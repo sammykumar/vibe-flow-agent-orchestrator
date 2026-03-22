@@ -63,6 +63,9 @@ skill directory):
 - `assets/progress-log-template.md` — starter `3-PROGRESS.md`
 - `references/REFERENCE.md` — tool usage and scope details
 
+These `assets/` files are the templates the skill reads at runtime. The files in `docs/templates/` are reference copies for documentation and do not drive agent behavior directly.
+
+
 ## Example usage
 
 ```text

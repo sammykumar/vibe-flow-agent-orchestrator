@@ -15,4 +15,5 @@ I want to implement a new feature.
 Please follow the PDD protocol:
 
 1. Initialize a new plan folder in `.github/plans/in-progress/`.
-2. Begin the Research phase.
+2. Create `1-PROGRESS.md` first.
+3. Begin the Research phase.
