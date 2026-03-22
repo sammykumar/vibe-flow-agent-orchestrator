@@ -4,7 +4,7 @@
 **Agent**: research.agent  
 **Status**: Draft / Under Review / Approved / Implemented  
 **Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`  
-**Based on Research**: `3-RESEARCH.md`
+**Based on Research**: `2-RESEARCH.md`
 
 ---
 
@@ -597,8 +597,8 @@ newFunction(param: string): Promise<Result>
 
 ### Related Documentation
 
-- [Research Document](3-RESEARCH.md)
-- [Implementation Tasks](5-TASKS.md)
+- [Progress Log](1-PROGRESS.md)
+- [Research Document](2-RESEARCH.md)
 - [{Other relevant doc}](path/to/doc.md)
 
 ### External Resources

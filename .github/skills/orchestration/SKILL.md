@@ -22,7 +22,7 @@ For implementation, prefer sequential `implement.agent` runs on isolated tasks w
 
 **Audit Mindset**: Before closing any task, verify every subagent fulfilled its duties (test coverage, diagrams, documentation).
 
-**Progress-Driven**: The single source of truth is `.github/plans/in-progress/{major-area}/{task-name}/3-PROGRESS.md`.
+**Progress-Driven**: The single source of truth is `.github/plans/in-progress/{major-area}/{task-name}/1-PROGRESS.md`.
 
 **Sequential Execution (write-capable)**: Call write-capable subagents sequentially until ALL tasks are declared complete in the progress file.
 
@@ -42,9 +42,9 @@ All work tracked in: `.github/plans/{status}/{major-area}/{task-name}/`
 
 Required files:
 
-- `1-RESEARCH.md` - Investigation findings
-- `2-SPEC.md` - Business context + technical specification
-- `3-PROGRESS.md` - **Single source of truth** for tasks and current state
+- `1-PROGRESS.md` - **Single source of truth** for tasks and current state
+- `2-RESEARCH.md` - Investigation findings
+- `3-SPEC.md` - Business context + technical specification
 
 **Templates**: PDD file templates are available in [assets/](assets/) directory:
 
@@ -64,7 +64,7 @@ Before starting, classify the request:
 ### Fast Track PDD
 
 1. Initialize `.github/plans/in-progress/{major-area}/{task-name}/`
-2. Initialize `3-PROGRESS.md` with a compact task plan
+2. Initialize `1-PROGRESS.md` with a compact task plan
 3. Split work into isolated implementation tasks where possible
 4. Invoke the implement agent sequentially for each isolated task
 5. Use parallel helpers only for read-only discovery or clearly disjoint work
@@ -78,12 +78,12 @@ Before starting, classify the request:
 **New Task:**
 
 1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
-2. Initialize `3-PROGRESS.md` (tasks and progress log)
+2. Initialize `1-PROGRESS.md` (tasks and progress log)
 3. Initialize task tracking with phases: Research, Orchestrator Planning, Implement, Test, Final Review
 
 **Existing Task:**
 
-1. Read `3-PROGRESS.md` to determine current state
+1. Read `1-PROGRESS.md` to determine current state
 2. Resume task tracking state
 
 **Critical**: All agent-created tasks must be created in `in-progress/` directory. Use `todo/` only for user plan-only/manual planning requests (no execution).
@@ -92,14 +92,14 @@ Before starting, classify the request:
 
 1. **Invoke**: Call research agent with absolute path to plan directory
 2. **Wait**: For signal "Research phase complete"
-3. **Verify**: Confirm `1-RESEARCH.md` and `2-SPEC.md` exist
+3. **Verify**: Confirm `2-RESEARCH.md` and `3-SPEC.md` exist
 4. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with orchestrator-authored planning (keeps the PDD cycle in a single chat turn)
 5. **Update**: Mark Research phase complete in task tracking
 
 ### STEP 3: Orchestrator Planning Phase
 
-1. **Author**: Orchestrator writes task breakdown into `3-PROGRESS.md` directly from `1-RESEARCH.md` and `2-SPEC.md`
-2. **Verify**: Confirm `3-PROGRESS.md` includes task list with file targets, verification steps, and dependencies
+1. **Author**: Orchestrator writes task breakdown into `1-PROGRESS.md` directly from `2-RESEARCH.md` and `3-SPEC.md`
+2. **Verify**: Confirm `1-PROGRESS.md` includes task list with file targets, verification steps, and dependencies
 3. **Review**: Use `#tool:agent/askQuestions` to ask the user whether to proceed with implementation (keeps the PDD cycle in a single chat turn)
 4. **Update**: Mark Orchestrator Planning phase complete in task tracking
 
@@ -107,7 +107,7 @@ Before starting, classify the request:
 
 1. **Invoke**: Call implement agent with absolute path to plan directory
 2. **Scope**: Prefer one isolated task per invocation when file ownership is narrow and non-overlapping
-3. **Loop**: Continue calling until `3-PROGRESS.md` shows all tasks complete
+3. **Loop**: Continue calling until `1-PROGRESS.md` shows all tasks complete
 4. **Monitor**: Check progress file after each invocation
 5. **Update**: Mark tasks complete in task tracking as progress is made
 
@@ -117,18 +117,18 @@ Before starting, classify the request:
 2. **Wait**: For signal "Testing complete" or "Testing blocked"
 3. **If blocked**: Re-invoke implement agent to fix reported bugs, then re-invoke test agent
 4. **Loop**: Continue implement→test cycle until all tests pass
-5. **Verify**: Confirm `3-PROGRESS.md` contains test results with pass/fail evidence
+5. **Verify**: Confirm `1-PROGRESS.md` contains test results with pass/fail evidence
 6. **Update**: Mark Test phase complete in task tracking
 
 ### STEP 6: Final Review
 
-1. **Summarize**: Review `3-PROGRESS.md` for completion signals, implementation evidence, AND passing test evidence.
+1. **Summarize**: Review `1-PROGRESS.md` for completion signals, implementation evidence, AND passing test evidence.
 2. **Gate**: A plan is NOT complete unless the test agent confirms all tests pass.
 3. **Update**: Mark Final Review complete in task tracking.
 
 **Final Review Checklist:**
 
-1. **Progress Status**: `3-PROGRESS.md` shows completion signals
+1. **Progress Status**: `1-PROGRESS.md` shows completion signals
 2. **Tests Passing**: Test agent confirmed all tests pass with evidence logged
 3. **README**: Updated to reflect new state (if required)
 4. **Cleanup**: All temporary POC or test files removed
@@ -200,17 +200,6 @@ Phases to track:
 ## Quality Verification Checklist
 
 Before marking task complete, verify:
-
-- [ ] All PDD files exist and are complete
-- [ ] Implementation complete per task list in `3-PROGRESS.md`
-- [ ] Happy-path verification recorded by implement agent
-- [ ] Test agent wrote and ran tests with all passing
-- [ ] Test evidence (pass/fail counts, coverage) logged in `3-PROGRESS.md`
-- [ ] README reflects changes
-- [ ] Cleanup performed (no temp files)
-- [ ] Progress file shows `finished` status
-
-## Status Values
 
 - `todo` - Plan-only/manual requests (user-created; no execution)
 - `in-progress` - Active work (agents always initialize here)

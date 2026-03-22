@@ -57,9 +57,9 @@ Major Area Examples:
 Required files:
 
 ```
-1-RESEARCH.md
-2-SPEC.md
-3-PROGRESS.md
+1-PROGRESS.md
+2-RESEARCH.md
+3-SPEC.md
 ```
 
 Documentation output:
@@ -72,9 +72,9 @@ docs/{major-area}/{doc}.md
 
 | File          | Purpose                                                 |
 | ------------- | ------------------------------------------------------- |
-| 1-RESEARCH.md | Investigation + **Alternative Matrix**                  |
-| 2-SPEC.md     | Business context + Tech Spec + **Impact Analysis**      |
-| 3-PROGRESS.md | Task plan + append-only execution log (Source of Truth) |
+| 1-PROGRESS.md | Task plan + append-only execution log (Source of Truth) |
+| 2-RESEARCH.md | Investigation + **Alternative Matrix**                  |
+| 3-SPEC.md     | Business context + Tech Spec + **Impact Analysis**      |
 
 ### Progress file format (recommended)
 
@@ -238,7 +238,7 @@ Vibe Flow supports two PDD lanes:
 - **Fast Track** for small to medium, bounded, low-risk changes that can go straight from plan initialization to implementation and testing.
 - **Full PDD** for large, ambiguous, cross-cutting, or higher-risk changes that need research and approval gates before implementation.
 
-Both lanes still use the same PDD folder structure and `3-PROGRESS.md` as the source of truth.
+Both lanes still use the same PDD folder structure and `1-PROGRESS.md` as the source of truth.
 
 When possible, break work into isolated implementation tasks with non-overlapping file ownership. Run `implement-agent` sequentially per isolated task so each subagent owns a narrow file surface. Reserve parallelism for read-only discovery or clearly disjoint tasks.
 
@@ -260,7 +260,7 @@ Before starting work, classify the request into one of two lanes:
 Responsibilities:
 
 - **Goal Decomposition**: Parse user intent and break it down into a structured PDD folder.
-- **Progress Tracking**: Initialize and maintain the `3-PROGRESS.md` file as the source of truth for the task lifecycle.
+- **Progress Tracking**: Initialize and maintain the `1-PROGRESS.md` file as the source of truth for the task lifecycle.
 - **Sub-agent Orchestration**: Trigger specialized sub-agents (Research, Implement, Test) sequentially for write-capable work; run read-only research helpers in parallel by default when safe.
 - **Verification**: Evaluate the outputs of sub-agents to ensure tasks are completed correctly before proceeding.
 - **State Management**: Manage transitions between PDD statuses (`todo`, `in-progress`, `finished`).
@@ -274,7 +274,7 @@ Responsibilities:
 
 #### Fast Track PDD
 
-1. **Initialize** the plan folder and `3-PROGRESS.md`.
+1. **Initialize** the plan folder and `1-PROGRESS.md`.
 2. **Compact Plan**: write a minimal task breakdown directly from the request.
 3. **Split** the work into isolated tasks when the file ownership is clear.
 4. **Implement**: trigger the implement sub-agent sequentially for each isolated task.
@@ -286,24 +286,24 @@ Responsibilities:
 
 1.  **Initialization**:
     - Create PDD structure: `.github/plans/in-progress/{area}/{task}/`.
-    - Initialize `3-PROGRESS.md`.
+    - Initialize `1-PROGRESS.md`.
 2.  **Research & Design**:
 
-- Call `Research` sub-agent to populate `1-RESEARCH.md` and `2-SPEC.md`.
+- Call `Research` sub-agent to populate `2-RESEARCH.md` and `3-SPEC.md`.
 - Review specification with the user.
 
 3.  **Planning Phase (Orchestrator-owned)**:
 
-- Write task breakdown into `3-PROGRESS.md` directly from `1-RESEARCH.md` and `2-SPEC.md`.
+- Write task breakdown into `1-PROGRESS.md` directly from `2-RESEARCH.md` and `3-SPEC.md`.
 - Review task plan with the user.
 
 4.  **Implementation Loop**:
 
 - Trigger `Implement` (Implementation) sub-agent.
-- `Implement` picks the most important isolated task from `3-PROGRESS.md`, implements it, and performs a "Happy Path" test.
+- `Implement` picks the most important isolated task from `1-PROGRESS.md`, implements it, and performs a "Happy Path" test.
 - If the current task shares files with another task, keep implementation sequential and do not parallelize the overlapping work.
 - If a task is isolated and its file surface does not overlap with other tasks, continue with the next sequential implement-agent invocation.
-- Orchestrator reviews `3-PROGRESS.md` and the implementation evidence.
+- Orchestrator reviews `1-PROGRESS.md` and the implementation evidence.
 - If tasks remain or new tasks are discovered, repeat the loop.
 
 5.  **Test Phase**:
@@ -325,18 +325,18 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
 - Write-capable subagents (including `research-agent`, `implement-agent`, and `test-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
-- **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
-- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `3-PROGRESS.md`).
+- **Single-writer rule**: Only the orchestrator writes to `1-PROGRESS.md` during parallel runs.
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `1-PROGRESS.md`).
 - Summarize each subagent's outputs separately before synthesis.
 - Tool confirmations must be serialized: only one subagent may request interactive confirmation at a time.
-- Update the Subagent Ledger section in `3-PROGRESS.md` for each parallel run.
+- Update the Subagent Ledger section in `1-PROGRESS.md` for each parallel run.
 
 ### Rules
 
 - **Access Tooling**: Must have access to `runSubagent`. If missing, fail immediately.
-- **Progress-First**: Always check/update `3-PROGRESS.md` before and after every sub-agent call.
+- **Progress-First**: Always check/update `1-PROGRESS.md` before and after every sub-agent call.
 - **Tool Preamble**: Before every tool use, emit a one-line preamble: **Goal → Plan → Policy**.
-- **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative in `2-PROGRESS.md`.
+- **High Signal Updates**: Prefer concise, outcome-focused updates. Use diffs and test logs over verbose narrative in `1-PROGRESS.md`.
 - **Verification Over Implementation**: Do not write source code. Verify that sub-agents did.
 - **Iterative Completion**: Continue calling sub-agents until all tasks in `2-PROGRESS.md` are marked as `completed`.
 - **User Liaison**: Serve as the single point of contact for the user, summarizing progress and escalating ambiguities.
@@ -358,7 +358,7 @@ Investigation + specification authoring.
 Produces:
 
 - 3-RESEARCH.md
-- 4-SPEC.md
+- 3-SPEC.md
 
 Updates:
 
@@ -398,7 +398,7 @@ Updates:
 
 Produces:
 
-- 5-TASKS.md
+- 1-PROGRESS.md
 
 Updates:
 
@@ -411,7 +411,7 @@ Updates:
 
 ### Purpose
 
-Execute `5-TASKS.md` with maximal initiative and persistence. Implement Agent's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
+Execute `1-PROGRESS.md` with maximal initiative and persistence. Implement Agent's goal is **autonomous resolution**: solve the problem by iterating through implementation, verification, and self-correction until the request is fully satisfied.
 
 Produces:
 
@@ -454,13 +454,13 @@ Produces:
 Produces:
 
 - **Test files**: Unit, integration, and/or E2E tests appropriate to the repo
-- **Test results**: Pass/fail evidence logged in `3-PROGRESS.md`
+- **Test results**: Pass/fail evidence logged in `1-PROGRESS.md`
 - **Rejection signals**: If tests reveal implementation bugs, rejects back to orchestrator with specifics
 
 ### Responsibilities
 
 1.  **Discovery**: Identify test framework, runner, config, conventions, and existing patterns before writing any tests.
-2.  **Unit Testing**: Write granular tests for every function/class introduced per `2-SPEC.md`. Mock external dependencies.
+2.  **Unit Testing**: Write granular tests for every function/class introduced per `3-SPEC.md`. Mock external dependencies.
 3.  **Integration Testing**: Verify contract adherence between modules (API endpoints, service layers, data flows).
 4.  **E2E Testing**: Write browser-based or full-system flows ONLY when the repo has an E2E framework configured.
 5.  **Convention Compliance**: Match existing test patterns, file structure, and naming conventions.
@@ -476,10 +476,10 @@ Produces:
 
 1.  **Discovery (always first)**:
     - Scan for test config, dependencies, existing test files, and conventions.
-    - Record findings in `3-PROGRESS.md`.
+    - Record findings in `1-PROGRESS.md`.
     - If no test framework detected, report to orchestrator.
 2.  **Spec-to-Test**:
-    - Analyze `2-SPEC.md` acceptance criteria.
+    - Analyze `3-SPEC.md` acceptance criteria.
     - Write tests covering every acceptance criterion.
 3.  **Implementation Verification**:
     - Run tests against implement agent's output.
@@ -538,7 +538,7 @@ docs/
     - Scans `src/` for major changes.
     - Updates root `README.md` installation, usage, and status sections.
 2.  **Architecture Viz**:
-    - _Input_: `4-SPEC.md` or existing code structure.
+    - _Input_: `3-SPEC.md` or existing code structure.
     - _Action_: Generates Mermaid diagrams to visualize relationships and data flow.
     - _Output_: `docs/architecture/diagrams/*.mmd` + embedded images in Markdown.
 3.  **API Scribe**:

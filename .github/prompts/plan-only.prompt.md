@@ -16,6 +16,6 @@ I want to create a plan-only PDD folder without starting execution.
 Please:
 
 1. Create a new plan folder in `.github/plans/todo/{major-area}/{plan-name}/`.
-2. Initialize `3-PROGRESS.md` to capture the plan context.
-3. If needed, create placeholders for `1-RESEARCH.md` and `2-SPEC.md` without invoking subagents.
+2. Initialize `1-PROGRESS.md` to capture the plan context.
+3. If needed, create placeholders for `2-RESEARCH.md` and `3-SPEC.md` without invoking subagents.
 4. Stop after plan creation. Do not start research or implementation.

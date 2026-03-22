@@ -29,7 +29,7 @@
 | Area              | Details                                                       |
 | ----------------- | ------------------------------------------------------------- |
 | Key discoveries   | - Finding 1<br>- Finding 2<br>- Finding 3                     |
-| Alternatives      | Evaluated 3 approaches, selected Option B (see 3-RESEARCH.md) |
+| Alternatives      | Evaluated 3 approaches, selected Option B (see 2-RESEARCH.md) |
 | External sources  | - [Source 1](url)<br>- [Source 2](url)                        |
 | Notes / decisions | - Decision rationale<br>- Known constraints                   |
 
@@ -42,9 +42,9 @@
 
 | File          | Status      |
 | ------------- | ----------- |
-| 3-RESEARCH.md | ✅ Complete |
-| 4-SPEC.md     | ✅ Complete |
-| 5-TASKS.md    | ✅ Complete |
+| 1-PROGRESS.md | ✅ Complete |
+| 2-RESEARCH.md | ✅ Complete |
+| 3-SPEC.md     | ✅ Complete |
 
 ### Risks
 

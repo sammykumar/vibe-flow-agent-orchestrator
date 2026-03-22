@@ -30,9 +30,9 @@ Use the **plan-only prompt** to create a `todo/` plan without starting research 
 
 | File            | Purpose                                                 |
 | --------------- | ------------------------------------------------------- |
-| `1-RESEARCH.md` | Investigation + Alternative Matrix                      |
-| `2-SPEC.md`     | Business context + Tech Spec + Impact Analysis          |
-| `3-PROGRESS.md` | Task plan + append-only execution log (Source of Truth) |
+| `1-PROGRESS.md` | Task plan + append-only execution log (Source of Truth) |
+| `2-RESEARCH.md` | Investigation + Alternative Matrix                      |
+| `3-SPEC.md`     | Business context + Tech Spec + Impact Analysis          |
 
 ### Documentation Output
 
@@ -40,11 +40,11 @@ Agents produce documentation in: `docs/{major-area}/{doc}.md`
 
 ### Workflow
 
-1. **Initialize**: Create folder in `in-progress`.
-2. **Research**: Populate `1-RESEARCH.md` and `2-SPEC.md`.
-3. **Orchestrator Planning**: `vibe-flow` writes task breakdown into `3-PROGRESS.md` from `1-RESEARCH.md` and `2-SPEC.md`.
-4. **Implement**: Execute tasks, logging to `3-PROGRESS.md`.
-5. **Test**: `test-agent` writes and runs tests proving functionality works. Logs results to `3-PROGRESS.md`.
+1. **Initialize**: Create `1-PROGRESS.md` in the plan folder.
+2. **Research**: Populate `2-RESEARCH.md` and `3-SPEC.md`.
+3. **Orchestrator Planning**: `vibe-flow` writes task breakdown into `1-PROGRESS.md` from `2-RESEARCH.md` and `3-SPEC.md`.
+4. **Implement**: Execute tasks, logging to `1-PROGRESS.md`.
+5. **Test**: `test-agent` writes and runs tests proving functionality works. Logs results to `1-PROGRESS.md`.
 6. **If tests fail due to implementation bugs**: Return to Implement, fix, then re-run Test.
 7. **Final Review**: Plan is complete only when all tests pass.
 8. **Finish**: User manually moves the folder to `finished`.
@@ -56,10 +56,10 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 - Only run subagents in parallel if they are **read-only research helpers** (no file edits, no plan artifacts).
 - Write-capable subagents (including `research-agent`, `implement-agent`, and `test-agent`) MUST run sequentially.
 - Each parallel subagent MUST declare: `subagent-id`, `scope` (read-only/write), `lock-scope`, and `expected-outputs`.
-- **Single-writer rule**: Only the orchestrator writes to `3-PROGRESS.md` during parallel runs.
-- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `3-PROGRESS.md`).
+- **Single-writer rule**: Only the orchestrator writes to `1-PROGRESS.md` during parallel runs.
+- Wait for all subagents in the parallel group to complete; reconcile deterministically (e.g., order in task list within `1-PROGRESS.md`).
 - Summarize each subagent’s outputs separately before synthesis.
-- Update the Subagent Ledger section in `3-PROGRESS.md` for each parallel run.
+- Update the Subagent Ledger section in `1-PROGRESS.md` for each parallel run.
 
 ## Progress Log Format (Recommended)
 
@@ -84,7 +84,7 @@ Parallel read-only helpers are ON by default in v2. Use parallelism only for rea
 | research-a1 | code scan         | read-only | n/a        | ✅     | 09:10 | 09:20 | findings to VF |
 | research-a2 | dependency review | read-only | n/a        | ✅     | 09:10 | 09:25 | findings to VF |
 
-> **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `3-PROGRESS.md` concurrently.
+> **Single-writer rule**: The orchestrator updates this ledger during parallel runs. Subagents must not edit `1-PROGRESS.md` concurrently.
 
 ## 2026-01-12 — Implement Agent
 
@@ -121,7 +121,7 @@ None
 
 ## Alternative Matrix (Research Phase)
 
-When researching solutions, document alternatives in `1-RESEARCH.md`:
+When researching solutions, document alternatives in `2-RESEARCH.md`:
 
 ```markdown
 ## Alternative Matrix
@@ -135,7 +135,7 @@ When researching solutions, document alternatives in `1-RESEARCH.md`:
 
 ## Impact Analysis (Spec Phase)
 
-Include in `2-SPEC.md` to identify ripple effects:
+Include in `3-SPEC.md` to identify ripple effects:
 
 ```markdown
 ## Impact Analysis

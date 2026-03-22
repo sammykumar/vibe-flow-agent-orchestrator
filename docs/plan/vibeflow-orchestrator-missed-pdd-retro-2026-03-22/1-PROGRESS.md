@@ -2,6 +2,7 @@
 
 ## Status
 
+- [x] Progress
 - [x] Research
 - [x] Spec
 - [x] Root cause summary

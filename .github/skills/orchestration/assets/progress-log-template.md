@@ -9,7 +9,7 @@
 **Date**: YYYY-MM-DD  
 **Agent**: vibe-flow  
 **Status**: Draft / Approved / In Progress / Complete  
-**Based on Spec**: `2-SPEC.md`
+**Based on Spec**: `3-SPEC.md`
 
 ### Goal
 
@@ -21,8 +21,8 @@
 
 ### Pre-Implementation Checklist
 
-- [ ] Spec reviewed and approved (`2-SPEC.md`)
-- [ ] Research findings validated (`1-RESEARCH.md`)
+- [ ] Spec reviewed and approved (`3-SPEC.md`)
+- [ ] Research findings validated (`2-RESEARCH.md`)
 - [ ] Dependencies identified and available
 
 ### Implementation Tasks
@@ -117,7 +117,7 @@
 | Area              | Details                                                       |
 | ----------------- | ------------------------------------------------------------- |
 | Key discoveries   | - Finding 1<br>- Finding 2<br>- Finding 3                     |
-| Alternatives      | Evaluated 3 approaches, selected Option B (see 1-RESEARCH.md) |
+| Alternatives      | Evaluated 3 approaches, selected Option B (see 2-RESEARCH.md) |
 | External sources  | - [Source 1](url)<br>- [Source 2](url)                        |
 | Notes / decisions | - Decision rationale<br>- Known constraints                   |
 
@@ -130,8 +130,9 @@
 
 | File          | Status      |
 | ------------- | ----------- |
-| 1-RESEARCH.md | ✅ Complete |
-| 2-SPEC.md     | ✅ Complete |
+| 1-PROGRESS.md | ✅ Complete |
+| 2-RESEARCH.md | ✅ Complete |
+| 3-SPEC.md     | ✅ Complete |
 
 ### Risks
 
