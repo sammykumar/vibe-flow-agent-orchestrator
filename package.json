@@ -3,7 +3,10 @@
   "version": "3.6.0",
   "type": "module",
   "scripts": {
-    "sync": "node scripts/sync-apm.js"
+    "sync": "node scripts/sync-apm.js",
+    "version:patch": "node scripts/version.js patch",
+    "version:minor": "node scripts/version.js minor",
+    "version:major": "node scripts/version.js major"
   },
   "dependencies": {
     "open": "^11.0.0",
