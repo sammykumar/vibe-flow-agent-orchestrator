@@ -210,16 +210,16 @@ The following MCP servers provide essential capabilities for the Vibe Flow agent
   - `mcp_microsoft_pla_browser_run_code`: Execute browser automation scripts
   - Browser control, screenshot capture, network monitoring
 
-#### Chrome DevTools (Runtime Inspection)
+#### Browser (Runtime Inspection)
 
-- **Package**: `io.github.chromedevtools/chrome-devtools-mcp/*`
-- **Purpose**: Runtime debugging, network analysis, performance profiling
+- **Tool**: `browser`
+- **Purpose**: Runtime debugging, DOM inspection, network analysis, performance profiling
 - **Usage**:
   - Research Agent: Investigate runtime behavior and issues
   - Test Agent: Validate performance and network activity
 - **Tools**:
-  - `mcp_io_github_chr_get_network_request`: Inspect network requests
-  - Console log access, DOM inspection, performance metrics
+  - Browser navigation and inspection utilities
+  - Screenshot capture and page state inspection
 
 ### Setup Requirements
 
@@ -436,7 +436,7 @@ Produces:
 - **Core**: `read_file`, `replace_string_in_file`, `create_file`, `file_search`
 - **Execution**: `run_in_terminal` (for running test suites like `vitest`, `jest`, `playwright`, `pytest`), `get_terminal_output`
 - **Analysis**: `get_errors`, `list_code_usages`
-- **Context**: `io.github.upstash/context7/*`, `io.github.chromedevtools/chrome-devtools-mcp/*`
+- **Context**: `io.github.upstash/context7/*`, `browser`
 
 ### Workflow Modes
 

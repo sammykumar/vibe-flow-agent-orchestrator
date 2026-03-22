@@ -6,29 +6,14 @@ disable-model-invocation: true
 agents: []
 tools:
   [
-    vscode/memory,
-    vscode/runCommand,
-    execute/testFailure,
-    execute/getTerminalOutput,
-    execute/awaitTerminal,
-    execute/killTerminal,
-    execute/runTask,
-    execute/createAndRunTask,
-    execute/runInTerminal,
-    read/problems,
-    read/readFile,
-    read/terminalSelection,
-    read/terminalLastCommand,
-    read/getTaskOutput,
+    vscode,
+    execute,
+    read,
     agent,
-    edit/createDirectory,
-    edit/createFile,
-    edit/editFiles,
-    edit/rename,
+    edit,
     search,
     web,
     browser,
-    "io.github.chromedevtools/chrome-devtools-mcp/*",
     "io.github.upstash/context7/*",
     vscode.mermaid-chat-features/renderMermaidDiagram,
     todo,
@@ -36,7 +21,7 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 3.4.0 -->
+<!-- version: 3.4.1 -->
 
 # Vibe Flow Orchestrator (Incremental Mode)
 
