@@ -10,20 +10,19 @@ This is the **source code** for the Vibe Flow AI Agents, distributed as an [APM]
 - The "Compiler" is the LLM that reads them.
 - The "Package Manager" is [APM](https://github.com/microsoft/apm).
 
-**Note on Repository Structure**: This repository uses a dual-directory layout:
+**Note on Repository Structure**: This repository uses a source-and-mirror layout:
 
-- `.apm/` — the **distribution source** that APM reads when consumers run `apm install sammykumar/vibe-flow-agent-orchestrator`
-- `.github/agents/` (and `.github/skills/`, `.github/prompts/`) — **committed deployed copies** for dogfooding in this source repo. VS Code only reads agents from `.github/agents/`, so these files are kept in sync with `.apm/` to allow testing before publishing.
+- `.github/agents/` (and `.github/skills/`, `.github/prompts/`) — the **authoring source** for agent, skill, and prompt content. VS Code reads agents from `.github/agents/`, so this is the place to edit behavior.
+- `.apm/` — the **generated distribution mirror** that APM reads when consumers run `apm install sammykumar/vibe-flow-agent-orchestrator`.
 
-When you modify an agent, skill, or prompt, update it in **both** `.apm/` and `.github/` to keep them in sync.
+When you modify an agent, skill, or prompt, edit the `.github/` copy first, then run `npm run sync` to copy those changes into `.apm/`.
 
 ## ✅ Source of Truth
 
 Use these locations as the authoritative sources for behavior and workflow details:
 
-- `.apm/agents/` and `.github/agents/` (keep in sync)
-- `.apm/skills/` and `.github/skills/` (keep in sync)
-- `.apm/prompts/` and `.github/prompts/` (keep in sync)
+- `.github/agents/`, `.github/skills/`, and `.github/prompts/` (authoring source)
+- `.apm/agents/`, `.apm/skills/`, and `.apm/prompts/` (generated mirror; keep in sync via `npm run sync`)
 - `apm.yml` (package manifest — version must match `vibe-flow.agent.md`)
 - `docs/vibeflow/`
 
@@ -49,24 +48,25 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 ### Modifying Agents
 
 1.  **Edit the Prompt:** precise wording matters. Use "YOU MUST" for critical constraints.
-2.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
-3.  **Task Management:** All agents include guidance to use `#tool:todo` for tracking work. Ensure new agents or major updates maintain this pattern.
-4.  **Bump Version:** Run `npm run version:patch` (or `version:minor` / `version:major`). This bumps `package.json` and `apm.yml` in sync, then commits, tags, and pushes.
+2.  **Edit the `.github/` copy first:** treat `.github/` as the working source and `npm run sync` as the publishing step.
+3.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
+4.  **Task Management:** All agents include guidance to use `#tool:todo` for tracking work. Ensure new agents or major updates maintain this pattern.
+5.  **Bump Version:** Run `npm run version:patch` (or `version:minor` / `version:major`). This bumps `package.json` and `apm.yml` in sync, then commits, tags, and pushes.
 
 ### Adding New Agents
 
 1.  Create `new-agent-name.agent.md` in `.github/agents/`.
-2.  Copy it to `.apm/agents/` as well.
+2.  Run `npm run sync` so the new agent is mirrored into `.apm/agents/`.
 3.  Add it to `vibe-flow.agent.md`'s orchestration logic (it needs to know the subagent exists).
 
 ### Change Checklist (Agents)
 
 When changing agents or workflow:
 
-1. Update .apm/agents/ (distribution source — this is what APM deploys to consumers)
-2. Update .github/agents/ (dogfood copy — keep in sync)
+1. Update `.github/agents/` (authoring source).
+2. Run `npm run sync` to refresh `.apm/agents/`.
 3. Update docs/vibeflow/pdd-protocol.md and docs/vibeflow/orchestrator-manual.md
-4. Update .github/prompts/ and .apm/prompts/ if prompts reference the new flow
+4. Update `.github/prompts/` and run `npm run sync` if prompts reference the new flow
 5. Run `npm run version:patch` (or `minor`/`major`) to bump both `package.json` and `apm.yml`, commit, tag, and push
 
 ## 🧪 Testing & Validation
@@ -79,15 +79,15 @@ There is no `npm test` for prompts. Validation is behavioral.
 
 ## 🧩 Architecture Summary
 
-This repository is the **source of truth** for the Vibe Flow agent suite. For behavior details, defer to the agent definitions and documentation:
+This repository is authored in `.github/` and mirrored into `.apm/` for distribution. For behavior details, defer to the agent definitions and documentation:
 
-- Agent definitions in .apm/agents/ (distribution) and .github/agents/ (dogfood)
+- Agent definitions in `.github/agents/` (authoring source) and `.apm/agents/` (distribution mirror)
 - PDD protocol in docs/vibeflow/pdd-protocol.md
 - Orchestrator manual in docs/vibeflow/orchestrator-manual.md
 
 ## 🚫 Common Pitfalls
 
-- **Forgetting `.apm/` sync:** If you edit agent/skill/prompt files in `.github/`, you MUST also update the corresponding file in `.apm/`. Both are canonical sources for different consumers.
+- **Forgetting `.apm/` sync:** If you edit agent/skill/prompt files in `.github/`, you MUST run `npm run sync` so the mirrored `.apm/` copy stays current.
 - **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
 - **Inconsistent Task Management:** All agents should use `#tool:todo` consistently for tracking work
 

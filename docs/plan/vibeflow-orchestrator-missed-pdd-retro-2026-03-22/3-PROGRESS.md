@@ -2,11 +2,11 @@
 
 ## Status
 
-- [ ] Research
-- [ ] Spec
-- [ ] Root cause summary
-- [ ] Prevention controls
-- [ ] Validation
+- [x] Research
+- [x] Spec
+- [x] Root cause summary
+- [x] Prevention controls
+- [x] Validation
 
 ## Notes
 
