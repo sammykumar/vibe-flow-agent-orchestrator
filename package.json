@@ -1,4 +1,10 @@
 {
+  "name": "vibe-flow",
+  "version": "3.6.0",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-apm.js"
+  },
   "dependencies": {
     "open": "^11.0.0",
     "skills": "^1.0.0"
