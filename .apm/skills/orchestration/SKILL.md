@@ -54,7 +54,6 @@ Required files:
 
 The files under `assets/` are the runtime templates used by the skill. The copies in `docs/templates/` are reference material only and are not read automatically by the agents.
 
-
 ## Orchestration Workflow
 
 ### Lane Selection

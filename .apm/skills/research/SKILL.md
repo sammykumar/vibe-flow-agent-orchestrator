@@ -65,7 +65,6 @@ skill directory):
 
 These `assets/` files are the templates the skill reads at runtime. The files in `docs/templates/` are reference copies for documentation and do not drive agent behavior directly.
 
-
 ## Example usage
 
 ```text
