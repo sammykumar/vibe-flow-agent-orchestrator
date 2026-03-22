@@ -6,10 +6,16 @@
 BUMP_TYPE="${1:-patch}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENT_FILE="$SCRIPT_DIR/.github/agents/vibe-flow.agent.md"
+APM_FILE="$SCRIPT_DIR/apm.yml"
 
 if [ ! -f "$AGENT_FILE" ]; then
     echo "Error: Agent file not found at $AGENT_FILE"
     echo "Expected path: .github/agents/vibe-flow.agent.md (anchored to script directory)"
+    exit 1
+fi
+
+if [ ! -f "$APM_FILE" ]; then
+    echo "Error: APM manifest not found at $APM_FILE"
     exit 1
 fi
 
@@ -53,10 +59,13 @@ echo "Bumping to version: $NEW_VERSION"
 # Update version in orchestrator file (single source of truth)
 sed -i "" "s/<!-- version: .* -->/<!-- version: $NEW_VERSION -->/" "$AGENT_FILE"
 
-echo "Version bumped from $CURRENT_VERSION to $NEW_VERSION in $AGENT_FILE"
+# Update version in APM manifest
+sed -i "" "s/^version: .*/version: $NEW_VERSION/" "$APM_FILE"
+
+echo "Version bumped from $CURRENT_VERSION to $NEW_VERSION in $AGENT_FILE and $APM_FILE"
 
 # Git operations
-git add "$AGENT_FILE"
+git add "$AGENT_FILE" "$APM_FILE"
 git commit -m "chore: bump version to $NEW_VERSION"
 git push origin
 

@@ -1,0 +1,16 @@
+name: vibe-flow
+version: 3.6.0
+description: Plan-Driven Development (PDD) agent suite for GitHub Copilot, Claude, and Cursor — orchestrator + research, implement, and test subagents
+author: SK Productions LLC
+license: MIT
+repository: sammykumar/vibe-flow-agent-orchestrator
+homepage: https://github.com/sammykumar/vibe-flow-agent-orchestrator
+tags:
+  - pdd
+  - orchestration
+  - github-copilot
+  - claude
+  - cursor
+  - agents
+  - ai-native
+  - plan-driven-development

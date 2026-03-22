@@ -96,12 +96,53 @@ flowchart TD
     style PR fill:#f39c12,stroke:#333,color:#fff,stroke-dasharray: 4 2
 ```
 
-## �🚀 Quick Start
+## 🚀 Quick Start
 
-| Action                  | Description                                                          | Install                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ----------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Install Vibe Flow**   | Bootstrap the incremental Vibe Flow agent suite into your repository | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Finstall-vibeflow.md)<br />[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode-insiders:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Finstall-vibeflow.md)     |
-| **Uninstall Vibe Flow** | Safely remove Vibe Flow from your repository (with backup options)   | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Funinstall-vibeflow.md)<br />[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](vscode-insiders:chat-prompt/install?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsammykumar%2Fvibe-flow-agent-orchestrator%2Fmain%2Funinstall-vibeflow.md) |
+Vibe Flow is distributed as an [APM](https://github.com/microsoft/apm) package.
+
+### Install APM
+
+```bash
+# macOS / Linux
+curl -sSL https://aka.ms/apm-unix | sh
+
+# Windows (PowerShell)
+irm https://aka.ms/apm-windows | iex
+```
+
+### Install Vibe Flow
+
+In any repository:
+
+```bash
+apm install sammykumar/vibe-flow-agent-orchestrator
+```
+
+APM deploys agents, skills, and prompts directly into `.github/agents/`, `.github/skills/`, and `.github/prompts/` — the native directories GitHub Copilot reads from.
+
+### Update
+
+```bash
+apm install --update sammykumar/vibe-flow-agent-orchestrator
+```
+
+### Uninstall
+
+```bash
+apm uninstall sammykumar/vibe-flow-agent-orchestrator
+```
+
+### Pin to a version
+
+Add to your project's `apm.yml`:
+
+```yaml
+dependencies:
+  apm:
+    - sammykumar/vibe-flow-agent-orchestrator#v3.6.0
+```
+
+Then run `apm install` to sync.
 
 ## 🤖 Agents Included
 
@@ -159,13 +200,15 @@ The orchestrator will:
 
 ## 🔄 Version Management
 
-Current Version: **2.2.0** (Single source of truth in `vibe-flow.agent.md`)
+Current Version: **3.6.0** (Single source of truth in `vibe-flow.agent.md` and `apm.yml`)
 
 All agents are versioned as a suite. When you update Vibe Flow, all agents update together to maintain compatibility.
 
 ### Check for Updates
 
-Simply run the install prompt again - it will check GitHub for the latest version and update if needed.
+```bash
+apm install --update sammykumar/vibe-flow-agent-orchestrator
+```
 
 ## 📖 Documentation
 
@@ -186,19 +229,32 @@ This repository is the **source code** for Vibe Flow agents.
 
 - **"Code"**: Markdown files (`*.agent.md`)
 - **"Compiler"**: The LLM that interprets them
-- **"Installer"**: `install-vibeflow.md` prompt
-- **"Package Manager"**: VS Code Chat Prompt Install system
+- **"Package Manager"**: [APM](https://github.com/microsoft/apm)
+
+### Repository Structure
+
+```
+.apm/              # APM distribution source (what consumers receive)
+  agents/          # Agent definitions
+  skills/          # Skill packages
+  prompts/         # Prompt templates
+.github/           # Dogfood copies for developing in this repo
+  agents/          # Deployed agent copies (VS Code reads these)
+  skills/          # Deployed skill copies
+  prompts/         # Deployed prompt copies
+apm.yml            # APM package manifest
+```
+
+The `.apm/` directory is the **distribution source** — what APM reads when consumers run `apm install`.
+The `.github/` copies are committed deployed files so contributors get context immediately on clone.
 
 ### Contributing
 
 To modify agents or add features:
 
-1. Edit agent files in `.github/agents/`
-2. Update `install-vibeflow.md` if structure changes
-3. Run `./version-bump.sh [major|minor|patch]`
-4. Test in a target repository
-
-See [.github/copilot-instructions.md](.github/copilot-instructions.md) for detailed development guidelines.
+1. Edit files in **both** `.apm/agents/` (distribution source) and `.github/agents/` (dogfood copy)
+2. Run `./version-bump.sh [major|minor|patch]` to bump the version
+3. Test in a target repository using `apm install .`
 
 ## 📜 License
 
