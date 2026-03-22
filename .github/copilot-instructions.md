@@ -53,9 +53,9 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 2.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
 3.  **Task Management:** All agents include guidance to use `#tool:todo` for tracking work. Ensure new agents or major updates maintain this pattern.
 4.  **Bump Version:**
-    - You **MUST** update the version comment in `vibe-flow.agent.md`: `<!-- version: 1.0.1 -->`.
-    - This is the **single source of truth** for the entire agent suite. Subagents do NOT have individual version tags.
-    - Run `./version-bump.sh <major|minor|patch>` to automate this.
+    - Update `version` in `apm.yml` — this is the authoritative version for APM consumers.
+    - Also update the `<!-- version: X.X.X -->` comment in `vibe-flow.agent.md` to keep it readable.
+    - No script needed; just edit both fields manually.
 
 ### Adding New Agents
 
@@ -71,7 +71,7 @@ When changing agents or workflow:
 2. Update .github/agents/ (dogfood copy — keep in sync)
 3. Update docs/vibeflow/pdd-protocol.md and docs/vibeflow/orchestrator-manual.md
 4. Update .github/prompts/ and .apm/prompts/ if prompts reference the new flow
-5. Bump the version in .github/agents/vibe-flow.agent.md and apm.yml (or run ./version-bump.sh)
+5. Bump `version` in `apm.yml` (and the `<!-- version -->` comment in `vibe-flow.agent.md`)
 
 ## 🧪 Testing & Validation
 

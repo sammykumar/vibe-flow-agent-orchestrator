@@ -253,8 +253,8 @@ The `.github/` copies are committed deployed files so contributors get context i
 To modify agents or add features:
 
 1. Edit files in **both** `.apm/agents/` (distribution source) and `.github/agents/` (dogfood copy)
-2. Run `./version-bump.sh [major|minor|patch]` to bump the version
-3. Test in a target repository using `apm install .`
+2. Run `npm run sync` to copy `.github/` → `.apm/` automatically
+3. Bump `version` in `apm.yml` when releasing
 
 ## 📜 License
 
