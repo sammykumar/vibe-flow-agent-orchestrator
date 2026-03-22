@@ -34,6 +34,7 @@ graph TD
     subgraph "Subagents"
         RA[research-agent]
         IA[implement-agent]
+        TA[test-agent]
     end
 
     subgraph "PDD Artifacts"
@@ -62,11 +63,18 @@ graph TD
     IA -->|Changes| CODE
     IA -.->|Signal| VF
 
-    VF -.->|Stop after Implement| CODE
+    VF -->|Delegate: 4. Test| TA
+    TA -->|Reads| F3
+    TA -->|Updates| F3
+    TA -->|Verifies| CODE
+    TA -.->|Signal| VF
+
+    VF -.->|Stop after Test| CODE
 
     style VF fill:#8e44ad,stroke:#333,color:#fff
     style RA fill:#27ae60,stroke:#333,color:#fff
     style IA fill:#2980b9,stroke:#333,color:#fff
+    style TA fill:#f39c12,stroke:#333,color:#fff
 
     style F1 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
     style F2 fill:#f9f9f9,stroke:#666,stroke-dasharray: 5 5
@@ -76,13 +84,14 @@ graph TD
 
 ### Parallel subagents (v2, default read-only)
 
-In v2, the core workflow remains sequential: `vibe-flow` → `research-agent` → `implement-agent`. By default, `vibe-flow` can also spawn parallel **read-only research helpers** to scan code or gather context. These helpers never edit files or plan artifacts; they return notes to `vibe-flow`, which remains the single writer.
+In v2, the core workflow remains sequential: `vibe-flow` → `research-agent` → `implement-agent` → `test-agent`. By default, `vibe-flow` can also spawn parallel **read-only research helpers** to scan code or gather context. These helpers never edit files or plan artifacts; they return notes to `vibe-flow`, which remains the single writer.
 
 ```mermaid
 flowchart TD
     subgraph "Core (Sequential)"
         VF[vibe-flow] --> RA[research-agent]
         RA --> IA[implement-agent]
+        IA --> TA[test-agent]
     end
 
     subgraph "Default (Read-only parallel research helpers)"
@@ -93,6 +102,7 @@ flowchart TD
     style VF fill:#8e44ad,stroke:#333,color:#fff
     style RA fill:#27ae60,stroke:#333,color:#fff
     style IA fill:#2980b9,stroke:#333,color:#fff
+    style TA fill:#f39c12,stroke:#333,color:#fff
     style PR fill:#f39c12,stroke:#333,color:#fff,stroke-dasharray: 4 2
 ```
 
@@ -139,7 +149,7 @@ Add to your project's `apm.yml`:
 ```yaml
 dependencies:
   apm:
-    - sammykumar/vibe-flow-agent-orchestrator#v3.6.0
+    - sammykumar/vibe-flow-agent-orchestrator#v3.6.1
 ```
 
 Then run `apm install` to sync.
@@ -200,7 +210,7 @@ The orchestrator will:
 
 ## 🔄 Version Management
 
-Current Version: **3.6.0** (Single source of truth in `vibe-flow.agent.md` and `apm.yml`)
+Current Version: **3.6.1** (Single source of truth in `vibe-flow.agent.md` and `apm.yml`)
 
 All agents are versioned as a suite. When you update Vibe Flow, all agents update together to maintain compatibility.
 
@@ -234,25 +244,25 @@ This repository is the **source code** for Vibe Flow agents.
 ### Repository Structure
 
 ```
-.apm/              # APM distribution source (what consumers receive)
-  agents/          # Agent definitions
-  skills/          # Skill packages
-  prompts/         # Prompt templates
-.github/           # Dogfood copies for developing in this repo
-  agents/          # Deployed agent copies (VS Code reads these)
-  skills/          # Deployed skill copies
-  prompts/         # Deployed prompt copies
+.github/           # Authoring source for agents, skills, and prompts
+    agents/          # Editable agent definitions
+    skills/          # Editable skill packages
+    prompts/         # Editable prompt templates
+.apm/              # Generated mirror for APM distribution
+    agents/          # Mirrored agent definitions
+    skills/          # Mirrored skill packages
+    prompts/         # Mirrored prompt templates
 apm.yml            # APM package manifest
 ```
 
-The `.apm/` directory is the **distribution source** — what APM reads when consumers run `apm install`.
-The `.github/` copies are committed deployed files so contributors get context immediately on clone.
+The `.github/` directory is the **authoring source** — edit these files first.
+The `.apm/` directory is the **generated mirror** produced by `npm run sync`.
 
 ### Contributing
 
 To modify agents or add features:
 
-1. Edit files in **both** `.apm/agents/` (distribution source) and `.github/agents/` (dogfood copy)
+1. Edit files in **.github/agents/**, **.github/skills/**, or **.github/prompts/** first
 2. Run `npm run sync` to copy `.github/` → `.apm/`
 3. Run `npm run version:patch` (or `version:minor` / `version:major`) to bump `package.json` + `apm.yml`, commit, tag, and push
 

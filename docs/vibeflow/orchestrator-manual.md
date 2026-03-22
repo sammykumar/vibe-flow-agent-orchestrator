@@ -367,7 +367,7 @@ Updates:
 ### Tools / MCP
 
 - **Core**: `file_search`, `semantic_search`, `read_file`, `get_errors`, `get_project_setup_info`
-- **Web**: `open_simple_browser`, `fetch_webpage`
+- **Web**: `browser`, `fetch_webpage`
 - **Execution**: `run_in_terminal`, `get_terminal_output`, `create_and_run_task`, `run_notebook_cell`
 - **Context**: `terminal_selection`, `terminal_last_command`
 - **File/Management**: `create_directory`, `create_file`, `replace_string_in_file`, `todo`
@@ -529,7 +529,7 @@ docs/
 ### Tools / MCP
 
 - **Core**: `read_file`, `replace_string_in_file`, `create_file`, `file_search`
-- **Visualization**: `run_in_terminal`, `open_simple_browser`
+- **Visualization**: `run_in_terminal`, `browser`
 - **Analysis**: `list_dir`, `grep_search`, `list_code_usages`
 
 ### Workflow Modes

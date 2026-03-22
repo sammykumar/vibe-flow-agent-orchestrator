@@ -9,7 +9,6 @@ for a plan:
 
 Quickstart
 
-- Install Vibe Flow (see `install-vibeflow.md`)
 - Verify the skill by running:
 
 ```bash
