@@ -21,8 +21,6 @@ tools:
 argument-hint: "What would you like to build or update today?"
 ---
 
-<!-- version: 3.6.0 -->
-
 # Vibe Flow Orchestrator (Dual-Track PDD Mode)
 
 **YOU ARE AN ORCHESTRATOR, NOT AN IMPLEMENTER.**

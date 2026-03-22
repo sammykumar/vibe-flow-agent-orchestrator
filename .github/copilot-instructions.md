@@ -37,7 +37,6 @@ These are the executable agent files. Treat them as production source code.
 
 - **YAML Frontmatter:** Defines `name`, `description`, `tools`, and `infer` settings.
 - **Prompt Body:** Defines the agent's identity, role, and strict execution protocols.
-- **Version Tag:** `<!-- version: X.X.X -->` in `vibe-flow.agent.md` ONLY (single source of truth for the entire suite).
 
 ### 2. The Protocol Spec (`orchestrator-manual.md`)
 
@@ -52,10 +51,7 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 1.  **Edit the Prompt:** precise wording matters. Use "YOU MUST" for critical constraints.
 2.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
 3.  **Task Management:** All agents include guidance to use `#tool:todo` for tracking work. Ensure new agents or major updates maintain this pattern.
-4.  **Bump Version:**
-    - Update `version` in `apm.yml` — this is the authoritative version for APM consumers.
-    - Also update the `<!-- version: X.X.X -->` comment in `vibe-flow.agent.md` to keep it readable.
-    - No script needed; just edit both fields manually.
+4.  **Bump Version:** Run `npm run version:patch` (or `version:minor` / `version:major`). This bumps `package.json` and `apm.yml` in sync, then commits, tags, and pushes.
 
 ### Adding New Agents
 
@@ -71,7 +67,7 @@ When changing agents or workflow:
 2. Update .github/agents/ (dogfood copy — keep in sync)
 3. Update docs/vibeflow/pdd-protocol.md and docs/vibeflow/orchestrator-manual.md
 4. Update .github/prompts/ and .apm/prompts/ if prompts reference the new flow
-5. Bump `version` in `apm.yml` (and the `<!-- version -->` comment in `vibe-flow.agent.md`)
+5. Run `npm run version:patch` (or `minor`/`major`) to bump both `package.json` and `apm.yml`, commit, tag, and push
 
 ## 🧪 Testing & Validation
 
@@ -89,7 +85,7 @@ This repository is the **source of truth** for the Vibe Flow agent suite. For be
 - PDD protocol in docs/vibeflow/pdd-protocol.md
 - Orchestrator manual in docs/vibeflow/orchestrator-manual.md
 
-## 🚫 Common Pitfalls in `vibe-flow.agent.md` only. If you don't bump, updates won't propagate. All agents are versioned as a suite.
+## 🚫 Common Pitfalls
 
 - **Forgetting `.apm/` sync:** If you edit agent/skill/prompt files in `.github/`, you MUST also update the corresponding file in `.apm/`. Both are canonical sources for different consumers.
 - **Hallucinating Tools:** Only list tools in YAML that are actually available in the target environment (VS Code / MCP).
