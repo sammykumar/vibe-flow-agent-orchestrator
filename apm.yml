@@ -1,5 +1,5 @@
 name: vibe-flow
-version: 3.7.2
+version: 3.8.0
 description: Plan-Driven Development (PDD) agent suite for GitHub Copilot, Claude, and Cursor — orchestrator + research, implement, and test subagents
 author: SK Productions LLC
 license: MIT
