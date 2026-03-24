@@ -40,14 +40,16 @@ Examples:
 | `2-RESEARCH.md` | Investigation + Alternative Matrix                      |
 | `3-SPEC.md`     | Business context + Tech Spec + Impact Analysis          |
 
+Fast Track note: even when a task skips the dedicated research lane, it still creates compact `2-RESEARCH.md` and `3-SPEC.md` entries during initialization so every plan keeps the full PDD artifact set.
+
 ### Documentation Output
 
 When documentation needs the same organization, mirror the plan taxonomy in docs paths such as `docs/{domain}/{scope-path}/{doc}.md`.
 
 ### Workflow
 
-1. **Initialize**: Create `1-PROGRESS.md` in the plan folder.
-2. **Research**: Populate `2-RESEARCH.md` and `3-SPEC.md`.
+1. **Initialize**: Create `1-PROGRESS.md` in the plan folder. Fast Track also initializes compact `2-RESEARCH.md` and `3-SPEC.md` here.
+2. **Research**: Populate `2-RESEARCH.md` and `3-SPEC.md`. In Full PDD this happens through the research phase; in Fast Track this is done directly from the request in compact form.
 3. **Orchestrator Planning**: `vibe-flow` writes task breakdown into `1-PROGRESS.md` from `2-RESEARCH.md` and `3-SPEC.md`.
 4. **Implement**: Execute tasks, logging to `1-PROGRESS.md`.
 5. **Test**: `test-agent` writes and runs tests proving functionality works. Logs results to `1-PROGRESS.md`.

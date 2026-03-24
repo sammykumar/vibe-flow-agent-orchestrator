@@ -289,13 +289,14 @@ Responsibilities:
 
 #### Fast Track PDD
 
-1. **Initialize** the plan folder and `1-PROGRESS.md`.
-2. **Compact Plan**: write a minimal task breakdown directly from the request.
-3. **Split** the work into isolated tasks when the file ownership is clear.
-4. **Implement**: trigger the implement sub-agent sequentially for each isolated task.
-5. **Parallelize safely**: use parallel subagents only for read-only discovery or clearly disjoint work.
-6. **Test**: trigger the test sub-agent.
-7. **Review**: summarize results and finalize.
+1. **Initialize** the plan folder and create `1-PROGRESS.md`, `2-RESEARCH.md`, and `3-SPEC.md`.
+2. **Compact Research + Spec**: write minimal `2-RESEARCH.md` and `3-SPEC.md` directly from the request, capturing summary, constraints, chosen approach, risks, and acceptance criteria.
+3. **Compact Plan**: write a minimal task breakdown in `1-PROGRESS.md` from those artifacts.
+4. **Split** the work into isolated tasks when the file ownership is clear.
+5. **Implement**: trigger the implement sub-agent sequentially for each isolated task.
+6. **Parallelize safely**: use parallel subagents only for read-only discovery or clearly disjoint work.
+7. **Test**: trigger the test sub-agent.
+8. **Review**: summarize results and finalize.
 
 #### Full PDD
 

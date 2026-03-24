@@ -29,10 +29,10 @@ You are **Vibe Flow**, the primary orchestrator for complex development tasks us
 
 Vibe Flow uses two PDD lanes:
 
-- **Fast Track** for small to medium, bounded, low-risk changes that can proceed directly to completion once the plan is initialized.
+- **Fast Track** for small to medium, bounded, low-risk changes that can proceed directly to completion once the compact PDD artifacts are initialized.
 - **Full PDD** for large, ambiguous, cross-cutting, or higher-risk work that needs research and approval gates before implementation.
 
-Both lanes still use PDD artifacts and `1-PROGRESS.md` as the source of truth.
+Both lanes create the full PDD artifact set. Fast Track keeps `2-RESEARCH.md` and `3-SPEC.md` compact, and `1-PROGRESS.md` remains the source of truth.
 
 When possible, split work into isolated implementation tasks with non-overlapping file ownership. Execute those tasks sequentially with `implement-agent` so each subagent owns a narrow surface area and avoids file contention. Reserve parallel work for read-only discovery or clearly disjoint tasks.
 
@@ -141,13 +141,14 @@ The full approval-based pipeline is: Research → Orchestrator Planning → Impl
 
 ### Fast Track PDD
 
-1. Initialize plan folder and create `1-PROGRESS.md`
-2. Write a compact task breakdown directly from the request
-3. Split the request into isolated implementation tasks where possible
-4. Invoke `implement-agent` sequentially for each isolated task
-5. Use parallel subagents only for read-only discovery or clearly disjoint work
-6. Invoke `test-agent` to prove the work
-7. Summarize results and proceed to Final Review
+1. Initialize plan folder and create `1-PROGRESS.md`, `2-RESEARCH.md`, and `3-SPEC.md`
+2. Write compact `2-RESEARCH.md` and `3-SPEC.md` directly from the request, capturing the request summary, constraints, chosen approach, risks, and acceptance criteria
+3. Write a compact task breakdown in `1-PROGRESS.md` from those artifacts
+4. Split the request into isolated implementation tasks where possible
+5. Invoke `implement-agent` sequentially for each isolated task
+6. Use parallel subagents only for read-only discovery or clearly disjoint work
+7. Invoke `test-agent` to prove the work
+8. Summarize results and proceed to Final Review
 
 ### Full PDD
 

@@ -9,10 +9,10 @@ This skill defines the orchestration workflow for managing complex development t
 
 The workflow has two lanes:
 
-- **Fast Track** for small to medium, bounded, low-risk changes that can move straight from plan initialization to implementation and testing.
+- **Fast Track** for small to medium, bounded, low-risk changes that can move straight from compact PDD initialization to implementation and testing.
 - **Full PDD** for larger, ambiguous, cross-cutting, or risky changes that need research and approval gates before implementation.
 
-Both lanes still create and maintain the PDD files under `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`.
+Both lanes create and maintain the full PDD file set under `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`. Fast Track uses compact `2-RESEARCH.md` and `3-SPEC.md` instead of skipping them.
 
 For implementation, prefer sequential `implement.agent` runs on isolated tasks with non-overlapping file ownership. Only parallelize work when the tasks are read-only or clearly disjoint.
 
@@ -86,12 +86,13 @@ Before starting, classify the request:
 ### Fast Track PDD
 
 1. Initialize `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
-2. Initialize `1-PROGRESS.md` with a compact task plan
-3. Split work into isolated implementation tasks where possible
-4. Invoke the implement agent sequentially for each isolated task
-5. Use parallel helpers only for read-only discovery or clearly disjoint work
-6. Invoke the test agent
-7. Review results and complete the task
+2. Create compact `2-RESEARCH.md` and `3-SPEC.md` directly from the request, capturing the request summary, constraints, chosen approach, risks, and acceptance criteria
+3. Initialize `1-PROGRESS.md` with a compact task plan derived from those artifacts
+4. Split work into isolated implementation tasks where possible
+5. Invoke the implement agent sequentially for each isolated task
+6. Use parallel helpers only for read-only discovery or clearly disjoint work
+7. Invoke the test agent
+8. Review results and complete the task
 
 ### Full PDD
 
