@@ -181,8 +181,11 @@ After installation, your repository will have:
 │   └── implement.agent.md    # Implementation specialist
 └── plans/                     # Project memory (PDD)
     ├── todo/                  # Planned work
+    │   └── ui/card-v2/...     # Domain / scope-path / task-name
     ├── in-progress/           # Active tasks
+    │   └── app/navigation/...
     └── finished/              # Completed work
+        └── infra/deploy/...
 
 docs/
 ├── vibeflow/
@@ -202,11 +205,13 @@ Once installed, start any complex task with:
 
 The orchestrator will:
 
-1. ✅ Create a plan structure in `.github/plans/in-progress/`
+1. ✅ Create a plan structure in `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
 2. ✅ Delegate to **research-agent** for investigation
 3. ✅ Author task breakdown in `1-PROGRESS.md` in **vibe-flow** from research/spec outputs
 4. ✅ Delegate to **implement-agent** after approval
 5. ✅ Stop after implementation and prompt you to add the next subagent
+
+Plan folders are intentionally hierarchical. Vibe Flow should reuse broad top-level domains such as `ui`, `app`, and `infra`, then nest durable feature or subsystem folders beneath them, such as `ui/card-v2/...` instead of sibling buckets like `ui-system/...`.
 
 ## 🔄 Version Management
 

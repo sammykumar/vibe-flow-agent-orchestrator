@@ -71,7 +71,7 @@ If any requirement, scope, or acceptance criteria is unclear, STOP and send a cl
 
 ## Scope & Constraints
 
-- All writes are limited to the active plan directory: `.github/plans/{status}/{major-area}/{task-name}/`.
+- All writes are limited to the active plan directory: `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`.
 - Do NOT edit project source files.
 - Use Playwright/browser only when a UI inspection is explicitly required.
 - If the request is ambiguous, ask the orchestrator for clarification before continuing research.

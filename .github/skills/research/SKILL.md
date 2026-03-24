@@ -23,7 +23,7 @@ into the active plan directory.
 ## Scope & Constraints
 
 - Writes are strictly limited to the active plan directory:
-  `.github/plans/{status}/{major-area}/{task-name}/`.
+  `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`.
 - **Do NOT** modify `src/` or production source files.
 - Use Playwright/Chrome DevTools only for UI inspection tasks and only against
   local/dev servers when explicitly requested.
@@ -70,6 +70,6 @@ These `assets/` files are the templates the skill reads at runtime. The files in
 ```text
 # Create a plan for 'add-auth-integration' and run research
 @research: "Investigate authentication flow in the repository. The plan
-  directory is '/absolute/path/to/.github/plans/in-progress/auth/add-auth-integration'.
+  directory is '/absolute/path/to/.github/plans/in-progress/app/auth/add-auth-integration'.
   Create `2-RESEARCH.md` and `3-SPEC.md` skeletons and update progress."
 ```

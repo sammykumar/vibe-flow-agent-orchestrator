@@ -12,7 +12,7 @@ The workflow has two lanes:
 - **Fast Track** for small to medium, bounded, low-risk changes that can move straight from plan initialization to implementation and testing.
 - **Full PDD** for larger, ambiguous, cross-cutting, or risky changes that need research and approval gates before implementation.
 
-Both lanes still create and maintain the PDD files under `.github/plans/{status}/{major-area}/{task-name}/`.
+Both lanes still create and maintain the PDD files under `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`.
 
 For implementation, prefer sequential `implement.agent` runs on isolated tasks with non-overlapping file ownership. Only parallelize work when the tasks are read-only or clearly disjoint.
 
@@ -22,7 +22,7 @@ For implementation, prefer sequential `implement.agent` runs on isolated tasks w
 
 **Audit Mindset**: Before closing any task, verify every subagent fulfilled its duties (test coverage, diagrams, documentation).
 
-**Progress-Driven**: The single source of truth is `.github/plans/in-progress/{major-area}/{task-name}/1-PROGRESS.md`.
+**Progress-Driven**: The single source of truth is `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/1-PROGRESS.md`.
 
 **Sequential Execution (write-capable)**: Call write-capable subagents sequentially until ALL tasks are declared complete in the progress file.
 
@@ -38,7 +38,27 @@ For implementation, prefer sequential `implement.agent` runs on isolated tasks w
 
 ## PDD File Structure
 
-All work tracked in: `.github/plans/{status}/{major-area}/{task-name}/`
+All work tracked in: `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`
+
+### Plan Taxonomy
+
+- `domain`: stable top-level functional area such as `ui`, `app`, `infra`, `data`, `docs`, or `agents`
+- `scope-path`: one or more reusable grouping folders under the domain, such as `card-v2`, `navigation`, `media/reddit`, or `deploy/github-actions`
+- `task-name`: the concrete plan slug for a single unit of work
+
+Rules:
+
+1. Inspect existing folders across `.github/plans/{todo,in-progress,finished}/` before creating a new plan.
+2. Reuse an existing `domain` when the work fits inside it.
+3. Reuse or extend an existing `scope-path` when the work belongs to the same subsystem, feature family, component, or service.
+4. Do not create synthetic top-level folders that collapse hierarchy, such as `ui-system`, when the correct placement is `ui/...`.
+5. Agent-created plans MUST include at least one `scope-path` segment.
+
+Examples:
+
+- `.github/plans/in-progress/ui/card-v2/footer-overlay-actions-2026-03-24/`
+- `.github/plans/in-progress/app/navigation/app-shell-refactor/`
+- `.github/plans/in-progress/infra/deploy/github-actions-cache/`
 
 Required files:
 
@@ -65,7 +85,7 @@ Before starting, classify the request:
 
 ### Fast Track PDD
 
-1. Initialize `.github/plans/in-progress/{major-area}/{task-name}/`
+1. Initialize `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
 2. Initialize `1-PROGRESS.md` with a compact task plan
 3. Split work into isolated implementation tasks where possible
 4. Invoke the implement agent sequentially for each isolated task
@@ -79,7 +99,7 @@ Before starting, classify the request:
 
 **New Task:**
 
-1. Create `.github/plans/in-progress/{major-area}/{task-name}/`
+1. Create `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
 2. Initialize `1-PROGRESS.md` (tasks and progress log)
 3. Initialize task tracking with phases: Research, Orchestrator Planning, Implement, Test, Final Review
 
@@ -135,7 +155,7 @@ Before starting, classify the request:
 3. **README**: Updated to reflect new state (if required)
 4. **Cleanup**: All temporary POC or test files removed
 
-**Note**: Task folder remains in `in-progress/`. User manually moves to `.github/plans/finished/{major-area}/{task-name}/` after verification.
+**Note**: Task folder remains in `in-progress/`. User manually moves to `.github/plans/finished/{domain}/{scope-path}/{task-name}/` after verification.
 
 **Report**: Notify user of completion and that they can archive the plan.
 
@@ -154,7 +174,7 @@ Example invocation:
 
 ```
 research.agent: "Investigate the authentication flow in the codebase.
-The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration.
+The plan directory is at /absolute/path/to/.github/plans/in-progress/app/auth/oauth-integration.
 Create research findings, technical spec, and execution plan."
 ```
 

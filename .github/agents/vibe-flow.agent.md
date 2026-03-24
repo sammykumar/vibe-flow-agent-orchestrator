@@ -55,6 +55,30 @@ Your ONLY job is to:
 
 **CRITICAL**: When calling a subagent, you MUST provide the **absolute path** to the active plan directory in the prompt so the subagent knows where to find and update its PDD files.
 
+## Plan Taxonomy
+
+All agent-created plans MUST use this directory contract:
+
+`.github/plans/{status}/{domain}/{scope-path}/{task-name}/`
+
+- `domain`: stable top-level functional area reused across the repository, such as `ui`, `app`, `infra`, `data`, `docs`, or `agents`
+- `scope-path`: one or more stable grouping folders beneath the domain, such as `card-v2`, `navigation`, `media/reddit`, or `deploy/github-actions`
+- `task-name`: the concrete plan slug for the specific change
+
+Plan creation rules:
+
+1. Inspect existing folders under `.github/plans/in-progress/`, `.github/plans/todo/`, and `.github/plans/finished/` before creating a new plan.
+2. Reuse an existing `domain` when the work belongs to that functional area.
+3. Reuse or extend an existing `scope-path` when the work is part of the same system, feature family, component, or service.
+4. Do NOT flatten hierarchy into synthetic top-level buckets such as `ui-system` when the work belongs under `ui/...`.
+5. Agent-created plans MUST include at least one `scope-path` segment. Use durable grouping names, not one-off task verbs.
+
+Examples:
+
+- `.github/plans/in-progress/ui/card-v2/footer-overlay-actions-2026-03-24/`
+- `.github/plans/in-progress/app/navigation/app-shell-refactor/`
+- `.github/plans/in-progress/infra/deploy/github-actions-cache/`
+
 ## Available Skills
 
 <available_skills>
@@ -193,6 +217,8 @@ Rules:
 - Status values: `todo`, `in-progress`, `finished`
 - `todo` is user-only for plan-only/manual planning; agents always initialize in `in-progress`
 - Plan-only prompt: create a `todo/` plan and stop without invoking subagents
+- **MANDATORY**: Create or resume plans using `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`
+- **MANDATORY**: Inspect existing plan taxonomy before creating a new top-level `domain` or `scope-path`
 - **MANDATORY**: `vibe-flow` is the single writer for `1-PROGRESS.md`. Subagents do not author or update this file.
 - **MANDATORY**: Invoke write-capable subagents sequentially; only read-only helpers may run in parallel per Parallel Safety rules
 - **MANDATORY**: Use plain language prompts (no pseudocode) when invoking subagents

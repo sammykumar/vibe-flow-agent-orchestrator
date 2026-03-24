@@ -23,9 +23,10 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
    - Search for existing plan in `.github/plans/in-progress/`
    - If not found → Create new plan directory
    - If found → Resume from current state
+   - Before creating a new directory, inspect the existing taxonomy and reuse the matching top-level domain and scope path when possible
 
 2. For new tasks:
-   - Create `.github/plans/in-progress/{major-area}/{task-name}/`
+   - Create `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
    - Initialize `1-PROGRESS.md` (use template from assets/)
    - Initialize task tracking with phases
 
@@ -207,7 +208,7 @@ Task Completion:
 **Research Agent**:
 
 ```
-"Investigate the authentication system in the codebase. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Analyze the current implementation, evaluate OAuth 2.0 integration options, and create research findings and a technical spec."
+"Investigate the authentication system in the codebase. The plan directory is at /absolute/path/to/.github/plans/in-progress/app/auth/oauth-integration. Analyze the current implementation, evaluate OAuth 2.0 integration options, and create research findings and a technical spec."
 ```
 
 **Orchestrator Planning Step**:
@@ -219,7 +220,7 @@ Task Completion:
 **Implement Agent**:
 
 ```
-"Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/auth/oauth-integration. Follow the task list in 1-PROGRESS.md sequentially and update 1-PROGRESS.md after each task."
+"Execute the implementation plan for OAuth integration. The plan directory is at /absolute/path/to/.github/plans/in-progress/app/auth/oauth-integration. Follow the task list in 1-PROGRESS.md sequentially and update 1-PROGRESS.md after each task."
 ```
 
 **Future Subagents (not installed in v2)**: Test/Document prompts are added when those agents are installed.

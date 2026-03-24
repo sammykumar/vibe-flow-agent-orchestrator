@@ -3,7 +3,7 @@
 **Date**: YYYY-MM-DD  
 **Agent**: research.agent  
 **Status**: In Progress / Complete  
-**Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`
+**Related Plan**: `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
 
 ---
 

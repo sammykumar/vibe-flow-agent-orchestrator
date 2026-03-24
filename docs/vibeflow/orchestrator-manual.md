@@ -25,7 +25,7 @@ Goals:
 All work happens inside:
 
 ```
-.github/plans/{status}/{major-area}/{task-name}/
+.github/plans/{status}/{domain}/{scope-path}/{task-name}/
 ```
 
 Status Options
@@ -38,20 +38,35 @@ Status Options
 
 **Semantics:** `todo` is for plan-only/manual planning (no execution). Active agent work always starts in `in-progress`.
 
-Major Area Examples:
+Plan Taxonomy:
 
 ```
-- core
-- agents
-- mcp-servers
-- infrastructure
-- ci-cd
 - ui
-- api
+- app
+- infra
 - data
-- observability
-- documentation
-- security
+- docs
+- agents
+```
+
+- `domain`: broad top-level functional area reused across the repository.
+- `scope-path`: one or more stable grouping folders under the domain.
+- `task-name`: the concrete plan slug.
+
+Rules:
+
+- Inspect existing plan folders before creating a new top-level domain or scope path.
+- Reuse an existing `domain` when the work belongs there.
+- Reuse or extend an existing `scope-path` when the work belongs to the same subsystem, component family, or service.
+- Do not create flattened top-level buckets like `ui-system` when the correct placement is `ui/...`.
+- Agent-created plans must include at least one `scope-path` segment.
+
+Examples:
+
+```
+.github/plans/in-progress/ui/card-v2/footer-overlay-actions-2026-03-24/
+.github/plans/in-progress/app/navigation/app-shell-refactor/
+.github/plans/in-progress/infra/deploy/github-actions-cache/
 ```
 
 Required files:
@@ -65,7 +80,7 @@ Required files:
 Documentation output:
 
 ```
-docs/{major-area}/{doc}.md
+docs/{domain}/{scope-path}/{doc}.md
 ```
 
 ### File semantics
@@ -558,7 +573,7 @@ docs/
 Status values map directly to the `{status}` segment in the PDD path:
 
 ```
-.github/plans/{status}/{major-area}/{task-name}/
+.github/plans/{status}/{domain}/{scope-path}/{task-name}/
 ```
 
 ### Status definitions

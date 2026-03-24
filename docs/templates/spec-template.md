@@ -3,7 +3,7 @@
 **Date**: YYYY-MM-DD  
 **Agent**: research.agent  
 **Status**: Draft / Under Review / Approved / Implemented  
-**Related Plan**: `.github/plans/in-progress/{major-area}/{task-name}/`  
+**Related Plan**: `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`  
 **Based on Research**: `2-RESEARCH.md`
 
 > Reference copy: Vibe Flow skills read their runtime template assets from `.github/skills/*/assets/`; this file is a shared documentation example.

@@ -2,7 +2,7 @@
 
 ## File Contract
 
-All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
+All work happens inside: `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`
 
 ### Statuses
 
@@ -12,19 +12,25 @@ All work happens inside: `.github/plans/{status}/{major-area}/{task-name}/`
 
 Use the **plan-only prompt** to create a `todo/` plan without starting research or implementation. Active agent work always starts in `in-progress`.
 
-### Major Area Examples
+### Plan Taxonomy
 
-- `core`
-- `agents`
-- `mcp-servers`
-- `infrastructure`
-- `ci-cd`
-- `ui`
-- `api`
-- `data`
-- `observability`
-- `documentation`
-- `security`
+- `domain`: broad top-level functional area, such as `ui`, `app`, `infra`, `data`, `docs`, or `agents`
+- `scope-path`: one or more stable grouping folders inside that domain, such as `card-v2`, `navigation`, `media/reddit`, or `deploy/github-actions`
+- `task-name`: the specific work item at the leaf
+
+Rules:
+
+1. Agents must inspect existing folders under `.github/plans/{todo,in-progress,finished}/` before creating a new plan.
+2. Reuse an existing `domain` when the work belongs in that functional area.
+3. Reuse or extend an existing `scope-path` when the work belongs to the same subsystem, feature family, component, or service.
+4. Do not flatten hierarchy into synthetic top-level names like `ui-system` when the correct structure is `ui/...`.
+5. Agent-created plans must include at least one `scope-path` segment.
+
+Examples:
+
+- `.github/plans/in-progress/ui/card-v2/footer-overlay-actions-2026-03-24/`
+- `.github/plans/in-progress/app/navigation/app-shell-refactor/`
+- `.github/plans/in-progress/infra/deploy/github-actions-cache/`
 
 ### Required Files
 
@@ -36,7 +42,7 @@ Use the **plan-only prompt** to create a `todo/` plan without starting research 
 
 ### Documentation Output
 
-Agents produce documentation in: `docs/{major-area}/{doc}.md`
+When documentation needs the same organization, mirror the plan taxonomy in docs paths such as `docs/{domain}/{scope-path}/{doc}.md`.
 
 ### Workflow
 

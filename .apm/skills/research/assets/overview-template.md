@@ -138,7 +138,7 @@ This plan directory contains the following files:
 
 ### Related Plans
 
-- `.github/plans/{status}/{area}/{name}/` - {How it relates}
+- `.github/plans/{status}/{domain}/{scope-path}/{task-name}/` - {How it relates}
 
 ---
 
@@ -150,7 +150,7 @@ This plan directory contains the following files:
 
 ## Metadata
 
-**Plan ID**: `{major-area}/{task-name}`  
+**Plan ID**: `{domain}/{scope-path}/{task-name}`  
 **Created By**: {Agent/Person}  
 **Last Updated**: YYYY-MM-DD  
 **Version**: 1.0
