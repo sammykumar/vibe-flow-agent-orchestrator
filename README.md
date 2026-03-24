@@ -38,9 +38,9 @@ graph TD
     end
 
     subgraph "PDD Artifacts"
-        F1[1-RESEARCH.md]
-        F2[2-SPEC.md]
-        F3[3-PROGRESS.md]
+        F1[1-PROGRESS.md]
+        F2[2-RESEARCH.md]
+        F3[3-SPEC.md]
         CODE[repo changes]
     end
 
@@ -204,7 +204,7 @@ The orchestrator will:
 
 1. ✅ Create a plan structure in `.github/plans/in-progress/`
 2. ✅ Delegate to **research-agent** for investigation
-3. ✅ Author task breakdown in `3-PROGRESS.md` in **vibe-flow** from research/spec outputs
+3. ✅ Author task breakdown in `1-PROGRESS.md` in **vibe-flow** from research/spec outputs
 4. ✅ Delegate to **implement-agent** after approval
 5. ✅ Stop after implementation and prompt you to add the next subagent
 

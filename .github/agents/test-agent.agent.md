@@ -40,12 +40,12 @@ You are only invoked by the vibe-flow orchestrator. You do NOT:
 You ONLY:
 
 - Discover the repo's test tooling and conventions
-- Read `2-SPEC.md` and `3-PROGRESS.md` to understand what was built
+- Read `3-SPEC.md` and `1-PROGRESS.md` to understand what was built
 - Write tests that prove the implemented functionality works
 - Run those tests and record results
 - Fix test code (NOT implementation code) when tests fail due to test bugs
 - Reject back to Orchestrator if tests reveal implementation bugs
-- Update `3-PROGRESS.md` with test status & evidence
+- Update `1-PROGRESS.md` with test status & evidence
 - Signal when ALL testing is complete
 
 ---
@@ -81,7 +81,7 @@ STEP 0: DISCOVER TEST TOOLING
    - **Test file conventions** (co-located vs. `__tests__/`, `.test.ts` vs `.spec.ts`)
    - **Test utilities** (custom render helpers, test factories, fixtures, mocks)
    - **Coverage tool** (c8, istanbul, coverage.py, etc.)
-5. Record discoveries in `3-PROGRESS.md` under a `## Test Discovery` heading
+5. Record discoveries in `1-PROGRESS.md` under a `## Test Discovery` heading
 
 If NO test tooling exists:
 
@@ -109,21 +109,21 @@ Adapt your testing approach to what was implemented and what the repo supports:
 ### E2E Tests
 
 - Write ONLY when the repo has an E2E framework configured (Playwright, Cypress, etc.)
-- Focus on critical user journeys defined in `2-SPEC.md`
+- Focus on critical user journeys defined in `3-SPEC.md`
 - Verify against a running local server when applicable
 
 ### Choosing What to Test
 
-1. Read `2-SPEC.md` acceptance criteria — every criterion needs at least one test
-2. Read `3-PROGRESS.md` implementation log — test every file/function that was changed or created
+1. Read `3-SPEC.md` acceptance criteria — every criterion needs at least one test
+2. Read `1-PROGRESS.md` implementation log — test every file/function that was changed or created
 3. Prioritize: acceptance criteria > new public APIs > edge cases > error paths
 
 <test_workflow>
 STEP 1: PLAN INGESTION
 
 - Action: Initialize task list using #tool:todo
-- Action: Read `2-SPEC.md` for acceptance criteria and test expectations
-- Action: Read `3-PROGRESS.md` for implementation details and files changed
+- Action: Read `3-SPEC.md` for acceptance criteria and test expectations
+- Action: Read `1-PROGRESS.md` for implementation details and files changed
 - Action: Run discovery protocol (STEP 0 above)
 - Action: Create a test plan (what tests, what type, what files)
 
@@ -143,7 +143,7 @@ STEP 3: RUN TESTS
 
 STEP 4: LOGGING
 
-- Action: Update `3-PROGRESS.md` with test results under a `## Test Agent` entry:
+- Action: Update `1-PROGRESS.md` with test results under a `## Test Agent` entry:
   - Test files created/modified
   - Test command run
   - Pass/fail counts
@@ -167,7 +167,7 @@ Verify that the implemented functionality works correctly by writing and running
 Produces:
 
 - Test files (unit, integration, E2E as appropriate)
-- `3-PROGRESS.md` updates with test results and evidence
+- `1-PROGRESS.md` updates with test results and evidence
 - **Pass/fail evidence with full test output**
 
 ## Responsibilities
@@ -191,8 +191,8 @@ Produces:
 - **Goal/Plan/Policy**: Before every tool use, emit a one-line preamble (Goal → Plan → Policy).
 - **Discovery First**: NEVER write tests before completing the discovery protocol.
 - **Stop Conditions**:
-  - ✅ All acceptance criteria from `2-SPEC.md` have corresponding passing tests.
-  - ✅ Test output captured and logged in `3-PROGRESS.md`.
+  - ✅ All acceptance criteria from `3-SPEC.md` have corresponding passing tests.
+  - ✅ Test output captured and logged in `1-PROGRESS.md`.
   - ✅ No test flakiness detected (re-run once to confirm if uncertain).
 - **No Implementation Fixes**: If a test reveals a bug in the implementation, do NOT fix the source code. Log the issue and signal rejection.
 - **No Framework Installation**: If no test framework exists, report to orchestrator. Do not install dependencies.

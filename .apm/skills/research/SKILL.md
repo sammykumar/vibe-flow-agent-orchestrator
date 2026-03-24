@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Performs repository research, evidence-driven analysis, and produces PDD deliverables (1-RESEARCH.md, 2-SPEC.md, 3-PROGRESS.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required."
+description: "Performs repository research, evidence-driven analysis, and produces PDD deliverables (1-PROGRESS.md, 2-RESEARCH.md, 3-SPEC.md) inside the active plan directory. Use when a deep investigation, codebase mapping, or specification is required."
 license: Proprietary
 metadata:
   author: sammykumar
@@ -41,11 +41,11 @@ into the active plan directory.
    relevant artifacts.
 3. Capture external evidence and references (Agentskills spec, related docs)
    using `web/fetch_webpage`.
-4. Draft `1-RESEARCH.md` (analysis & evidence) using
+4. Draft `2-RESEARCH.md` (analysis & evidence) using
    `assets/research-template.md`.
-5. Draft `2-SPEC.md` (specification) using
+5. Draft `3-SPEC.md` (specification) using
    `assets/spec-template.md`.
-6. Update `3-PROGRESS.md` and set status to `research_complete` when finished.
+6. Update `1-PROGRESS.md` and set status to `research_complete` when finished.
 
 ## Inference
 
@@ -58,9 +58,9 @@ if ambiguous.
 This skill includes the following assets and templates (located under the
 skill directory):
 
-- `assets/research-template.md` — skeleton for `1-RESEARCH.md`
-- `assets/spec-template.md` — skeleton for `2-SPEC.md`
-- `assets/progress-log-template.md` — starter `3-PROGRESS.md`
+- `assets/progress-log-template.md` — starter `1-PROGRESS.md`
+- `assets/research-template.md` — skeleton for `2-RESEARCH.md`
+- `assets/spec-template.md` — skeleton for `3-SPEC.md`
 - `references/REFERENCE.md` — tool usage and scope details
 
 These `assets/` files are the templates the skill reads at runtime. The files in `docs/templates/` are reference copies for documentation and do not drive agent behavior directly.
@@ -71,5 +71,5 @@ These `assets/` files are the templates the skill reads at runtime. The files in
 # Create a plan for 'add-auth-integration' and run research
 @research: "Investigate authentication flow in the repository. The plan
   directory is '/absolute/path/to/.github/plans/in-progress/auth/add-auth-integration'.
-  Create `1-RESEARCH.md` and `2-SPEC.md` skeletons and update progress."
+  Create `2-RESEARCH.md` and `3-SPEC.md` skeletons and update progress."
 ```
