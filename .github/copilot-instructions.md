@@ -51,7 +51,7 @@ Defines the PDD (Plan-Driven Development) standard that the agents enforce in `d
 2.  **Edit the `.github/` copy first:** treat `.github/` as the working source and `npm run sync` as the publishing step.
 3.  **Update Tools:** If an agent needs new capabilities, add them to the `tools` array in YAML.
 4.  **Task Management:** All agents include guidance to use `#tool:todo` for tracking work. Ensure new agents or major updates maintain this pattern.
-5.  **Bump Version:** Run `npm run version:patch` (or `version:minor` / `version:major`). This bumps `package.json` and `apm.yml` in sync, then commits, tags, and pushes.
+5.  **Bump Version:** Run `npm run version:patch` (or `version:minor` / `version:major`). This runs `npm run sync` first, bumps `package.json` and `apm.yml`, then commits the refreshed `.apm/` mirror, tags, and pushes.
 
 ### Adding New Agents
 
@@ -67,7 +67,7 @@ When changing agents or workflow:
 2. Run `npm run sync` to refresh `.apm/agents/`.
 3. Update docs/vibeflow/pdd-protocol.md and docs/vibeflow/orchestrator-manual.md
 4. Update `.github/prompts/` and run `npm run sync` if prompts reference the new flow
-5. Run `npm run version:patch` (or `minor`/`major`) to bump both `package.json` and `apm.yml`, commit, tag, and push
+5. Run `npm run version:patch` (or `minor`/`major`) to auto-run sync, bump both `package.json` and `apm.yml`, commit the refreshed `.apm/` mirror, tag, and push
 
 ## 🧪 Testing & Validation
 

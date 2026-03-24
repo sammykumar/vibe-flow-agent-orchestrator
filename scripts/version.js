@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Usage: node scripts/version.js [patch|minor|major]
-// Bumps version in package.json and apm.yml, then commits, tags, and pushes.
+// Runs sync, bumps version in package.json and apm.yml, then commits, tags, and pushes.
 
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, dirname } from "path";
@@ -10,12 +10,17 @@ import { createRequire } from "module";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
+const run = (cmd) => execSync(cmd, { cwd: root, stdio: "inherit" });
 
 const bumpType = process.argv[2] ?? "patch";
 if (!["patch", "minor", "major"].includes(bumpType)) {
   console.error(`Invalid bump type "${bumpType}". Use patch, minor, or major.`);
   process.exit(1);
 }
+
+// --- Refresh the generated APM mirror before versioning ---
+console.log("Running npm run sync...");
+run("npm run sync");
 
 // --- Read current version from package.json ---
 const pkgPath = resolve(root, "package.json");
@@ -56,9 +61,7 @@ writeFileSync(apmPath, updatedApm, "utf8");
 console.log("✓ apm.yml");
 
 // --- Git commit, tag, push ---
-const run = (cmd) => execSync(cmd, { cwd: root, stdio: "inherit" });
-
-run(`git add package.json apm.yml`);
+run(`git add package.json apm.yml .apm/agents .apm/skills .apm/prompts`);
 run(`git commit -m "chore: release v${newVersion}"`);
 run(`git tag -m "Version ${newVersion}" v${newVersion}`);
 run(`git push origin`);

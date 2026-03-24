@@ -269,7 +269,7 @@ To modify agents or add features:
 
 1. Edit files in **.github/agents/**, **.github/skills/**, or **.github/prompts/** first
 2. Run `npm run sync` to copy `.github/` → `.apm/`
-3. Run `npm run version:patch` (or `version:minor` / `version:major`) to bump `package.json` + `apm.yml`, commit, tag, and push
+3. Run `npm run version:patch` (or `version:minor` / `version:major`) to auto-run sync, bump `package.json` + `apm.yml`, commit the refreshed `.apm/` mirror, tag, and push
 
 ## 📜 License
 
