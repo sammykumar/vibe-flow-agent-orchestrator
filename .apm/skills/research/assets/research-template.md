@@ -1,5 +1,7 @@
 # Research: {Task Name}
 
+> Usage: Instantiate `2-RESEARCH.md` from this template for every PDD plan. Fast Track may shorten content, but must preserve this file shape and section headings.
+
 **Date**: YYYY-MM-DD  
 **Agent**: research.agent  
 **Status**: In Progress / Complete  
@@ -301,7 +303,7 @@ graph LR
 
 ### Next Steps
 
-1. ✅ Research complete → Create `4-SPEC.md`
+1. ✅ Research complete → Create `3-SPEC.md`
 2. ⏭️ Get stakeholder approval on recommendation
 3. ⏭️ Proceed to specification phase
 

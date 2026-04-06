@@ -41,10 +41,8 @@ into the active plan directory.
    relevant artifacts.
 3. Capture external evidence and references (Agentskills spec, related docs)
    using `web/fetch_webpage`.
-4. Draft `2-RESEARCH.md` (analysis & evidence) using
-   `assets/research-template.md`.
-5. Draft `3-SPEC.md` (specification) using
-   `assets/spec-template.md`.
+4. Instantiate `2-RESEARCH.md` from `assets/research-template.md` and fill it with task-specific analysis and evidence while preserving the template structure.
+5. Instantiate `3-SPEC.md` from `assets/spec-template.md` and fill it with task-specific specification content while preserving the template structure.
 6. Update `1-PROGRESS.md` and set status to `research_complete` when finished.
 
 ## Inference

@@ -45,7 +45,7 @@ You ONLY:
 - Run those tests and record results
 - Fix test code (NOT implementation code) when tests fail due to test bugs
 - Reject back to Orchestrator if tests reveal implementation bugs
-- Update `1-PROGRESS.md` with test status & evidence
+- Update the existing template-backed `1-PROGRESS.md` with test status & evidence
 - Signal when ALL testing is complete
 
 ---
@@ -143,7 +143,7 @@ STEP 3: RUN TESTS
 
 STEP 4: LOGGING
 
-- Action: Update `1-PROGRESS.md` with test results under a `## Test Agent` entry:
+- Action: Update the existing template-backed `1-PROGRESS.md` with test results under the matching testing/logging section; preserve the file's current headings/sections:
   - Test files created/modified
   - Test command run
   - Pass/fail counts

@@ -27,7 +27,8 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 
 2. For new tasks:
    - Create `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
-   - Initialize `1-PROGRESS.md` (use template from assets/)
+   - Instantiate `1-PROGRESS.md`, `2-RESEARCH.md`, and `3-SPEC.md` from the runtime templates in `assets/`
+   - Keep the template headings/sections intact; use concise content instead of inventing a custom file shape
    - Initialize task tracking with phases
 
 3. For existing tasks:
@@ -65,6 +66,7 @@ Plan-Driven Development follows a structured v2 pipeline. Each step must complet
 ```markdown
 1. Author task breakdown in `1-PROGRESS.md` directly in `vibe-flow`:
    - Use `2-RESEARCH.md` and `3-SPEC.md` as the source of truth
+   - Preserve the existing template-backed `1-PROGRESS.md` structure
    - Include ordered tasks, file targets, verification steps, and dependencies
 
 2. Verify outputs exist:

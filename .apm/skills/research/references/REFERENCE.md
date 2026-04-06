@@ -6,7 +6,7 @@ usage patterns.
 ## Purpose
 
 The `research` skill performs repository-level discovery, evidence gathering,
-and produces PDD artifacts (`3-RESEARCH.md` and `4-SPEC.md`) into the active
+and produces PDD artifacts (`2-RESEARCH.md` and `3-SPEC.md`) into the active
 plan directory.
 
 ## Tool Usage Policy
@@ -19,9 +19,9 @@ plan directory.
 
 ## Outputs
 
-- `3-RESEARCH.md` — findings, evidence, and alternatives
-- `4-SPEC.md` — technical spec and acceptance criteria
-- `2-PROGRESS.md` — progress logging and status
+- `2-RESEARCH.md` — findings, evidence, and alternatives
+- `3-SPEC.md` — technical spec and acceptance criteria
+- `1-PROGRESS.md` — progress logging and status
 
 ## Validation
 

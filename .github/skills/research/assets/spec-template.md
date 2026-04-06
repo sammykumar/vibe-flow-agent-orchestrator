@@ -1,10 +1,12 @@
 # Technical Specification: {Feature Name}
 
+> Usage: Instantiate `3-SPEC.md` from this template for every PDD plan. Fast Track may shorten content, but must preserve this file shape and section headings.
+
 **Date**: YYYY-MM-DD  
 **Agent**: research.agent  
 **Status**: Draft / Under Review / Approved / Implemented  
 **Related Plan**: `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`  
-**Based on Research**: `3-RESEARCH.md`
+**Based on Research**: `2-RESEARCH.md`
 
 ---
 
@@ -597,8 +599,8 @@ newFunction(param: string): Promise<Result>
 
 ### Related Documentation
 
-- [Research Document](3-RESEARCH.md)
-- [Implementation Tasks](5-TASKS.md)
+- [Research Document](2-RESEARCH.md)
+- [Progress Log](1-PROGRESS.md)
 - [{Other relevant doc}](path/to/doc.md)
 
 ### External Resources

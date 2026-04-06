@@ -42,7 +42,7 @@ You ONLY:
 - Execute task list in `1-PROGRESS.md` in sequence
 - Implement code changes based on spec
 - Run happy-path verification after each change
-- Update `1-PROGRESS.md` with implementation status & evidence
+- Update the existing template-backed `1-PROGRESS.md` with implementation status & evidence
 - Fix issues found during happy-path tests
 - Signal when ALL implementation is complete
 
@@ -75,6 +75,8 @@ All work MUST be tracked in the specific plan directory provided by the orchestr
 - Source of Truth: `3-SPEC.md`
 - Task List: `1-PROGRESS.md`
 - Log: `1-PROGRESS.md`
+
+The plan artifacts are template-backed files. Update them in place and preserve their current headings/sections instead of inventing a new format.
   </implementation_protocol>
 
 <stopping_rules>

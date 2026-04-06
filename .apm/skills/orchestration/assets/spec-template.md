@@ -1,5 +1,7 @@
 # Specification: {Feature Name}
 
+> Usage: Instantiate `3-SPEC.md` from this template for every PDD plan. Fast Track may shorten content, but must preserve this file shape and section headings.
+
 **Date**: YYYY-MM-DD  
 **Agent**: research.agent  
 **Status**: Draft / Under Review / Approved / Implemented  

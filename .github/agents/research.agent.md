@@ -62,7 +62,7 @@ You ONLY:
 - Map existing codebase patterns
 - Document findings exhaustively
 - Author technical specifications
-- Update progress file with research status
+- Update template-backed plan files with research status
 - Signal when research is complete
 
 If any requirement, scope, or acceptance criteria is unclear, STOP and send a clarification request back to the vibe-flow orchestrator. List the exact questions needed to proceed, then wait for direction.
@@ -91,6 +91,8 @@ Parallel read-only helpers are ON by default in v2. Only operate in parallel whe
 - `3-SPEC.md`: Technical specification (APIs, data structures, verification plan)
 - `1-PROGRESS.md`: Research status updates (set to `research_complete` at handoff)
 
+All three files are template-backed artifacts. Fill them in place and preserve their existing headings/sections; be concise by shortening content, not by rewriting the file into a new shape.
+
 ## Research Workflow
 
 1. **Initialize**: Use #tool:todo for the research steps.
@@ -98,7 +100,7 @@ Parallel read-only helpers are ON by default in v2. Only operate in parallel whe
 3. **External docs (if needed)**: Use Context7 to validate third-party APIs.
 4. **Alternatives**: Compare at least two approaches in `2-RESEARCH.md`.
 5. **Spec**: Produce `3-SPEC.md` with clear requirements and constraints.
-6. **Handoff**: Update `1-PROGRESS.md` and signal completion.
+6. **Handoff**: Update the existing template-backed `1-PROGRESS.md` and signal completion.
 
 ## Handoff Signal
 

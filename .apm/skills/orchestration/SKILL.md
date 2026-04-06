@@ -9,10 +9,10 @@ This skill defines the orchestration workflow for managing complex development t
 
 The workflow has two lanes:
 
-- **Fast Track** for small to medium, bounded, low-risk changes that can move straight from compact PDD initialization to implementation and testing.
+- **Fast Track** for small to medium, bounded, low-risk changes that can move straight from template-backed PDD initialization to implementation and testing.
 - **Full PDD** for larger, ambiguous, cross-cutting, or risky changes that need research and approval gates before implementation.
 
-Both lanes create and maintain the full PDD file set under `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`. Fast Track uses compact `2-RESEARCH.md` and `3-SPEC.md` instead of skipping them.
+Both lanes create and maintain the full PDD file set under `.github/plans/{status}/{domain}/{scope-path}/{task-name}/`. Fast Track keeps content concise, but all PDD files must still be instantiated from the runtime templates and retain their required headings/sections.
 
 For implementation, prefer sequential `implement.agent` runs on isolated tasks with non-overlapping file ownership. Only parallelize work when the tasks are read-only or clearly disjoint.
 
@@ -86,8 +86,8 @@ Before starting, classify the request:
 ### Fast Track PDD
 
 1. Initialize `.github/plans/in-progress/{domain}/{scope-path}/{task-name}/`
-2. Create compact `2-RESEARCH.md` and `3-SPEC.md` directly from the request, capturing the request summary, constraints, chosen approach, risks, and acceptance criteria
-3. Initialize `1-PROGRESS.md` with a compact task plan derived from those artifacts
+2. Instantiate `2-RESEARCH.md` and `3-SPEC.md` from the runtime templates, then fill them directly from the request with concise content that preserves the template structure
+3. Instantiate `1-PROGRESS.md` from the runtime template, then fill it with a task plan derived from those artifacts while preserving the template structure
 4. Split work into isolated implementation tasks where possible
 5. Invoke the implement agent sequentially for each isolated task
 6. Use parallel helpers only for read-only discovery or clearly disjoint work

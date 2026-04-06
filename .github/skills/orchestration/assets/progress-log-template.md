@@ -2,6 +2,8 @@
 
 > Purpose: Combined task plan and chronological execution log. Tracks what needs to be done, what changed, and why.
 
+> Usage: Instantiate `1-PROGRESS.md` from this template for every PDD plan. Fast Track may shorten content, but must preserve this file shape and section headings.
+
 ---
 
 ## Task Plan
